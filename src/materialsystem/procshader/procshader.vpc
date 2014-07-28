@@ -90,7 +90,7 @@ $Project "$OUTBINNAME"
 
 	$Folder	"Link Libraries"
 	{
-		$DynamicFile	"$TARGET_SRC_DIRECTORY\dx9sdk\lib\d3dx9.lib"
+		//$DynamicFile	"$TARGET_SRC_DIRECTORY\dx9sdk\lib\d3dx9.lib"
 		//$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\d3dx9.lib"
 		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\mathlib.lib"
 		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\shaderlib.lib"
