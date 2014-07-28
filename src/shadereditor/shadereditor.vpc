@@ -22,8 +22,8 @@ $Configuration	"Debug"
 {
 	$General
 	{
-		$OutputDirectory			".\Debug_$GAMENAME"
-		$IntermediateDirectory		".\Debug_$GAMENAME"
+		$OutputDirectory			".\Debug_$GAMENAME_$TARGET_PLATFORM"
+		$IntermediateDirectory		".\Debug_$GAMENAME_$TARGET_PLATFORM"
 	}
 }
 
@@ -31,13 +31,18 @@ $Configuration	"Release"
 {
 	$General
 	{
-		$OutputDirectory			".\Release_$GAMENAME"
-		$IntermediateDirectory		".\Release_$GAMENAME"
+		$OutputDirectory			".\Release_$GAMENAME_$TARGET_PLATFORM"
+		$IntermediateDirectory		".\Release_$GAMENAME_$TARGET_PLATFORM"
 	}
 }
 
 $Configuration
 {
+	$General
+	{
+		$TargetName	"$OUTBINNAME"
+	}
+	
 	$Compiler
 	{
 		$AdditionalIncludeDirectories	".\;$BASE;$SRCDIR\vgui_editor\include;$SRCDIR\vgui_editor"
@@ -354,7 +359,7 @@ $Project "$OUTBINNAME"
 		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\tier1.lib"
 		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\tier2.lib"
 		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\tier3.lib"
-		$DynamicFile	"$SRCDIR\lib\public\vgui_controls_editor.lib"
+		$DynamicFile	"$SRCDIR\lib\public\vgui_controls_editor_$TARGET_PLATFORM.lib"
 		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\steam_api.lib"
 		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\vtf.lib"
 		$DynamicFile	"$SRCDIR\lib\public\jpeglib.lib"

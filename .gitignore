@@ -21,7 +21,6 @@ ipch
 *.sln
 
 # OSX/Linux build products
-*.mak
 *.mak.vpc_crc
 *.xcodeproj/
 obj*/
@@ -54,3 +53,14 @@ config.cfg
 # shader files
 *.tmp
 
+# shader editor specific
+/src/lib/public/vgui_controls_editor*.lib
+/src/materialsystem/procshader/Debug_procshader*
+/src/materialsystem/procshader/Release_procshader*
+*.filters
+*.vpc_crc
+*.sentinel
+/src/shadereditor/Debug_shader_editor*
+/src/shadereditor/Release_shader_editor*
+/src/vgui_editor/Debug*
+/src/vgui_editor/Release*

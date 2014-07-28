@@ -22,8 +22,8 @@ $Configuration	"Debug"
 {
 	$General
 	{
-		$OutputDirectory			".\Debug_$GAMENAME"
-		$IntermediateDirectory		".\Debug_$GAMENAME"
+		$OutputDirectory			".\Debug_$GAMENAME_$TARGET_PLATFORM"
+		$IntermediateDirectory		".\Debug_$GAMENAME_$TARGET_PLATFORM"
 	}
 }
 
@@ -31,13 +31,18 @@ $Configuration	"Release"
 {
 	$General
 	{
-		$OutputDirectory			".\Release_$GAMENAME"
-		$IntermediateDirectory		".\Release_$GAMENAME"
+		$OutputDirectory			".\Release_$GAMENAME_$TARGET_PLATFORM"
+		$IntermediateDirectory		".\Release_$GAMENAME_$TARGET_PLATFORM"
 	}
 }
 
 $Configuration
 {
+	$General
+	{
+		$TargetName	"$OUTBINNAME"
+	}
+	
 	$Compiler
 	{
 		$AdditionalIncludeDirectories	"$BASE;fxctmp9;vshtmp9;"	[$WIN32||$POSIX]

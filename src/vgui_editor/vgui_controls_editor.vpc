@@ -9,14 +9,36 @@ $Macro SRCDIR				".."
 $Include "$SRCDIR\shadereditor_platform.vpc"
 
 $Macro GENERATED_PROTO_DIR	"generated_proto"
-$macro PROTOBUF_LITE 0
+$Macro PROTOBUF_LITE 0
+$Macro OUTLIBNAME "vgui_controls_editor_$TARGET_PLATFORM"
 $Macro OUTLIBDIR	"$SRCDIR\lib\public"	[!$LINUX]
 
 $include "$SRCDIR\vpc_scripts\source_lib_base.vpc"
 //$include "$SRCDIR\vpc_scripts\protobuf_builder.vpc"
 
+$Configuration	"Debug"
+{
+	$General
+	{
+		$IntermediateDirectory		".\Debug_vgui_editor_$TARGET_PLATFORM"
+	}
+}
+
+$Configuration	"Release"
+{
+	$General
+	{
+		$IntermediateDirectory		".\Release_vgui_editor_$TARGET_PLATFORM"
+	}
+}
+
 $Configuration
 {
+	$General
+	{
+		$TargetName	"vgui_controls_editor_$TARGET_PLATFORM"
+	}
+	
 	$Compiler
 	{
 		$AdditionalIncludeDirectories	"$BASE;$TARGET_SRC_DIRECTORY\thirdparty;$SRCDIR\vgui_editor;$TARGET_SRC_DIRECTORY\thirdparty\cef;$GENERATED_PROTO_DIR"
