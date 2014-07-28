@@ -44,6 +44,10 @@ $Configuration
 		$AdditionalIncludeDirectories	"$BASE;$TARGET_SRC_DIRECTORY\thirdparty;$SRCDIR\vgui_editor;$TARGET_SRC_DIRECTORY\thirdparty\cef;$GENERATED_PROTO_DIR"
 		$AdditionalIncludeDirectories 	"$BASE;$SRCDIR\shadereditor"
 		$AdditionalIncludeDirectories 	"$BASE;$TARGET_SRC_DIRECTORY\public;$TARGET_SRC_DIRECTORY\public\tier0;$TARGET_SRC_DIRECTORY\public\tier1"
+		
+		$AdditionalIncludeDirectories 	"$BASE;$TARGET_SRC_DIRECTORY\common"
+		
+		$PreprocessorDefinitions		"$BASE;SHADER_EDITOR_DLL_$TARGET_PLATFORM"
 	}
 }
 
@@ -68,7 +72,6 @@ $Project "vgui_controls_editor"
 		$File	"CheckButtonList.cpp"
 		$File	"CircularProgressBar.cpp"
 		$File	"ComboBox.cpp"
-		$File	"consoledialog.cpp"
 		$File	"ControllerMap.cpp"
 		$File	"controls.cpp"
 		$File	"CvarToggleCheckButton.cpp"
@@ -150,7 +153,6 @@ $Project "vgui_controls_editor"
 		$File	"$SRCDIR\vgui_editor\vgui_controls\CircularProgressBar.h"
 		$File	"$TARGET_SRC_DIRECTORY\public\Color.h"
 		$File	"$SRCDIR\vgui_editor\vgui_controls\ComboBox.h"
-		$File	"$SRCDIR\vgui_editor\vgui_controls\consoledialog.h"
 		$File	"$SRCDIR\vgui_editor\vgui_controls\ControllerMap.h"
 		$File	"$SRCDIR\vgui_editor\vgui_controls\Controls.h"
 		$File	"$SRCDIR\vgui_editor\vgui_controls\CvarToggleCheckButton.h"

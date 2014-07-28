@@ -31,6 +31,8 @@
 #include <vgui_controls/Divider.h>
 #include <vgui_controls/PanelListPanel.h>
 
+#include "vgui_editor_platform.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include <tier0/memdbgon.h>
 
@@ -90,7 +92,7 @@ public:
 
 	void RemoveAll( void )
 	{
-		for ( int i = 0; i < m_PanelList.Size(); i++ )
+		for ( int i = 0; i < m_PanelList.Count(); i++ )
 		{
 			PanelItem_t *item = &m_PanelList[i];
 			delete item->m_EditLabel;
@@ -836,7 +838,7 @@ void BuildModeDialog::UpdateControlData(Panel *control)
 	control->GetSettings( dat );
 
 	// apply the settings to the edit panels
-	for ( int i = 0; i < m_pPanelList->m_PanelList.Size(); i++ )
+	for ( int i = 0; i < m_pPanelList->m_PanelList.Count(); i++ )
 	{
 		const char *name = m_pPanelList->m_PanelList[i].m_szName;
 		const char *datstring = dat->GetString( name, "" );
@@ -986,7 +988,7 @@ void BuildModeDialog::ApplyDataToControls()
 	KeyValues *dat = new KeyValues( m_pCurrentPanel->GetName() );
 
 	// loop through the textedit filling in settings
-	for ( int i = 0; i < m_pPanelList->m_PanelList.Size(); i++ )
+	for ( int i = 0; i < m_pPanelList->m_PanelList.Count(); i++ )
 	{
 		const char *name = m_pPanelList->m_PanelList[i].m_szName;
 		char buf[512];
@@ -1110,7 +1112,7 @@ KeyValues *BuildModeDialog::StoreSettings()
 	storedSettings = new KeyValues( m_pCurrentPanel->GetName() );
 
 	// loop through the textedit filling in settings
-	for ( int i = 0; i < m_pPanelList->m_PanelList.Size(); i++ )
+	for ( int i = 0; i < m_pPanelList->m_PanelList.Count(); i++ )
 	{
 		const char *name = m_pPanelList->m_PanelList[i].m_szName;
 		char buf[512];

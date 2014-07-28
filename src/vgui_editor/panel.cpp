@@ -38,6 +38,8 @@
 
 #include "tier0/vprof.h"
 
+#include "vgui_editor_platform.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include <tier0/memdbgon.h>
 
@@ -997,7 +999,7 @@ void Panel::PaintTraverse( bool repaint, bool allowForce )
 	float oldAlphaMultiplier = surface()->DrawGetAlphaMultiplier();
 	float newAlphaMultiplier = oldAlphaMultiplier * m_flAlpha * 1.0f/255.0f;
 
-	if ( IsXbox() && !newAlphaMultiplier )
+	if ( /*IsXbox() &&*/ !newAlphaMultiplier )
 	{
 		// xbox optimization not suitable for pc
 		// xbox panels are compliant and can early out and not traverse their children
@@ -1090,7 +1092,7 @@ void Panel::PaintTraverse( bool repaint, bool allowForce )
 	{
 		// outline all selected panels 
 		CUtlVector<PHandle> *controlGroup = _buildGroup->GetControlGroup();
-		for (int i=0; i < controlGroup->Size(); ++i)
+		for (int i=0; i < controlGroup->Count(); ++i)
 		{
 			surface()->PushMakeCurrent( ((*controlGroup)[i].Get())->GetVPanel(), false );
 			((*controlGroup)[i].Get())->PaintBuildOverlay();
@@ -1234,7 +1236,7 @@ bool Panel::IsOpaque()
 //-----------------------------------------------------------------------------
 bool Panel::IsRightAligned()
 {
-	return (_buildModeFlags & BUILDMODE_SAVE_XPOS_RIGHTALIGNED);
+	return (_buildModeFlags & BUILDMODE_SAVE_XPOS_RIGHTALIGNED) != 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -1242,7 +1244,7 @@ bool Panel::IsRightAligned()
 //-----------------------------------------------------------------------------
 bool Panel::IsBottomAligned()
 {
-	return (_buildModeFlags & BUILDMODE_SAVE_YPOS_BOTTOMALIGNED);
+	return (_buildModeFlags & BUILDMODE_SAVE_YPOS_BOTTOMALIGNED) != 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -3048,7 +3050,7 @@ void Panel::SetBuildModeEditable(bool state)
 //-----------------------------------------------------------------------------
 bool Panel::IsBuildModeDeletable()
 {
-	return (_buildModeFlags & BUILDMODE_DELETABLE);
+	return (_buildModeFlags & BUILDMODE_DELETABLE) != 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -3901,7 +3903,7 @@ void Panel::ApplySettings(KeyValues *inResourceData)
 		SetVisible(true);
 	}
 
-	SetEnabled( inResourceData->GetInt("enabled", true) );
+	SetEnabled( inResourceData->GetBool("enabled", true) );
 
 	// tab order
 	SetTabPosition(inResourceData->GetInt("tabPosition", 0));
@@ -4548,7 +4550,7 @@ void Panel::OnOldMessage(KeyValues *params, VPANEL ifromPanel)
 					{
 					case DATATYPE_BOOL:
 						typedef void (Panel::*MessageFunc_Bool_t)(bool);
-						(this->*((MessageFunc_Bool_t)pMessageMap[i].func))( (bool)params->GetInt(pMessageMap[i].firstParamName) );
+						(this->*((MessageFunc_Bool_t)pMessageMap[i].func))( (bool)params->GetBool(pMessageMap[i].firstParamName) );
 						break;
 
 					case DATATYPE_CONSTCHARPTR:

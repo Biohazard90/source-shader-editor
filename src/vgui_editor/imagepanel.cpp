@@ -222,11 +222,11 @@ void ImagePanel::ApplySettings(KeyValues *inResourceData)
 	m_pszImageName = NULL;
 	m_pszColorName = NULL;
 
-	m_bScaleImage = inResourceData->GetInt("scaleImage", 0);
+	m_bScaleImage = inResourceData->GetBool("scaleImage");
 	m_fScaleAmount = inResourceData->GetFloat("scaleAmount", 0.0f);
-	m_bTileImage = inResourceData->GetInt("tileImage", 0);
-	m_bTileHorizontally = inResourceData->GetInt("tileHorizontally", m_bTileImage);
-	m_bTileVertically = inResourceData->GetInt("tileVertically", m_bTileImage);
+	m_bTileImage = inResourceData->GetBool("tileImage");
+	m_bTileHorizontally = inResourceData->GetBool("tileHorizontally", m_bTileImage);
+	m_bTileVertically = inResourceData->GetBool("tileVertically", m_bTileImage);
 	const char *imageName = inResourceData->GetString("image", "");
 	if (*imageName)
 	{

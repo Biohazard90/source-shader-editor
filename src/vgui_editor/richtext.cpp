@@ -8,6 +8,8 @@
 #include "vgui_controls/pch_vgui_controls.h"
 #include "vgui/ilocalize.h"
 
+#include "vgui_editor_platform.h"
+
 // memdbgon must be the last include file in a .cpp file
 #include "tier0/memdbgon.h"
 
@@ -19,10 +21,6 @@ enum
 };
 
 using namespace vgui;
-
-#ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
-#endif
 
 namespace vgui
 {
@@ -252,7 +250,7 @@ void RichText::SetFgColor( Color color )
 {
 	// Replace default format color if 
 	// the stream is empty and the color is the default ( or the previous FgColor )
-	if ( m_FormatStream.Size() == 1 && 
+	if ( m_FormatStream.Count() == 1 && 
 		( m_FormatStream[0].color == _defaultTextColor || m_FormatStream[0].color == GetFgColor() ) )
 	{
 		m_FormatStream[0].color = color;
@@ -2269,7 +2267,7 @@ void RichText::ApplySettings(KeyValues *inResourceData)
 {
 	BaseClass::ApplySettings(inResourceData);
 	SetMaximumCharCount(inResourceData->GetInt("maxchars", -1));
-	SetVerticalScrollbar(inResourceData->GetInt("scrollbar", 1));
+	SetVerticalScrollbar(inResourceData->GetBool("scrollbar", true));
 
 	// get the starting text, if any
 	const char *text = inResourceData->GetString("text", "");

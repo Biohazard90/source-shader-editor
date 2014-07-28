@@ -13,12 +13,10 @@
 #include <vgui_controls/QueryBox.h>
 #include <vgui_controls/TextImage.h>
 
+#include "vgui_editor_platform.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include <tier0/memdbgon.h>
-
-#ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
-#endif
 
 using namespace vgui;
 

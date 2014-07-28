@@ -157,12 +157,14 @@ bool ShaderEditorInterface::Init( CreateInterfaceFn appSystemFactory, CGlobalVar
 		return false;
 
 #ifdef SHADER_EDITOR_DLL_SWARM
-	const char *pszModuleName = "game_shader_generic_eshader_swarm.dll";
+	const char *pszModuleName = "game_shader_generic_eshader_SWARM.dll";
 #elif SHADER_EDITOR_DLL_2006
 	const char *pszModuleName = "game_shader_generic_eshader_2006.dll";
 #elif SHADER_EDITOR_DLL_2013
 	//const char *pszModuleName = "game_shader_generic_eshader_2013.dll";
 	const char *pszModuleName = "game_shader_dx6.dll";
+#elif SHADER_EDITOR_DLL_PORTAL2
+	const char *pszModuleName = "game_shader_generic_eshader_PORTAL2.dll";
 #else
 	const char *pszModuleName = "game_shader_generic_eshader_2007.dll";
 #endif

@@ -27,6 +27,9 @@
 #include <vgui_controls/Controls.h>
 #include <vgui_controls/MenuItem.h>
 #include "vgui_controls/ColorPicker.h"
+
+#include "vgui_editor_platform.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include <tier0/memdbgon.h>
 
@@ -3732,12 +3735,12 @@ void TextEntry::ApplySettings( KeyValues *inResourceData )
 //	_font = scheme()->GetFont(GetScheme(), "Default", IsProportional() );
 //	SetFont( _font );
 
-	SetTextHidden((bool)inResourceData->GetInt("textHidden", 0));
-	SetEditable((bool)inResourceData->GetInt("editable", 1));
+	SetTextHidden((bool)inResourceData->GetBool("textHidden"));
+	SetEditable((bool)inResourceData->GetBool("editable", true));
 	SetMaximumCharCount(inResourceData->GetInt("maxchars", -1));
-	SetAllowNumericInputOnly(inResourceData->GetInt("NumericInputOnly", 0));
-	SetAllowNonAsciiCharacters(inResourceData->GetInt("unicode", 0));
-	SetUseTokenChannelBehaviour(inResourceData->GetInt("TokenChannels", 0));
+	SetAllowNumericInputOnly(inResourceData->GetBool("NumericInputOnly"));
+	SetAllowNonAsciiCharacters(inResourceData->GetBool("unicode"));
+	SetUseTokenChannelBehaviour(inResourceData->GetBool("TokenChannels"));
 }
 
 //-----------------------------------------------------------------------------

@@ -7,6 +7,8 @@
 
 #include "vgui_controls/pch_vgui_controls.h"
 
+#include "vgui_editor_platform.h"
+
 // memdbgon must be the last include file in a .cpp file
 #include "tier0/memdbgon.h"
 #define MENU_SEPARATOR_HEIGHT 3

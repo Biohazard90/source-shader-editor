@@ -14,14 +14,12 @@
 #include <vgui_controls/Label.h>
 #include <vgui_controls/MessageBox.h>
 
+#include "vgui_editor_platform.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include <tier0/memdbgon.h>
 
 using namespace vgui;
-
-#ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
-#endif
 
 vgui::Panel *MessageBox_Factory()
 {

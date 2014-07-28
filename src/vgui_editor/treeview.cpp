@@ -31,12 +31,10 @@
 
 #include "tier1/UtlString.h"
 
+#include "vgui_editor_platform.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include <tier0/memdbgon.h>
-
-#ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
-#endif
 
 using namespace vgui;
 enum 
@@ -669,7 +667,7 @@ void TreeNode::SetKeyValues(KeyValues *data)
 
     // set text
     m_pText->SetText(data->GetString("Text", ""));
- 	m_bExpandableWithoutChildren = data->GetInt("Expand");
+ 	m_bExpandableWithoutChildren = data->GetBool("Expand");
     InvalidateLayout();
 }
 

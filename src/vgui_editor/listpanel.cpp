@@ -32,6 +32,8 @@
 #include <vgui_controls/Menu.h>
 #include <vgui_controls/Tooltip.h>
 
+#include "vgui_editor_platform.h"
+
 // memdbgon must be the last include file in a .cpp file
 #include "tier0/memdbgon.h"
 
@@ -41,19 +43,6 @@ enum
 {
 	WINDOW_BORDER_WIDTH=2 // the width of the window's border
 };
-
-
-#ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
-#endif
-
-#ifndef min
-#define min(a,b)    (((a) < (b)) ? (a) : (b))
-#endif
-
-#ifndef clamp
-#define clamp( val, min, max ) ( ((val) > (max)) ? (max) : ( ((val) < (min)) ? (min) : (val) ) )
-#endif
 
 //-----------------------------------------------------------------------------
 //
@@ -604,10 +593,10 @@ void ListPanel::AddColumnHeader(int index, const char *columnName, const char *c
 	column.m_pHeader = pButton;
 	column.m_iMinWidth = minWidth;
 	column.m_iMaxWidth = maxWidth;
-	column.m_bResizesWithWindow = columnFlags & COLUMN_RESIZEWITHWINDOW;
+	column.m_bResizesWithWindow = (columnFlags & COLUMN_RESIZEWITHWINDOW) != 0;
 	column.m_bTypeIsText = !(columnFlags & COLUMN_IMAGE);
 	column.m_bHidden = false;
-	column.m_bUnhidable = (columnFlags & COLUMN_UNHIDABLE);
+	column.m_bUnhidable = (columnFlags & COLUMN_UNHIDABLE) != 0;
 	column.m_nContentAlignment = Label::a_west;
 
 	Dragger *dragger = new Dragger(index);

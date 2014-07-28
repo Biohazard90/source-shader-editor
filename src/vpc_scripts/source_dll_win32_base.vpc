@@ -107,7 +107,7 @@ $Project
 
 		// Implement __imp__EncodePointer and __imp__DecodePointer so that we can run on XP SP1
 		// when building with VS 2010 and higher.
-		$File	"$TARGET_SRC_DIRECTORY\public\tier0\pointeroverride.asm" [$WIN32]
+		$File	"$TARGET_SRC_DIRECTORY\public\tier0\pointeroverride.asm" [$WIN32 && !$TARGET_PLATFORM_PORTAL2]
 		{
 			$Configuration
 			{	

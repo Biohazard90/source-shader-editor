@@ -2,6 +2,7 @@
 #include "vgui_controls/Utilities.h"
 #include "vgui_controls/tokenchannels.h"
 
+#include "vgui_editor_platform.h"
 
 #define MAX_OPERATION_C 1024
 

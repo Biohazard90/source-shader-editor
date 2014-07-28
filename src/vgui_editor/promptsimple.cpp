@@ -12,6 +12,8 @@
 #include <vgui_controls/Controls.h>
 #include <vgui_controls/promptsimple.h>
 
+#include "vgui_editor_platform.h"
+
 #include <tier0/memdbgon.h>
 
 using namespace vgui;

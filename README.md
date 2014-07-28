@@ -26,10 +26,14 @@ USAGE:
                            "<ROOT>/sp/src/". This directory is used to pull in SDK
                            specific libraries and includes, like tier0, tier1 etc.
 
-    TARGET_PLATFORM - specifies the target SDK version.
-                      Possible options are currently: 2013, SWARM, 2007 and 2006
-                      This macro is used to add the preprocessor definition
-                      SHADER_EDITOR_DLL_<VERSION> to all projects.
+    TARGET_PLATFORM_X - specifies the target SDK version.
+                        Possible options are currently: 2013, SWARM, 2007 and 2006
+                        PORTAL2 is experimental and cannot be shared as it would
+                        require references to closed source.
+                        These macros are used to add the preprocessor definition
+                        SHADER_EDITOR_DLL_<VERSION> to all projects and toggle
+                        inclusion of files in vpc scripts.
+                        Make sure you only enable the one you want to compile for!
 
     TARGET_GAME_DIRECTORY - specifies the directory of your game. So for a Source
                             Engine modifitcation it typically lies in
@@ -42,6 +46,22 @@ USAGE:
 4.) Open the solution and build it. The resulting binaries will be copied into the
     target directory you specified with TARGET_GAME_DIRECTORY.
 
+5.) Add the directory from shadereditor from client/ to your games client library
+    as described here:
+    https://developer.valvesoftware.com/wiki/SourceShaderEditor/Installation#Compile
+
+6.) Copy the contents of the directory game/ to your game root directory, the
+    editor is relying on these resources to be present.
+
 Editor internal shaders can be build by calling
 src\materialsystem\procshader\buildeditorshaders.bat. Refer to the instructions inside
 the batch file to set up your paths appropriately!
+
+NOTES:
+
+The libraries build by this project are shadereditor_<PLATFORM>.dll, so
+shadereditor_2013.dll, for example, and game_shader_generic_eshader_<PLATFORM>.dll
+respectively.
+
+For the 2013 SDK, the game shader library is called game_shader_dx6.dll, because
+Valve recently broke shader dll loading through the wildcard game_shader_generic*.dll.

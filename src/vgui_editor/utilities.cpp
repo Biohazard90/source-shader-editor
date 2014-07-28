@@ -1,6 +1,8 @@
 
 #include <vgui_controls\Utilities.h>
 
+#include "vgui_editor_platform.h"
+
 static char hexLookup[16] =
 {
 	'0',
