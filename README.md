@@ -20,20 +20,21 @@ USAGE:
     your game, the source code of your game and the target Source Engine SDK version
     like this:
 
-    TARGET_SRC_DIRECTORY -  has to point to the root src/ directory, so for a single player mod on the Source 2013
-                            SDK it would point to "<ROOT>/sp/src/". This directory is used to pull in SDK specific
-                            libraries and includes, like tier0, tier1 etc.
+    TARGET_SRC_DIRECTORY -  Has to point to the root src/ directory, so for a single player mod on the
+                            Source 2013 SDK it would point to "<ROOT>/sp/src/". This directory is used
+                            to pull in SDK specific libraries and includes, like tier0, tier1 etc.
 
-    TARGET_PLATFORM_X -     specifies the target SDK version.
-                            Possible options are currently: 2013, SWARM, 2007 and 2006 PORTAL2 is experimental and
-                            cannot be shared as it would require references to closed source.
-                            These macros are used to add the preprocessor definition SHADER_EDITOR_DLL_<VERSION>
-                            to all projects and toggle inclusion of files in vpc scripts.
-                            Make sure you only enable the one you want to compile for!
+    TARGET_PLATFORM_X -     Specifies the target SDK version.
+                            Possible options are currently: 2013, SWARM, 2007 and 2006 PORTAL2 is
+                            experimental and cannot be shared as it would require references to closed
+                            source.
+                            These macros are used to add the preprocessor definition
+                            SHADER_EDITOR_DLL_<VERSION> to all projects and toggle inclusion of files
+                            in vpc scripts. Make sure you only enable the one you want to compile for!
 
-    TARGET_GAME_DIRECTORY - specifies the directory of your game. So for a Source Engine modifitcation it typically
-                            lies in SteamApps/sourcemods/<YOURGAME>/. This macro is used to define the output
-                            directory of the binaries you build.
+    TARGET_GAME_DIRECTORY - Specifies the directory of your game. So for a Source Engine modification
+                            it typically lies in SteamApps/sourcemods/<YOURGAME>/. This macro is used
+                            to define the output directory of the binaries you build.
 
 3.) Run src/createshadereditorprojects.bat to build projects and solution for
     Visual Studio.
