@@ -1,0 +1,362 @@
+//-----------------------------------------------------------------------------
+//	SHADEREDITOR.VPC
+//
+//	Project Script
+//-----------------------------------------------------------------------------
+
+$Macro SRCDIR				".."
+
+$Include "$SRCDIR\shadereditor_platform.vpc"
+
+$Macro OUTBINNAME	"shadereditor_$TARGET_PLATFORM"
+$Macro OUTBINDIR	"$TARGET_GAME_DIRECTORY\bin"
+
+$Macro GAMENAME				"shader_editor"
+$Macro SRCDIRSHARED			"$SRCDIR\game\shared"
+$Macro SRCDIRPUBLIC			"$TARGET_SRC_DIRECTORY\public"
+$Macro SRCDIREDITOR			"$SRCDIR\shadereditor"
+
+$Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
+
+$Configuration	"Debug"
+{
+	$General
+	{
+		$OutputDirectory			".\Debug_$GAMENAME"
+		$IntermediateDirectory		".\Debug_$GAMENAME"
+	}
+}
+
+$Configuration	"Release"
+{
+	$General
+	{
+		$OutputDirectory			".\Release_$GAMENAME"
+		$IntermediateDirectory		".\Release_$GAMENAME"
+	}
+}
+
+$Configuration
+{
+	$Compiler
+	{
+		$AdditionalIncludeDirectories	".\;$BASE;$SRCDIR\vgui_editor\include;$SRCDIR\vgui_editor"
+		$AdditionalIncludeDirectories	"$BASE;$TARGET_SRC_DIRECTORY\public;$TARGET_SRC_DIRECTORY\public\tier0;$TARGET_SRC_DIRECTORY\public\tier1;$TARGET_SRC_DIRECTORY\common"
+		$PreprocessorDefinitions		"$BASE;NO_STRING_T;CLIENT_DLL;VECTOR;VERSION_SAFE_STEAM_API_INTERFACES;PROTECTED_THINGS_ENABLE;strncpy=use_Q_strncpy_instead;_snprintf=use_Q_snprintf_instead" 
+		$PreprocessorDefinitions		"$BASE;ENABLE_CHROMEHTMLWINDOW;fopen=dont_use_fopen" [$WIN32]
+		$PreprocessorDefinitions		"$BASE;ENABLE_CHROMEHTMLWINDOW;" [$OSXALL]
+		$PreprocessorDefinitions		"$BASE;ENABLE_CHROMEHTMLWINDOW;" [$LINUX]
+		$PreprocessorDefinitions		"$BASE;USE_WEBM_FOR_REPLAY" [$LINUX]
+		$PreprocessorDefinitions		"$BASE;CURL_STATICLIB" [$WIN32 && $BUILD_REPLAY]
+		//$PreprocessorDefinitions		"$BASE;NO_MALLOC_OVERRIDE"
+		$Create/UsePrecompiledHeader	"Use Precompiled Header (/Yu)"
+		$Create/UsePCHThroughFile		"cbase.h"
+		$PrecompiledHeaderFile			"$(IntDir)/shadereditor.pch"
+		
+		$PreprocessorDefinitions		"$BASE;SHADER_EDITOR_DLL;SHADER_EDITOR_DLL_$TARGET_PLATFORM"
+		$AdditionalIncludeDirectories	"$BASE"
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIREDITOR;$SRCDIREDITOR\util;$SRCDIREDITOR\interface;$SRCDIR\..\client\shadereditor;$SRCDIREDITOR\nodes;$SRCDIREDITOR\properties;$SRCDIREDITOR\solver;$SRCDIREDITOR\threads;$SRCDIREDITOR\solver\postprocessing;$SRCDIREDITOR\properties\postprocessing;$SRCDIREDITOR\properties\smarttext;$SRCDIREDITOR\nodes\postprocessing"
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\materialsystem\"
+	}
+
+	$Linker
+	{
+		$SystemLibraries				"iconv" [$OSXALL]
+		$SystemFrameworks				"Carbon" [$OSXALL]
+		$SystemLibraries				"rt" [$LINUXALL]
+		$IgnoreImportLibrary			"TRUE"
+		$AdditionalDependencies			"$BASE winmm.lib"	[$WIN32]
+		$AdditionalDependencies			"$BASE wsock32.lib Ws2_32.lib" [$BUILD_REPLAY]
+	}
+}
+
+$Configuration "Debug"
+{
+	$Linker
+	{
+		$AdditionalDependencies			"$BASE Dbghelp.lib"	[$WIN32]
+	}
+}
+
+$Project "$OUTBINNAME"
+{
+	$Folder	"Source Files"
+	{
+		$Folder	"Base Files"
+		{
+			$File		"$SRCDIREDITOR\util\client_factorylist.cpp"
+			$File		"$SRCDIREDITOR\util\igamesystem.cpp"
+			
+			$File		"$SRCDIRPUBLIC\collisionutils.cpp" \
+						"$SRCDIR\vgui_editor\vgui_controls_editor.cpp" \
+						"$SRCDIRPUBLIC\crtmemdebug.cpp"
+			{
+				$Configuration
+				{
+					$Compiler
+					{
+						$Create/UsePrecompiledHeader	"Not Using Precompiled Headers"
+					}
+				}
+			}
+		}
+		
+		$File	"$SRCDIREDITOR\cHLSL_Image.cpp"
+		$File	"$SRCDIREDITOR\cHLSL_Mesh.cpp"
+		$File	"$SRCDIREDITOR\cHLSL_Variable.cpp"
+		$File	"$SRCDIREDITOR\cKVPacker.cpp"
+		$File	"$SRCDIREDITOR\cRegex.cpp"
+		$File	"$SRCDIREDITOR\editorCommon.cpp"
+		$File	"$SRCDIREDITOR\exported_utilities.cpp"
+		$File	"$SRCDIREDITOR\gDirectories.cpp"
+		$File	"$SRCDIREDITOR\gPostProcessingCache.cpp"
+		$File	"$SRCDIREDITOR\gRendertargetConfig.cpp"
+		$File	"$SRCDIREDITOR\gShaderDumps.cpp"
+		$File	"$SRCDIREDITOR\vBaseDiag.cpp"
+		$File	"$SRCDIREDITOR\vBridge.cpp"
+		$File	"$SRCDIREDITOR\vDialogConfig.cpp"
+		$File	"$SRCDIREDITOR\vDialogEditorConfig.cpp"
+		$File	"$SRCDIREDITOR\vDialogNew.cpp"
+		$File	"$SRCDIREDITOR\vDialogPPEConfig.cpp"
+		$File	"$SRCDIREDITOR\vDialogPPEffectPrecache.cpp"
+		$File	"$SRCDIREDITOR\vDialogRecompileAll.cpp"
+		$File	"$SRCDIREDITOR\vDialogRTList.cpp"
+		$File	"$SRCDIREDITOR\vDialogSPrecache.cpp"
+		$File	"$SRCDIREDITOR\vEditorFlowGraphPage.cpp"
+		$File	"$SRCDIREDITOR\vEditorFlowGraphSheet.cpp"
+		$File	"$SRCDIREDITOR\vEditorRoot.cpp"
+		$File	"$SRCDIREDITOR\vgui_init.cpp"
+		$File	"$SRCDIREDITOR\vJack.cpp"
+		$File	"$SRCDIREDITOR\vNodeView.cpp"
+		$File	"$SRCDIREDITOR\vNodeViewError.cpp"
+		$File	"$SRCDIREDITOR\vPreview.cpp"
+		$File	"$SRCDIREDITOR\vRenderPanel.cpp"
+		
+		//$File	"$SRCDIR\public\memtrack.cpp"
+		
+		$Folder	"Interface"
+		{
+			$File	"$SRCDIREDITOR\interface\dll_init.cpp"
+			$File	"$SRCDIREDITOR\interface\EditorInit.cpp"
+			$File	"$SRCDIREDITOR\interface\PPEHelper.cpp"
+			
+			$File	"$SRCDIR\materialsystem\IVProcShader.cpp"
+			{
+				$Configuration
+				{
+					$Compiler
+					{
+						$Create/UsePrecompiledHeader	"Not Using Precompiled Headers"
+					}
+				}
+			}
+		}
+		
+		$Folder	"Nodes"
+		{
+			$File	"$SRCDIREDITOR\nodes\vBaseContainer.cpp"
+			$File	"$SRCDIREDITOR\nodes\vBaseNode.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Add.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Array.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_BaseEvaluate.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_BaseRange.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Break.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Callback.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Combo.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Comment.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Condition.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Constant.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Cross.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Custom.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Divide.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Dot.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_EnvC.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Final.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Flashlight.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Fog.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Lerp.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Lightscale.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Loop.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Matrices.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_MCompose.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Multiply.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Parallax.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_PsInput.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_PsOutput.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Sampler.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Std_PLight.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Std_Skinning.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Std_VLight.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Subtract.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Swizzle.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_TexSample.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_TexTransform.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_Utility.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_VCompression.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_VecAppend.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_VectorRef.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_VmtParam.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_VsInput.cpp"
+			$File	"$SRCDIREDITOR\nodes\vNode_VsOutput.cpp"
+			
+			$Folder	"Post processing"
+			{
+				$File	"$SRCDIREDITOR\nodes\postprocessing\vNode_PP_Base.cpp"
+				$File	"$SRCDIREDITOR\nodes\postprocessing\vNode_PP_DrawMat.cpp"
+				$File	"$SRCDIREDITOR\nodes\postprocessing\vNode_PP_Mat.cpp"
+				$File	"$SRCDIREDITOR\nodes\postprocessing\vNode_PP_Operations.cpp"
+				$File	"$SRCDIREDITOR\nodes\postprocessing\vNode_PP_RenderView.cpp"
+				$File	"$SRCDIREDITOR\nodes\postprocessing\vNode_PP_RT.cpp"
+			}
+		}
+		
+		$Folder	"Properties"
+		{
+			$File	"$SRCDIREDITOR\properties\vCodeEditor.cpp"
+			$File	"$SRCDIREDITOR\properties\vNodeProperties.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Array.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Base.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Callback.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_CMatrix.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Combo.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Comment.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Condition.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Constant.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Custom.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Final.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Flashlight.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_General.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Lightscale.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Loop.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_MComp.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Multiply.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Parallax.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_PSOutput.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_StdPLight.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_StdPSpecLight.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_StdSkinning.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_StdVLight.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_Swizzle.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_TexTransform.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_TextureSample.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_VCompression.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_VmtParam.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_VSInput.cpp"
+			$File	"$SRCDIREDITOR\properties\vSheet_VSOutPSIn.cpp"
+			
+			$Folder	"Post processing"
+			{
+				$File	"$SRCDIREDITOR\properties\postprocessing\vSheet_PP_DrawMat.cpp"
+				$File	"$SRCDIREDITOR\properties\postprocessing\vSheet_PP_Mat.cpp"
+				$File	"$SRCDIREDITOR\properties\postprocessing\vSheet_PP_Operations.cpp"
+				$File	"$SRCDIREDITOR\properties\postprocessing\vSheet_PP_RenderView.cpp"
+				$File	"$SRCDIREDITOR\properties\postprocessing\vSheet_PP_RT.cpp"
+			}
+			
+			$Folder	"Smart text"
+			{
+				$File	"$SRCDIREDITOR\properties\smarttext\vSmartAutocomplete.cpp"
+				$File	"$SRCDIREDITOR\properties\smarttext\vSmartObject.cpp"
+				$File	"$SRCDIREDITOR\properties\smarttext\vSmartObjectList.cpp"
+				$File	"$SRCDIREDITOR\properties\smarttext\vSmartRow.cpp"
+				$File	"$SRCDIREDITOR\properties\smarttext\vSmartText.cpp"
+				$File	"$SRCDIREDITOR\properties\smarttext\vSmartTooltip.cpp"
+			}
+		}
+		
+		$Folder	"Solver"
+		{
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Add.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Append.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Array.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_BaseEvaluate.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_BaseRange.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Break.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Callback.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Constant.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_ContainerBasic.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Cross.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Custom.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Divide.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Dot.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Dummy.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_EnvC.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Final.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Flashlight.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Fog.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Lerp.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Lightscale.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Matrices.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_MComp.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Multiply.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Parallax.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_ReadSemantics.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_StdPLight.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_StdSkinning.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_StdVLight.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Subtract.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Swizzle.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_TexTransform.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_TextureSample.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_Utility.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_VCompression.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_VecRef.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_VmtParam.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_Solver_WriteSemantics.cpp"
+			$File	"$SRCDIREDITOR\solver\cHLSL_SolverBase.cpp"
+			
+			$File	"$SRCDIREDITOR\solver\hlsl_solver.h"
+			
+			$Folder	"Post processing"
+			{
+				$File	"$SRCDIREDITOR\solver\postprocessing\cHLSL_Solver_PP_DrawMat.cpp"
+				$File	"$SRCDIREDITOR\solver\postprocessing\cHLSL_Solver_PP_Mat.cpp"
+				$File	"$SRCDIREDITOR\solver\postprocessing\cHLSL_Solver_PP_operations.cpp"
+				$File	"$SRCDIREDITOR\solver\postprocessing\cHLSL_Solver_PP_RenderView.cpp"
+				$File	"$SRCDIREDITOR\solver\postprocessing\cHLSL_Solver_PP_RT.cpp"
+				$File	"$SRCDIREDITOR\solver\postprocessing\cHLSL_SolverPP_Base.cpp"
+			}
+		}
+		
+		$Folder	"Threads"
+		{
+			$File	"$SRCDIREDITOR\threads\cBaseThread.cpp"
+			$File	"$SRCDIREDITOR\threads\cCompileThread.cpp"
+			$File	"$SRCDIREDITOR\threads\cSolverCallback.cpp"
+			$File	"$SRCDIREDITOR\threads\cThreadManager.cpp"
+		}
+	}
+
+	$Folder	"Precompiled Header"
+	{
+		$File	"$SRCDIREDITOR\cbase.h"
+		//$File	"$SRCDIREDITOR\cbase_se.h"
+		$File	"$SRCDIREDITOR\stdafx.cpp"
+		{
+			$Configuration
+			{
+				$Compiler
+				{
+					$Create/UsePrecompiledHeader	"Create Precompiled Header (/Yc)"
+				}
+			}
+		}
+	}
+
+	$Folder	"Link Libraries"
+	{
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\bitmap.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\choreoobjects.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\dmxloader.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\mathlib.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\matsys_controls.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\particles.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\tier1.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\tier2.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\tier3.lib"
+		$DynamicFile	"$SRCDIR\lib\public\vgui_controls_editor.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\steam_api.lib"
+		$DynamicFile	"$TARGET_SRC_DIRECTORY\lib\public\vtf.lib"
+		$DynamicFile	"$SRCDIR\lib\public\jpeglib.lib"
+	}
+}

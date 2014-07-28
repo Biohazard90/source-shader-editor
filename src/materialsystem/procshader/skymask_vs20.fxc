@@ -1,0 +1,41 @@
+// Includes
+#include "common_vs_fxc.h"
+
+// STATIC: "DRAWWHITE"		"0..1"
+// STATIC: "COMBINE"		"0..1"
+
+// Semantic structures
+struct VS_INPUT
+{
+	float3 vPos					:	POSITION;
+#if COMBINE
+	float2 vTexCoord			:	TEXCOORD0;
+#endif
+};
+
+struct VS_OUTPUT
+{
+	float4 vProjPos				:	POSITION;
+#if COMBINE
+	float2 vTexCoord			:	TEXCOORD0;
+#endif
+};
+
+// Entry point
+VS_OUTPUT main( const VS_INPUT In )
+{
+	VS_OUTPUT Out;
+	Out.vProjPos = float4( In.vPos, 1 );
+
+#if DRAWWHITE
+	Out.vProjPos.z = 1.0f;
+#else
+	Out.vProjPos.z = 0.0f;
+#endif
+
+#if COMBINE
+	Out.vTexCoord = In.vTexCoord;
+#endif
+
+	return Out;
+}

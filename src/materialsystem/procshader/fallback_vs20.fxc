@@ -1,0 +1,56 @@
+// *********************************
+// ** auto generated vertexshader **
+// *********************************
+
+// Includes
+#include "common_vs_fxc.h"
+
+
+// Combos
+// DYNAMIC: "COMPRESSED_VERTS"		"0..10"
+
+// Samplers
+
+// Constants
+
+// Semantic structures
+struct VS_INPUT
+{
+	float3 vPos					:	POSITION;
+	float4 vNormal				: NORMAL;
+	float4 vBoneWeights			: BLENDWEIGHT;
+	float4 vBoneIndices			: BLENDINDICES;
+
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float2 vTexCoord_1			:	TEXCOORD1;
+	float2 vTexCoord_2			:	TEXCOORD2;
+	float4 vTexCoord_3			:	TEXCOORD3;
+
+	float4 vColor			: COLOR0;
+	float3 vSpecular		: COLOR1;
+
+	float3 vTangentS		: TANGENT;
+	float3 vTangentT		: BINORMAL;
+	float4 vUserData		: TANGENT;
+
+	float3 vPosFlex			: POSITION1;
+	float3 vNormalFlex		: NORMAL1;
+	float vVertexID			: POSITION2;
+};
+
+struct VS_OUTPUT
+{
+	float4 vProjPos				:	POSITION;
+	float3 vTexCoord_0			:	TEXCOORD0;
+};
+
+// Entry point
+VS_OUTPUT main( const VS_INPUT In )
+{
+	VS_OUTPUT Out;
+
+	Out.vProjPos = mul( float4( In.vPos, 1.0f ), cModelViewProj );
+	Out.vTexCoord_0 = In.vPos;
+
+	return Out;
+}

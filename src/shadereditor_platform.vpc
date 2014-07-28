@@ -1,0 +1,16 @@
+//-----------------------------------------------------------------------------
+//  SHADEREDITOR_PLATFORM.VPC
+//
+//  Project Script
+//-----------------------------------------------------------------------------
+
+$Macro TARGET_SRC_DIRECTORY "<PATH TO YOUR GAMES SOURCE ROOT>" // example: C:\sourcesdk2013\sp\src
+
+$Macro TARGET_PLATFORM "2013"
+
+// integration untested, but supported by the code:
+// $Macro TARGET_PLATFORM "SWARM"
+// $Macro TARGET_PLATFORM "2007"
+// $Macro TARGET_PLATFORM "2006"
+
+$Macro TARGET_GAME_DIRECTORY "<PATH TO YOUR GAME>" // example: C:\Steam\steamapps\sourcemods\mygame

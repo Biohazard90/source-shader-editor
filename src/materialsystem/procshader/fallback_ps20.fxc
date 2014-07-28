@@ -1,0 +1,44 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+
+
+// Combos
+
+// Samplers
+
+// Constants
+
+// Semantic structures
+struct PS_INPUT
+{
+	float3 vTexCoord_0			:	TEXCOORD0;
+	float2 vTexCoord_1			:	TEXCOORD1;
+	float2 vTexCoord_2			:	TEXCOORD2;
+	float2 vTexCoord_3			:	TEXCOORD3;
+	float2 vTexCoord_4			:	TEXCOORD4;
+	float2 vTexCoord_5			:	TEXCOORD5;
+	float2 vTexCoord_6			:	TEXCOORD6;
+	float2 vTexCoord_7			:	TEXCOORD7;
+
+	float2 vCol_0				:	COLOR0;
+	float2 vCol_1				:	COLOR1;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+
+	Out.vColor_0 = float4( normalize( In.vTexCoord_0 ) * 0.5f + 0.5f, 1 );
+
+	return Out;
+}

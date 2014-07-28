@@ -1,0 +1,40 @@
+// Includes
+#include "common_ps_fxc.h"
+
+// STATIC: "DRAWWHITE"		"0..1"
+// STATIC: "COMBINE"		"0..1"
+
+#if COMBINE
+sampler srcTex				: register( s0 );
+#endif
+
+struct PS_INPUT
+{
+#if COMBINE
+	float2 vTexCoord			:	TEXCOORD0;
+#endif
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor0				: COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+
+#if DRAWWHITE
+	Out.vColor0 = 1.0f;
+#else
+	Out.vColor0 = 0.0f;
+#endif
+
+#if COMBINE && DRAWWHITE
+	float alphaold = tex2D( srcTex, In.vTexCoord ).a;
+	Out.vColor0 = min( Out.vColor0, alphaold );
+#endif
+
+	return Out;
+}

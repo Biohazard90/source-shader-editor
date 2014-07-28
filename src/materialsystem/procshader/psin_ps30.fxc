@@ -1,0 +1,71 @@
+// Includes
+#include "common_ps_fxc.h"
+
+// DYNAMIC:		"OPERATION"			"0..9"
+
+struct PS_INPUT
+{
+	float4 vTexCoord_0			:	TEXCOORD0;
+	float4 vTexCoord_1			:	TEXCOORD1;
+	float4 vTexCoord_2			:	TEXCOORD2;
+	float4 vTexCoord_3			:	TEXCOORD3;
+	float4 vTexCoord_4			:	TEXCOORD4;
+	float4 vTexCoord_5			:	TEXCOORD5;
+	float4 vTexCoord_6			:	TEXCOORD6;
+	float4 vTexCoord_7			:	TEXCOORD7;
+
+	float4 vCol_0				:	COLOR0;
+	float4 vCol_1				:	COLOR1;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
+/*
+enum
+{
+	NPSOP_WRITE_TEXCOORD_0 = 0,
+	NPSOP_WRITE_TEXCOORD_1,
+	NPSOP_WRITE_TEXCOORD_2,
+	NPSOP_WRITE_TEXCOORD_3,
+	NPSOP_WRITE_TEXCOORD_4,
+	NPSOP_WRITE_TEXCOORD_5,
+	NPSOP_WRITE_TEXCOORD_6,
+	NPSOP_WRITE_TEXCOORD_7,
+	NPSOP_WRITE_COLOR_0,
+	NPSOP_WRITE_COLOR_1,	// 9
+};
+*/
+
+#if ( OPERATION == 0 )
+		Out.vColor_0 = In.vTexCoord_0;
+#elif ( OPERATION == 1 )
+		Out.vColor_0 = In.vTexCoord_1;
+#elif ( OPERATION == 2 )
+		Out.vColor_0 = In.vTexCoord_2;
+#elif ( OPERATION == 3 )
+		Out.vColor_0 = In.vTexCoord_3;
+#elif ( OPERATION == 4 )
+		Out.vColor_0 = In.vTexCoord_4;
+#elif ( OPERATION == 5 )
+		Out.vColor_0 = In.vTexCoord_5;
+#elif ( OPERATION == 6 )
+		Out.vColor_0 = In.vTexCoord_6;
+#elif ( OPERATION == 7 )
+		Out.vColor_0 = In.vTexCoord_7;
+#elif ( OPERATION == 8 )
+		Out.vColor_0 = In.vCol_0;
+#elif ( OPERATION == 9 )
+		Out.vColor_0 = In.vCol_1;
+#else
+		Out.vColor_0.xy = In.vTexCoord_0;
+#endif
+	return Out;
+}

@@ -1,0 +1,420 @@
+
+// Includes
+#include "common_ps_fxc.h"
+
+// STATIC: "OPERATION"		"0..57"
+
+sampler src_0				: register( s0 );
+sampler custom_tex_0		: register( s1 );
+
+const float4 g_UV_0			: register( c0 );
+const float4 g_UV_1			: register( c1 );
+const float4 g_UV_2			: register( c2 );
+const float4 g_UV_3			: register( c3 );
+const float4 g_UV_4			: register( c4 );
+const float4 g_UV_5			: register( c5 );
+
+
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+float3 AutoFillYZWWithX( float4 color, float4 controller )
+{
+	return float3( lerp( color.y, color.x, controller.x ), lerp( color.z, color.x, controller.y ), lerp( color.w, color.x, controller.z ) );
+}
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out = (PS_OUTPUT)0;
+
+/*
+enum
+{
+	NPSOP_CALC_ADD = 0,
+};
+*/
+	float2 uv_0 = float2( lerp( g_UV_0.x, g_UV_0.z, In.vTexCoord_0.x ), lerp( g_UV_0.y, g_UV_0.w, In.vTexCoord_0.y ) );
+	float2 uv_1 = float2( lerp( g_UV_1.x, g_UV_1.z, In.vTexCoord_0.x ), lerp( g_UV_1.y, g_UV_1.w, In.vTexCoord_0.y ) );
+	float2 uv_2 = float2( lerp( g_UV_2.x, g_UV_2.z, In.vTexCoord_0.x ), lerp( g_UV_2.y, g_UV_2.w, In.vTexCoord_0.y ) );
+	float2 uv_3 = float2( lerp( g_UV_3.x, g_UV_3.z, In.vTexCoord_0.x ), lerp( g_UV_3.y, g_UV_3.w, In.vTexCoord_0.y ) );
+	float2 uv_4 = float2( lerp( g_UV_4.x, g_UV_4.z, In.vTexCoord_0.x ), lerp( g_UV_4.y, g_UV_4.w, In.vTexCoord_0.y ) );
+	float2 uv_5 = float2( lerp( g_UV_5.x, g_UV_5.z, In.vTexCoord_0.x ), lerp( g_UV_5.y, g_UV_5.w, In.vTexCoord_0.y ) );
+
+#if ( OPERATION == 0 ) // add
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	//col_1.yzw = float3( lerp( col_1.y, col_1.x, g_UV_3.x ), lerp( col_1.z, col_1.x, g_UV_3.y ), lerp( col_1.w, col_1.x, g_UV_3.z ) );
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	Out.vColor_0 = col_0 + col_1;
+
+#elif ( OPERATION == 1 ) // subtract
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	Out.vColor_0 = col_0 - col_1;
+
+#elif ( OPERATION == 2 ) // swizzle
+	float4 color = tex2D( src_0, uv_0 );
+	Out.vColor_0.x = g_UV_1.x * color.x + g_UV_1.y * color.y + g_UV_1.z * color.z + g_UV_1.w * color.w + g_UV_5.x;
+	Out.vColor_0.y = g_UV_2.x * color.x + g_UV_2.y * color.y + g_UV_2.z * color.z + g_UV_2.w * color.w + g_UV_5.y;
+	Out.vColor_0.z = g_UV_3.x * color.x + g_UV_3.y * color.y + g_UV_3.z * color.z + g_UV_3.w * color.w + g_UV_5.z;
+	Out.vColor_0.w = g_UV_4.x * color.x + g_UV_4.y * color.y + g_UV_4.z * color.z + g_UV_4.w * color.w + g_UV_5.w;
+	//Out.vColor_0 += g_UV_5;
+
+#elif ( OPERATION == 3 ) // multiply
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	Out.vColor_0 = col_0 * col_1;
+
+#elif ( OPERATION == 4 ) // divide
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	Out.vColor_0 = col_0 / col_1;
+
+#elif ( OPERATION == 5 || OPERATION == 6 ) // tex lookup 2D + 3D
+
+	float4 uv = tex2D( src_0, uv_0 );
+#	if ( OPERATION == 5 )
+	float4 color = tex2D( custom_tex_0, uv.xy );
+#	else
+	float4 color = tex3D( custom_tex_0, uv.xyz );
+#	endif
+	Out.vColor_0.x = g_UV_1.x * color.x + g_UV_1.y * color.y + g_UV_1.z * color.z + g_UV_1.w * color.w;
+	Out.vColor_0.y = 0 + g_UV_2.y * color.y + 0 + 0;
+	Out.vColor_0.z = 0 + 0 + g_UV_3.z * color.z + 0;
+	Out.vColor_0.w = 0 + 0 + 0 + g_UV_4.w * color.w;
+
+#elif ( OPERATION == 7 ) // set constant
+	Out.vColor_0 = g_UV_0;
+
+#elif ( OPERATION == 8 ) // declare
+	Out.vColor_0 = tex2D( src_0, uv_0 );
+
+#elif ( OPERATION == 9 ) // assign
+	Out.vColor_0 = tex2D( src_0, uv_1 );
+
+#elif ( OPERATION == 10 ) // dot
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+	col_0.y = lerp( col_0.y, col_0.x, g_UV_2.x );
+	col_0.z = lerp( col_0.z, col_0.x, g_UV_2.y );
+	col_0.w = lerp( col_0.w, col_0.x, g_UV_2.z );
+	Out.vColor_0.x = dot( col_0, col_1 );
+
+#elif ( OPERATION == 11 ) // normalize
+	Out.vColor_0 = normalize( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 12 ) // lerp
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+	float4 col_2 = tex2D( src_0, uv_2 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_3 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_4 );
+	col_2.yzw = AutoFillYZWWithX( col_2, g_UV_5 );
+
+	Out.vColor_0 = lerp( col_0, col_1, col_2 );
+
+#elif ( OPERATION == 13 ) // smoothstep
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+	float4 col_2 = tex2D( src_0, uv_2 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_3 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_4 );
+
+	float4 _solve = float4(0,0,0,0);
+	_solve.x = smoothstep( col_0.x, col_1.x, col_2.x );
+	_solve.y = smoothstep( col_0.y, col_1.y, col_2.y ) * g_UV_5.x;
+	_solve.z = smoothstep( col_0.z, col_1.z, col_2.z ) * g_UV_5.y;
+	_solve.w = smoothstep( col_0.w, col_1.w, col_2.w ) * g_UV_5.z;
+	Out.vColor_0 = _solve;
+
+#elif ( OPERATION == 14 ) // clamp
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+	float4 col_2 = tex2D( src_0, uv_2 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_3 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_4 );
+
+	float4 _solve = float4(0,0,0,0);
+	_solve.x = clamp( col_2.x, col_0.x, col_1.x );
+	_solve.y = clamp( col_2.y, col_0.y, col_1.y ) * g_UV_5.x;
+	_solve.z = clamp( col_2.z, col_0.z, col_1.z ) * g_UV_5.y;
+	_solve.w = clamp( col_2.w, col_0.w, col_1.w ) * g_UV_5.z;
+	Out.vColor_0 = _solve;
+
+#elif ( OPERATION == 15 ) // length
+	Out.vColor_0.x = length( tex2D( src_0, uv_0 ).xyzw );
+
+#elif ( OPERATION == 16 ) // pow
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	float4 _solve = float4(0,0,0,0);
+	_solve.x = pow( col_0.x, col_1.x );
+	_solve.y = pow( col_0.y, col_1.y ) * g_UV_5.x;
+	_solve.z = pow( col_0.z, col_1.z ) * g_UV_5.y;
+	_solve.w = pow( col_0.w, col_1.w ) * g_UV_5.z;
+
+	Out.vColor_0 = _solve;
+
+#elif ( OPERATION == 17 ) // step
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	float4 _solve = float4(0,0,0,0);
+	_solve.x = step( col_0.x, col_1.x );
+	_solve.y = step( col_0.y, col_1.y ) * g_UV_5.x;
+	_solve.z = step( col_0.z, col_1.z ) * g_UV_5.y;
+	_solve.w = step( col_0.w, col_1.w ) * g_UV_5.z;
+
+	Out.vColor_0 = _solve;
+
+#elif ( OPERATION == 18 ) // round
+	Out.vColor_0 = round( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 19 ) // frac
+	Out.vColor_0 = frac( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 20 ) // floor
+	Out.vColor_0 = floor( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 21 ) // ceil
+	Out.vColor_0 = ceil( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 22 ) // abs
+	Out.vColor_0 = abs( tex2D( src_0, uv_0 ) );
+
+
+#elif ( OPERATION == 23 ) // sin
+	Out.vColor_0 = sin( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 24 ) // asin
+	Out.vColor_0 = asin( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 25 ) // sinh
+	Out.vColor_0 = sinh( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 26 ) // cos
+	Out.vColor_0 = cos( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 27 ) // acos
+	Out.vColor_0 = acos( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 28 ) // cosh
+	Out.vColor_0 = cosh( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 29 ) // tan
+	Out.vColor_0 = tan( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 30 ) // atan
+	Out.vColor_0 = atan( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 31 ) // tanh
+	Out.vColor_0 = tanh( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 32 ) // atan2
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	//float4 _solve = float4(0,0,0,0);
+	//_solve.x = atan2( col_0.x, col_1.x );
+	//_solve.y = atan2( col_0.y, col_1.y ) * g_UV_5.x;
+	//_solve.z = atan2( col_0.z, col_1.z ) * g_UV_5.y;
+	//_solve.w = atan2( col_0.w, col_1.w ) * g_UV_5.z;
+	//Out.vColor_0 = _solve;
+	Out.vColor_0 = atan2( col_0, col_1 );
+
+#elif ( OPERATION == 33 ) // min
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	Out.vColor_0 = min( col_0, col_1 );
+
+#elif ( OPERATION == 34 ) // max
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	Out.vColor_0 = max( col_0, col_1 );
+
+#elif ( OPERATION == 35 ) // fmod
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	Out.vColor_0 = fmod( col_0, col_1 );
+
+#elif ( OPERATION == 36 ) // degrees
+	Out.vColor_0 = degrees( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 37 ) // radians
+	Out.vColor_0 = radians( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 38 ) // reflect
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	Out.vColor_0 = reflect( col_0, col_1 );
+
+#elif ( OPERATION == 39 ) // refract
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+	float idx = tex2D( src_0, uv_2 ).x;
+
+	col_0.yzw = AutoFillYZWWithX( col_0, g_UV_3 );
+	col_1.yzw = AutoFillYZWWithX( col_1, g_UV_4 );
+
+	Out.vColor_0 = refract( col_0, col_1, idx );
+
+#elif ( OPERATION == 40 ) // saturate
+	Out.vColor_0 = saturate( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 41 ) // invert
+	Out.vColor_0 = 1.0f - tex2D( src_0, uv_0 );
+
+#elif ( OPERATION == 42 ) // textransform
+	// g_UV_5 controls: center rot scale trans
+	float2 uv = tex2D( src_0, uv_0 );
+	float2 center = lerp( float2(0.5f,0.5f), tex2D( src_0, uv_1 ), g_UV_5.x );
+	float rot = lerp( 0.0f, tex2D( src_0, uv_2 ), g_UV_5.y );
+	float2 scale = lerp( float2(1.0f,1.0f), tex2D( src_0, uv_3 ), g_UV_5.z );
+	float2 trans = lerp( float2(0.0f,0.0f), tex2D( src_0, uv_4 ), g_UV_5.w );
+
+	float fs = sin( rot );
+	float fc = cos( rot );
+
+	float4 row_0 = float4( fc * scale.x,
+		-fs * scale.x,
+		0,
+		( -0.5f * fc + 0.5f * fs ) * scale.x + 0.5f + trans.x );
+	float4 row_1 = float4( fs * scale.y,
+		fc * scale.y,
+		0,
+		( -0.5f * fs - 0.5f * fc ) * scale.y + 0.5f + trans.y );
+
+	Out.vColor_0.x = dot( float4( uv, 0, 1 ), row_0 );
+	Out.vColor_0.y = dot( float4( uv, 0, 1 ), row_1 );
+
+#elif ( OPERATION == 43 ) // sign
+	Out.vColor_0 = sign( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 44 ) // append
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	Out.vColor_0 += float4( col_0.x, col_1.xyz ) * g_UV_2.x;
+	Out.vColor_0 += float4( col_0.xy, col_1.xy ) * g_UV_2.y;
+	Out.vColor_0 += float4( col_0.xyz, col_1.x ) * g_UV_2.z;
+	Out.vColor_0 += col_0 * g_UV_2.w;
+
+#elif ( OPERATION == 45 ) // root
+	Out.vColor_0 = sqrt( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 46 ) // cross
+	Out.vColor_0.xyz = cross( tex2D( src_0, uv_0 ).xyz, tex2D( src_0, uv_1 ).xyz );
+
+#elif ( OPERATION == 47 ) // ps lighting
+	float3 light = float3( 0, 0, 1 );
+	float3 normal = normalize( tex2D( src_0, uv_0 ).rgb );
+	float ao = tex2D( src_0, uv_1 ).x;
+	ao = lerp( ao, 1, g_UV_2.x );
+
+	float radius = 1.0f - saturate( length( (In.vTexCoord_0 - 0.5f) * 2.0f) );
+
+	Out.vColor_0.rgb = dot( light, normal ) * ao * radius;
+
+#elif ( OPERATION == 48 ) // matrix compose
+	Out.vColor_0 = tex2D( src_0, uv_0 ) + tex2D( src_0, uv_1 ) + tex2D( src_0, uv_2 );
+	Out.vColor_0.r = 0;
+
+	Out.vColor_0.rgb = 1;
+	Out.vColor_0.w = 0;
+
+#elif ( OPERATION == 49 ) // log
+	Out.vColor_0 = log( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 50 ) // log2
+	Out.vColor_0 = log2( tex2D( src_0, uv_0 ) );
+#elif ( OPERATION == 51 ) // log10
+	Out.vColor_0 = log10( tex2D( src_0, uv_0 ) );
+
+#elif ( OPERATION == 52 ) // exp
+	float4 color = tex2D( src_0, uv_0 );
+	Out.vColor_0.x = exp( color.x );
+	Out.vColor_0.y = exp( color.y ) * g_UV_2.x;
+	Out.vColor_0.z = exp( color.z ) * g_UV_2.y;
+	Out.vColor_0.w = exp( color.w ) * g_UV_2.z;
+
+#elif ( OPERATION == 53 ) // exp2
+	float4 color = tex2D( src_0, uv_0 );
+	Out.vColor_0.x = exp2( color.x );
+	Out.vColor_0.y = exp2( color.y ) * g_UV_2.x;
+	Out.vColor_0.z = exp2( color.z ) * g_UV_2.y;
+	Out.vColor_0.w = exp2( color.w ) * g_UV_2.z;
+
+#elif ( OPERATION == 54 ) // ddx
+#if defined(SHADER_MODEL_PS_3_0)
+	float4 color = ddx( tex2D( src_0, uv_0 ) );
+	Out.vColor_0 = color;
+#endif
+
+#elif ( OPERATION == 55 ) // ddy
+#if defined(SHADER_MODEL_PS_3_0)
+	float4 color = ddy( tex2D( src_0, uv_0 ) );
+	Out.vColor_0 = color;
+#endif
+
+#elif ( OPERATION == 56 ) // fixed lookup
+	float4 color = tex2D( custom_tex_0, In.vTexCoord_0 );
+	Out.vColor_0 = color;
+
+#elif ( OPERATION == 57 ) // distance
+	float4 col_0 = tex2D( src_0, uv_0 );
+	float4 col_1 = tex2D( src_0, uv_1 );
+
+	//col_0.yzw = AutoFillYZWWithX( col_0, g_UV_2 );
+	//col_1.yzw = AutoFillYZWWithX( col_1, g_UV_3 );
+
+	Out.vColor_0 = distance( col_0, col_1 );
+
+#else
+	Out.vColor_0 = float4( 1, 0, 1, 1 );
+
+#endif
+
+	return Out;
+}

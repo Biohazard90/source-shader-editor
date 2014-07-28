@@ -1,0 +1,26 @@
+// Includes
+#include "common_ps_fxc.h"
+
+// DYNAMIC: "ISCUBEMAP"		"0..1"
+
+sampler src_bg				: register( s0 );
+
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float3 vNormal				:	TEXCOORD1;
+};
+
+// Entry point
+float4 main( const PS_INPUT In ) : COLOR
+{
+	float4 color;
+
+#if ISCUBEMAP
+	color = texCUBE( src_bg, In.vNormal ) * ENV_MAP_SCALE;
+#else
+	color = tex2D( src_bg, In.vTexCoord_0 );
+#endif
+
+	return color;
+}

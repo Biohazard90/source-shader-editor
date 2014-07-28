@@ -1,0 +1,30 @@
+// Includes
+#include "common_ps_fxc.h"
+
+sampler src_bg				: register( s0 );
+sampler src_bg2				: register( s1 );
+
+// STATIC: "COMBINEMODE"		"0..1"
+
+struct PS_INPUT
+{
+	float2 vTexCoords			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor0				: COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+
+	Out.vColor0 = tex2D( src_bg, In.vTexCoords );
+#if COMBINEMODE
+	Out.vColor0.a = min( Out.vColor0.a, floor( tex2D( src_bg2, In.vTexCoords ).a ) );
+#endif
+
+	return Out;
+}

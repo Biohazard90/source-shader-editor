@@ -1,0 +1,32 @@
+// *********************************
+// ** auto generated vertexshader **
+// *********************************
+
+// Includes
+#include "common_vs_fxc.h"
+
+const float2 g_Delta		: register( c48 );
+
+// Semantic structures
+struct VS_INPUT
+{
+	float3 vPos					:	POSITION;
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct VS_OUTPUT
+{
+	float4 vProjPos				:	POSITION;
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+// Entry point
+VS_OUTPUT main( const VS_INPUT In )
+{
+	VS_OUTPUT Out;
+	Out.vProjPos = mul( float4( In.vPos, 1.0f ), cViewProj );
+
+	Out.vTexCoord_0.x = clamp( In.vTexCoord_0.x, g_Delta.x, g_Delta.y );
+	Out.vTexCoord_0.y = clamp( In.vTexCoord_0.y, g_Delta.x, g_Delta.y );
+	return Out;
+}
