@@ -500,6 +500,12 @@ void CPostProcessingCache::RenderAllEffects( bool bScene )
 
 void CPostProcessingCache::RenderSinglePPE( EditorPostProcessingEffect *effect, bool bPreviewMode, bool bSceneMode, bool bOwnsEffect )
 {
+	RenderSinglePPE( effect, -1, -1, -1, -1, bPreviewMode, bSceneMode, bOwnsEffect );
+}
+
+void CPostProcessingCache::RenderSinglePPE( EditorPostProcessingEffect *effect, int x, int y, int w, int h,
+	bool bPreviewMode, bool bSceneMode, bool bOwnsEffect )
+{
 	if ( !effect )
 		return;
 
@@ -516,16 +522,22 @@ void CPostProcessingCache::RenderSinglePPE( EditorPostProcessingEffect *effect, 
 			AssertMsg( !bOwnsEffect, "Mem leak." );
 
 			EditorPostProcessingEffect *pNewEffect = new EditorPostProcessingEffect( *effect );
-			return pCallQueue->QueueCall( CPostProcessingCache::RenderSinglePPE, pNewEffect, bPreviewMode, bSceneMode, true );
+			return pCallQueue->QueueCall( CPostProcessingCache::RenderSinglePPE, pNewEffect, x, y, w, h, bPreviewMode, bSceneMode, true );
 		}
 	}
 #endif
 
 	if ( !bSceneMode && effect->config.bDoAutoUpdateFBCopy )
 	{
-		GeneralFramebufferUpdate( pRenderContext );
+		if ( w > 0 )
+		{
+			UpdateScreenEffectTexture( GetFBTex(), x, y, w, h, true );
+		}
+		else
+		{
+			GeneralFramebufferUpdate( pRenderContext );
+		}
 	}
-
 
 	RunCodeContext rContext( bPreviewMode, bSceneMode );
 	rContext.pRenderContext = pRenderContext;

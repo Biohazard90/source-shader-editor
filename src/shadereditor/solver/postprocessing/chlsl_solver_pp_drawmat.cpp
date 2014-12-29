@@ -30,12 +30,15 @@ void CHLSL_Solver_PP_DrawMat::OnExecuteCode( const RunCodeContext &context )
 
 	ITexture *pRT_Target = NULL;
 
+	int vx, vy, vw, vh;
+	context.pRenderContext->GetViewport( vx, vy, vw, vh );
+
 	switch ( m_iSizingMode_tg )
 	{
 	default:
 	case CNodePP_DrawMat::VPSIZINGMODE_FULL_FB:
-		tg_sx = backbuffer_sx;
-		tg_sy = backbuffer_sy;
+		tg_sx = vw;
+		tg_sy = vh;
 		break;
 	case CNodePP_DrawMat::VPSIZINGMODE_USE_RT:
 		{
@@ -89,22 +92,27 @@ void CHLSL_Solver_PP_DrawMat::OnExecuteCode( const RunCodeContext &context )
 	// 2	:: 1600/400		4
 
 	float src_uv_x = src_sx / (float)tg_sx;
-	src_uv_x = -1.0f/12.0f * src_uv_x * src_uv_x + 3.0f/4.0f * src_uv_x + 1.0f/3.0f;
 	float src_uv_y = src_sy / (float)tg_sy;
-	src_uv_y = -1.0f/12.0f * src_uv_y * src_uv_y + 3.0f/4.0f * src_uv_y + 1.0f/3.0f;
-
-	//src_uv_x += m_vecSrcUVCompensate.x;
-	//src_uv_y += m_vecSrcUVCompensate.y;
-
 	int fix_x = 0;
 	int fix_y = 0;
 
-	if ( src_sx == backbuffer_sx / 2 &&
-		src_sx % 2 && tg_sx % 2 )
-		fix_x--;
-	if ( src_sy == backbuffer_sy / 2 &&
-		src_sy % 2 && tg_sy % 2 )
-		fix_y--;
+	if ( vw < backbuffer_sx )
+	{
+		src_uv_x = 0;
+		src_uv_y = 1;
+	}
+	else
+	{
+		src_uv_x = -1.0f/12.0f * src_uv_x * src_uv_x + 3.0f/4.0f * src_uv_x + 1.0f/3.0f;
+		src_uv_y = -1.0f/12.0f * src_uv_y * src_uv_y + 3.0f/4.0f * src_uv_y + 1.0f/3.0f;
+
+		if ( src_sx == backbuffer_sx / 2 &&
+			src_sx % 2 && tg_sx % 2 )
+			fix_x--;
+		if ( src_sy == backbuffer_sy / 2 &&
+			src_sy % 2 && tg_sy % 2 )
+			fix_y--;
+	}
 
 	context.pRenderContext->MatrixMode( MATERIAL_VIEW );
 	context.pRenderContext->PushMatrix();

@@ -148,6 +148,8 @@ public:
 
 	void RenderAllEffects( bool bScene );
 	static void RenderSinglePPE( EditorPostProcessingEffect *effect, bool bPreviewMode = false, bool bSceneMode = false, bool bOwnsEffect = false );
+	static void RenderSinglePPE( EditorPostProcessingEffect *effect, int x, int y, int w, int h,
+		bool bPreviewMode = false, bool bSceneMode = false, bool bOwnsEffect = false );
 
 	void LockVrCallbacks();
 	bool AddVrCallback( EditorRenderViewCommand_Definition *pCallback );
