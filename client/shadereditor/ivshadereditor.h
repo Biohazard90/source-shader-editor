@@ -25,7 +25,7 @@
 #include "view_shared.h"
 #else
 #include "interface.h"
-#include "ShaderEditor/ShaderEditorSystem.h"
+#include "shadereditor/shadereditorsystem.h"
 #endif // NOT SHADER_EDITOR_DLL
 
 class IMaterial;

@@ -2145,7 +2145,7 @@ void CNodeView::OnMousePressed ( vgui::MouseCode code )
 	{
 		iArmDrag = DRAG_VIEW;
 	}
-	if ( code == MOUSE_LEFT )
+	else if ( code == MOUSE_LEFT )
 	{
 		CBaseNode *cur = GetNodeUnderCursor();
 		float t = BRIDGE_DRAG_TOLERANCE;
