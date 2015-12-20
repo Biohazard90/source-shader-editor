@@ -346,6 +346,11 @@ protected:
 		return true;
 	};
 
+	virtual bool ShouldDrawEntities()
+	{
+		return true;
+	};
+
 	virtual bool ShouldDrawRopes()
 	{
 		return true;
@@ -509,8 +514,12 @@ protected:
 		//if( !r_drawopaquerenderables.GetBool() )
 		//	return;
 
-		if( !m_pMainView->ShouldDrawEntities() )
-			return;
+		// undefined reference to `CViewRender::ShouldDrawEntities()' collect2: ld returned 1 exit status
+		/*if( !m_pMainView->ShouldDrawEntities() )
+		  return;
+		*/
+		if( !ShouldDrawEntities() )
+		  return;
 
 		render->SetBlend( 1 );
 
@@ -1005,6 +1014,7 @@ public:
 		bool bClearObeyStencil;
 		bool bFogOverride;
 		bool bFogEnabled;
+		bool bDrawEntities;
 
 		int iClearColorR;
 		int iClearColorG;
@@ -1238,6 +1248,12 @@ public:
 		return settings.bDrawParticles;
 	};
 
+
+	virtual bool ShouldDrawEntities()
+	{
+		return settings.bDrawEntities;
+	};
+
 	virtual bool ShouldDrawRopes()
 	{
 		return settings.bDrawRopes;
@@ -1393,6 +1409,7 @@ pFnVrCallback_Declare( VrCallback_General )
 	settings.bClearObeyStencil = pbOptions[14];
 	settings.bFogOverride = pbOptions[15];
 	settings.bFogEnabled = pbOptions[16];
+	settings.bDrawEntities = pbOptions[17];
 
 	settings.iClearColorR = piOptions[0];
 	settings.iClearColorG = piOptions[1];
