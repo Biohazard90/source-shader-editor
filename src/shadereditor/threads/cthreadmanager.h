@@ -1,7 +1,7 @@
 #ifndef CTHREADMANAGER_H
 #define CTHREADMANAGER_H
 
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 class CThreadManager : public CAutoGameSystemPerFrame
 {

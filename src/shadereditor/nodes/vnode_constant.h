@@ -1,7 +1,7 @@
 #ifndef CNODE_CONSTANT_H
 #define CNODE_CONSTANT_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeConstant : public CBaseNode
 {

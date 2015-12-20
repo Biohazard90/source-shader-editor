@@ -1,7 +1,7 @@
 #ifndef CNODE_NORMALIZE_H
 #define CNODE_NORMALIZE_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeBaseEvaluate : public CBaseNode
 {

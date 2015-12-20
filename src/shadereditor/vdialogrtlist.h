@@ -1,7 +1,7 @@
 #ifndef DIALOG_RT_LIST_H
 #define DIALOG_RT_LIST_H
 
-#include "editorCommon.h"
+#include "editorcommon.h"
 #include "vgui_controls/controls.h"
 
 

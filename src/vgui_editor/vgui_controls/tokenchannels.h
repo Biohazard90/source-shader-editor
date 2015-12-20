@@ -1,7 +1,7 @@
 #ifndef TOKENCHANNELS_H
 #define TOKENCHANNELS_H
 
-#include "vgui_controls/Utilities.h"
+#include "vgui_controls/utilities.h"
 
 struct SimpleTokenize
 {

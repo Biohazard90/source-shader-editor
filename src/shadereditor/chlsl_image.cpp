@@ -1,15 +1,20 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 #include "view_shared.h"
 
 #include "vtf/vtf.h"
 //#include "magick++.h"
-#ifdef SHADER_EDITOR_DLL_2006
+//#ifdef SHADER_EDITOR_DLL_2006
 #include "setjmp.h"
-#endif
+//#endif
 
+#define JPEGLIB_USE_STDIO
 #include "jpeglib/jpeglib.h"
+#undef JPEGLIB_USE_STDIO
+
+// memdbgon must be the last include file in a .cpp file!!!
+#include <tier0/memdbgon.h>
 
 CHLSL_Image::CHLSL_Image()
 {
@@ -66,13 +71,14 @@ void CHLSL_Image::DestroyProceduralMaterial()
 struct ValveJpegErrorHandler_t
 {
 	struct jpeg_error_mgr	m_Base;
-	jmp_buf					m_ErrorContext;
+	jmp_buf m_ErrorContext;
 };
 
 static void ValveJpegErrorHandler( j_common_ptr cinfo )
 {
 	ValveJpegErrorHandler_t *pError = reinterpret_cast< ValveJpegErrorHandler_t * >( cinfo->err );
 	char buffer[ JMSG_LENGTH_MAX ];
+	/* Create the message */
 	( *cinfo->err->format_message )( cinfo, buffer );
 	Warning( "%s\n", buffer );
 	longjmp( pError->m_ErrorContext, 1 );

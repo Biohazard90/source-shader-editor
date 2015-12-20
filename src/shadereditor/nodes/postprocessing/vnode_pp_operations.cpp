@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CNodePP_ClearBuffers::CNodePP_ClearBuffers( CNodeView *p ) : BaseClass( "Clear buffers", p )
 {

@@ -3,7 +3,7 @@
 #ifndef SHADER_EDITOR_DLL_2006
 #include "tier1/callqueue.h"
 #endif
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 static CPostProcessingCache gs_ppcache;
@@ -503,8 +503,7 @@ void CPostProcessingCache::RenderSinglePPE( EditorPostProcessingEffect *effect, 
 	RenderSinglePPE( effect, -1, -1, -1, -1, bPreviewMode, bSceneMode, bOwnsEffect );
 }
 
-void CPostProcessingCache::RenderSinglePPE( EditorPostProcessingEffect *effect, int x, int y, int w, int h,
-	bool bPreviewMode, bool bSceneMode, bool bOwnsEffect )
+void CPostProcessingCache::RenderSinglePPE( EditorPostProcessingEffect *effect, int x, int y, int w, int h, bool bPreviewMode, bool bSceneMode, bool bOwnsEffect )
 {
 	if ( !effect )
 		return;
@@ -538,6 +537,7 @@ void CPostProcessingCache::RenderSinglePPE( EditorPostProcessingEffect *effect, 
 			GeneralFramebufferUpdate( pRenderContext );
 		}
 	}
+
 
 	RunCodeContext rContext( bPreviewMode, bSceneMode );
 	rContext.pRenderContext = pRenderContext;

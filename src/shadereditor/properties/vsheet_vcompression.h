@@ -1,7 +1,7 @@
 #ifndef CSHEET_VCOMPRESSION_H
 #define CSHEET_VCOMPRESSION_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_VCompression : public CSheet_Base

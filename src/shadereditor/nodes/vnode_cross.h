@@ -1,7 +1,7 @@
 #ifndef CNODE_CROSS_H
 #define CNODE_CROSS_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeCross : public CBaseNode
 {

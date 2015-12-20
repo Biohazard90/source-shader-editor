@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 //#include "vgui_int.h"
 
 static CUtlVector< CBaseDiag* >hListDiags;

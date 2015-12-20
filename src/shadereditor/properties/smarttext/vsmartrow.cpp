@@ -1,7 +1,7 @@
 
 #include "cbase.h"
-#include "vSmartRow.h"
-#include "cRegex.h"
+#include "vsmartrow.h"
+#include "cregex.h"
 
 
 #define __ROWCALC_INTRO( x ) int iLastsplit = 0;\
@@ -76,7 +76,7 @@ _smartRow::_smartRow( HFont font, const int &w, const int &inset )
 
 	SetupVguiTex( m_iTex_Arrow, "shadereditor/char_arrow" );
 	SetupVguiTex( m_iTex_CR, "shadereditor/char_cr" );
-	
+
 #if DEFAULT_ROW_CAPACITY > 0
 	hText.EnsureCapacity( DEFAULT_ROW_CAPACITY );
 #endif
@@ -1065,7 +1065,7 @@ wchar_t *_smartRow::ReadInterval( int start, int end, bool bAllowLF, bool bIgnor
 
 	//bool bEndLF = bAllowCR;
 
-	//if ( bEndLF && 
+	//if ( bEndLF &&
 	//	( ( start != 0 || end != hText.Count() ) )
 	//	)
 	//	bEndLF = false;
@@ -1176,7 +1176,7 @@ _smartRow *_smartRow::Split( int pos )
 		wchar_t *text = ReadInterval( pos, -1 );
 		row->InsertString( text );
 		delete [] text;
-	
+
 
 		DeleteInterval( pos, -1 );
 	}
@@ -1288,7 +1288,7 @@ void _smartRow::MakeHighlightRefClean()
 				pFormat->bOverride_bg = true;
 				pFormat->col_bg.SetColor( 80, 65, 40, 255 );
 				hUserHighlight.AddToHead( pFormat );
-				
+
 				i += steps - 1;
 			}
 		}

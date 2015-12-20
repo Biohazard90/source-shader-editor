@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeStdVLight::CNodeStdVLight( CNodeView *p ) : BaseClass( "Vertex lighting", p )

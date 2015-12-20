@@ -1,0 +1,126 @@
+--- html.cpp	2014-07-30 12:53:43.311879882 -0700
++++ html.cpp	2014-07-30 13:01:35.122830789 -0700
+@@ -18,10 +18,10 @@
+ #include "filesystem.h"
+ 
+ #include "vgui_controls/HTML.h"
+-#include "vgui_controls/Controls.h"
+-#include "vgui_controls/Label.h"
+-#include "vgui_controls/Image.h"
+-#include "vgui_controls/ScrollBar.h"
++#include "vgui_controls/controls.h"
++#include "vgui_controls/label.h"
++#include "vgui_controls/image.h"
++#include "vgui_controls/scrollbar.h"
+ #include "KeyValues.h"
+ 
+ #include <stdio.h>
+@@ -41,12 +41,12 @@
+ 
+ vgui::Panel *HTML_NoJavascript_Factory()
+ {
+-	return new HTML( NULL, NULL, false );
++	return NULL; //new HTML( NULL, NULL, false );
+ }
+ 
+ vgui::Panel *HTML_Javascript_Factory()
+ {
+-	return new HTML( NULL, NULL, true );
++	return NULL;//new HTML( NULL, NULL, true );
+ }
+ 
+ //DECLARE_BUILD_FACTORY_CUSTOM_ALIAS( HTML, HTML_NoJavascript, HTML_NoJavascript_Factory );
+@@ -266,8 +266,10 @@
+ 			}
+ 
+ 			_vbar->SetEnabled(false);
+-			_vbar->SetRangeWindow( h/2-5 );
+-			_vbar->SetRange( 0, img_h);	
++			//_vbar->SetRangeWindow( h/2-5 );
++			//_vbar->SetRange( 0, img_h );
++			_vbar->SetRangeWindow( h/2 );
++			_vbar->SetRange( 0, img_h - h/2 );	
+ 			_vbar->SetButtonPressedScrollValue( 5 );
+ 
+ 			_vbar->SetPos(w - (_vbar->GetWide()+WINDOW_BORDER_WIDTH), WINDOW_BORDER_WIDTH);
+@@ -292,8 +294,10 @@
+ 		{
+ 			_hbar->SetVisible(true);
+ 			_hbar->SetEnabled(false);
+-			_hbar->SetRangeWindow( w/2-5 );
+-			_hbar->SetRange( 0, img_w);	
++			//_hbar->SetRangeWindow( w/2-5 );
++			//_hbar->SetRange( 0, img_w);	
++			_hbar->SetRangeWindow( w/2 );
++			_hbar->SetRange( 0, img_w - w/2);	
+ 			_hbar->SetButtonPressedScrollValue( 5 );
+ 
+ 			_hbar->SetPos(WINDOW_BORDER_WIDTH,h-(_vbar->GetWide()+WINDOW_BORDER_WIDTH));
+@@ -441,7 +445,7 @@
+ 	{
+ 		if (browser) 
+ 		{
+-			browser->OnMouse(code,IHTML::DOWN,m_iMouseX,m_iMouseY);
++			//browser->OnMouse(code,IHTML::DOWN,m_iMouseX,m_iMouseY);
+ 		}
+ 	}
+ 	m_bRegenerateHTMLBitmap = true;
+@@ -458,7 +462,7 @@
+ {
+ 	if (browser) 
+ 	{
+-		browser->OnMouse(code, IHTML::UP, m_iMouseX, m_iMouseY);
++		//browser->OnMouse(code, IHTML::UP, m_iMouseX, m_iMouseY);
+ 	}
+ 	m_bRegenerateHTMLBitmap = true;
+ 	if ( !surface()->SupportsFeature( ISurface::DIRECT_HWND_RENDER ) )
+@@ -472,10 +476,10 @@
+ //-----------------------------------------------------------------------------
+ void HTML::OnCursorMoved(int x,int y)
+ {
+-	MouseCode code=MOUSE_LEFT;
++	//MouseCode code=MOUSE_LEFT;
+ 	m_iMouseX=x;
+ 	m_iMouseY=y;
+-	if(browser) browser->OnMouse(code,IHTML::MOVE,x,y);
++	//if(browser) browser->OnMouse(code,IHTML::MOVE,x,y);
+ }
+ 
+ //-----------------------------------------------------------------------------
+@@ -485,7 +489,7 @@
+ {
+ 	if (browser)
+ 	{
+-		browser->OnMouse(code, IHTML::DOWN, m_iMouseX, m_iMouseY);
++		//browser->OnMouse(code, IHTML::DOWN, m_iMouseX, m_iMouseY);
+ 	}
+ 	m_bRegenerateHTMLBitmap = true;
+ 	if ( !surface()->SupportsFeature( ISurface::DIRECT_HWND_RENDER ) )
+@@ -522,7 +526,7 @@
+ 		
+ 	}
+ 
+-	if(browser) browser->OnKeyDown(code);
++	//if(browser) browser->OnKeyDown(code);
+ 	m_bRegenerateHTMLBitmap = true;
+ 	Repaint();
+ }
+@@ -618,7 +622,7 @@
+ 
+ 	if(browser) 
+ 	{
+-		browser->OnSize(m_iScrollX + left, m_iScrollY + top, w-m_iScrollBorderX - right, h-m_iScrollBorderY - bottom);
++		//browser->OnSize(m_iScrollX + left, m_iScrollY + top, w-m_iScrollBorderX - right, h-m_iScrollBorderY - bottom);
+ 	}
+ }
+ 
+@@ -675,6 +679,9 @@
+ 		}
+ 	}
+ 
++	m_bRegenerateHTMLBitmap = true;
++	Repaint();
++
+ 	int w, h;
+ 	GetSize(w, h);
+ 	CalcScrollBars(w, h);

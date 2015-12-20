@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: Contains the CMessageDialog declaration
 //
@@ -79,10 +79,10 @@ enum EDialogType
 	MD_CHECKING_STORAGE_DEVICE
 };
 
-#include "vgui_controls/Frame.h"
-#include "vgui_controls/Label.h"
-#include "vgui_controls/AnimatingImagePanel.h"
-#include "vgui_controls/ImagePanel.h"
+#include "vgui_controls/frame.h"
+#include "vgui_controls/label.h"
+#include "vgui_controls/animatingimagepanel.h"
+#include "vgui_controls/imagepanel.h"
 
 //-----------------------------------------------------------------------------
 // Purpose: Simple modal dialog box for Xbox 360 warnings and messages

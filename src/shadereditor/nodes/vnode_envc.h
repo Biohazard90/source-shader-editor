@@ -1,7 +1,7 @@
 #ifndef CNODE_TIME_H
 #define CNODE_TIME_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeEnvC : public CBaseNode
 {

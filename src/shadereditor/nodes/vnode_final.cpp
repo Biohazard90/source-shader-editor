@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeFinal::CNodeFinal( CNodeView *p ) : BaseClass( "Final output", p )

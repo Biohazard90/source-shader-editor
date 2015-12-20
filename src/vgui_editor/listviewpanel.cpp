@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -17,13 +17,13 @@
 #include <vgui/IPanel.h>
 #include <vgui/ILocalize.h>
 
-#include <vgui_controls/Controls.h>
-#include <vgui_controls/ScrollBar.h>
-#include <vgui_controls/ImageList.h>
-#include <vgui_controls/ImagePanel.h>
-#include <vgui_controls/Label.h>
-#include <vgui_controls/TextImage.h>
-#include <vgui_controls/ListViewPanel.h>
+#include <vgui_controls/controls.h>
+#include <vgui_controls/scrollbar.h>
+#include <vgui_controls/imagelist.h>
+#include <vgui_controls/imagepanel.h>
+#include <vgui_controls/label.h>
+#include <vgui_controls/textimage.h>
+#include <vgui_controls/listviewpanel.h>
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include <tier0/memdbgon.h>

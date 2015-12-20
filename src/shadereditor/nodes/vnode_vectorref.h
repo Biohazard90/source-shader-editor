@@ -1,7 +1,7 @@
 #ifndef CNODE_VECTORREF_H
 #define CNODE_VECTORREF_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeVectorReflect : public CBaseNode
 {

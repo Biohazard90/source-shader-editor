@@ -1,7 +1,7 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
-#include "vSheets.h"
+#include "editorcommon.h"
+#include "vsheets.h"
 
 
 CNodeVSInput::CNodeVSInput( CNodeView *p ) : BaseClass( "VS Input", p )

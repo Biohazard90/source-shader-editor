@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CSheet_PP_Mat::CSheet_PP_Mat(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

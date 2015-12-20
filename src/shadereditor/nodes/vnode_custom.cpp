@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CNodeCustom::CNodeCustom( CNodeView *p ) : BaseClass( "Custom code", p )
 {

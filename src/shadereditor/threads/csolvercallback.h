@@ -1,7 +1,7 @@
 #ifndef CSOLVERCALLBACK_H
 #define CSOLVERCALLBACK_H
 
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 class CBaseThread;
 

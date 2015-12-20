@@ -1,7 +1,7 @@
 #ifndef CNODE_LIGHTSCALE_H
 #define CNODE_LIGHTSCALE_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeLightscale : public CBaseNode
 {

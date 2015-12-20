@@ -1,17 +1,17 @@
 #ifndef CNODEPROPERTIES_H
 #define CNODEPROPERTIES_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
-#include "vgui_controls/Controls.h"
-#include <vgui_controls/PropertyDialog.h>
+#include "vgui_controls/controls.h"
+#include <vgui_controls/propertydialog.h>
 #include <vgui_controls/propertysheet.h>
 #include <vgui_controls/propertypage.h>
 #include <vgui_controls/textentry.h>
 #include <vgui_controls/checkbutton.h>
 #include <vgui_controls/slider.h>
 #include <vgui_controls/combobox.h>
-#include <vgui_controls/PanelListPanel.h>
+#include <vgui_controls/panellistpanel.h>
 
 class CNodePropertySheet : public PropertyDialog
 {

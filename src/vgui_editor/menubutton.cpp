@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -13,10 +13,10 @@
 #include <KeyValues.h>
 #include <vgui/IVGui.h>
 
-#include <vgui_controls/Controls.h>
-#include <vgui_controls/MenuButton.h>
-#include <vgui_controls/Menu.h>
-#include <vgui_controls/TextImage.h>
+#include <vgui_controls/controls.h>
+#include <vgui_controls/menubutton.h>
+#include <vgui_controls/menu.h>
+#include <vgui_controls/textimage.h>
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include <tier0/memdbgon.h>
@@ -35,6 +35,7 @@ MenuButton::MenuButton(Panel *parent, const char *panelName, const char *text) :
 	m_pDropMenuImage = NULL;
 	m_nImageIndex = -1;
 	_openOffsetY = 0;
+	m_bDropMenuButtonStyle = true;  // set to true so SetDropMenuButtonStyle() forces real init.
 
 	SetDropMenuButtonStyle( false );
 	SetUseCaptureMouse( false );

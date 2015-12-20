@@ -1,11 +1,11 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
-// Purpose: 
+// Purpose:
 //
 // $NoKeywords: $
 //===========================================================================//
 
-#include <vgui_controls/Controls.h>
+#include <vgui_controls/controls.h>
 #include <locale.h>
 
 // memdbgon must be the last include file in a .cpp file!!!
@@ -14,14 +14,11 @@
 extern int g_nYou_Must_Add_Public_Vgui_Controls_Vgui_ControlsCpp_To_Your_Project;
 
 class CircularProgressBar;
-CircularProgressBar *g_CircularProgressBarLinkerHack;
 
 namespace vgui
 {
 	class Slider;
 }
-
-vgui::Slider *g_SliderLinkerHack;
 
 namespace vgui
 {
@@ -39,13 +36,13 @@ bool VGui_InitInterfacesList( const char *moduleName, CreateInterfaceFn *factory
 
 	// If you hit this error, then you need to include memoverride.cpp in the project somewhere or else
 	// you'll get crashes later when vgui_controls allocates KeyValues and vgui tries to delete them.
-#if !defined(NO_MALLOC_OVERRIDE)
+#if !defined(NO_MALLOC_OVERRIDE) && defined( WIN32 )
 	if ( _heapmin() != 1 )
 	{
 		Assert( false );
 		Error( "Must include memoverride.cpp in your project." );
 	}
-#endif	
+#endif
 	// keep a record of this module name
 	strncpy(g_szControlsModuleName, moduleName, sizeof(g_szControlsModuleName));
 	g_szControlsModuleName[sizeof(g_szControlsModuleName) - 1] = 0;
@@ -58,7 +55,7 @@ bool VGui_InitInterfacesList( const char *moduleName, CreateInterfaceFn *factory
 	setlocale(LC_MONETARY, "");
 
 	// NOTE: Vgui expects to use these interfaces which are defined in tier3.lib
-	if ( !g_pVGui || !g_pVGuiInput || !g_pVGuiPanel || 
+	if ( !g_pVGui || !g_pVGuiInput || !g_pVGuiPanel ||
 		 !g_pVGuiSurface || !g_pVGuiSchemeManager || !g_pVGuiSystem )
 	{
 		Warning( "vgui_controls is missing a required interface!\n" );
@@ -77,6 +74,3 @@ const char *GetControlsModuleName()
 }
 
 } // namespace vgui
-
-
-

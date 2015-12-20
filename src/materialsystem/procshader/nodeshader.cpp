@@ -5,7 +5,7 @@
 #include "fallback_vs20.inc"
 #include "fallback_ps20.inc"
 
-#include "../ProcShaderInterface.h"
+#include "../procshaderinterface.h"
 
 #include "node_ps20.inc"
 #include "node_vs20.inc"

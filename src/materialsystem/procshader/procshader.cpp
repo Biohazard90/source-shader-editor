@@ -5,7 +5,7 @@
 #include "fallback_vs20.inc"
 #include "fallback_ps20.inc"
 
-#include "../ProcShaderInterface.h"
+#include "../procshaderinterface.h"
 #include "cpp_shader_constant_register_map.h"
 
 #ifdef SHADER_EDITOR_DLL_2006
@@ -86,6 +86,7 @@ void UpdateConstantByIdentifier( CBaseVSShader *pShader, IShaderDynamicAPI* pSha
 		pShader->PI_SetPixelShaderLocalLighting( SSEREG_LIGHT_INFO_ARRAY );
 #endif
 		return;
+/*
 #ifndef SHADER_EDITOR_DLL_2006
 	case HLSLENV_STUDIO_MORPHING:
 		{
@@ -95,6 +96,7 @@ void UpdateConstantByIdentifier( CBaseVSShader *pShader, IShaderDynamicAPI* pSha
 		}
 		return;
 #endif
+*/
 	case HLSLENV_FLASHLIGHT_VPMATRIX:
 		{
 			VMatrix worldToTexture;
@@ -552,7 +554,7 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 		{
 			CLEAR_FLAGS( MATERIAL_VAR_SELFILLUM );
 			SET_FLAGS( MATERIAL_VAR_MODEL );
-		
+
 			CLEAR_FLAGS2( MATERIAL_VAR2_LIGHTING_UNLIT );
 			SET_FLAGS2( MATERIAL_VAR2_LIGHTING_VERTEX_LIT );
 			SET_FLAGS2( MATERIAL_VAR2_DIFFUSE_BUMPMAPPED_MODEL );
@@ -705,7 +707,7 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 
 					const char *name = c->szSmartHelper;
 					char tmp[MAX_PATH];
-					Q_snprintf( tmp, MAX_PATH, "$%s\0", name );
+					Q_snprintf( tmp, MAX_PATH, "$%s", name );
 					const char *input = data->GetString( tmp );
 
 					Vector4D val;
@@ -728,7 +730,7 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 				params[ MUTABLE_01 + c->iFastLookup ]->SetVecValue( c->flSmartDefaultValues, 4 );
 
 				char paramName[MAX_PATH];
-				Q_snprintf( paramName, sizeof( paramName ), "$%s\0", c->szSmartHelper );
+				Q_snprintf( paramName, sizeof( paramName ), "$%s", c->szSmartHelper );
 				const char *input = data->GetString( paramName );
 
 				Vector4D val;
@@ -785,7 +787,7 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 						Assert( 0 );
 				}
 				else
-					Q_snprintf( tmp, MAX_PATH, "$%s\0", _tex->szParamName );
+					Q_snprintf( tmp, MAX_PATH, "$%s", _tex->szParamName );
 
 				const char *VmtTexture = data->GetString( tmp );
 				if ( VmtTexture && Q_strlen( VmtTexture ) )
@@ -851,7 +853,7 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 			{
 				char localpath[MAX_PATH];
 				char fullpath[MAX_PATH];
-				Q_snprintf( localpath, MAX_PATH, "materials\\%s.vmt\0", pMaterialName );
+				Q_snprintf( localpath, MAX_PATH, "materials\\%s.vmt", pMaterialName );
 				g_pFullFileSystem->RelativePathToFullPath( localpath, NULL, fullpath, MAX_PATH );
 
 				pKV = new KeyValues("");
@@ -1158,8 +1160,8 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 #if 0 //def SHADER_EDITOR_DLL_SWARM
 			char tmp_vs[MAX_PATH*4];
 			char tmp_ps[MAX_PATH*4];
-			Q_snprintf( tmp_vs, sizeof( tmp_vs ), "%s\0", cfg->ProcVSName );
-			Q_snprintf( tmp_ps, sizeof( tmp_ps ), "%s\0", cfg->ProcPSName );
+			Q_snprintf( tmp_vs, sizeof( tmp_vs ), "%s", cfg->ProcVSName );
+			Q_snprintf( tmp_ps, sizeof( tmp_ps ), "%s", cfg->ProcPSName );
 			ShaderNameToSwarmUnique( tmp_vs, sizeof( tmp_vs ) );
 			ShaderNameToSwarmUnique( tmp_ps, sizeof( tmp_ps ) );
 			pShaderShadow->SetVertexShader( tmp_vs, index_vs_static );

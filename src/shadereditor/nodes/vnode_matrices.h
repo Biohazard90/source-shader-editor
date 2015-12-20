@@ -1,7 +1,7 @@
 #ifndef CNODEMATRICES_H
 #define CNODEMATRICES_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeMatrix_MVP : public CBaseNode
 {

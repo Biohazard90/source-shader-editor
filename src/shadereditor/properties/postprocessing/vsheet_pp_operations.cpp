@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CSheet_PP_ClearBuff::CSheet_PP_ClearBuff(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )
 	: BaseClass( pNode, view, data, parent )

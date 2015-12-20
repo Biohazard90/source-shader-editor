@@ -1,11 +1,11 @@
 #ifndef C_SMART_TEXT_H
 #define C_SMART_TEXT_H
 
-#include "vSheets.h"
-#include <vgui_Controls/scrollbar.h>
-#include <vgui/isystem.h>
-#include "vSmartRow.h"
-#include "vSmartObjectList.h"
+#include "vsheets.h"
+#include <vgui_controls/scrollbar.h>
+#include <vgui/ISystem.h>
+#include "vsmartrow.h"
+#include "vsmartobjectlist.h"
 
 #define MAX_SMARTEDIT_HISTORY 100
 

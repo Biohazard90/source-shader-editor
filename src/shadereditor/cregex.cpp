@@ -1,4 +1,3 @@
-
 #include "cbase.h"
 #include "editorcommon.h"
 
@@ -6,8 +5,10 @@
 #undef new
 #endif
 
+#include "tier0/valve_minmax_off.h"	// GCC 4.2.2 headers screw up our min/max defs.
 #include <regex>
-#include "cRegex.h"
+#include "tier0/valve_minmax_on.h"
+#include "cregex.h"
 
 static const char *g_szSyntaxList_Keywords[] =
 {
@@ -217,9 +218,10 @@ bool CRegex::RegexMatch( const char *cStr, const char *exp )
 	//std::string stdStr;
 	//stdStr.append( cStr );
 
-	std::tr1::regex reg( exp );
+	std::regex reg( exp );
 	//return std::tr1::regex_match( stdStr.begin(), stdStr.end(), reg, std::tr1::regex_constants::match_default );
-	return std::tr1::regex_match( cStr, reg, std::tr1::regex_constants::match_default );
+	return std::regex_match( cStr, reg, std::regex_constants::match_default );
+
 }
 bool CRegex::RegexMatch( const wchar_t *lStr, const char *exp )
 {

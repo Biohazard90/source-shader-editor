@@ -1,7 +1,7 @@
 #ifndef CNODE_COMBO_H
 #define CNODE_COMBO_H
 
-#include "vBaseContainer.h"
+#include "vbasecontainer.h"
 
 class CNodeCombo : public CBaseContainerNode
 {

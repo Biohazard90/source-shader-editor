@@ -2,7 +2,7 @@
 #define CCOMPILE_THREAD_H
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 enum
 {

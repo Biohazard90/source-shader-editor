@@ -14,14 +14,14 @@
 #include <vgui_controls/menubar.h>
 
 #include "materialsystem/imesh.h"
-#include "materialsystem/ITexture.h"
-#include "materialsystem/IMaterial.h"
-#include "materialsystem/IMaterialVar.h"
+#include "materialsystem/itexture.h"
+#include "materialsystem/imaterial.h"
+#include "materialsystem/imaterialvar.h"
 #include "materialsystem/imaterialsystem.h"
 
-#include "editorCommon.h"
-#include "vEditorRoot.h"
-#include "vNodeView.h"
+#include "editorcommon.h"
+#include "veditorroot.h"
+#include "vnodeview.h"
 
 //#include "vgui_int.h"
 
@@ -250,6 +250,12 @@ void CEditorRoot::PageChanged()
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 4, bIsShader );
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 5, bIsShader );
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 6, bIsShader );
+
+#ifdef NO_COMPILING
+	m_pMBut_Shader->GetMenu()->SetItemEnabled( 2, false );
+	m_pMBut_Shader->GetMenu()->SetItemEnabled( 3, false );
+	m_pMBut_Shader->GetMenu()->SetItemEnabled( 4, false );
+#endif
 
 	const bool bIsPPEffect = pView->GetFlowgraphType() == CNodeView::FLOWGRAPH_POSTPROC;
 	m_pMBut_PostProc->GetMenu()->SetItemEnabled( 0, bIsPPEffect );
@@ -936,7 +942,7 @@ void CEditorRoot::OnFileSelected( KeyValues *pKV )
 	bool bSaving = true;
 	if ( !Q_stricmp( __c, "openc" ) )
 		bSaving = false;
-	
+
 	const char *pathIn = pKV->GetString( "fullpath" );
 	if ( Q_strlen( pathIn ) <= 1 )
 		return;
@@ -1282,7 +1288,7 @@ void CEditorRoot::LoadLayout()
 	m_bDoTooltips = !!pKV->GetInt( "enable_nodeview_tooltips", 1 );
 	m_bAutoPrecacheUpdate = !!pKV->GetInt( "precache_auto_reload", 1 );
 	m_bWarnOnClose = !!pKV->GetInt( "warn_unsaved_changes", 1 );
-	
+
 	cedit_x = pKV->GetInt( "cedit_x", -1 );
 	cedit_y = pKV->GetInt( "cedit_y", -1 );
 	cedit_sx = pKV->GetInt( "cedit_sx", -1 );
@@ -1320,7 +1326,7 @@ void CEditorRoot::SaveLayout()
 	pKV->SetInt( "cedit_y", cedit_y );
 	pKV->SetInt( "cedit_sx", cedit_sx );
 	pKV->SetInt( "cedit_sy", cedit_sy );
-	
+
 	pKV->SaveToFile( filesystem, VarArgs( "%s/shadereditorui/editor_config.txt", engine->GetGameDirectory()), "MOD" );
 	pKV->deleteThis();
 

@@ -6,7 +6,7 @@
 #include <vgui/ISurface.h>
 #include "ienginevgui.h"
 
-#include "vgui_controls/Controls.h"
+#include "vgui_controls/controls.h"
 #include "editorcommon.h"
 
 
@@ -204,21 +204,22 @@ void PaintDynamicRotationStructure(DynRenderHelper info)
 	vgui::surface()->DrawTexturedPolygon( 4, verts );
 }
 
-inline void UpdateSimpleObjectBounds( Vector2D &pos, Vector2D &size, Vector4D &bounds )
+void UpdateSimpleObjectBounds( Vector2D &pos, Vector2D &size, Vector4D &bounds )
 {
 	bounds.x = pos.x - BOUNDS_EXTRUDE;
 	bounds.y = pos.y + BOUNDS_EXTRUDE;
 	bounds.z = pos.x + size.x + BOUNDS_EXTRUDE;
 	bounds.w = pos.y + size.y - BOUNDS_EXTRUDE;
 }
-inline bool __InBounds( Vector2D &p, Vector2D &smin, Vector2D &smax )
+
+bool __InBounds( Vector2D &p, Vector2D &smin, Vector2D &smax )
 {
 	if ( p.x >= smin.x && p.x <= smax.x &&
 		p.y >= smin.y && p.y <= smax.y )
 		return true;
 	return false;
 }
-inline bool __CrossesBounds( float &p_min, float &p_max, float &b_min, float &b_max )
+bool __CrossesBounds( float &p_min, float &p_max, float &b_min, float &b_max )
 {
 	if ( p_max < b_min )
 		return false;
@@ -226,7 +227,8 @@ inline bool __CrossesBounds( float &p_min, float &p_max, float &b_min, float &b_
 		return false;
 	return true;
 }
-inline bool ShouldSimpleDrawObject( vgui::Panel *parent, CNodeView *coordSystem, Vector4D &bounds )
+
+bool ShouldSimpleDrawObject( vgui::Panel *parent, CNodeView *coordSystem, Vector4D &bounds )
 {
 	Vector2D bpoint_00( bounds.x, bounds.y );
 	Vector2D bpoint_11( bounds.z, bounds.w );
@@ -245,6 +247,8 @@ inline bool ShouldSimpleDrawObject( vgui::Panel *parent, CNodeView *coordSystem,
 
 	return true;
 }
+
+
 void DestroySolverStack( CUtlVector< CHLSL_SolverBase* > &m_hSolvers )
 {
 	DestroyVariablesInSolverStack( m_hSolvers );
@@ -444,7 +448,7 @@ void CopySolvers( const CUtlVector< CHLSL_SolverBase* > &m_hInput,
 	m_hCopied_Variables.Purge();
 }
 
-inline void ClipToScreenBounds( int &_x, int &_y, int &_sx, int &_sy )
+void ClipToScreenBounds( int &_x, int &_y, int &_sx, int &_sy )
 {
 	int w,t;
 	engine->GetScreenSize( w, t );
@@ -879,6 +883,7 @@ GenericShaderData::~GenericShaderData()
 	delete shader;
 	delete pUNDEF_Identifiers;
 }
+
 GenericShaderData::GenericShaderData( const GenericShaderData &o )
 {
 	AllocCheck_Alloc();
@@ -905,8 +910,6 @@ bool GenericShaderData::IsPreview()
 	Assert( shader != NULL );
 	return shader->bPreviewMode;
 }
-
-
 
 GenericPPEData::GenericPPEData()
 {
@@ -946,11 +949,12 @@ bool SolverResources::IsVertexShader()
 }
 
 static const int __FloatSize = sizeof( float );
-inline void AutoCopyFloats( const void *src, void *dst, const int amt )
+void AutoCopyFloats( const void *src, void *dst, const int amt )
 {
 	Q_memcpy( dst, src, __FloatSize * amt );
 }
-inline void AutoCopyStringPtr( const char *src, char **dst )
+
+void AutoCopyStringPtr( const char *src, char **dst )
 {
 	*dst = NULL;
 	if ( !src || !*src )
@@ -962,55 +966,7 @@ inline void AutoCopyStringPtr( const char *src, char **dst )
 	(*dst)[len-1] = '\0';
 }
 
-//inline int GetChannelNumFromChar( const char *c )
-//{
-//	switch ( *c )
-//	{
-//	case 'r':
-//	case 'R':
-//	case 'x':
-//	case 'X':
-//			return 0;
-//		break;
-//	case 'g':
-//	case 'G':
-//	case 'y':
-//	case 'Y':
-//			return 1;
-//		break;
-//	case 'b':
-//	case 'B':
-//	case 'z':
-//	case 'Z':
-//			return 2;
-//		break;
-//	case 'a':
-//	case 'A':
-//	case 'w':
-//	case 'W':
-//			return 3;
-//		break;
-//	}
-//	return -1;
-//}
-//inline char GetCharFromChannelNum( const int i )
-//{
-//	switch (i)
-//	{
-//	case 0:
-//		return 'x';
-//	case 1:
-//		return 'y';
-//	case 2:
-//		return 'z';
-//	case 3:
-//		return 'w';
-//	}
-//	return 'x';
-//}
-
-
-inline int GetSlotsFromTypeFlag( int flag )
+int GetSlotsFromTypeFlag( int flag )
 {
 	switch ( flag )
 	{
@@ -1034,7 +990,8 @@ inline int GetSlotsFromTypeFlag( int flag )
 	}
 	return 1;
 }
-inline int GetTypeFlagFromEnum( int i )
+
+int GetTypeFlagFromEnum( int i )
 {
 	switch ( i )
 	{
@@ -1170,7 +1127,7 @@ bool ReportErrors( GenericShaderData *data, CUtlVector< LimitReport_t* > &hError
 				//		simpletexture &_tex_b = htexlist[b];
 				//		if ( a == b )
 				//			continue;
-				//		
+				//
 
 				//	}
 				//}
@@ -2008,7 +1965,7 @@ void GetUVsForPuzzle( const int &num, Vector2D &min, Vector2D &max, bool bAddCla
 	}
 	else
 	{
-		float deltapixelsize = sedit_uv_adjust.GetFloat() / (float)sizeold; // lé magic
+		float deltapixelsize = sedit_uv_adjust.GetFloat() / (float)sizeold; // lï¿½ magic
 		//float deltapixelsize = ( curPuzzlesPerRow / (float)sizeold ) * 0.1f;
 		//min.x += deltapixelsize;
 		//min.y += deltapixelsize;

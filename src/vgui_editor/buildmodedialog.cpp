@@ -17,19 +17,19 @@
 #include <KeyValues.h>
 #include <vgui/MouseCode.h>
 
-#include <vgui_controls/BuildModeDialog.h>
-#include <vgui_controls/Label.h>
-#include <vgui_controls/TextEntry.h>
-#include <vgui_controls/Button.h>
-#include <vgui_controls/CheckButton.h>
-#include <vgui_controls/RadioButton.h>
-#include <vgui_controls/MenuButton.h>
-#include <vgui_controls/ComboBox.h>
-#include <vgui_controls/BuildGroup.h>
-#include <vgui_controls/MessageBox.h>
-#include <vgui_controls/Menu.h>
-#include <vgui_controls/Divider.h>
-#include <vgui_controls/PanelListPanel.h>
+#include <vgui_controls/buildmodedialog.h>
+#include <vgui_controls/label.h>
+#include <vgui_controls/textentry.h>
+#include <vgui_controls/button.h>
+#include <vgui_controls/checkbutton.h>
+#include <vgui_controls/radiobutton.h>
+#include <vgui_controls/menubutton.h>
+#include <vgui_controls/combobox.h>
+#include <vgui_controls/buildgroup.h>
+#include <vgui_controls/messagebox.h>
+#include <vgui_controls/menu.h>
+#include <vgui_controls/divider.h>
+#include <vgui_controls/panellistpanel.h>
 
 #include "vgui_editor_platform.h"
 

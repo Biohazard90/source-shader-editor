@@ -1,7 +1,7 @@
 #ifndef CNODE_VCOMPRESSION_H
 #define CNODE_VCOMPRESSION_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeVCompression : public CBaseNode
 {

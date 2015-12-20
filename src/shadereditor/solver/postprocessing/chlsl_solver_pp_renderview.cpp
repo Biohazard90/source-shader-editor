@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CHLSL_Solver_PP_RenderView::CHLSL_Solver_PP_RenderView( HNODE nodeidx ) : CHLSL_Solver_PP_Base( nodeidx )
 {

@@ -3,18 +3,18 @@
 #include <vgui/IPanel.h>
 #include "vgui/ISurface.h"
 #include "ienginevgui.h"
-#include <vgui_controls/button.h>
-#include <vgui_controls/textentry.h>
-#include <vgui_controls/richtext.h>
+#include <vgui_controls/Button.h>
+#include <vgui_controls/TextEntry.h>
+#include <vgui_controls/RichText.h>
 
 #include "materialsystem/imesh.h"
-#include "materialsystem/ITexture.h"
-#include "materialsystem/IMaterial.h"
-#include "materialsystem/IMaterialVar.h"
+#include "materialsystem/itexture.h"
+#include "materialsystem/imaterial.h"
+#include "materialsystem/imaterialvar.h"
 #include "materialsystem/imaterialsystem.h"
 
 #include "editorcommon.h"
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 HNODE CBaseNode::m_iUniqueIndexCount = HNODE(0);
 
@@ -55,7 +55,7 @@ CBaseNode::CBaseNode( const char *opName, CNodeView *p )
 CBaseNode::~CBaseNode()
 {
 	RemoveSolvers( true );
-	
+
 	//for ( int i = 0; i < GetNumContainers(); i++ )
 	while( GetNumContainers() )
 		GetContainer( 0 )->RemoveChild( this );
@@ -534,7 +534,7 @@ void CBaseNode::OnUpdateHierachy_Internal( CUtlVector< CBaseNode* > &m_hNodesPro
 		m_hNodesProcessed.AddToTail( this );
 
 	bool bContainerLinkError = false;
-	
+
 	int inputErrorLevel = ERRORLEVEL_NONE;
 	if ( m_bAllInputsRequired && !JacksAllConnected_In() )
 		inputErrorLevel = ERRORLEVEL_UNDEFINED;
@@ -618,7 +618,7 @@ void CBaseNode::OnUpdateHierachy_Internal( CUtlVector< CBaseNode* > &m_hNodesPro
 			CJack *nextJ = b->GetDestinationJack();
 
 			bool bTargetWithError = next && next->GetErrorLevel() != ERRORLEVEL_NONE;
-				
+
 			if ( next && nextJ &&
 				(!m_hNodesProcessed.IsValidIndex( m_hNodesProcessed.Find( next ) ) || (bTargetWithError&&bDeepUpdate)) &&
 				!next->IsMarkedForDeletion() )

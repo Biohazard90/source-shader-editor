@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeAdd::CNodeAdd( CNodeView *p ) : BaseClass( "Add", p )

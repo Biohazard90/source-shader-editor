@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -13,8 +13,8 @@
 #include "vgui/Cursor.h"
 #include "KeyValues.h"
 
-#include "vgui_controls/URLLabel.h"
-#include "vgui_controls/TextImage.h"
+#include "vgui_controls/urllabel.h"
+#include "vgui_controls/textimage.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"

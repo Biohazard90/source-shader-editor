@@ -5,8 +5,8 @@
 
 #include "steam/steam_api.h"
 #include "datacache/idatacache.h"
-#include "engine/ienginesound.h"
-#include "igameuifuncs.h"
+#include "engine/IEngineSound.h"
+#include "IGameUIFuncs.h"
 #include "inputsystem/iinputsystem.h"
 #include "client_factorylist.h"
 //#include "initializer.h"
@@ -33,7 +33,7 @@ IEngineVGui *enginevgui = NULL;
 ISpatialPartition* partition = NULL;
 IFileSystem *filesystem = NULL;
 IEngineSound *enginesound = NULL;
-IUniformRandomStream *random = NULL;
+IUniformRandomStream *random_se = NULL;
 static CGaussianRandomStream s_GaussianRandomStream;
 CGaussianRandomStream *randomgaussian = &s_GaussianRandomStream;
 IGameUIFuncs *gameuifuncs = NULL;
@@ -52,9 +52,9 @@ CGlobalVarsBase *gpGlobals = &dummyvars;
 
 
 
-#include "EditorInit.h"
+#include "editorinit.h"
 #include "editorcommon.h"
-#include "IVProcShader.h"
+#include "ivprocshader.h"
 
 CSysModule *ProcShaderModule = NULL;
 IVProcShader *gProcShaderCTRL = NULL;
@@ -125,7 +125,7 @@ bool ShaderEditorInterface::Init( CreateInterfaceFn appSystemFactory, CGlobalVar
 	if ( (filesystem = (IFileSystem *)appSystemFactory(FILESYSTEM_INTERFACE_VERSION, NULL)) == NULL )
 		return false;
 #endif
-	if ( (random = (IUniformRandomStream *)appSystemFactory(VENGINE_CLIENT_RANDOM_INTERFACE_VERSION, NULL)) == NULL )
+	if ( (random_se = (IUniformRandomStream *)appSystemFactory(VENGINE_CLIENT_RANDOM_INTERFACE_VERSION, NULL)) == NULL )
 		return false;
 	if ( (gameuifuncs = (IGameUIFuncs * )appSystemFactory( VENGINE_GAMEUIFUNCS_VERSION, NULL )) == NULL )
 		return false;
@@ -139,7 +139,7 @@ bool ShaderEditorInterface::Init( CreateInterfaceFn appSystemFactory, CGlobalVar
 	if( !g_pMaterialSystemHardwareConfig )
 		return false;
 
-	s_GaussianRandomStream.AttachToStream( random );
+	s_GaussianRandomStream.AttachToStream( random_se );
 
 #ifdef SHADER_EDITOR_DLL_2006
 	//if ( bCreateEditor )
@@ -281,12 +281,12 @@ char *VarArgs( char *format, ... )
 {
 	va_list		argptr;
 	static char		string[1024];
-	
+
 	va_start (argptr, format);
 	Q_vsnprintf (string, sizeof( string ), format,argptr);
 	va_end (argptr);
 
-	return string;	
+	return string;
 }
 
 int ScreenHeight( void )

@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CDialog_RendertargetList::CDialog_RendertargetList( Panel *parent ) : CBaseDiag( parent, NULL, "_rt_list" )
 {

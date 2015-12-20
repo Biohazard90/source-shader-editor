@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CHLSL_Solver_Array::CHLSL_Solver_Array( HNODE nodeidx ) : CHLSL_SolverBase( nodeidx )
 {

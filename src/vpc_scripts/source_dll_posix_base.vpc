@@ -32,7 +32,7 @@ $Project
 {
 	$Folder	"Source Files"
 	{
-		$File	"$SRCDIR\public\tier0\memoverride.cpp"
+		$File	"$TARGET_SRC_DIRECTORY\public\tier0\memoverride.cpp"
 		{
 			$Configuration
 			{

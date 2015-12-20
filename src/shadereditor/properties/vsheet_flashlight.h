@@ -1,7 +1,7 @@
 #ifndef CSHEET_FLASHLIGHT_H
 #define CSHEET_FLASHLIGHT_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Flashlight : public CSheet_Base

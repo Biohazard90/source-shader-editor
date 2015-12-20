@@ -7,7 +7,7 @@
 #include <vgui/ISurface.h>
 #include "ienginevgui.h"
 
-#include "vgui_controls/Controls.h"
+#include "vgui_controls/controls.h"
 #include <vgui_controls/propertydialog.h>
 #include <vgui_controls/propertysheet.h>
 #include <vgui_controls/propertypage.h>
@@ -15,60 +15,60 @@
 #include <vgui_controls/checkbutton.h>
 #include <vgui_controls/slider.h>
 #include <vgui_controls/combobox.h>
-#include <vgui_controls/PanelListPanel.h>
+#include <vgui_controls/panellistpanel.h>
 #include <vgui_controls/fileopendialog.h>
 
-#include "editorCommon.h"
+#include "editorcommon.h"
 
-#include "vNodeProperties.h"
+#include "vnodeproperties.h"
 
-#include "vCodeEditor.h"
+#include "vcodeeditor.h"
 
-#include "vSheet_Base.h"
-#include "vSheet_General.h"
-#include "vSheet_Multiply.h"
-#include "vSheet_TextureSample.h"
-#include "vSheet_TexTransform.h"
-#include "vSheet_Swizzle.h"
-#include "vSheet_Loop.h"
-#include "vSheet_Combo.h"
-#include "vSheet_Constant.h"
-#include "vSheet_MComp.h"
-#include "vSheet_CMatrix.h"
-#include "vSheet_Callback.h"
-#include "vSheet_VmtParam.h"
-#include "vSheet_Array.h"
-#include "vSheet_Condition.h"
-#include "vSheet_Custom.h"
+#include "vsheet_base.h"
+#include "vsheet_general.h"
+#include "vsheet_multiply.h"
+#include "vsheet_texturesample.h"
+#include "vsheet_textransform.h"
+#include "vsheet_swizzle.h"
+#include "vsheet_loop.h"
+#include "vsheet_combo.h"
+#include "vsheet_constant.h"
+#include "vsheet_mcomp.h"
+#include "vsheet_cmatrix.h"
+#include "vsheet_callback.h"
+#include "vsheet_vmtparam.h"
+#include "vsheet_array.h"
+#include "vsheet_condition.h"
+#include "vsheet_custom.h"
 
-#include "vSheet_Parallax.h"
-#include "vSheet_StdVLight.h"
-#include "vSheet_StdPLight.h"
-#include "vSheet_StdSkinning.h"
-#include "vSheet_StdPSpecLight.h"
-#include "vSheet_VCompression.h"
+#include "vsheet_parallax.h"
+#include "vsheet_stdvlight.h"
+#include "vsheet_stdplight.h"
+#include "vsheet_stdskinning.h"
+#include "vsheet_stdpspeclight.h"
+#include "vsheet_vcompression.h"
 
-#include "vSheet_Flashlight.h"
-#include "vSheet_Lightscale.h"
+#include "vsheet_flashlight.h"
+#include "vsheet_lightscale.h"
 
-#include "vSheet_Final.h"
+#include "vsheet_final.h"
 
-#include "vSheet_VSInput.h"
-#include "vSheet_VSOutPSIn.h"
-#include "vSheet_PSOutput.h"
-
-
-
-
-#include "vSheet_PP_RT.h"
-#include "vSheet_PP_Mat.h"
-#include "vSheet_PP_Operations.h"
-#include "vSheet_PP_DrawMat.h"
-#include "vSheet_PP_RenderView.h"
+#include "vsheet_vsinput.h"
+#include "vsheet_vsoutpsin.h"
+#include "vsheet_psoutput.h"
 
 
 
 
-#include "vSheet_Comment.h"
+#include "vsheet_pp_rt.h"
+#include "vsheet_pp_mat.h"
+#include "vsheet_pp_operations.h"
+#include "vsheet_pp_drawmat.h"
+#include "vsheet_pp_renderview.h"
+
+
+
+
+#include "vsheet_comment.h"
 
 #endif

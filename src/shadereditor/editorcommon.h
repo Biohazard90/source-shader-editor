@@ -83,7 +83,6 @@ private:
 
 #include "dll_init.h"
 
-class vgui::Panel;
 class CJack;
 class CBaseNode;
 class CNodeView;
@@ -540,9 +539,9 @@ extern void PaintDynamicRotationStructure(DynRenderHelper info);
 
 struct WriteContext_FXC;
 
-#include "IVProcShader.h"
-#include "ISEdit_ModelRender.h"
-#include "PPEHelper.h"
+#include "ivprocshader.h"
+#include "isedit_modelrender.h"
+#include "ppehelper.h"
 
 float GaussianWeight_1D( const int &iSample_pos, const int &iKernel_size, const float &flBias = 0 );
 float GaussianWeight_2D( const int &iPos_X, const int &iPos_Y, const int &iSize_X, const int &iSize_Y, const float &flBias = 0 );
@@ -599,19 +598,16 @@ int GetVarFlagsVarValue( int flag );
 const char *GetVarCodeNameFromFlag( int flag );
 int GetVarFlagsRowsRequired( int flag );
 
-extern inline void AutoCopyFloats( const void *src, void *dst, const int amt );
-extern inline void AutoCopyStringPtr( const char *src, char **dst );
+void AutoCopyFloats( const void *src, void *dst, const int amt );
+void AutoCopyStringPtr( const char *src, char **dst );
 
-//extern inline int GetChannelNumFromChar( const char *c );
-//extern inline char GetCharFromChannelNum( const int i );
+int GetSlotsFromTypeFlag( int flag );
+int GetTypeFlagFromEnum( int i );
 
-extern inline int GetSlotsFromTypeFlag( int flag );
-extern inline int GetTypeFlagFromEnum( int i );
+void UpdateSimpleObjectBounds( Vector2D &pos, Vector2D &size, Vector4D &bounds );
+bool ShouldSimpleDrawObject( vgui::Panel *parent, CNodeView *coordSystem, Vector4D &bounds );
 
-extern inline void UpdateSimpleObjectBounds( Vector2D &pos, Vector2D &size, Vector4D &bounds );
-extern inline bool ShouldSimpleDrawObject( vgui::Panel *parent, CNodeView *coordSystem, Vector4D &bounds );
-
-extern inline void ClipToScreenBounds( int &_x, int &_y, int &_sx, int &_sy );
+void ClipToScreenBounds( int &_x, int &_y, int &_sx, int &_sy );
 
 template <class T>
 void SaveDeleteVector( CUtlVector<T> &m_hItems )
@@ -1057,13 +1053,13 @@ void UpdateScreenEffectTexture( ITexture *pTexture, int x, int y, int w, int h, 
 
 #include "filesystem.h"
 #include "utlbuffer.h"
-#include "EditorInit.h"
-#include "gShaderDumps.h"
-#include "gRendertargetConfig.h"
-#include "gPostProcessingCache.h"
-#include "cKVPacker.h"
+#include "editorinit.h"
+#include "gshaderdumps.h"
+#include "grendertargetconfig.h"
+#include "gpostprocessingcache.h"
+#include "ckvpacker.h"
 
-#include "vgui_controls/Controls.h"
+#include "vgui_controls/controls.h"
 #include <vgui_controls/propertydialog.h>
 #include <vgui_controls/propertysheet.h>
 #include <vgui_controls/propertypage.h>
@@ -1071,105 +1067,105 @@ void UpdateScreenEffectTexture( ITexture *pTexture, int x, int y, int w, int h, 
 #include <vgui_controls/checkbutton.h>
 #include <vgui_controls/slider.h>
 #include <vgui_controls/combobox.h>
-#include <vgui_controls/PanelListPanel.h>
+#include <vgui_controls/panellistpanel.h>
 #include <vgui_controls/fileopendialog.h>
 #include <vgui_controls/radiobutton.h>
 #include <vgui_controls/promptsimple.h>
-#include <vgui_controls/PanelListPanel.h>
+#include <vgui_controls/panellistpanel.h>
 #include <vgui/ILocalize.h>
 
 #include "materialsystem/imaterial.h"
 #include "materialsystem/imaterialvar.h"
 
-#include "cHLSL_Image.h"
-#include "cHLSL_Mesh.h"
-#include "cHLSL_Variable.h"
+#include "chlsl_image.h"
+#include "chlsl_mesh.h"
+#include "chlsl_variable.h"
 #include "hlsl_solver.h"
 
-#include "vBridge.h"
-#include "vJack.h"
-#include "vBaseNode.h"
+#include "vbridge.h"
+#include "vjack.h"
+#include "vbasenode.h"
 
-#include "vBaseContainer.h"
-#include "vNode_Matrices.h"
-#include "vNode_Add.h"
-#include "vNode_Subtract.h"
-#include "vNode_Multiply.h"
-#include "vNode_Divide.h"
-#include "vNode_Cross.h"
-#include "vNode_Swizzle.h"
-#include "vNode_Dot.h"
-#include "vNode_VecAppend.h"
-#include "vNode_VectorRef.h"
-#include "vNode_BaseEvaluate.h"
-#include "vNode_Lerp.h"
-#include "vNode_BaseRange.h"
-#include "vNode_Constant.h"
-#include "vNode_EnvC.h"
-#include "vNode_Utility.h"
-#include "vNode_MCompose.h"
-#include "vNode_Callback.h"
-#include "vNode_VmtParam.h"
-#include "vNode_Array.h"
-#include "vNode_Break.h"
-#include "vNode_Custom.h"
+#include "vbasecontainer.h"
+#include "vnode_matrices.h"
+#include "vnode_add.h"
+#include "vnode_subtract.h"
+#include "vnode_multiply.h"
+#include "vnode_divide.h"
+#include "vnode_cross.h"
+#include "vnode_swizzle.h"
+#include "vnode_dot.h"
+#include "vnode_vecappend.h"
+#include "vnode_vectorref.h"
+#include "vnode_baseevaluate.h"
+#include "vnode_lerp.h"
+#include "vnode_baserange.h"
+#include "vnode_constant.h"
+#include "vnode_envc.h"
+#include "vnode_utility.h"
+#include "vnode_mcompose.h"
+#include "vnode_callback.h"
+#include "vnode_vmtparam.h"
+#include "vnode_array.h"
+#include "vnode_break.h"
+#include "vnode_custom.h"
 
-#include "vNode_TexSample.h"
-#include "vNode_TexTransform.h"
-#include "vNode_Sampler.h"
-#include "vNode_Parallax.h"
+#include "vnode_texsample.h"
+#include "vnode_textransform.h"
+#include "vnode_sampler.h"
+#include "vnode_parallax.h"
 
-#include "vNode_Loop.h"
-#include "vNode_Combo.h"
-#include "vNode_Condition.h"
+#include "vnode_loop.h"
+#include "vnode_combo.h"
+#include "vnode_condition.h"
 
-#include "vNode_Std_VLight.h"
-#include "vNode_Std_PLight.h"
-#include "vNode_Std_Skinning.h"
-#include "vNode_VCompression.h"
+#include "vnode_std_vlight.h"
+#include "vnode_std_plight.h"
+#include "vnode_std_skinning.h"
+#include "vnode_vcompression.h"
 
-#include "vNode_Fog.h"
-#include "vNode_Final.h"
-#include "vNode_Flashlight.h"
-#include "vNode_Lightscale.h"
+#include "vnode_fog.h"
+#include "vnode_final.h"
+#include "vnode_flashlight.h"
+#include "vnode_lightscale.h"
 
-#include "vNode_VsInput.h"
-#include "vNode_VsOutput.h"
-#include "vNode_PsInput.h"
-#include "vNode_PsOutput.h"
-
-
-
-#include "vNode_PP_Base.h"
-#include "vNode_PP_RT.h"
-#include "vNode_PP_Mat.h"
-#include "vNode_PP_Operations.h"
-#include "vNode_PP_DrawMat.h"
-#include "vNode_PP_RenderView.h"
+#include "vnode_vsinput.h"
+#include "vnode_vsoutput.h"
+#include "vnode_psinput.h"
+#include "vnode_psoutput.h"
 
 
 
-#include "vNode_Comment.h"
+#include "vnode_pp_base.h"
+#include "vnode_pp_rt.h"
+#include "vnode_pp_mat.h"
+#include "vnode_pp_operations.h"
+#include "vnode_pp_drawmat.h"
+#include "vnode_pp_renderview.h"
 
 
 
-#include "vBaseDiag.h"
-#include "vDialogNew.h"
-#include "vDialogConfig.h"
-#include "vDialogPPEConfig.h"
-#include "vDialogSPrecache.h"
-#include "vDialogEditorConfig.h"
-#include "vDialogRTList.h"
-#include "vDialogPPEffectPrecache.h"
-#include "vDialogRecompileAll.h"
+#include "vnode_comment.h"
 
-#include "vNodeViewError.h"
-#include "vNodeView.h"
-#include "vEditorFlowGraphPage.h"
-#include "vEditorFlowGraphSheet.h"
-#include "vEditorRoot.h"
-#include "vRenderPanel.h"
-#include "vPreview.h"
+
+
+#include "vbasediag.h"
+#include "vdialognew.h"
+#include "vdialogconfig.h"
+#include "vdialogppeconfig.h"
+#include "vdialogsprecache.h"
+#include "vdialogeditorconfig.h"
+#include "vdialogrtlist.h"
+#include "vdialogppeffectprecache.h"
+#include "vdialogrecompileall.h"
+
+#include "vnodeviewerror.h"
+#include "vnodeview.h"
+#include "veditorflowgraphpage.h"
+#include "veditorflowgraphsheet.h"
+#include "veditorroot.h"
+#include "vrenderpanel.h"
+#include "vpreview.h"
 
 
 
@@ -1199,10 +1195,10 @@ struct __threadcmds_CompileCommand
 	};
 	~__threadcmds_CompileCommand()
 	{
-		delete __vs;
-		delete __ps;
-		delete __undef;
-		delete __data;
+		free(__vs);
+		free(__ps);
+		free(__ps);
+		free(__ps);
 
 		AllocCheck_Free();
 	};
@@ -1244,10 +1240,10 @@ struct __threadcmds_CompileCallback
 
 extern CEditorRoot *pEditorRoot;
 
-#include "cSolverCallback.h"
-//#include "custom/cSolveThread.h"
-#include "cBaseThread.h"
-#include "cCompileThread.h"
-#include "cThreadManager.h"
+#include "csolvercallback.h"
+//#include "custom/csolvethread.h"
+#include "cbasethread.h"
+#include "ccompilethread.h"
+#include "cthreadmanager.h"
 
 #endif

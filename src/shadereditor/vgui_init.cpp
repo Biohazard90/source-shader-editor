@@ -2,30 +2,30 @@
 #include "cbase.h"
 //#include "vgui_int.h"
 #include "ienginevgui.h"
-#include <vgui/isurface.h>
+#include <vgui/ISurface.h>
 #include <vgui/IVGui.h>
 #include <vgui/IInput.h>
 #include "tier0/vprof.h"
-#include <vgui_controls/Panel.h>
+#include <vgui_controls/panel.h>
 #include <KeyValues.h>
-#include "FileSystem.h"
+#include "filesystem.h"
 #ifndef SHADER_EDITOR_DLL_2006
 #include "matsys_controls/matsyscontrols.h"
 #endif
-#include "vguimatsurface/IMatSystemSurface.h"
-#include "vgui/isystem.h"
+#include "VGuiMatSurface/IMatSystemSurface.h"
+#include "vgui/ISystem.h"
 #include <vgui/ILocalize.h>
 #include <tier3/tier3.h>
 #include <steam/steam_api.h>
 #include "vgui_controls/animationcontroller.h"
 
-#include "vEditorRoot.h"
-#include "editorCommon.h"
+#include "veditorroot.h"
+#include "editorcommon.h"
 
 using namespace vgui;
 
 #include <vgui/IInputInternal.h>
-#include <vgui_controls/Controls.h>
+#include <vgui_controls/controls.h>
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -107,7 +107,7 @@ bool VGui_Editor_Startup( CreateInterfaceFn appSystemFactory )
 #define SEDITSCHEME_TAG "ShaderEditorScheme"
 
 //-----------------------------------------------------------------------------
-// Purpose: 
+// Purpose:
 //-----------------------------------------------------------------------------
 void VGui_Editor_CreateGlobalPanels( bool bEditingMode )
 {

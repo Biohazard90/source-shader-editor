@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeCallback::CNodeCallback( CNodeView *p ) : BaseClass( "Callback", p )

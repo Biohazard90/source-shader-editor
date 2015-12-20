@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_Std_PSpecLight::CSheet_Std_PSpecLight(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CNodeTexSample::CNodeTexSample( CNodeView *p ) : BaseClass( "Texture sample", p )
 {

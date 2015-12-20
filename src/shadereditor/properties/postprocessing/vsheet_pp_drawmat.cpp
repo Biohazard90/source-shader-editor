@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 static const char *pszSizingModes[] = {
 	"Full frame buffer",

@@ -1,7 +1,7 @@
 #ifndef CNODE_PP_MAT_H
 #define CNODE_PP_MAT_H
 
-#include <editorCommon.h>
+#include <editorcommon.h>
 
 class CNodePP_Mat : public CNodePP_Base
 {

@@ -2,7 +2,7 @@
 #define C_DIALOG_RECOMPILE_ALL_H
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 struct DumpCompileHelper_t
 {

@@ -1,8 +1,8 @@
 
 #include "cbase.h"
-#include "vSheets.h"
-#include "vSmartText.h"
-#include "vSmartRow.h"
+#include "vsheets.h"
+#include "vsmarttext.h"
+#include "vsmartrow.h"
 #include "editorcommon.h"
 
 CCode_Editor::CCode_Editor( CSheet_Base *parent, const char *pName, CSmartText::CodeEditMode_t mode ) : BaseClass( parent, pName )

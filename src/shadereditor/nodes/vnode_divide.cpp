@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeDivide::CNodeDivide( CNodeView *p ) : BaseClass( "Divide", p )

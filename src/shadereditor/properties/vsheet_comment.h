@@ -1,7 +1,7 @@
 #ifndef CSHEET_COMMENT_H
 #define CSHEET_COMMENT_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Comment : public CSheet_Base

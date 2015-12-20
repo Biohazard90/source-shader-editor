@@ -1,7 +1,7 @@
 #ifndef CNODE_STD_VLIGHT_H
 #define CNODE_STD_VLIGHT_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeStdVLight : public CBaseNode
 {

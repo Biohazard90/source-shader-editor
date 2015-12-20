@@ -1,7 +1,7 @@
 #ifndef CNODE_BREAK_H
 #define CNODE_BREAK_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeBreak : public CBaseNode
 {

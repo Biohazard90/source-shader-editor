@@ -1,7 +1,7 @@
 #ifndef CNODE_UTILITY_H
 #define CNODE_UTILITY_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeUtility_Declare : public CBaseNode
 {

@@ -1,7 +1,7 @@
 #ifndef CNODE_CALLBACK_H
 #define CNODE_CALLBACK_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeCallback : public CBaseNode
 {

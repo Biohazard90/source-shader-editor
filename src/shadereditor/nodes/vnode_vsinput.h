@@ -1,7 +1,7 @@
 #ifndef CNODEVSINPUT_H
 #define CNODEVSINPUT_H
 
-#include <editorCommon.h>
+#include <editorcommon.h>
 
 class CNodeVSInput : public CBaseNode
 {

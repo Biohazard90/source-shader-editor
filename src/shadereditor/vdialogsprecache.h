@@ -2,7 +2,7 @@
 #define CHLSL_SHADERPRECACHE_H
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 using namespace vgui;
 

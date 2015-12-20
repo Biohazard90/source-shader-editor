@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CDialog_PPEPrecache::CDialog_PPEPrecache( Panel *parent ) : BaseClass( parent, NULL, "dialog_precache_ppeffect" )

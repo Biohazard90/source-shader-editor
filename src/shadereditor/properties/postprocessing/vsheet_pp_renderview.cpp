@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 CSheet_PP_RenderView::CSheet_PP_RenderView(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )
 	: BaseClass( pNode, view, data, parent )

@@ -1,7 +1,7 @@
 #ifndef CNODE_PARALLAX_H
 #define CNODE_PARALLAX_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 #include "editorcommon.h"
 
 class CNodeParallax : public CBaseNode

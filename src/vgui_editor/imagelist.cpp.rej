@@ -1,0 +1,29 @@
+--- imagelist.cpp	2014-07-30 12:53:43.311879882 -0700
++++ imagelist.cpp	2014-07-30 13:01:35.078830789 -0700
+@@ -27,6 +27,26 @@
+ 	virtual void GetSize(int &wide, int &tall) { wide = 0; tall = 0; }
+ 	virtual void SetSize(int wide, int tall) {}
+ 	virtual void SetColor(Color col) {}
++
++	bool Evict()
++	{
++		return false;
++	}
++
++	int GetNumFrames()
++	{
++		return 0;
++	}
++
++	void SetFrame( int nFrame )
++	{
++	}
++
++	HTexture GetID()
++	{
++		return 0;
++	}
++	void SetRotation( int iRotation ){};
+ };
+ 
+ //-----------------------------------------------------------------------------

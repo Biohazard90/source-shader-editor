@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeStdPLight::CNodeStdPLight( CNodeView *p ) : BaseClass( "PS lighting", p )

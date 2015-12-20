@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CNodePP_RenderView::CNodePP_RenderView( CNodeView *p ) : BaseClass( "Render view", p )
 {

@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeEnvC::CNodeEnvC( CNodeView *p, float defaultSmartVal ) : BaseClass( "UNKNOWN ENVC", p )

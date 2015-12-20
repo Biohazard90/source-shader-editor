@@ -1,7 +1,7 @@
 #ifndef CDIALOG_NEW_H
 #define CDIALOG_NEW_H
 
-#include "editorCommon.h"
+#include "editorcommon.h"
 #include "vgui_controls/controls.h"
 
 enum

@@ -1,7 +1,7 @@
 #ifndef CNODE_FOG_H
 #define CNODE_FOG_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeFog : public CBaseNode
 {

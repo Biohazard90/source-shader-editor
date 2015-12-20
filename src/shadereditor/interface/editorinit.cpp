@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vgui/isystem.h"
+#include "vgui/ISystem.h"
 
 void EngineCopy( const char *a, const char *b )
 {
@@ -16,21 +16,24 @@ float GetEditorTime()
 	return g_pVGuiSystem->GetCurrentTime();
 }
 
-#include <windows.h>
-#include "EditorInit.h"
+#include "editorinit.h"
 #include "editorcommon.h"
 
-#include <tlhelp32.h>
-#include <windows.h>
 #include <stdio.h>
+
+#ifndef NO_COMPILING
+#include <windows.h>
+#include <tlhelp32.h>
 #include <tchar.h>
 #include <direct.h>
+#endif
 
 #include "view_shared.h"
 #include "materialsystem/imesh.h"
 
 void ForceTerminateCompilers()
 {
+#ifndef NO_COMPILING
 	PROCESSENTRY32 entry;
 	entry.dwSize = sizeof(PROCESSENTRY32);
 
@@ -52,6 +55,7 @@ void ForceTerminateCompilers()
 	}
 
 	CloseHandle(snapshot);
+#endif
 }
 
 
@@ -100,13 +104,13 @@ ShaderEditorInterface::~ShaderEditorInterface()
 
 using namespace vgui;
 
-#include "vgui_controls/controls.h"
-#include "vgui_controls/panel.h"
-#include "vgui_controls/animationcontroller.h"
-#include <vgui/isurface.h>
+#include "vgui_controls/Controls.h"
+#include "vgui_controls/Panel.h"
+#include "vgui_controls/AnimationController.h"
+#include <vgui/ISurface.h>
 #include <vgui/IVGui.h>
 #include <vgui/IInput.h>
-#include "vgui/ipanel.h"
+#include "vgui/IPanel.h"
 
 CViewSetup_SEdit_Shared _MainView;
 
@@ -168,7 +172,7 @@ void UpdateScreenEffectTexture( ITexture *pTexture, int x, int y, int w, int h, 
 	Rect_t destRect = srcRect;
 	if( !bDestFullScreen && ( nSrcWidth > nDestWidth || nSrcHeight > nDestHeight ) )
 	{
-		// the source and target sizes aren't necessarily the same (specifically in dx7 where 
+		// the source and target sizes aren't necessarily the same (specifically in dx7 where
 		// nonpow2 rendertargets aren't supported), so lets figure it out here.
 		float scaleX = ( float )nDestWidth / ( float )nSrcWidth;
 		float scaleY = ( float )nDestHeight / ( float )nSrcHeight;
@@ -208,12 +212,14 @@ void ShaderEditorInterface::OnFrame( float frametime )
 
 	IGameSystem::UpdateAllSystems( frametime );
 }
+
 void ShaderEditorInterface::OnPreRender( void *viewsetup )
 {
 	_MainView = *((CViewSetup_SEdit_Shared*)viewsetup);
 
 	IGameSystem::PreRenderAllSystems();
 }
+
 void ShaderEditorInterface::OnUpdateSkymask( bool bCombineMode, int x, int y, int w, int h )
 {
 	SetFramebufferCopyTexOverride( NULL );
@@ -306,7 +312,7 @@ void ShaderEditorInterface::OnUpdateSkymask( bool bCombineMode, int x, int y, in
 
 #ifndef SHADER_EDITOR_DLL_2006
 	UpdateScreenEffectTexture( GetFBTex(), x, y, w, h );
-	//pRenderContext->CopyRenderTargetToTexture( GetFBTex() );
+//pRenderContext->CopyRenderTargetToTexture( GetFBTex() );
 #endif
 
 	// do ops
@@ -343,6 +349,7 @@ void ShaderEditorInterface::OnSceneRender()
 	if ( IsInEditMode() )
 		::pEditorRoot->OnSceneRender();
 }
+
 void ShaderEditorInterface::OnPostRender( bool bUpdateFB )
 {
 	if ( bUpdateFB )
@@ -365,6 +372,7 @@ void ShaderEditorInterface::SetFramebufferCopyTexOverride( ITexture *tex )
 	CMatRenderContextPtr pRenderContext( materials );
 	pRenderContext->SetFrameBufferCopyTexture( (tex!=NULL) ? tex : GetFBTex() );
 }
+
 void ShaderEditorInterface::UpdateFramebufferTexture( bool bDoPush, bool bCopyToEditorTarget )
 {
 	CMatRenderContextPtr pRenderContext( materials );
@@ -377,6 +385,7 @@ void ShaderEditorInterface::UpdateFramebufferTexture( bool bDoPush, bool bCopyTo
 	if ( bDoPush )
 		pRenderContext->PopRenderTargetAndViewport();
 }
+
 void ShaderEditorInterface::RegisterClientCallback( const char *name, pFnClCallback(callback), int numComponents )
 {
 	char tmp[MAX_PATH];
@@ -404,6 +413,7 @@ void ShaderEditorInterface::RegisterClientCallback( const char *name, pFnClCallb
 
 	m_hFunctionCallbacks.AddToTail( cb );
 }
+
 void ShaderEditorInterface::LockClientCallbacks()
 {
 	bCallbackLock = true;
@@ -413,15 +423,18 @@ void ShaderEditorInterface::LockClientCallbacks()
 	if ( gProcShaderCTRL )
 		gProcShaderCTRL->LinkCallbacks( &m_hFunctionCallbacks );
 }
+
 int ShaderEditorInterface::GetNumCallbacks()
 {
 	return m_hFunctionCallbacks.Count();
 }
+
 _clCallback *ShaderEditorInterface::GetCallback( int idx )
 {
 	Assert( m_hFunctionCallbacks.IsValidIndex( idx ) );
 	return m_hFunctionCallbacks[ idx ];
 }
+
 int ShaderEditorInterface::FindCallback( const char *name )
 {
 	if ( !name || !Q_strlen( name ) )
@@ -433,7 +446,6 @@ int ShaderEditorInterface::FindCallback( const char *name )
 	}
 	return -1;
 }
-
 
 void ShaderEditorInterface::RegisterViewRenderCallback( const char *pszVrCName, pFnVrCallback(callback),
 		const char **pszBoolNames, const bool *pBoolDefaults, const int numBoolParams,
@@ -671,6 +683,7 @@ void MainShaderEditorUpdate::UpdateConstants( const CViewSetup *_override )
 	CViewSetup_SEdit_Shared setup = CViewSetup_SEdit_Shared( *_override );
 	UpdateConstants( &setup );
 }
+
 void MainShaderEditorUpdate::UpdateConstants( const CViewSetup_SEdit_Shared *_override )
 {
 	const CViewSetup_SEdit_Shared *_activeSetup = &_MainView;
@@ -709,6 +722,7 @@ void MainShaderEditorUpdate::UpdateConstants( const CViewSetup_SEdit_Shared *_ov
 		gProcShaderCTRL->UpdateEnvironmentData( i, _data );
 	}
 }
+
 void MainShaderEditorUpdate::PreRender()
 {
 	if ( !gProcShaderCTRL )
@@ -748,6 +762,7 @@ void MainShaderEditorUpdate::BeginMaterialReload( bool bResetMode )
 		iMatReloadStep = bResetMode ? 2 : 1;
 	}
 }
+
 void MainShaderEditorUpdate::Update( float frametime )
 {
 #if 0
@@ -817,7 +832,7 @@ void MainShaderEditorUpdate::Update( float frametime )
 			pEditorRoot->ToggleVisible();
 	}
 
-	if ( input()->IsKeyDown( KEY_LCONTROL ) && 
+	if ( input()->IsKeyDown( KEY_LCONTROL ) &&
 		input()->IsKeyDown( KEY_LSHIFT ) &&
 		input()->IsKeyDown( KEY_LALT ) &&
 		input()->IsKeyDown( KEY_V ) )
@@ -835,6 +850,7 @@ void MainShaderEditorUpdate::QueueLog( const char *_data, int len )
 
 	m_BufferLock.Unlock();
 }
+
 void MainShaderEditorUpdate::QueueLog( const char *_data )
 {
 	m_BufferLock.Lock();
@@ -846,6 +862,7 @@ void MainShaderEditorUpdate::QueueLog( const char *_data )
 
 	m_BufferLock.Unlock();
 }
+
 void MainShaderEditorUpdate::ParseLog( char *logOut, int maxLen )
 {
 	m_BufferLock.Lock();
@@ -858,6 +875,7 @@ void MainShaderEditorUpdate::ParseLog( char *logOut, int maxLen )
 
 	m_BufferLock.Unlock();
 }
+
 bool MainShaderEditorUpdate::IsLogDirty()
 {
 	bool bOut = false;
@@ -867,13 +885,13 @@ bool MainShaderEditorUpdate::IsLogDirty()
 	return bOut;
 }
 
-
 void MainShaderEditorUpdate::SetCompilerState( bool bRunning )
 {
 	m_LockCompilerState.Lock();
 	bCompilerRunning = bRunning;
 	m_LockCompilerState.Unlock();
 }
+
 bool MainShaderEditorUpdate::IsCompilerRunning()
 {
 	m_LockCompilerState.Lock();
@@ -1016,7 +1034,7 @@ void ReloadGameShaders( GenericShaderData *data, char **pszMaterialList, int iNu
 			{
 				pKV->SetName( "EDITOR_SHADER" );
 				pKV->SetString( "$SHADERNAME", CanvasName );
-			
+
 				const char *curEnvmap = pKV->GetString( "$envmap" );
 				if ( !curEnvmap || !*curEnvmap )
 					pKV->SetString( "$envmap", "env_cubemap" );
@@ -1039,6 +1057,7 @@ void ReloadGameShaders( GenericShaderData *data, char **pszMaterialList, int iNu
 
 	QuickRefreshEditorShader();
 }
+
 void QuickRefreshEditorShader()
 {
 	const char *nameLast = NULL;

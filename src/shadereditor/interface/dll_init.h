@@ -16,7 +16,7 @@
 #include "mathlib/vector.h"
 #endif
 #include <shareddefs.h>
-#include "materialsystem/materialsystemutil.h"
+#include "materialsystem/MaterialSystemUtil.h"
 #include "cmodel.h"
 #include "utlvector.h"
 #include "engine/IEngineTrace.h"
@@ -54,7 +54,7 @@ extern IMDLCache *mdlcache;
 extern IVModelInfoClient *modelinfo;
 extern IEngineVGui *enginevgui;
 extern IFileSystem *filesystem;
-extern IUniformRandomStream *random;
+extern IUniformRandomStream *random_se;
 extern CGaussianRandomStream *randomgaussian;
 extern IEngineSound *enginesound;
 extern IMatSystemSurface *g_pMatSystemSurface;

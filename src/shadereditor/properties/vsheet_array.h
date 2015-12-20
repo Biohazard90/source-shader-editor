@@ -1,7 +1,7 @@
 #ifndef CSHEET_ARRAY_H
 #define CSHEET_ARRAY_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Array : public CSheet_Base

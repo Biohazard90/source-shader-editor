@@ -1,7 +1,7 @@
 #ifndef CSHEET_GENERAL_H
 #define CSHEET_GENERAL_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_General : public CSheet_Base

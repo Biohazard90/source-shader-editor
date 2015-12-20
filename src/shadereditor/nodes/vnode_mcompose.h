@@ -1,7 +1,7 @@
 #ifndef CNODE_MCOMPOSE_H
 #define CNODE_MCOMPOSE_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeMCompose : public CBaseNode
 {

@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeBaseEvaluate::CNodeBaseEvaluate( const char *name, CNodeView *p, int LockOutput, int numInputs, bool bSmall, int LockInput ) : BaseClass( name, p )

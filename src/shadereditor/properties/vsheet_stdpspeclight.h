@@ -1,7 +1,7 @@
 #ifndef CSHEET_STD_PSPECLIGHT_H
 #define CSHEET_STD_PSPECLIGHT_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Std_PSpecLight : public CSheet_Base

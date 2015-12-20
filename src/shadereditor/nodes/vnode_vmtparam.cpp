@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeVmtParam_Mutable::CNodeVmtParam_Mutable( CNodeView *p ) : BaseClass( "VParam mutable", p )

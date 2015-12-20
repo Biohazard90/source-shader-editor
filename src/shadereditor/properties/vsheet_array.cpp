@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_Array::CSheet_Array(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

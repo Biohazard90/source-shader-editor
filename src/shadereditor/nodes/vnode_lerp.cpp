@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeLerp::CNodeLerp( CNodeView *p ) : BaseClass( "Lerp", p )

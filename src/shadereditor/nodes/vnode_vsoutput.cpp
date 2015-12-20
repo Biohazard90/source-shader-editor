@@ -1,7 +1,7 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
-#include "vSheets.h"
+#include "editorcommon.h"
+#include "vsheets.h"
 
 
 CNodeVSOutput::CNodeVSOutput( CNodeView *p ) : BaseClass( "VS Output", p )

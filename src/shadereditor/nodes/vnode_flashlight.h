@@ -1,7 +1,7 @@
 #ifndef CNODE_FLASHLIGHT_H
 #define CNODE_FLASHLIGHT_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeFlashlight : public CBaseNode
 {

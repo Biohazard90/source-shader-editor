@@ -1,7 +1,7 @@
 #ifndef CNODE_TEXTRANSFORM_H
 #define CNODE_TEXTRANSFORM_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeTexTransform : public CBaseNode
 {

@@ -1,7 +1,7 @@
 #ifndef CNODEPSINPUT_H
 #define CNODEPSINPUT_H
 
-#include <editorCommon.h>
+#include <editorcommon.h>
 
 class CNodePSInput : public CBaseNode
 {

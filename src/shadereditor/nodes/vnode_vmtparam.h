@@ -1,7 +1,7 @@
 #ifndef CNODE_VMTPARAM_H
 #define CNODE_VMTPARAM_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeVmtParam_Mutable : public CBaseNode
 {

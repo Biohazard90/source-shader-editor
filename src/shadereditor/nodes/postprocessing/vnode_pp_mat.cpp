@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CNodePP_Mat::CNodePP_Mat( CNodeView *p ) : BaseClass( "Material", p )
 {

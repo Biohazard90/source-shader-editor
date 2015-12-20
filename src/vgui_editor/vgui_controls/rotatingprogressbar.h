@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -13,8 +13,8 @@
 #endif
 
 #include <vgui/VGUI.h>
-#include <vgui_controls/Panel.h>
-#include <vgui_controls/ProgressBar.h>
+#include <vgui_controls/panel.h>
+#include <vgui_controls/progressbar.h>
 
 namespace vgui
 {

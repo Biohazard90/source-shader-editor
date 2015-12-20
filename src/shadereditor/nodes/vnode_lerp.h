@@ -1,7 +1,7 @@
 #ifndef CNODE_LERP_H
 #define CNODE_LERP_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeLerp : public CBaseNode
 {

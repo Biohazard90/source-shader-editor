@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#include "vgui_controls/BitmapImagePanel.h"
+#include "vgui_controls/bitmapimagepanel.h"
 #include "vgui/ISurface.h"
 #include "vgui/IScheme.h"
 #include "vgui/IBorder.h"

@@ -1,7 +1,7 @@
 #ifndef CSHEET_PSINPUT_H
 #define CSHEET_PSINPUT_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 class CSheet_PSInVSOut : public CSheet_Base
 {

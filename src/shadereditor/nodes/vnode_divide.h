@@ -1,7 +1,7 @@
 #ifndef CNODE_DIVIDE_H
 #define CNODE_DIVIDE_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeDivide : public CBaseNode
 {

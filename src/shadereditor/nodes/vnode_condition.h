@@ -1,7 +1,7 @@
 #ifndef CNODE_CONDITION_H
 #define CNODE_CONDITION_H
 
-#include "vBaseContainer.h"
+#include "vbasecontainer.h"
 
 class CNodeCondition : public CBaseContainerNode
 {

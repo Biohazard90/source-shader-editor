@@ -1,7 +1,7 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
-#include "vSheets.h"
+#include "editorcommon.h"
+#include "vsheets.h"
 
 
 CNodePSInput::CNodePSInput( CNodeView *p ) : BaseClass( "PS Input", p )

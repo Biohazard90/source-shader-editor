@@ -1,7 +1,7 @@
 #ifndef CNODE_SAMPLEROBJECT_H
 #define CNODE_SAMPLEROBJECT_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeSampler : public CBaseNode
 {

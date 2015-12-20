@@ -1,7 +1,7 @@
 #ifndef CNODE_BASERANGE_H
 #define CNODE_BASERANGE_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeBaseRange : public CBaseNode
 {

@@ -2,7 +2,7 @@
 #define C_KV_PACKER_H
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 class CKVPacker

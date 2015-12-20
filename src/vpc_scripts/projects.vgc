@@ -10,20 +10,20 @@
 
 $Project "shadereditor_dll"
 {
-	"shadereditor\shadereditor.vpc" [$WIN32]
+	"shadereditor\shadereditor.vpc"
 }
 
 $Project "editor_shader"
 {
-	"materialsystem\procshader\procshader.vpc" [$WIN32]
+	"materialsystem\procshader\procshader.vpc"
 }
 
 $Project "vgui_controls_editor"
 {
-	"vgui_editor\vgui_controls_editor.vpc" [$WIN32]
+	"vgui_editor\vgui_controls_editor.vpc"
 }
 
-$Project "captioncompiler"
+/*$Project "captioncompiler"
 {
 	"utils\captioncompiler\captioncompiler.vpc" [$WIN32]
 }
@@ -144,5 +144,5 @@ $Project "vvis_dll"
 $Project "vvis_launcher"
 {
 	"utils\vvis_launcher\vvis_launcher.vpc" [$WIN32]
-}
+}*/
 

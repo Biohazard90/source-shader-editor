@@ -8,16 +8,16 @@
 #include <vgui_controls/richtext.h>
 
 #include "materialsystem/imesh.h"
-#include "materialsystem/ITexture.h"
-#include "materialsystem/IMaterial.h"
-#include "materialsystem/IMaterialVar.h"
+#include "materialsystem/itexture.h"
+#include "materialsystem/imaterial.h"
+#include "materialsystem/imaterialvar.h"
 #include "materialsystem/imaterialsystem.h"
 
 #include <vgui/ILocalize.h>
 
-#include "editorCommon.h"
-#include "vJack.h"
-#include "vBaseNode.h"
+#include "editorcommon.h"
+#include "vjack.h"
+#include "vbasenode.h"
 
 
 
@@ -240,7 +240,7 @@ CHLSL_Var *CJack::GetTemporaryVarTarget_End_Smart( int varTypes, bool bAllowOver
 		int numPartnerBridges = pEndJack->GetNumBridges();
 		if ( numPartnerBridges < 2 )
 			return potentialVar;
-	
+
 		bool bTakeThis = true;
 		if ( !bAllowOverwrite )
 		{

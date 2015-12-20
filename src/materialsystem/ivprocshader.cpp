@@ -4,10 +4,10 @@
 #include "filesystem.h"
 #else
 #include "procshader/shaderincludes.h"
-#include "ProcShaderInterface.h"
+#include "procshaderinterface.h"
 #endif
 
-#include "IVProcShader.h"
+#include "ivprocshader.h"
 
 #ifndef AllocCheck_Alloc
 #define AllocCheck_Alloc() ((void)NULL)

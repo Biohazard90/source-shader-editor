@@ -1,4 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: Contains a list of files, determines their perforce status
 //
@@ -13,8 +13,8 @@
 #endif
 
 #include "tier1/utlstring.h"
-#include "tier1/utlstringmap.h"
-#include "vgui_controls/ListPanel.h"
+#include "tier1/UtlStringMap.h"
+#include "vgui_controls/listpanel.h"
 
 
 //-----------------------------------------------------------------------------

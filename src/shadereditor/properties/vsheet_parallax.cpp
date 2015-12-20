@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_Parallax::CSheet_Parallax(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

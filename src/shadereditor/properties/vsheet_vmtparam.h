@@ -1,7 +1,7 @@
 #ifndef CSHEET_VMT_PARAM_H
 #define CSHEET_VMT_PARAM_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_VParam_Mutable : public CSheet_Base

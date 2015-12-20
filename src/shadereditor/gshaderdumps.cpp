@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 void GetDumpListFilePath( char *out, int maxlen )
 {

@@ -1,7 +1,7 @@
 #ifndef CNODEPSOUTPUT_H
 #define CNODEPSOUTPUT_H
 
-#include <editorCommon.h>
+#include <editorcommon.h>
 
 class CNodePSOutput : public CBaseNode
 {

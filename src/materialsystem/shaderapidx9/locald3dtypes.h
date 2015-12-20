@@ -1,6 +1,6 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//===== Copyright Valve Corporation, All rights reserved. ======//
 //
-// Purpose: 
+// Purpose:
 //
 // $NoKeywords: $
 //===========================================================================//
@@ -12,7 +12,7 @@
 #pragma once
 #endif
 
-#ifdef DX10
+#if defined( DX10 ) && !defined( DX_TO_GL_ABSTRACTION )
 
 #include <d3d10.h>
 #include <d3dx10.h>
@@ -28,7 +28,7 @@ class CDx10Types
 {
 public:
 	typedef struct IDirect3D10BaseTexture	IDirect3DTexture;
-	// FIXME: What is this called now ? 
+	// FIXME: What is this called now ?
 	// typedef ID3D10TextureCube			IDirect3DCubeTexture;
 	typedef ID3D10Texture3D					IDirect3DVolumeTexture;
 	typedef ID3D10Device					IDirect3DDevice;
@@ -46,16 +46,13 @@ public:
 	typedef ID3D10Buffer					*LPDIRECT3DVERTEXBUFFER;
 };
 
-#endif // DX10
+#endif // defined( DX10 ) && !defined( DX_TO_GL_ABSTRACTION )
 
 
-#if !defined( _X360 )
+#if !defined( _X360 ) && !defined( DX_TO_GL_ABSTRACTION )
 #ifdef _DEBUG
 #define D3D_DEBUG_INFO 1
 #endif
-#include <d3d9.h>
-#include <d3dx9.h>
-#include <d3dx9core.h>
 #endif
 
 struct IDirect3DTexture9;
@@ -117,7 +114,7 @@ typedef void *HardwareShader_t;
 // The vertex and pixel shader type
 //-----------------------------------------------------------------------------
 typedef int VertexShader_t;
-typedef int PixelShader_t;	
+typedef int PixelShader_t;
 
 //-----------------------------------------------------------------------------
 // Bitpattern for an invalid shader
@@ -127,6 +124,8 @@ typedef int PixelShader_t;
 
 #define D3DSAMP_NOTSUPPORTED					D3DSAMP_FORCE_DWORD
 #define D3DRS_NOTSUPPORTED						D3DRS_FORCE_DWORD
+
+#include "togl/rendermechanism.h"
 
 #if defined( _X360 )
 
@@ -154,7 +153,7 @@ typedef int PixelShader_t;
 #define D3DRS_NORMALIZENORMALS					D3DRS_NOTSUPPORTED
 #define D3DRS_SPECULARMATERIALSOURCE			D3DRS_NOTSUPPORTED
 #define D3DRS_AMBIENTMATERIALSOURCE				D3DRS_NOTSUPPORTED
-#define D3DRS_EMISSIVEMATERIALSOURCE			D3DRS_NOTSUPPORTED	
+#define D3DRS_EMISSIVEMATERIALSOURCE			D3DRS_NOTSUPPORTED
 #define D3DRS_VERTEXBLEND						D3DRS_NOTSUPPORTED
 #define D3DRS_POINTSCALEENABLE					D3DRS_NOTSUPPORTED
 #define D3DRS_POINTSCALE_A						D3DRS_NOTSUPPORTED
@@ -187,6 +186,6 @@ typedef enum D3DSHADEMODE
 	D3DSHADE_GOURAUD = 0,
 };
 
-#endif
+#endif // _X360
 
 #endif // LOCALD3DTYPES_H

@@ -1,8 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
-
-//#include <Windows.h>
+#include "editorcommon.h"
 
 CUtlVector< CAutoSolverCallback* >CAutoSolverCallback::m_shClients;
 
@@ -46,7 +44,7 @@ CAutoSolverCallback *CAutoSolverCallback::GetSolverClientByIdx( HAUTOSOLVER idx 
 	return NULL;
 }
 
-#include "IVProcShader.h"
+#include "ivprocshader.h"
 
 void CAutoSolverCallback::Update3DPrevMaterial( GenericShaderData *data, const int index )
 {

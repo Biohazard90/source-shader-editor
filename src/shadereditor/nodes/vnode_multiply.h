@@ -1,7 +1,7 @@
 #ifndef CNODEMULTIPLY_H
 #define CNODEMULTIPLY_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeMultiply : public CBaseNode
 {

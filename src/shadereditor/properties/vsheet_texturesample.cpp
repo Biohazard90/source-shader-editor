@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 #define TEXPATH_WHITE "white" //"Lights\\White.vtf"
 #define TEXPATH_BLACK "black" //"cable\\black.vtf"

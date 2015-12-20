@@ -1,7 +1,7 @@
 #ifndef CNODE_FINAL_H
 #define CNODE_FINAL_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeFinal : public CBaseNode
 {

@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeBaseRange::CNodeBaseRange( const char *name, CNodeView *p ) : BaseClass( name, p )

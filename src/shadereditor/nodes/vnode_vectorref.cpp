@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeVectorReflect::CNodeVectorReflect( CNodeView *p ) : BaseClass( "Reflect", p )

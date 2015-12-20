@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeBreak::CNodeBreak( CNodeView *p ) : BaseClass( "Break", p )

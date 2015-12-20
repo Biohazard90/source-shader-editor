@@ -1,7 +1,7 @@
 #ifndef CSHEET_TEXTRANSFORM_H
 #define CSHEET_TEXTRANSFORM_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_TexTransform : public CSheet_Base

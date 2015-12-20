@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_Base::CSheet_Base(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent ) : PropertyPage( parent, "" )

@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeFog::CNodeFog( CNodeView *p ) : BaseClass( "Fog factor", p )

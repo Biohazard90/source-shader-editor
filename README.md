@@ -20,11 +20,11 @@ USAGE:
     your game, the source code of your game and the target Source Engine SDK version
     like this:
 
-    TARGET_SRC_DIRECTORY  - Has to point to the root src/ directory, so for a single player mod on the
+    TARGET_SRC_DIRECTORY -  Has to point to the root src/ directory, so for a single player mod on the
                             Source 2013 SDK it would point to "<ROOT>/sp/src/". This directory is used
                             to pull in SDK specific libraries and includes, like tier0, tier1 etc.
 
-    TARGET_PLATFORM_X     - Specifies the target SDK version.
+    TARGET_PLATFORM_X -     Specifies the target SDK version.
                             Possible options are currently: 2013, SWARM, 2007 and 2006 PORTAL2 is
                             experimental and cannot be shared as it would require references to closed
                             source.

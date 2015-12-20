@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CDialog_EditorConfig::CDialog_EditorConfig( Panel *parent ) : Frame( parent, "_editor_config" )
 {

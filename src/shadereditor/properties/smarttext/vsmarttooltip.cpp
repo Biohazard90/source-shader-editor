@@ -1,8 +1,8 @@
 
 #include "cbase.h"
-#include "vSmartObject.h"
-#include "vSmartTooltip.h"
-#include "vSmartText.h"
+#include "vsmartobject.h"
+#include "vsmarttooltip.h"
+#include "vsmarttext.h"
 
 
 CSmartTooltip::CSmartTooltip( Panel *parent, const char *pElementname ) : BaseClass( parent, pElementname )

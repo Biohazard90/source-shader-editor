@@ -6,7 +6,7 @@
 #include <vgui/IPanel.h>
 #include <vgui/ISurface.h>
 #include "ienginevgui.h"
-#include "vgui_controls/Controls.h"
+#include "vgui_controls/controls.h"
 
 class CBridge;
 class CBaseNode;

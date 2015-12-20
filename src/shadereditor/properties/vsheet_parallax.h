@@ -1,7 +1,7 @@
 #ifndef CSHEET_PARALLAX_H
 #define CSHEET_PARALLAX_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 #include "editorcommon.h"
 
 

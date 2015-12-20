@@ -1,7 +1,7 @@
 #ifndef CSHEET_SWIZZLE_H
 #define CSHEET_SWIZZLE_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Swizzle : public CSheet_Base

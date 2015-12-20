@@ -1,7 +1,6 @@
 #ifndef C_REGEX_H
 #define C_REGEX_H
 
-
 #define IS_CONTROL_CHAR( x ) ( x == '\n' || x == '\r' )
 #define IS_CHAR( x ) ( x >= L'a' && x <= L'z' || x >= L'A' && x <= L'Z' || x == L'#' || x == L'_' )
 #define IS_NUMERICAL( x ) ( x >= L'0' && x <= L'9' ) //|| x == '-' ) ) //|| x == '.' )

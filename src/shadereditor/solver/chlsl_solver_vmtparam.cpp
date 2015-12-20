@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CHLSL_Solver_VParam_Mutable::CHLSL_Solver_VParam_Mutable( HNODE nodeidx ) : CHLSL_SolverBase( nodeidx )
 {

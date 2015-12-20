@@ -2,7 +2,7 @@
 #define DIALOG_PPE_PRECACHE_H
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 class CDialog_PPEPrecache : public CBaseDiag
 {

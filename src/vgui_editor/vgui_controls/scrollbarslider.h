@@ -1,4 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -13,7 +13,7 @@
 #endif
 
 #include <vgui/VGUI.h>
-#include <vgui_controls/Panel.h>
+#include <vgui_controls/panel.h>
 
 namespace vgui
 {
@@ -63,6 +63,8 @@ public:
 
 	// Return true if this slider is actually drawing itself
 	virtual bool IsSliderVisible( void );
+
+	virtual void ApplySettings( KeyValues *pInResourceData );
 
 protected:
 	virtual void Paint();

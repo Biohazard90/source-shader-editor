@@ -1,7 +1,7 @@
 #ifndef CNODECUSTOM_H
 #define CNODECUSTOM_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 enum
 {

@@ -1,7 +1,7 @@
 #ifndef CNODE_PP_OPERATIONS_H
 #define CNODE_PP_OPERATIONS_H
 
-#include <editorCommon.h>
+#include <editorcommon.h>
 
 class CNodePP_ClearBuffers : public CNodePP_Base
 {

@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -10,10 +10,10 @@
 #include "vgui/ISurface.h"
 #include <KeyValues.h>
 
-#include <vgui_controls/Controls.h>
-#include <vgui_controls/Menu.h>
-#include <vgui_controls/MenuItem.h>
-#include <vgui_controls/TextImage.h>
+#include <vgui_controls/controls.h>
+#include <vgui_controls/menu.h>
+#include <vgui_controls/menuitem.h>
+#include <vgui_controls/textimage.h>
 
 #include "vgui_editor_platform.h"
 
@@ -144,7 +144,7 @@ void MenuItem::Init( void )
 	if (m_pCascadeMenu)
 	{
 		m_pCascadeMenu->SetParent(this);
-		m_pCascadeArrow = new TextImage ("4");	// this makes a right pointing arrow.
+		m_pCascadeArrow = new TextImage("4");	// this makes a right pointing arrow.
 
 		m_pCascadeMenu->AddActionSignalTarget(this);
 	}

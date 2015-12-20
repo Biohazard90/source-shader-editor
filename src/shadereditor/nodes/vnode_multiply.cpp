@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeMultiply::CNodeMultiply( CNodeView *p ) : BaseClass( "Multiply", p )

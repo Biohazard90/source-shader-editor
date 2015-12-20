@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -13,10 +13,10 @@
 #include <vgui/KeyCode.h>
 #include <KeyValues.h>
 
-#include <vgui_controls/MenuBar.h>
-#include <vgui_controls/MenuButton.h>
-#include <vgui_controls/Label.h>
-#include <vgui_controls/Controls.h>
+#include <vgui_controls/menubar.h>
+#include <vgui_controls/menubutton.h>
+#include <vgui_controls/label.h>
+#include <vgui_controls/controls.h>
 
 #include "vgui_editor_platform.h"
 

@@ -1,7 +1,7 @@
 #ifndef CNODE_PP_DRAWMAT_H
 #define CNODE_PP_DRAWMAT_H
 
-#include <editorCommon.h>
+#include <editorcommon.h>
 
 class CNodePP_DrawMat : public CNodePP_Base
 {

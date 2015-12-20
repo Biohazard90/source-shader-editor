@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeCross::CNodeCross( CNodeView *p ) : BaseClass( "Crossproduct", p )

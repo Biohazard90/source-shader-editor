@@ -1,7 +1,7 @@
 #ifndef CNODEDOT_H
 #define CNODEDOT_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeDot : public CBaseNode
 {

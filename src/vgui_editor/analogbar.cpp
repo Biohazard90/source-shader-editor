@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -8,8 +8,8 @@
 #include <math.h>
 #include <stdio.h>
 
-#include <vgui_controls/AnalogBar.h>
-#include <vgui_controls/Controls.h>
+#include <vgui_controls/analogbar.h>
+#include <vgui_controls/controls.h>
 
 #include <vgui/ILocalize.h>
 #include <vgui/IScheme.h>
@@ -254,6 +254,7 @@ void AnalogBar::ApplySchemeSettings(IScheme *pScheme)
 //-----------------------------------------------------------------------------
 bool AnalogBar::ConstructTimeRemainingString(wchar_t *output, int outputBufferSizeInBytes, float startTime, float currentTime, float currentAnalogValue, float lastAnalogValueUpdateTime, bool addRemainingSuffix)
 {
+	Assert( outputBufferSizeInBytes >= sizeof(output[0]) );
 	Assert(lastAnalogValueUpdateTime <= currentTime);
 	output[0] = 0;
 

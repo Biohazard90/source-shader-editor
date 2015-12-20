@@ -1,7 +1,7 @@
 #ifndef CSHEET_CONDITION_H
 #define CSHEET_CONDITION_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Condition : public CSheet_Base

@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -10,9 +10,9 @@
 #pragma once
 #endif
 
-#include <vgui_controls/Panel.h>
-#include "UtlLinkedList.h"
-#include "UtlVector.h"
+#include <vgui_controls/panel.h>
+#include "utllinkedlist.h"
+#include "utlvector.h"
 
 namespace vgui
 {

@@ -1,7 +1,7 @@
 #ifndef CHLSL_MESH_H
 #define CHLSL_MESH_H
 
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 struct CHLSL_Vertex;
 struct CHLSL_Triangle;

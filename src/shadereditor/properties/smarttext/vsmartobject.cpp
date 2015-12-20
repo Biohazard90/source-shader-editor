@@ -1,7 +1,7 @@
 
 #include "cbase.h"
 #include "editorcommon.h"
-#include "vSmartObject.h"
+#include "vsmartobject.h"
 
 
 CSmartObject::CSmartObject( int type, const char *pszDef, const char *pszIdent, const char *pszDatatype )

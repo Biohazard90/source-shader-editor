@@ -1,7 +1,7 @@
 #ifndef CNODE_SUBTRACT_H
 #define CNODE_SUBTRACT_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeSubtract : public CBaseNode
 {

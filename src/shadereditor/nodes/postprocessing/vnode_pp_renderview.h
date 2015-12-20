@@ -1,7 +1,7 @@
 #ifndef CNODE_PP_RENDERVIEW_H
 #define CNODE_PP_RENDERVIEW_H
 
-#include <editorCommon.h>
+#include <editorcommon.h>
 
 class CNodePP_RenderView : public CNodePP_Base
 {

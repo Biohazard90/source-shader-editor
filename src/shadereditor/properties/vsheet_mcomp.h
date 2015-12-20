@@ -1,7 +1,7 @@
 #ifndef CSHEET_MCOMP_H
 #define CSHEET_MCOMP_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_MComp : public CSheet_Base

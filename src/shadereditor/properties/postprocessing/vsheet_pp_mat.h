@@ -1,7 +1,7 @@
 #ifndef CSHEET_PP_MAT_H
 #define CSHEET_PP_MAT_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 #define DEFAULT_VMT_CONTENT "\"EDITOR_SHADER\"\n{\n\t\"$SHADERNAME\"\t\"\"\n}"
 

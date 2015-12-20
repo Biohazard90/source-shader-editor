@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CShaderPrecache::CShaderPrecache( vgui::Panel *parent, CNodeView *nodeview ) : BaseClass( parent, nodeview, "shaderpreview" )
 {

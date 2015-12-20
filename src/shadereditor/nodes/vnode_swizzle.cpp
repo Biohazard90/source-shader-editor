@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeSwizzle::CNodeSwizzle( CNodeView *p ) : BaseClass( "Swizzle", p )

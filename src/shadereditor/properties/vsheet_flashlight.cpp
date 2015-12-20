@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_Flashlight::CSheet_Flashlight(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

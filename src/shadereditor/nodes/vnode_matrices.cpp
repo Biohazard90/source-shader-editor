@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeMatrix_MVP::CNodeMatrix_MVP( CNodeView *p ) : BaseClass( "Matrix MVP", p )

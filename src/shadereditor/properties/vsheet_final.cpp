@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_Final::CSheet_Final(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

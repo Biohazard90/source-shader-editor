@@ -2,7 +2,7 @@
 #define CHLSL_IMAGE_H
 
 #include "vtf/vtf.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 class CHLSL_Image
 {

@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_VSInput::CSheet_VSInput(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

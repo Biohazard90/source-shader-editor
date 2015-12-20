@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CNodeUtility_Declare::CNodeUtility_Declare( CNodeView *p ) : BaseClass( "Declare", p )
 {

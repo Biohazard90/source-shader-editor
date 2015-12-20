@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CNodePP_RT::CNodePP_RT( CNodeView *p ) : BaseClass( "Rendertarget", p )
 {

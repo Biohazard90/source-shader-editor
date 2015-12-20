@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_MComp::CSheet_MComp(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

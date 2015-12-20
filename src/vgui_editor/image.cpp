@@ -1,6 +1,6 @@
 //========= Copyright Valve Corporation, All rights reserved. ============//
 //
-// Purpose: 
+// Purpose:
 //
 // $NoKeywords: $
 //=============================================================================//
@@ -9,8 +9,8 @@
 #include <vgui/IPanel.h>
 #include <vgui/ISurface.h>
 
-#include <vgui_controls/Image.h>
-#include <vgui_controls/Controls.h>
+#include <vgui_controls/image.h>
+#include <vgui_controls/controls.h>
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -35,7 +35,7 @@ Image::~Image()
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: Set the position of the image, you need to reset this every time you 
+// Purpose: Set the position of the image, you need to reset this every time you
 // call Paint()
 //-----------------------------------------------------------------------------
 void Image::SetPos(int x,int y)
@@ -168,7 +168,7 @@ void Image::DrawSetTextColor(Color sc)
 void Image::DrawSetTextColor(int r,int g,int b,int a)
 {
 	surface()->DrawSetTextColor(r,g,b,a);
-}	
+}
 
 //-----------------------------------------------------------------------------
 // Purpose: Set the text position
@@ -279,4 +279,3 @@ HTexture Image::GetID()
 {
 	return 0;
 }
-

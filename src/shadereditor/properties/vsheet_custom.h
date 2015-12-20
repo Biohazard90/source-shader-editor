@@ -1,7 +1,7 @@
 #ifndef CSHEET_CUSTOM_H
 #define CSHEET_CUSTOM_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 struct __customCtrlEntry
 {

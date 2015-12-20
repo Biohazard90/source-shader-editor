@@ -1,7 +1,7 @@
 #ifndef CSHEET_CMATRIX_H
 #define CSHEET_CMATRIX_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_CMatrix : public CSheet_Base

@@ -1,7 +1,7 @@
 #ifndef CSHEET_LIGHTSCALE_H
 #define CSHEET_LIGHTSCALE_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Lightscale : public CSheet_Base

@@ -1,7 +1,7 @@
 #ifndef CSHEET_CONSTANT_H
 #define CSHEET_CONSTANT_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Constant : public CSheet_Base

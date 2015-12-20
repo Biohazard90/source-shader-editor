@@ -1,7 +1,7 @@
 #ifndef C_EDITOR_FG_PAGE_H
 #define C_EDITOR_FG_PAGE_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CFlowGraphPage : public PropertyPage

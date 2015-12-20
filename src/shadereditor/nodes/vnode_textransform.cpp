@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeTexTransform::CNodeTexTransform( CNodeView *p ) : BaseClass( "Texture transform", p )

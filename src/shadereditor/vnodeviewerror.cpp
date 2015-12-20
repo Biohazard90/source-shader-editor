@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 static const char *szErrorNames[] = {
 	"YOU ARE USING MULTIPLE TEXTURE NODES WITH THE SAME VMT PARAMETER (%s) BUT DIFFERENT TEXTURE REFERENCES!",

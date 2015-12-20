@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CDialog_PPEConfig::CDialog_PPEConfig( Panel *parent, CNodeView *pNodeView ) : Frame( parent, "ppe_config" )

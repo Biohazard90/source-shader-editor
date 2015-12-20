@@ -1,13 +1,13 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
 // $NoKeywords: $
 //=============================================================================//
 
-#include "vgui_controls/WizardPanel.h"
-#include "vgui_controls/WizardSubPanel.h"
-#include "vgui_controls/BuildGroup.h"
+#include "vgui_controls/wizardpanel.h"
+#include "vgui_controls/wizardsubpanel.h"
+#include "vgui_controls/buildgroup.h"
 
 #include "KeyValues.h"
 

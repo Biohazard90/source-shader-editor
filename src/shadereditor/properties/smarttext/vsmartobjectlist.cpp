@@ -1,10 +1,10 @@
 
 #include "cbase.h"
-#include "cRegex.h"
-#include "vSmartObject.h"
-#include "vSmartObjectList.h"
+#include "cregex.h"
+#include "vsmartobject.h"
+#include "vsmartobjectlist.h"
 
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 #define __DBG_PARSE DEBUG
 
@@ -108,7 +108,7 @@ int NextSpace( char **p )
 	return count;
 }
 // WORD
-// |   
+// |
 char *MoveToWordLeft( char *pStrStart, char *pWord )
 {
 	Assert( pStrStart && pWord && pWord >= pStrStart );
@@ -469,7 +469,7 @@ void CSmartObjectList::ParseCode( const char *pszFilename, bool bRecursive, CUtl
 
 	Q_memset( pBuff, 0, iFSize );
 
-	
+
 
 	char *pCopyBuff = new char[ iFSize ];
 
@@ -1313,7 +1313,7 @@ void CSmartObjectList::ParseCode_PreProc( CUtlVector< char* > &hLines, bool bRec
 //}
 
 /*
-deklarationen nach dem öffnen eines scopes werden ignoriert
+deklarationen nach dem ï¿½ffnen eines scopes werden ignoriert
 deklarationen in impliziten scopes auch (egal?)
 expressions werden zB in for(;;) gesplittet (egal?)
 */
@@ -1637,7 +1637,7 @@ void CSmartObjectList::BuildIntrinsicDatatypes()
 				Q_strcat( tmp, ")", sizeof(tmp) );
 
 				Q_snprintf( tmp_dtype, sizeof(tmp_dtype), "%s%d", pszDatatypes[i], d1 );
-				
+
 				CSmartObject *pO = new CSmartObject( ACOMP_FUNC, tmp, tmp_dtype, tmp_dtype );
 				pO->m_bIntrinsic = true;
 				for ( int child = 0; child < d1; child++ )

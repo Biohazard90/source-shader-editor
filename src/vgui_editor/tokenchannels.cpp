@@ -1,5 +1,5 @@
 
-#include "vgui_controls/Utilities.h"
+#include "vgui_controls/utilities.h"
 #include "vgui_controls/tokenchannels.h"
 
 #include "vgui_editor_platform.h"
@@ -112,7 +112,7 @@ void SolveOperator( char *psz_StringStart, char *psz_Op )
 	}
 
 	char stringTarget[ MAX_OPERATION_C ];
-	Q_snprintf( stringTarget, MAX_OPERATION_C, "%f\0", var_out );
+	Q_snprintf( stringTarget, MAX_OPERATION_C, "%f", var_out );
 
 	int numToSnip = operatorEnd - firstValue;
 	for ( ;numToSnip;numToSnip-- )
@@ -124,7 +124,7 @@ void SolveOperator( char *psz_StringStart, char *psz_Op )
 	Q_strcpy( tmp_begin, psz_StringStart );
 	Q_strcpy( tmp_end, firstValue+1 );
 	char finaloutput[MAX_OPERATION_C];
-	Q_snprintf( finaloutput, MAX_OPERATION_C, "%s%s%s\0", tmp_begin, stringTarget, tmp_end );
+	Q_snprintf( finaloutput, MAX_OPERATION_C, "%s%s%s", tmp_begin, stringTarget, tmp_end );
 	Q_strcpy( psz_StringStart, finaloutput );
 }
 void StringReplace( char *dest, int destlen, const char *src )
@@ -132,7 +132,7 @@ void StringReplace( char *dest, int destlen, const char *src )
 	const char *string_append = dest + destlen;
 	char finalOutput[ MAX_OPERATION_C ];
 
-	Q_snprintf( finalOutput, MAX_OPERATION_C, "%s%s\0", src, string_append );
+	Q_snprintf( finalOutput, MAX_OPERATION_C, "%s%s", src, string_append );
 	Q_strcpy( dest, finalOutput );
 }
 void SolveBracketPair( char *bracket_open, char *bracket_close )
@@ -186,7 +186,7 @@ void SolveBracketPair( char *bracket_open, char *bracket_close )
 
 	float finalValue = GetValueFromChar( solveString, solveString );
 	char valueString[ MAX_OPERATION_C ];
-	Q_snprintf( valueString, MAX_OPERATION_C, "%f\0", finalValue );
+	Q_snprintf( valueString, MAX_OPERATION_C, "%f", finalValue );
 	StringReplace( bracket_open, len_real + bIsClosing, valueString );
 }
 void OnBracketOpen( char *bOpen )
@@ -235,7 +235,7 @@ float TokenChannels_t::PerformSolve( const char *start )
 		return 0;
 
 	char solveString[MAX_OPERATION_C];
-	Q_snprintf( solveString, sizeof( solveString ), "%s\0", start );
+	Q_snprintf( solveString, sizeof( solveString ), "%s", start );
 
 	OnBracketOpen( solveString );
 	return GetValueFromChar( solveString, solveString );
@@ -297,7 +297,7 @@ void TokenChannels_t::Tokenize( const char *string )
 		string++;
 
 	char localString[ MAX_OPERATION_C ];
-	Q_snprintf( localString, sizeof(localString), "%s\0", string );
+	Q_snprintf( localString, sizeof(localString), "%s", string );
 
 	char *MakeUpper = localString;
 	while( MakeUpper && *MakeUpper )
@@ -500,7 +500,7 @@ void TokenChannels_t::Tokenize( const char *string )
 					Q_strcat( tmp, ")", MAX_OPERATION_C );
 					Q_strcat( tmp, GlobalExpression, MAX_OPERATION_C );
 				}
-				
+
 				flValue[ i ] = PerformSolve( tmp );
 			}
 			iActiveChannels++;
@@ -565,7 +565,7 @@ void TokenChannels_t::PrintTargetString( char *out, int maxlen )
 			if ( frac != 0.0f )
 			{
 				Q_memset( tmp, 0, sizeof(tmp) );
-				Q_snprintf( tmp, MAX_PATH, "%f\0", flValue[i] );
+				Q_snprintf( tmp, MAX_PATH, "%f", flValue[i] );
 				for ( int a = (MAX_PATH-1); a >= 0; a-- )
 				{
 					if ( tmp[a] && tmp[a] != '0' )
@@ -574,10 +574,10 @@ void TokenChannels_t::PrintTargetString( char *out, int maxlen )
 				}
 			}
 			else
-				Q_snprintf( tmp, MAX_PATH, "%i\0", ((int)flValue[i]) );
+				Q_snprintf( tmp, MAX_PATH, "%i", ((int)flValue[i]) );
 		}
 		else
-			Q_snprintf( tmp, MAX_PATH, "%c\0", cChannel[i] );
+			Q_snprintf( tmp, MAX_PATH, "%c", cChannel[i] );
 
 		Q_strcat( out, tmp, maxlen );
 		if ( i < (iActiveChannels-1) && bHasAnyValues )

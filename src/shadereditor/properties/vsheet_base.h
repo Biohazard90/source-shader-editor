@@ -1,7 +1,7 @@
 #ifndef CSHEET_BASE_H
 #define CSHEET_BASE_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Base : public PropertyPage

@@ -13,19 +13,19 @@
 #include <vgui_controls/propertypage.h>
 
 #include "materialsystem/imesh.h"
-#include "materialsystem/ITexture.h"
-#include "materialsystem/IMaterial.h"
-#include "materialsystem/IMaterialVar.h"
+#include "materialsystem/itexture.h"
+#include "materialsystem/imaterial.h"
+#include "materialsystem/imaterialvar.h"
 #include "materialsystem/imaterialsystem.h"
 
 #include "collisionutils.h"
 #include "vgui_controls/animationcontroller.h"
 
-#include "editorCommon.h"
-#include "vNodeView.h"
-#include "vSmartObject.h"
-#include "vSmartTooltip.h"
-#include "vSheets.h"
+#include "editorcommon.h"
+#include "vnodeview.h"
+#include "vsmartobject.h"
+#include "vsmarttooltip.h"
+#include "vsheets.h"
 
 //#include "memtrack.h"
 
@@ -452,7 +452,7 @@ void CNodeView::UpdateSolverClients()
 	hErrorList.PurgeAndDeleteElements();
 
 	if (
-		!ReportErrors( m_ShaderData, hErrorList ) && 
+		!ReportErrors( m_ShaderData, hErrorList ) &&
 		( !m_ShaderData->IsPreview() || pEditorRoot->ShouldAutoCompile() )
 		)
 	{
@@ -588,7 +588,7 @@ void CNodeView::UpdatePsinMaterial( const char *vsName, GenericShaderData *data 
 	{
 		Assert( !pKV_Mat_PsIn );
 		/*KeyValues **/ pKV_Mat_PsIn = new KeyValues( "NODE_PSIN" );
-		//pKV_Mat_PsIn = new KeyValues( "NODE_PSIN" ); 
+		//pKV_Mat_PsIn = new KeyValues( "NODE_PSIN" );
 //		::gProcShaderCTRL->SendTempPsInputShaderName( "psin_vs20" );
 		m_pMat_PsIn = materials->CreateMaterial( "__npv_psin", pKV_Mat_PsIn );
 		//pKV_Mat_PsIn->Clear();
@@ -1450,7 +1450,7 @@ void CNodeView::InvokeCreateSolvers( CUtlVector< CBaseNode* > &m_hNodeBottomList
 			//Assert( !n_SHADER_Top->GetAsContainer() );
 
 			CUtlVector< CBaseContainerNode* > curContainers;
-			
+
 			n_SHADER_Top->ListContainersChronologically( curContainers );
 
 			CBaseContainerNode *pCurContainer = n_SHADER_Top->GetAsContainer();
@@ -1834,7 +1834,7 @@ void CNodeView::GetGraphBoundaries( Vector4D &out )
 	for ( int i = 1; i < GetNumNodes(); i++ )
 	{
 		CBaseNode *node = GetNode( i );
-		
+
 		Vector2D local_min = node->GetBoundsMinNodeSpace();
 		Vector2D local_max = node->GetBoundsMaxNodeSpace();
 
@@ -2530,7 +2530,7 @@ void CNodeView::HandleSelectionInputReleasedBox()
 		Vector2D nmax = n->GetSelectionBoundsMaxNodeSpace(); //GetBoundsMaxNodeSpace();
 		Vector n1( nmin.x, nmin.y, -10 );
 		Vector n2( nmax.x, nmax.y, 10 );
-		
+
 		if ( IsBoxIntersectingBox( smin, smax, n1, n2 ) )
 		{
 			m_hSelection.AddToTail( n );
@@ -2706,7 +2706,7 @@ void CNodeView::DragSelection( Vector2D delta )
 	//		hSelection.AddToTail( SingleNode );
 	//		break;
 	//	}
-	
+
 	//for ( int i = 0; i < hSelection.Count(); i++ )
 	for ( int i = 0; i < m_hNodesInMove.Count(); i++ )
 	{
@@ -3703,7 +3703,7 @@ CBaseNode *CNodeView::SpawnNode( int type )
 	NODESWITCH( HLSLNODE_MATRIX_FLASHLIGHT, CNodeMatrix_FVP );
 	NODESWITCH( HLSLNODE_MATRIX_COMPOSE, CNodeMCompose );
 	NODESWITCH( HLSLNODE_MATRIX_CUSTOM, CNodeMatrix_Custom );
-	
+
 // MATH
 	case HLSLNODE_MATH_ADD:
 		pNode = new CNodeAdd(this);
@@ -3758,7 +3758,7 @@ CBaseNode *CNodeView::SpawnNode( int type )
 
 	NODESWITCH( HLSLNODE_MATH_DDX, CNodeddx );
 	NODESWITCH( HLSLNODE_MATH_DDY, CNodeddy );
-	
+
 // VECTORS
 	case HLSLNODE_MATH_SWIZZLE:
 		pNode = new CNodeSwizzle(this);
@@ -3778,7 +3778,7 @@ CBaseNode *CNodeView::SpawnNode( int type )
 	NODESWITCH( HLSLNODE_MATH_APPEND, CNodeAppend );
 	NODESWITCH( HLSLNODE_VECTOR_CROSS, CNodeCross );
 	NODESWITCH( HLSLNODE_VECTOR_DISTANCE, CNodeDistance );
-	
+
 // CONSTANTS
 	case HLSLNODE_CONSTANT_LOCAL:
 		pNode = new CNodeConstant(this);
@@ -3823,7 +3823,7 @@ CBaseNode *CNodeView::SpawnNode( int type )
 	NODESWITCH( HLSLNODE_CONSTANT_BUMPBASIS, CNodeBumpBasis );
 	NODESWITCH( HLSLNODE_CONSTANT_ARRAY, CNodeArray );
 	NODESWITCH( HLSLNODE_CONSTANT_FLASHLIGHTPOS, CNodeFlashlight_Position );
-		
+
 // TEXTURE
 	case HLSLNODE_TEXTURE_SAMPLER:
 		pNode = new CNodeTexSample(this);
@@ -3832,7 +3832,7 @@ CBaseNode *CNodeView::SpawnNode( int type )
 	NODESWITCH( HLSLNODE_TEXTURE_SAMPLEROBJECT, CNodeSampler );
 	NODESWITCH( HLSLNODE_TEXTURE_PARALLAX, CNodeParallax );
 	NODESWITCH( HLSLNODE_TEXTURE_PARALLAX_SHADOW, CNodeParallax_StdShadow );
-	
+
 // CONTROLFLOW
 	case HLSLNODE_CONTROLFLOW_LOOP:
 		pNode = new CNodeLoop(this);
@@ -3841,7 +3841,7 @@ CBaseNode *CNodeView::SpawnNode( int type )
 	NODESWITCH( HLSLNODE_CONTROLFLOW_CONDITION, CNodeCondition );
 	NODESWITCH( HLSLNODE_CONTROLFLOW_BREAK, CNodeBreak );
 	NODESWITCH( HLSLNODE_CONTROLFLOW_CLIP, CNodeClip );
-	
+
 // UTILITY
 	case HLSLNODE_UTILITY_DECLARE:
 		pNode = new CNodeUtility_Declare(this);
@@ -3868,7 +3868,7 @@ CBaseNode *CNodeView::SpawnNode( int type )
 	NODESWITCH( HLSLNODE_POSTPROCESSING_CREATE_RT, CNodePP_RT );
 	NODESWITCH( HLSLNODE_POSTPROCESSING_CREATE_MAT, CNodePP_Mat );
 	NODESWITCH( HLSLNODE_POSTPROCESSING_COPY_RT, CNodePP_CopyRT );
-	
+
 	NODESWITCH( HLSLNODE_POSTPROCESSING_PUSH_VP, CNodePP_VP_Push );
 	NODESWITCH( HLSLNODE_POSTPROCESSING_POP_VP, CNodePP_VP_Pop );
 	NODESWITCH( HLSLNODE_POSTPROCESSING_SET_RT, CNodePP_VP_SetRT );
@@ -4013,7 +4013,7 @@ void CNodeView::AddNodesToContextMenu( Menu *pNodeMenu )
 		padd_math->AddMenuItem( "ddx", new KeyValues("spawnNode","type",HLSLNODE_MATH_DDX), this );
 		padd_math->AddMenuItem( "ddy", new KeyValues("spawnNode","type",HLSLNODE_MATH_DDY), this );
 		pNodeMenu->AddCascadingMenuItem( "Math", this, padd_math );
-	
+
 		padd_math_round->AddMenuItem( "Abs", new KeyValues("spawnNode","type",HLSLNODE_MATH_ABS), this );
 		padd_math_round->AddMenuItem( "Min", new KeyValues("spawnNode","type",HLSLNODE_MATH_MIN), this );
 		padd_math_round->AddMenuItem( "Max", new KeyValues("spawnNode","type",HLSLNODE_MATH_MAX), this );
@@ -4069,7 +4069,7 @@ void CNodeView::AddNodesToContextMenu( Menu *pNodeMenu )
 		padd_const->AddMenuItem( "Bump basis", new KeyValues("spawnNode","type",HLSLNODE_CONSTANT_BUMPBASIS), this );
 		padd_const->AddMenuItem( "Flashlight pos", new KeyValues("spawnNode","type",HLSLNODE_CONSTANT_FLASHLIGHTPOS), this );
 		pNodeMenu->AddCascadingMenuItem( "Constants", this, padd_const );
-	
+
 		padd_matrix->AddMenuItem( "Matrix - ModelViewProj", new KeyValues("spawnNode","type",HLSLNODE_MATRIX_MODELVIEWPROJ), this );
 		padd_matrix->AddMenuItem( "Matrix - ViewProj", new KeyValues("spawnNode","type",HLSLNODE_MATRIX_VIEWPROJ), this );
 		padd_matrix->AddMenuItem( "Matrix - Model", new KeyValues("spawnNode","type",HLSLNODE_MATRIX_MODEL), this );
@@ -4078,14 +4078,14 @@ void CNodeView::AddNodesToContextMenu( Menu *pNodeMenu )
 		padd_matrix->AddMenuItem( "Matrix compose", new KeyValues("spawnNode","type",HLSLNODE_MATRIX_COMPOSE), this );
 		padd_matrix->AddMenuItem( "User matrix", new KeyValues("spawnNode","type",HLSLNODE_MATRIX_CUSTOM), this );
 		pNodeMenu->AddCascadingMenuItem( "Matrices", this, padd_matrix );
-	
+
 		padd_tex->AddMenuItem( "Texture sample", new KeyValues("spawnNode","type",HLSLNODE_TEXTURE_SAMPLER), this );
 		padd_tex->AddMenuItem( "Texture transform", new KeyValues("spawnNode","type",HLSLNODE_TEXTURE_TRANSFORM), this );
 		padd_tex->AddMenuItem( "Sampler object", new KeyValues("spawnNode","type",HLSLNODE_TEXTURE_SAMPLEROBJECT), this );
 		padd_tex->AddMenuItem( "Parallax UV", new KeyValues("spawnNode","type",HLSLNODE_TEXTURE_PARALLAX), this );
 		padd_tex->AddMenuItem( "Parallax shadow", new KeyValues("spawnNode","type",HLSLNODE_TEXTURE_PARALLAX_SHADOW), this );
 		pNodeMenu->AddCascadingMenuItem( "Textures", this, padd_tex );
-	
+
 		padd_controlflow->AddMenuItem( "Loop", new KeyValues("spawnNode","type",HLSLNODE_CONTROLFLOW_LOOP), this );
 		//padd_controlflow->AddMenuItem( "Break", new KeyValues("spawnNode","type",HLSLNODE_CONTROLFLOW_BREAK), this );
 		padd_controlflow->AddMenuItem( "Condition", new KeyValues("spawnNode","type",HLSLNODE_CONTROLFLOW_CONDITION), this );
@@ -4221,7 +4221,7 @@ void CNodeView::CreatePropertyDialog( CBaseNode *pNode )
 	case HLSLNODE_TEXTURE_PARALLAX:
 			hSheets.AddToTail( new CSheet_Parallax( pNode, this, pKV, pSheet ) );
 		break;
-		
+
 // FLOW CONTROL
 	case HLSLNODE_CONTROLFLOW_LOOP:
 			hSheets.AddToTail( new CSheet_Loop( pNode, this, pKV, pSheet ) );

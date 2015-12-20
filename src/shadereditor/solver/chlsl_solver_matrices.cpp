@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 void CHLSL_Solver_MVP::OnVarInit( const WriteContext_FXC &context )

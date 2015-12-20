@@ -1,5 +1,5 @@
 
-#include <vgui_controls\Utilities.h>
+#include <vgui_controls/utilities.h>
 
 #include "vgui_editor_platform.h"
 
@@ -173,9 +173,7 @@ void SetupVguiTex( int &var, const char *tex )
 	}
 }
 
-
-
-inline int GetChannelNumFromChar( const char *c )
+int GetChannelNumFromChar( const char *c )
 {
 	switch ( *c )
 	{
@@ -206,7 +204,8 @@ inline int GetChannelNumFromChar( const char *c )
 	}
 	return -1;
 }
-inline char GetCharFromChannelNum( const int i )
+
+char GetCharFromChannelNum( const int i )
 {
 	switch (i)
 	{

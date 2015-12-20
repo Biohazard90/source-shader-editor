@@ -2,7 +2,7 @@
 #define CBASE_THREAD_H
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 class CBaseThread : public CThread
 {

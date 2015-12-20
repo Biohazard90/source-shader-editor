@@ -2,8 +2,8 @@
 #define CHLSL_BASEDIAG_H
 
 #include "cbase.h"
-#include "editorCommon.h"
-#include "cSolverCallback.h"
+#include "editorcommon.h"
+#include "csolvercallback.h"
 
 #include "vgui_controls/html.h"
 

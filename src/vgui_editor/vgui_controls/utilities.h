@@ -10,7 +10,7 @@
 #include <mathlib/vector4d.h>
 
 #include "vgui/ISurface.h"
-#include "vgui/IVgui.h"
+#include "vgui/IVGui.h"
 
 #include "vgui_controls/controls.h"
 #include "vgui_controls/tokenchannels.h"
@@ -28,8 +28,8 @@ void RGB2HSV( const Vector &normalizedRGB, Vector &hsv );
 
 void SetupVguiTex( int &var, const char *tex );
 
-extern inline int GetChannelNumFromChar( const char *c );
-extern inline char GetCharFromChannelNum( const int i );
+int GetChannelNumFromChar( const char *c );
+char GetCharFromChannelNum( const int i );
 
 //#include "memtrack.h"
 

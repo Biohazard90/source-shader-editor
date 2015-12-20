@@ -3,8 +3,8 @@
 
 class ShaderEditorInterface;
 
-#include "IVProcShader.h"
-#include "IVShaderEditor.h"
+#include "ivprocshader.h"
+#include "ivshadereditor.h"
 
 
 class ShaderEditorInterface : public IVShaderEditor

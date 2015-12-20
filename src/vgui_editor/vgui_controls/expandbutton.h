@@ -1,4 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: A button with no borders that shows a left-pointing or down-pointing triangle
 //
@@ -13,7 +13,7 @@
 #endif
 
 #include <vgui/VGUI.h>
-#include <vgui_controls/ToggleButton.h>
+#include <vgui_controls/togglebutton.h>
 
 
 namespace vgui

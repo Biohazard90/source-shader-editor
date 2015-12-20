@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeMCompose::CNodeMCompose( CNodeView *p ) : BaseClass( "MCompose", p )

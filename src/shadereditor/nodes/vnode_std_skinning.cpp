@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeStdSkinning::CNodeStdSkinning( CNodeView *p ) : BaseClass( "Skinning", p )

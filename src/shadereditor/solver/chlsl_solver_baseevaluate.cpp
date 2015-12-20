@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CHLSL_Solver_BaseEvaluate::CHLSL_Solver_BaseEvaluate( HNODE nodeidx, int numInputs ) : CHLSL_SolverBase( nodeidx )
 {

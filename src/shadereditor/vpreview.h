@@ -2,8 +2,8 @@
 #define CHLSL_PREVIEW_H
 
 #include "cbase.h"
-#include "editorCommon.h"
-#include "cSolverCallback.h"
+#include "editorcommon.h"
+#include "csolvercallback.h"
 
 class CPreview : public CBaseDiag
 {

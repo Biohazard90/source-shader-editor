@@ -1,7 +1,7 @@
 #ifndef CSHEET_VSINPUT_H
 #define CSHEET_VSINPUT_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 class CSheet_VSInput : public CSheet_Base
 {

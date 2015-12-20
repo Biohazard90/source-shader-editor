@@ -1,7 +1,7 @@
 #ifndef CCONTAINER_NODE_H
 #define CCONTAINER_NODE_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 #define CBORDER_SIZE 10.0f
 #define CBORDER_SIZE_COMMENT 5.0f

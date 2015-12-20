@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeConstant::CNodeConstant( CNodeView *p ) : BaseClass( "Constant", p )

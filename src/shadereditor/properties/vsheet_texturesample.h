@@ -1,7 +1,7 @@
 #ifndef CSHEET_TEXSAMPLE_H
 #define CSHEET_TEXSAMPLE_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_TextureSample : public CSheet_Base

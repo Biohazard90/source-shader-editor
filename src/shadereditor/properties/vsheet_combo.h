@@ -1,7 +1,7 @@
 #ifndef CSHEET_COMBO_H
 #define CSHEET_COMBO_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Combo : public CSheet_Base

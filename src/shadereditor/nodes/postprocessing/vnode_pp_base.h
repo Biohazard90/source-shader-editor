@@ -1,7 +1,7 @@
 #ifndef CNODE_PP_BASE_H
 #define CNODE_PP_BASE_H
 
-#include <editorCommon.h>
+#include <editorcommon.h>
 
 class CNodePP_Base : public CBaseNode
 {

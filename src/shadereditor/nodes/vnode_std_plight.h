@@ -1,7 +1,7 @@
 #ifndef CNODE_STD_PLIGHT_H
 #define CNODE_STD_PLIGHT_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeStdPLight : public CBaseNode
 {

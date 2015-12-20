@@ -2,7 +2,7 @@
 #define RTCONFIG_H
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 #define RT_DEFAULT_SIZE 256
 #define RT_MAX_SIZE 4096

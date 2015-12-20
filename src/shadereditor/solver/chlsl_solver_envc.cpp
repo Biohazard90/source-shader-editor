@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CHLSL_Solver_EnvC::CHLSL_Solver_EnvC( HNODE nodeidx ) : CHLSL_SolverBase( nodeidx )
 {

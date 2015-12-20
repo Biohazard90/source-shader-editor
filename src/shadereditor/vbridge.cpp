@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 #define BRIDGE_DRAW_SEGMENTS_MIN 8
 #define BRIDGE_DRAW_SEGMENTS_MAX 64
@@ -164,7 +164,14 @@ void CBridge::VguiDraw( const bool bShadow )
 	bounds_min -= Vector2D( BRIDGEHULLEXTRUDE, BRIDGEHULLEXTRUDE );
 	bounds_max += Vector2D( BRIDGEHULLEXTRUDE, BRIDGEHULLEXTRUDE );
 	swap( bounds_min.y, bounds_max.y );
-	if ( !::ShouldSimpleDrawObject( pNodeView, pNodeView, Vector4D( bounds_min.x, bounds_min.y, bounds_max.x, bounds_max.y ) ) )
+
+	Vector4D bounds;
+	bounds.x = bounds_min.x;
+	bounds.y = bounds_min.y;
+	bounds.z = bounds_max.x;
+	bounds.w = bounds_max.y;
+
+	if ( !ShouldSimpleDrawObject( pNodeView, pNodeView, bounds ) )
 		return;
 
 	if ( ji )

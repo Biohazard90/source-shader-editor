@@ -4,10 +4,10 @@
 #include "cbase.h"
 using namespace vgui;
 
-#include <vgui_controls/Frame.h>
+#include <vgui_controls/frame.h>
 #include <vgui_controls/label.h>
 #include <vgui_controls/textentry.h>
-#include "cSolverCallback.h"
+#include "csolvercallback.h"
 
 class CEditorRoot;
 class CBaseContainerNode;

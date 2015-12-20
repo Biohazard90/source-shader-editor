@@ -1,7 +1,7 @@
 #ifndef CNODE_COMMENT_H
 #define CNODE_COMMENT_H
 
-#include "vBaseContainer.h"
+#include "vbasecontainer.h"
 
 class CNodeComment : public CBaseContainerNode
 {

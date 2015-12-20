@@ -1,8 +1,8 @@
 #ifndef C_SMART_ROW_H
 #define C_SMART_ROW_H
 
-#include "vSheets.h"
-#include <vgui/isystem.h>
+#include "vsheets.h"
+#include <vgui/ISystem.h>
 
 //#define ST_TEXT_INSET 48
 

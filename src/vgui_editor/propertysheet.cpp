@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -15,17 +15,17 @@
 #include <KeyValues.h>
 #include <vgui/MouseCode.h>
 #include <vgui/ISurface.h>
-#include <vgui_controls/Button.h>
-#include <vgui_controls/Controls.h>
-#include <vgui_controls/Label.h>
-#include <vgui_controls/PropertySheet.h>
-#include <vgui_controls/ComboBox.h>
-#include <vgui_controls/Panel.h>
-#include <vgui_controls/ToolWindow.h>
-#include <vgui_controls/TextImage.h>
-#include <vgui_controls/ImagePanel.h>
-#include <vgui_controls/PropertyPage.h>
-#include "vgui_controls/AnimationController.h"
+#include <vgui_controls/button.h>
+#include <vgui_controls/controls.h>
+#include <vgui_controls/label.h>
+#include <vgui_controls/propertysheet.h>
+#include <vgui_controls/combobox.h>
+#include <vgui_controls/panel.h>
+#include <vgui_controls/toolwindow.h>
+#include <vgui_controls/textimage.h>
+#include <vgui_controls/imagepanel.h>
+#include <vgui_controls/propertypage.h>
+#include "vgui_controls/animationcontroller.h"
 
 #include "vgui_editor_platform.h"
 
@@ -533,8 +533,6 @@ public:
 
 	virtual void ApplySettings( KeyValues *inResourceData )
 	{
-		BaseClass::ApplySettings(inResourceData);
-
 		const char *pBorder = inResourceData->GetString("activeborder_override", "");
 		if (*pBorder)
 		{
@@ -545,6 +543,7 @@ public:
 		{
 			m_pNormalBorder = scheme()->GetIScheme(GetScheme())->GetBorder( pBorder );
 		}
+		BaseClass::ApplySettings(inResourceData);
 	}
 
 	virtual void OnCommand( char const *cmd )
@@ -782,6 +781,7 @@ public:
 	PropertySheet *m_pParent;
 };
 
+
 }; // namespace vgui
 
 //-----------------------------------------------------------------------------
@@ -806,6 +806,8 @@ PropertySheet::PropertySheet(
 	m_bDraggableTabs = draggableTabs;
 	m_pTabKV = NULL;
 	m_bCloseableTabs = closeableTabs;
+	m_iTabHeight = 0;
+    m_iTabHeightSmall = 0;
 
 	//if ( m_bDraggableTabs )
 	//{
@@ -836,6 +838,8 @@ PropertySheet::PropertySheet(Panel *parent, const char *panelName, ComboBox *com
 	m_bDraggableTabs = false;
 	m_pTabKV = NULL;
 	m_bCloseableTabs = false;
+	m_iTabHeight = 0;
+    m_iTabHeightSmall = 0;
 
 	Init();
 }
@@ -1056,6 +1060,18 @@ void PropertySheet::SetActivePage(Panel *page)
 //-----------------------------------------------------------------------------
 void PropertySheet::SetTabWidth(int pixels)
 {
+	if ( pixels < 0 )
+	{
+		if( !_activeTab )
+			return;
+
+		int nTall;
+		_activeTab->GetContentSize( pixels, nTall );
+	}
+
+	if ( _tabWidth == pixels )
+		return;
+
 	_tabWidth = pixels;
 	InvalidateLayout();
 }
@@ -1146,7 +1162,7 @@ int PropertySheet::GetNumPages()
 // Purpose: returns the name contained in the active tab
 // Input  : a text buffer to contain the output 
 //-----------------------------------------------------------------------------
-void PropertySheet::GetActiveTabTitle(char *textOut, int bufferLen)
+void PropertySheet::GetActiveTabTitle (char *textOut, int bufferLen )
 {
 	if(_activeTab) _activeTab->GetText(textOut, bufferLen);
 }
@@ -1155,14 +1171,25 @@ void PropertySheet::GetActiveTabTitle(char *textOut, int bufferLen)
 // Purpose: returns the name contained in the active tab
 // Input  : a text buffer to contain the output 
 //-----------------------------------------------------------------------------
-bool PropertySheet::GetTabTitle(int i, char *textOut, int bufferLen)
+bool PropertySheet::GetTabTitle( int i, char *textOut, int bufferLen )
 {
-	if (i < 0 && i > m_PageTabs.Count()) 
+	if ( i < 0 || i >= m_PageTabs.Count() ) 
 	{
 		return false;
 	}
 
 	m_PageTabs[i]->GetText(textOut, bufferLen);
+	return true;
+}
+
+bool PropertySheet::SetTabTitle( int i, char *pchTitle )
+{
+	if ( i < 0 || i >= m_PageTabs.Count() ) 
+	{
+		return false;
+	}
+
+	m_PageTabs[ i ]->SetText( pchTitle );
 	return true;
 }
 
@@ -1283,13 +1310,29 @@ void PropertySheet::ApplySchemeSettings(IScheme *pScheme)
 		}
 	}
 
+
+	//=============================================================================
+	// HPE_BEGIN:
+	// [tj] Here, we used to use a single size variable and overwrite it when we scaled.
+	//		This led to problems when we changes resolutions, so now we recalcuate the absolute 
+	//      size from the relative size each time (based on proportionality)
+	//=============================================================================
 	/*
-	if ( !IsProportional() )
+	if ( IsProportional() )
 	{
-		m_iTabHeight = scheme()->GetProportionalNormalizedValueEx( GetScheme(), m_iTabHeight );
-		m_iTabHeightSmall = scheme()->GetProportionalNormalizedValueEx( GetScheme(), m_iTabHeightSmall );
+		m_iTabHeight = scheme()->GetProportionalScaledValueEx( GetScheme(), m_iSpecifiedTabHeight );
+		m_iTabHeightSmall = scheme()->GetProportionalScaledValueEx( GetScheme(), m_iSpecifiedTabHeightSmall );
+	}
+	else
+	{
+		m_iTabHeight = m_iSpecifiedTabHeight;
+		m_iTabHeightSmall = m_iSpecifiedTabHeightSmall;
 	}
 	*/
+	//=============================================================================
+	// HPE_END
+	//=============================================================================
+
 	m_iTabHeight = 28;
 	m_iTabHeightSmall = 14;
 }
@@ -1447,6 +1490,17 @@ void PropertySheet::PerformLayout()
 
             int width, tall;
             m_PageTabs[i]->GetSize(width, tall);
+
+			if ( m_bTabFitText )
+			{
+				m_PageTabs[i]->SizeToContents();
+				width = m_PageTabs[i]->GetWide();
+
+				int iXInset, iYInset;
+				m_PageTabs[i]->GetTextInset( &iXInset, &iYInset );
+				width += (iXInset * 2);
+			}
+
 			if (m_PageTabs[i] == _activeTab)
 			{
 				// active tab is taller
@@ -1678,7 +1732,7 @@ void PropertySheet::OnTabPressed(Panel *panel)
 //-----------------------------------------------------------------------------
 Panel *PropertySheet::GetPage(int i) 
 {
-	if(i<0 && i>m_Pages.Count()) 
+	if(i<0 || i>=m_Pages.Count()) 
 	{
 		return NULL;
 	}
@@ -1747,6 +1801,15 @@ void PropertySheet::RemoveAllPages()
 	for ( int i = c - 1; i >= 0 ; --i )
 	{
 		RemovePage( m_Pages[ i ].page );
+	}
+}
+
+void PropertySheet::DeleteAllPages()
+{
+	int c = m_Pages.Count();
+	for ( int i = c - 1; i >= 0 ; --i )
+	{
+		DeletePage( m_Pages[ i ].page );
 	}
 }
 
@@ -1844,7 +1907,15 @@ void PropertySheet::ChangeActiveTab( int index )
 		if ( m_Pages.Count() > 0 )
 		{
 			_activePage = NULL;
-			ChangeActiveTab( 0 );
+
+			if ( index < 0 )
+			{
+				ChangeActiveTab( m_Pages.Count() - 1 );
+			}
+			else
+			{
+				ChangeActiveTab( 0 );
+			}
 		}
 		return;
 	}
@@ -1993,13 +2064,13 @@ void PropertySheet::OnOpenContextMenu( KeyValues *params )
 //-----------------------------------------------------------------------------
 // Purpose: Handle key presses, through tabs.
 //-----------------------------------------------------------------------------
-void PropertySheet::OnKeyCodeTyped(KeyCode code)
+void PropertySheet::OnKeyCodePressed(KeyCode code)
 {
 	bool shift = (input()->IsKeyDown(KEY_LSHIFT) || input()->IsKeyDown(KEY_RSHIFT));
 	bool ctrl = (input()->IsKeyDown(KEY_LCONTROL) || input()->IsKeyDown(KEY_RCONTROL));
 	bool alt = (input()->IsKeyDown(KEY_LALT) || input()->IsKeyDown(KEY_RALT));
 	
-	if ( ctrl && shift && alt && code == KEY_B)
+	if ( ctrl && shift && alt && code == KEY_B )
 	{
 		// enable build mode
 		EditablePanel *ep = dynamic_cast< EditablePanel * >( GetActivePage() );
@@ -2012,27 +2083,35 @@ void PropertySheet::OnKeyCodeTyped(KeyCode code)
 
 	if ( IsKBNavigationEnabled() )
 	{
-		switch (code)
+		ButtonCode_t nButtonCode = GetBaseButtonCode( code );
+
+		switch ( nButtonCode )
 		{
 			// for now left and right arrows just open or close submenus if they are there.
 		case KEY_RIGHT:
+		case KEY_XBUTTON_RIGHT:
+		case KEY_XSTICK1_RIGHT:
+		case KEY_XSTICK2_RIGHT:
 			{
 				ChangeActiveTab(_activeTabIndex+1);
 				break;
 			}
 		case KEY_LEFT:
+		case KEY_XBUTTON_LEFT:
+		case KEY_XSTICK1_LEFT:
+		case KEY_XSTICK2_LEFT:
 			{
 				ChangeActiveTab(_activeTabIndex-1);
 				break;
 			}
 		default:
-			BaseClass::OnKeyCodeTyped(code);
+			BaseClass::OnKeyCodePressed(code);
 			break;
 		}
 	}
 	else
 	{
-		BaseClass::OnKeyCodeTyped(code);
+		BaseClass::OnKeyCodePressed(code);
 	}
 }
 

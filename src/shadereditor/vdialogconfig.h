@@ -1,7 +1,7 @@
 #ifndef CDIALOG_CFG_H
 #define CDIALOG_CFG_H
 
-#include "editorCommon.h"
+#include "editorcommon.h"
 #include "vgui_controls/controls.h"
 
 

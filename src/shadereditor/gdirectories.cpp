@@ -1,9 +1,8 @@
-
 #include "cbase.h"
-
+#include "editorcommon.h"
+#ifdef _WIN32
 #include <direct.h>
-
-#include "editorCommon.h"
+#endif
 
 using namespace std;
 
@@ -121,13 +120,13 @@ void CreateDirectoryStrings()
 		Warning( "Unable to find account name/common\n" );
 		Q_snprintf( _acc, MASTERPATH_MAXLEN, "common" );
 	}
-	
+
 	//char *smods = Q_stristr( _wdTmp, "SourceMods" );
 	const char *_game = engine->GetGameDirectory();
 
 	Q_snprintf( _gamePath, MASTERPATH_MAXLEN, "%s", _game );
 	Q_FixSlashes( _gamePath );
-	
+
 	KeyValues *pKV = new KeyValues("cfg");
 	const char *localize = "..\\..\\..\\..\\";
 
@@ -175,7 +174,7 @@ void CreateDirectoryStrings()
 	Q_FixSlashes( _compilePath_Local );
 	pKV->deleteThis();
 
-	
+
 	const char *__localrootdir = "shadereditorui";
 	Q_snprintf( _seditRoot, MASTERPATH_MAXLEN, "%s/%s", _gamePath, __localrootdir );
 	Q_FixSlashes( _seditRoot );

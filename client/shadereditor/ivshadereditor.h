@@ -121,7 +121,6 @@ public:
 	// Draws a PPE graph right now or adds it to the render queue (r_queued_post_processing!)
 	// Does not push a new RT but uses the current one
 	// If you have 'during scene' nodes, make sure to call it twice in the appropriate places
-	virtual void		DrawPPEOnDemand( const int &index, const bool bInScene = false ) = 0;
 	virtual void		DrawPPEOnDemand( const int &index, int x, int y, int w, int h, const bool bInScene = false ) = 0;
 
 	// access a materialvar based on an incrementing token

@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_Std_VLight::CSheet_Std_VLight(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

@@ -1,7 +1,7 @@
 #ifndef CNODE_APPEND_H
 #define CNODE_APPEND_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeAppend : public CBaseNode
 {

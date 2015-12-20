@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CNodeSampler::CNodeSampler( CNodeView *p ) : BaseClass( "Sampler object", p )
 {

@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 void CHLSL_Solver_PP_ClearBuffers::Init( const TokenChannels_t &values, bool bColor, bool bDepth )

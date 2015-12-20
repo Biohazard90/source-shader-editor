@@ -1,10 +1,10 @@
 #ifndef CCODE_EDITOR_H
 #define CCODE_EDITOR_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
-#include <vgui_controls/RichText.h>
-#include "vSmartText.h"
+#include <vgui_controls/richtext.h>
+#include "vsmarttext.h"
 
 //class CSmartText;
 class CSheet_Base;

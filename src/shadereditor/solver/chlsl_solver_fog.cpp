@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 void CHLSL_Solver_Fog::OnWriteFXC( bool bIsPixelShader, WriteContext_FXC &context )

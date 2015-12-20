@@ -1,7 +1,7 @@
 #ifndef CNODE_SWIZZLE_H
 #define CNODE_SWIZZLE_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeSwizzle : public CBaseNode
 {

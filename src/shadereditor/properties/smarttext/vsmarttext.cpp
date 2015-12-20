@@ -1,12 +1,12 @@
 
 #include "cbase.h"
-#include "vSmartText.h"
-#include "vSmartObject.h"
-#include "vSmartObjectList.h"
-#include "vSmartAutocomplete.h"
-#include "vSmartTooltip.h"
+#include "vsmarttext.h"
+#include "vsmartobject.h"
+#include "vsmartobjectlist.h"
+#include "vsmartautocomplete.h"
+#include "vsmarttooltip.h"
 #include "vgui_controls/menuitem.h"
-#include "cRegex.h"
+#include "cregex.h"
 #include <ctype.h>
 
 //#define UCHAR_MDOT L'\x00B7'
@@ -252,8 +252,12 @@ void CParserHelper::Shutdown()
 		ParserThreadCmd_Request *pR = new ParserThreadCmd_Request();
 		pR->flags = PARSERREQUEST_STOPTHREAD;
 		ParserThread.m_QueueParse.QueueMessage( pR );
-
+//ThreadSetAffinity
+#ifdef _WIN32
 		VCRHook_WaitForSingleObject( ParserThread.GetThreadHandle(), TT_INFINITE );
+#else // not WIN32
+		VCRHook_WaitForSingleObject( ParserThread.GetThreadId(), TT_INFINITE );
+#endif // not WIN32
 	}
 }
 
@@ -505,7 +509,7 @@ void CSmartText::ApplySchemeSettings( IScheme *pScheme )
 	InitColors();
 	_col_SelectionBG = pScheme->GetColor( "SmartText.SelectionBG", _col_SelectionBG );
 	_col_SelectionFG = pScheme->GetColor( "SmartText.SelectionFG", _col_SelectionFG );
-	
+
 	SetBorder( pScheme->GetBorder("ButtonDepressedBorder") );
 
 	UpdateScrollbar();
@@ -1042,7 +1046,7 @@ void CSmartText::OnKeyTyped( wchar_t c )
 	MakeTopFormatsDirty();
 
 	AdvanceScrollbarOnDemand();
-	
+
 	OnACKeyTyped( c );
 }
 
@@ -1813,7 +1817,7 @@ void CSmartText::MoveCursorToEndOfRow( int y, text_cursor *c )
 
 	if ( y < 0 )
 		y = c->y;
-	
+
 	if ( y < 0 || y >= hRows.Count() )
 		return;
 
@@ -2189,7 +2193,7 @@ void CSmartText::ProcessCopy()
 		CRRow--;
 
 		delete [] pRow;
-		system()->SetClipboardText( CRRow, Q_wcslen( CRRow ) ); 
+		system()->SetClipboardText( CRRow, Q_wcslen( CRRow ) );
 		delete [] CRRow;
 	}
 

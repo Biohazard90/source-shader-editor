@@ -1,7 +1,7 @@
 #ifndef CNODE_STD_SKINNING_H
 #define CNODE_STD_SKINNING_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 
 enum

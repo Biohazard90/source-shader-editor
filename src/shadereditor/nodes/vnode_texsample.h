@@ -1,7 +1,7 @@
 #ifndef CNODETEXTURESAMPLE_H
 #define CNODETEXTURESAMPLE_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeTexSample : public CBaseNode
 {

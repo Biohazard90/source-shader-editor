@@ -1,7 +1,7 @@
 #ifndef CNODE_PP_RT_H
 #define CNODE_PP_RT_H
 
-#include <editorCommon.h>
+#include <editorcommon.h>
 
 class CNodePP_RT : public CNodePP_Base
 {

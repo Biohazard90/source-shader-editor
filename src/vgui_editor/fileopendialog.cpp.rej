@@ -1,0 +1,146 @@
+--- fileopendialog.cpp	2014-07-30 12:53:43.307877882 -0700
++++ fileopendialog.cpp	2014-07-30 13:01:35.182830793 -0700
+@@ -479,14 +485,15 @@
+ 
+ static ColumnInfo_t g_ColInfo[] =
+ {
+-	{	"text",				"#FileOpenDialog_Col_Name",				175,	20, 10000, ListPanel::COLUMN_UNHIDABLE,		&ListFileNameSortFunc			, Label::a_west },
+-	{	"filesize",			"#FileOpenDialog_Col_Size",				100,	20, 10000, 0,								&ListFileSizeSortFunc			, Label::a_east },
+-	{	"type",				"#FileOpenDialog_Col_Type",				150,	20, 10000, 0,								&ListFileTypeSortFunc			, Label::a_west },
++	{	"text",				"#FileOpenDialog_Col_Name",				325,	20, 10000, ListPanel::COLUMN_UNHIDABLE,		&ListFileNameSortFunc			, Label::a_west },
++	{	"filesize",			"#FileOpenDialog_Col_Size",				50,	20, 10000, 0,								&ListFileSizeSortFunc			, Label::a_east },
++	{	"type",				"#FileOpenDialog_Col_Type",				50,	20, 10000, 0,								&ListFileTypeSortFunc			, Label::a_west },
+ 	{	"modified",			"#FileOpenDialog_Col_DateModified",		125,	20, 10000, 0,								&ListFileModifiedSortFunc		, Label::a_west },
+ 	{	"created",			"#FileOpenDialog_Col_DateCreated",		125,	20, 10000, ListPanel::COLUMN_HIDDEN,		&ListFileCreatedSortFunc		, Label::a_west },
+ 	{	"attributes",		"#FileOpenDialog_Col_Attributes",		50,		20, 10000, ListPanel::COLUMN_HIDDEN,		&ListFileAttributesSortFunc		, Label::a_west },
+ };
+ 
++
+ //-----------------------------------------------------------------------------
+ // Purpose: Constructor
+ //-----------------------------------------------------------------------------
+@@ -1054,16 +1092,46 @@
+ 	}
+ 
+ 	// see if the path can be opened
++#if CUSTOM_POPULATE == 0
+ 	Q_strncat(fullpath, "*", sizeof( fullpath ), COPY_ALL_CHARACTERS );
++#endif
+ 	char *pData = fullpath;
+ 	while (*pData == ' ')
+ 	{
+ 		pData++;
+ 	}
++#if CUSTOM_POPULATE
++	char tmpLocal[MAX_PATH * 4];
++	if ( !g_pFullFileSystem->FullPathToRelativePath( pData, tmpLocal, MAX_PATH * 4 ) || !*tmpLocal )
++		Q_strcpy( tmpLocal, pData );
++
++	char fullpath2[MAX_PATH * 4];
++	Q_memset( fullpath2, 0, sizeof( fullpath2 ) );
++	Q_strcpy( fullpath2, fullpath );
++	Q_strncat(fullpath2, "*", sizeof( fullpath2 ), COPY_ALL_CHARACTERS );
++	char *pData2 = fullpath2;
++	while (*pData2 == ' ')
++	{
++		pData2++;
++	}
++
++	WIN32_FIND_DATA findData;
++	HANDLE findHandle = ::FindFirstFile(pData2, &findData);
++	bool bGlobalCheck = (findHandle != INVALID_HANDLE_VALUE);
+ 
++	Q_StripTrailingSlash( tmpLocal );
++	FileFindHandle_t _handle;
++	g_pFullFileSystem->FindFirst( tmpLocal, &_handle );
++	bool bLocal = (_handle >= 0) ? g_pFullFileSystem->FindIsDirectory( _handle ) : false;
++	g_pFullFileSystem->FindClose( _handle );
++
++	//if( g_pFullFileSystem->IsDirectory( tmpLocal, GetPathID() ) || bGlobalCheck )
++	if( bLocal || bGlobalCheck )
++#else
+ 	WIN32_FIND_DATA findData;
+ 	HANDLE findHandle = ::FindFirstFile(pData, &findData);
+ 	if (findHandle != INVALID_HANDLE_VALUE)
++#endif
+ 	{
+ 		// directory is valid, remove * and store
+ 		char *pos = strrchr(pData, '*');
+@@ -1079,6 +1147,7 @@
+ 		Q_strcpy(pData, m_szLastPath);
+ 	}
+ 
++
+ 	m_pFullPathEdit->SetText(pData);
+ 	m_pFullPathEdit->GetTooltip()->SetText(pData);
+ }
+@@ -1285,9 +1460,10 @@
+ 
+ 	char *filterPtr = filterList;
+ 	KeyValues *kv = new KeyValues("item");
++#if CUSTOM_POPULATE == 0
+ 	WIN32_FIND_DATA findData;
+ 	HANDLE findHandle = NULL;
+-
++#endif
+ 	if ( m_DialogType != FOD_SELECT_DIRECTORY )
+ 	{
+ 		while ((filterPtr != NULL) && (*filterPtr != 0))
+@@ -1311,6 +1487,10 @@
+ 				break;
+ 			}
+ 
++#if CUSTOM_POPULATE
++			Q_snprintf(dir, MAX_PATH*4, "%s", currentDir);
++			BeginIterate( dir, curFilter, m_pFileList, ITRFLAGS_FILES );
++#else
+ 			Q_snprintf(dir, MAX_PATH*4, "%s%s", currentDir, curFilter);
+ 
+ 			// open the directory and walk it, loading files
+@@ -1357,10 +1537,15 @@
+ 					break;
+ 			}
+ 			::FindClose(findHandle);
++#endif
+ 		}
+ 	}
+ 
+ 	// find all the directories
++
++#if CUSTOM_POPULATE
++	BeginIterate( currentDir, "*", m_pFileList, ITRFLAGS_DIRECTORIES );
++#else
+ 	GetCurrentDirectory(dir, sizeof(dir));
+ 	Q_strncat(dir, "*", sizeof( dir ), COPY_ALL_CHARACTERS);
+ 	findHandle = ::FindFirstFile(dir, &findData);
+@@ -1394,6 +1579,7 @@
+ 			break;
+ 	}
+ 	::FindClose(findHandle);
++#endif
+ 
+ 	kv->deleteThis();
+ 	m_pFileList->SortList();
+@@ -1639,9 +1825,21 @@
+ 		Q_strncpy( pFullPath, pFileName, sizeof(pFullPath) );
+ 	}
+ 
++	char tmpLocalPath[MAX_PATH*4];
++	GetLocalPath( pFullPath, tmpLocalPath, MAX_PATH*4 );
++
+ 	// If the name specified is a directory, then change directory
+-	if ( g_pFullFileSystem->IsDirectory( pFullPath, NULL ) )
++	FileFindHandle_t _handle;
++	g_pFullFileSystem->FindFirst( tmpLocalPath, &_handle );
++	bool bLocal = (_handle >= 0) ? g_pFullFileSystem->FindIsDirectory( _handle ) : false;
++	g_pFullFileSystem->FindClose( _handle );
++	bool bSystem = g_pFullFileSystem->IsDirectory( tmpLocalPath, GetPathID() );
++
++	if ( bLocal || bSystem )
+ 	{
++		if ( !bSystem )
++			Q_snprintf( pFullPath, sizeof(pFullPath), tmpLocalPath );
++
+ 		// it's a directory; change to the specified directory
+ 		if ( !bSpecifiedDirectory )
+ 		{

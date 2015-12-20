@@ -1,7 +1,7 @@
 #ifndef CHLSLVAR_H
 #define CHLSLVAR_H
 
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 class CBaseNode;
 

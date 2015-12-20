@@ -1,7 +1,7 @@
 #ifndef CSHEET_PP_OPERATIONS_H
 #define CSHEET_PP_OPERATIONS_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 class CSheet_PP_ClearBuff : public CSheet_Base
 {

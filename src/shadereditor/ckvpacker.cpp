@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 char *CKVPacker::ConvertKVSafeString( const char *pStr, bool bMakeEscaped )

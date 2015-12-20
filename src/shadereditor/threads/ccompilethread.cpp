@@ -1,11 +1,14 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
-#include <windows.h>
 #include <stdio.h>
+
+#ifndef NO_COMPILING
+#include <windows.h>
 #include <tchar.h>
 #include <direct.h>
+#endif
 
 #define COMPILE_FRENZY 0
 #if COMPILE_FRENZY
@@ -292,7 +295,7 @@ int CCompileThread::Run()
 {
 	for (;;)
 	{
-		
+
 #if COMPILE_FRENZY
 		const bool bCompileFrenzy = sedit_cf.GetBool();
 #endif
@@ -366,8 +369,8 @@ int CCompileThread::Run()
 				delete [] _shaderData->name;
 				_shaderData->name = uniquifyShader;
 			}
-		
-		
+
+
 			curFlags = 0;
 
 			if ( _shaderData )
@@ -463,6 +466,7 @@ int CCompileThread::Run()
 		}
 		Sleep( 1 );
 	}
+	return 0;
 }
 
 void CCompileThread::WriteFXCFile_VS(bool bPosOverride, CUtlBufferEditor *codeBuff)
@@ -474,7 +478,7 @@ void CCompileThread::WriteFXCFile_VS(bool bPosOverride, CUtlBufferEditor *codeBu
 	CUtlBufferEditor buf;
 	buf.SetBufferType( true, true );
 	buf.EnableDirectives( true );
-	
+
 	buf.PutString( "// *********************************\n" );
 	buf.PutString( "// ** auto generated vertexshader **\n" );
 	buf.PutString( "// *********************************\n" );
@@ -1005,6 +1009,7 @@ HANDLE g_hChildStd_OUT_Wr = NULL;
 
 bool CCompileThread::StartCompiler()
 {
+#ifndef NO_COMPILING
 	ForceTerminateCompilers();
 
 	char old_wd[MAX_PATH];
@@ -1045,16 +1050,16 @@ bool CCompileThread::StartCompiler()
 	siStartInfo.dwFlags |= STARTF_USESTDHANDLES;
 	siStartInfo.wShowWindow = SW_HIDE;
 	//Msg("commandline: %s\n", szCmdline);
-	bSuccess = CreateProcess(NULL, 
-		szCmdline,     // command line 
-		NULL,          // process security attributes 
-		NULL,          // primary thread security attributes 
-		TRUE,          // handles are inherited 
-		CREATE_NO_WINDOW,             // creation flags 
-		NULL,          // use parent's environment 
-		NULL,          // use parent's current directory 
-		&siStartInfo,  // STARTUPINFO pointer 
-		&piProcInfo);  // receives PROCESS_INFORMATION 
+	bSuccess = CreateProcess(NULL,
+		szCmdline,     // command line
+		NULL,          // process security attributes
+		NULL,          // primary thread security attributes
+		TRUE,          // handles are inherited
+		CREATE_NO_WINDOW,             // creation flags
+		NULL,          // use parent's environment
+		NULL,          // use parent's current directory
+		&siStartInfo,  // STARTUPINFO pointer
+		&piProcInfo);  // receives PROCESS_INFORMATION
 
 	if ( !bSuccess )
 	{
@@ -1098,7 +1103,7 @@ bool CCompileThread::StartCompiler()
 			BOOL bSuccess = FALSE;
 #	if 1
 			for (;;)
-			{ 
+			{
 				bSuccess = ReadFile( g_hChildStd_OUT_Rd, chBuf, BUFSIZE, &dwRead, NULL);
 				if( !bSuccess || dwRead <= 0 )
 					break;
@@ -1135,4 +1140,7 @@ bool CCompileThread::StartCompiler()
 
 	//chdir( old_wd );
 	return true;
+#else
+	return false;
+#endif
 }

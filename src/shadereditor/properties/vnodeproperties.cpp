@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CNodePropertySheet::CNodePropertySheet( CBaseNode *pNode, CNodeView *parent, const char *panelName )

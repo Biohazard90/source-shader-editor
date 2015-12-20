@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 CSheet_Combo::CSheet_Combo(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

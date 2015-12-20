@@ -1,7 +1,7 @@
 #ifndef PROCSHADER_INTERFACE_H
 #define PROCSHADER_INTERFACE_H
 
-#include "IVProcShader.h"
+#include "ivprocshader.h"
 #include "filesystem.h"
 #include "vstdlib/random.h"
 #include "tier1/KeyValues.h"
@@ -16,7 +16,7 @@ public:
 
 	virtual bool Init( CreateInterfaceFn appSystemFactory, IVPPEHelper *pPPEHelper );
 	virtual void Shutdown();
-	
+
 	virtual void *SwapShaderSystem( void *_data, const int &index );
 	virtual void SetNormalizedPuzzleDelta( float d );
 	virtual void UpdateEnvironmentData( int iEnvC, float *_fl4 );
@@ -60,7 +60,7 @@ void BindTextureByAutoType( bool bPreview, IShaderDynamicAPI *pShaderAPI, CBaseV
 void UpdateConstantByIdentifier( CBaseVSShader *pShader, IShaderDynamicAPI* pShaderAPI, IMaterialVar **params, SimpleEnvConstant *pConst, CProceduralContext *pContext,
 								bool bPS, int iFirstMutable = -1, int iFirstStatic = -1 );
 
-extern IUniformRandomStream *random;
+extern IUniformRandomStream *random_se;
 extern IFileSystem *g_pFullFileSystem;
 
 #endif

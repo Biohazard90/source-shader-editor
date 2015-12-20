@@ -1,7 +1,7 @@
 
 #include "procshader/shaderincludes.h"
 
-#include "ProcShaderInterface.h"
+#include "procshaderinterface.h"
 
 #include "tier1.h"
 
@@ -17,7 +17,7 @@ IFileSystem *g_pFullFileSystem = NULL;
 #else
 extern IFileSystem *g_pFullFileSystem;
 #endif
-IUniformRandomStream *random = NULL;
+IUniformRandomStream *random_se = NULL;
 
 EXPOSE_SINGLE_INTERFACE_GLOBALVAR( ProcShaderInterface, IVProcShader, PROCSHADER_INTERFACE_VERSION, __g_ProcShaderCTRL );
 
@@ -42,7 +42,7 @@ bool ProcShaderInterface::Init( CreateInterfaceFn appSystemFactory, IVPPEHelper 
 	if ( (g_pFullFileSystem = (IFileSystem *)appSystemFactory(FILESYSTEM_INTERFACE_VERSION, NULL)) == NULL )
 		return false;
 
-	if ( (random = (IUniformRandomStream *)appSystemFactory(VENGINE_CLIENT_RANDOM_INTERFACE_VERSION, NULL)) == NULL )
+	if ( (random_se = (IUniformRandomStream *)appSystemFactory(VENGINE_CLIENT_RANDOM_INTERFACE_VERSION, NULL)) == NULL )
 		return false;
 
 	return true;

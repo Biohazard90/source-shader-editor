@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 
 CNodeComment::CNodeComment( CNodeView *p ) : BaseClass( "Group", p )

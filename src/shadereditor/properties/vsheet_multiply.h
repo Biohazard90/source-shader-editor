@@ -1,7 +1,7 @@
 #ifndef CSHEET_MULTIPLY_H
 #define CSHEET_MULTIPLY_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Multiply : public CSheet_Base

@@ -18,8 +18,8 @@
 #include <vgui/Dar.h>
 #include <vgui/Cursor.h>
 #include <vgui/IScheme.h>
-#include <vgui_controls/Controls.h>
-#include <vgui_controls/PHandle.h>
+#include <vgui_controls/controls.h>
+#include <vgui_controls/phandle.h>
 #include "tier1/utlhandletable.h"
 
 class KeyValues;

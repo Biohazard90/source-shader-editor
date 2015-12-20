@@ -1,6 +1,6 @@
 
 #include "cbase.h"
-#include "editorCommon.h"
+#include "editorcommon.h"
 
 CNodeVCompression::CNodeVCompression( CNodeView *p ) : BaseClass( "Vertex decompress", p )
 {

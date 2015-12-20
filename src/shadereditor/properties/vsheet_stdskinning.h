@@ -1,7 +1,7 @@
 #ifndef CSHEET_STD_SKINNING_H
 #define CSHEET_STD_SKINNING_H
 
-#include "vSheets.h"
+#include "vsheets.h"
 
 
 class CSheet_Std_Skinning : public CSheet_Base

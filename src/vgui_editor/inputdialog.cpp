@@ -1,13 +1,13 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
 //=============================================================================//
 
-#include <vgui_controls/InputDialog.h>
-#include <vgui_controls/Label.h>
-#include <vgui_controls/Button.h>
-#include <vgui_controls/TextEntry.h>
+#include <vgui_controls/inputdialog.h>
+#include <vgui_controls/label.h>
+#include <vgui_controls/button.h>
+#include <vgui_controls/textentry.h>
 #include "tier1/KeyValues.h"
 #include "vgui/IInput.h"
 

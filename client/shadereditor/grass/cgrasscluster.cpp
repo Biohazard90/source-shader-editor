@@ -1,14 +1,14 @@
 
 #include "cbase.h"
-#include "shadereditor/grass/cgrasscluster.h"
+#include "ShaderEditor/Grass/CGrassCluster.h"
 #include "view.h"
 #include "viewrender.h"
 #include "idebugoverlaypanel.h"
-#include "engine/ivdebugoverlay.h"
+#include "engine/IVDebugOverlay.h"
 #include "iclientshadowmgr.h"
 #include "clientleafsystem.h"
-#include "materialsystem/itexture.h"
-#include "materialsystem/imaterialvar.h"
+#include "materialsystem/ITexture.h"
+#include "materialsystem/IMaterialVar.h"
 #include "collisionutils.h"
 #include "fasttimer.h"
 
@@ -192,6 +192,9 @@ CON_COMMAND( grasscluster_preset_meadow_ultra, "" )
 	//gcluster_sprite_index.SetValue( 2 );
 	CGrassClusterManager::GetInstance()->ClearClusterData();
 }
+
+#ifdef SHADEREDITOR_FORCE_ENABLED
+#endif
 
 Vector FetchLightSamples( Vector pos )
 {

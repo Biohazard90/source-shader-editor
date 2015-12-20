@@ -1,7 +1,7 @@
 #ifndef CNODEARRAY_H
 #define CNODEARRAY_H
 
-#include "vBaseNode.h"
+#include "vbasenode.h"
 
 class CNodeArray : public CBaseNode
 {

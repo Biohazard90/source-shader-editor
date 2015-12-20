@@ -1,7 +1,7 @@
 #ifndef CNODELOOP_H
 #define CNODELOOP_H
 
-#include "vBaseContainer.h"
+#include "vbasecontainer.h"
 
 class CNodeLoop : public CBaseContainerNode
 {
