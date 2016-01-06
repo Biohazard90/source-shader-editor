@@ -16,9 +16,8 @@
 #include "tier1/utldict.h"
 #include "vgui_controls/KeyBoardEditorDialog.h"
 
-// NOTE: This has to be the last file included!
+// memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
-
 
 using namespace vgui;
 

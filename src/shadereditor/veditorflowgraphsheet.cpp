@@ -2,6 +2,8 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CFlowGraphSheet::CFlowGraphSheet( Panel *parent, const char *panelName, bool draggableTabs, bool closeableTabs )
 	: BaseClass( parent, panelName, draggableTabs, closeableTabs )

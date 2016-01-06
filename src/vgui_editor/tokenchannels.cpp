@@ -4,6 +4,9 @@
 
 #include "vgui_editor_platform.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 #define MAX_OPERATION_C 1024
 
 

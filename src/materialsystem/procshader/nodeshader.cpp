@@ -13,6 +13,9 @@
 #include "psin_ps20.inc"
 #include "psin_vs20.inc"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 bool IsTextypeUsingCustomTexture( int textype )
 {
 	if ( textype == HLSLTEX_CUSTOMPARAM ||
@@ -173,12 +176,12 @@ BEGIN_VS_SHADER( NODE_CALC, "" )
 				LoadTexture(CUSTOMTEXTURE);
 		}
 	}
-	
+
 	SHADER_FALLBACK
 	{
 		return 0;
 	}
-	
+
 	SHADER_DRAW
 	{
 		const int command = params[ OPERATION ]->GetIntValue();
@@ -288,12 +291,12 @@ BEGIN_VS_SHADER( NODE_PSIN, "" )
 		if ( !params[ VFMT_FLAGS ]->GetIntValue() )
 			params[ VFMT_FLAGS ]->SetUndefined();
 	}
-	
+
 	SHADER_FALLBACK
 	{
 		return 0;
 	}
-	
+
 	SHADER_DRAW
 	{
 		int command = params[ OPERATION ]->GetIntValue();

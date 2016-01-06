@@ -40,7 +40,7 @@ $Configuration
 		$PreprocessorDefinitions		"$BASE;DEDICATED" [$DEDICATED]
 		// the 10240 in the following line is the output of `sysctl -n kern.maxfilesperproc`
 		$PreprocessorDefinitions		"$BASE;_OSX;OSX;_DARWIN_UNLIMITED_SELECT;FD_SETSIZE=10240;" [$OSXALL]
-		$PreprocessorDefinitions		"$BASE;OVERRIDE_V_DEFINES"	  [$OSXALL]						
+		$PreprocessorDefinitions		"$BASE;OVERRIDE_V_DEFINES"	  [$OSXALL]
 		$PreprocessorDefinitions		"$BASE;_LINUX;LINUX;" [$LINUXALL]
 		$SymbolVisibility				"hidden" 					[$POSIX]
 		$PreprocessorDefinitions		"$BASE;POSIX;_POSIX"		[$POSIX]
@@ -50,7 +50,7 @@ $Configuration
 
 		$Create/UsePCHThroughFile	"stdafx.h"
 	}
-	
+
 	$Linker
 	{
 		$GCC_ExtraLinkerFlags			"$BASE -arch x86_64"		[$OSX64]
@@ -63,9 +63,24 @@ $Project
 
 	$Folder	"Link Libraries"
 	{
-		$ImpLib "$LIBPUBLIC\tier0"		[!$IS_LIB_PROJECT]
-		$Lib	"$LIBPUBLIC\tier1"		[!$IS_LIB_PROJECT]
-		$ImpLib "$LIBPUBLIC\vstdlib"	[!$IS_LIB_PROJECT]
+		//$ImpLib "$LIBPUBLIC\tier0"		[!$IS_LIB_PROJECT]
+		//$Lib	"$LIBPUBLIC\tier1"		[!$IS_LIB_PROJECT]
+		//$ImpLib "$LIBPUBLIC\vstdlib"	[!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\bitmap" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\choreoobjects" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\dmxloader" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\mathlib" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\matsys_controls" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\particles" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\shaderlib" [!$IS_LIB_PROJECT]
+		$ImpLib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\tier0" [!$IS_LIB_PROJECT]
+		$ImpLib "$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\vstdlib" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\tier1" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\tier2" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\tier3" [!$IS_LIB_PROJECT]
+		$Lib	"$LIBPUBLIC\vgui_controls_editor_$TARGET_PLATFORM" [!$IS_LIB_PROJECT]
+		$ImpLib  "$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\steam_api" [!$IS_LIB_PROJECT]
+		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\vtf" [!$IS_LIB_PROJECT]
+		$Lib	"$LIBPUBLIC\libjpeg" [!$IS_LIB_PROJECT]
 	}
 }
-	

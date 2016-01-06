@@ -4,6 +4,9 @@
 #include <direct.h>
 #endif
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 using namespace std;
 
 #define MASTERPATH_MAXLEN 512
@@ -335,7 +338,8 @@ void ComposeShaderName( GenericShaderData *data, bool bPS, bool bExtension, char
 		(bPosOverride?"pos_":""),
 		(bPreview?"preview_":""),
 		((bPS)?
-			(sm2b?"ps20b":"ps30"):
+			//(sm2b?"ps20b":"ps30"):
+			(sm2b?"ps20":"ps30"):
 			(sm2b?"vs20":"vs30")
 		),
 		(bExtension?".fxc":"")
@@ -360,7 +364,8 @@ void ComposeShaderName_Compiled( GenericShaderData *data, bool bPS, bool bExtens
 		(bPosOverride?"pos_":""),
 		(bPreview?"preview_":""),
 		((bPS)?
-			(sm2b?"ps20b":"ps30"):
+			//(sm2b?"ps20b":"ps30"):
+			(sm2b?"ps20":"ps30"):
 			(sm2b?"vs20":"vs30")
 		),
 		(bExtension?".vcs":"")

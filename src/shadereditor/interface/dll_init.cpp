@@ -9,7 +9,6 @@
 #include "IGameUIFuncs.h"
 #include "inputsystem/iinputsystem.h"
 #include "client_factorylist.h"
-//#include "initializer.h"
 #include "vgui_init.h"
 #include "tier0/icommandline.h"
 
@@ -19,7 +18,12 @@
 
 #ifdef SHADER_EDITOR_DLL_2006
 #include "cdll_convar.h"
+#endif
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
+#ifdef SHADER_EDITOR_DLL_2006
 IMDLCache *mdlcache = NULL;
 static CDLL_ConVarAccessor g_ConVarAccessor;
 #endif

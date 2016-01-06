@@ -6,6 +6,8 @@
 
 #include "shader_dll_verify.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 static unsigned char *g_pLastInputData = 0;
 static HANDLE g_hDLLInst = 0;

@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CNodeSampler::CNodeSampler( CNodeView *p ) : BaseClass( "Sampler object", p )
 {
 	m_flMinSizeX = NODEDEFSIZE_SMALL;

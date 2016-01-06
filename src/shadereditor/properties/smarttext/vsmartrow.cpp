@@ -3,6 +3,8 @@
 #include "vsmartrow.h"
 #include "cregex.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 #define __ROWCALC_INTRO( x ) int iLastsplit = 0;\
 	int cur_x = 0;\

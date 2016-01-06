@@ -5,6 +5,9 @@
 #include "vsmartrow.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CCode_Editor::CCode_Editor( CSheet_Base *parent, const char *pName, CSmartText::CodeEditMode_t mode ) : BaseClass( parent, pName )
 {
 	m_iMode = mode;

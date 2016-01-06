@@ -2,6 +2,8 @@
 #include "cbase.h"
 #include "vsheets.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CSheet_Base::CSheet_Base(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent ) : PropertyPage( parent, "" )
 {

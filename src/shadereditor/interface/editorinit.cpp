@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "vgui/ISystem.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 void EngineCopy( const char *a, const char *b )
 {
 #ifdef SHADER_EDITOR_DLL_2013
@@ -21,7 +24,7 @@ float GetEditorTime()
 
 #include <stdio.h>
 
-#ifndef NO_COMPILING
+#ifdef _WIN32
 #include <windows.h>
 #include <tlhelp32.h>
 #include <tchar.h>
@@ -33,7 +36,7 @@ float GetEditorTime()
 
 void ForceTerminateCompilers()
 {
-#ifndef NO_COMPILING
+#ifdef _WIN32
 	PROCESSENTRY32 entry;
 	entry.dwSize = sizeof(PROCESSENTRY32);
 

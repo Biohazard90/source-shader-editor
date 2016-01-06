@@ -2,6 +2,8 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 void CHLSL_Solver_Dot::OnWriteFXC( bool bIsPixelShader, WriteContext_FXC &context )
 {

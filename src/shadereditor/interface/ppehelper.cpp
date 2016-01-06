@@ -2,6 +2,8 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 static CPPEHelper __ppeHelper_Instance;
 CPPEHelper *gPPEHelper = &__ppeHelper_Instance;

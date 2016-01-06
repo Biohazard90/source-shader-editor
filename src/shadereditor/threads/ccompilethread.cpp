@@ -4,11 +4,14 @@
 
 #include <stdio.h>
 
-#ifndef NO_COMPILING
+#ifdef _WIN32
 #include <windows.h>
 #include <tchar.h>
 #include <direct.h>
 #endif
+
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 #define COMPILE_FRENZY 0
 #if COMPILE_FRENZY
@@ -1009,7 +1012,7 @@ HANDLE g_hChildStd_OUT_Wr = NULL;
 
 bool CCompileThread::StartCompiler()
 {
-#ifndef NO_COMPILING
+#ifdef _WIN32
 	ForceTerminateCompilers();
 
 	char old_wd[MAX_PATH];
@@ -1101,7 +1104,7 @@ bool CCompileThread::StartCompiler()
 			DWORD dwRead;
 			CHAR chBuf[BUFSIZE];
 			BOOL bSuccess = FALSE;
-#	if 1
+#if 1
 			for (;;)
 			{
 				bSuccess = ReadFile( g_hChildStd_OUT_Rd, chBuf, BUFSIZE, &dwRead, NULL);
@@ -1110,7 +1113,7 @@ bool CCompileThread::StartCompiler()
 				chBuf[ dwRead ] = '\0';
 				gShaderEditorSystem->QueueLog( chBuf, dwRead );
 			}
-#	endif
+#endif
 			if ( _ExitCodeOut != -1 )
 				break;
 		}

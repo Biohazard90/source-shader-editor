@@ -295,7 +295,6 @@ int RemapEnvironmentConstant( bool bPixelShader, int iNormalized );
 #include "../public/tier1/interface.h"
 #endif
 
-
 enum
 {
 	SM_20B = 0,
@@ -473,7 +472,7 @@ public:
 	CUtlVector< SimpleEnvConstant* > hList_EConstants;
 	CUtlVector< SimpleArray* > hList_Arrays;
 	CUtlVector< SimpleFunction* > hList_Functions;
-	
+
 	int inum_DynamicCombos;
 };
 

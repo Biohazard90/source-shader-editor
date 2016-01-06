@@ -10,6 +10,8 @@
 #include "vgui/IInput.h"
 #include <vgui_controls/menuitem.h>
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CSmartAutocomplete::CSmartAutocomplete( Panel *parent, const char *pElementname ) : BaseClass( parent, pElementname )
 {

@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "vsheets.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 #define TEXPATH_WHITE "white" //"Lights\\White.vtf"
 #define TEXPATH_BLACK "black" //"cable\\black.vtf"
 #define TEXPATH_GREY "grey" //"Dev\\bump.vtf"

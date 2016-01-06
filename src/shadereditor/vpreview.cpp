@@ -1,9 +1,10 @@
 
 #include "cbase.h"
 #include "editorcommon.h"
-//#include "vgui_int.h"
-
 #include "vgui_controls/colorpicker.h"
+
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 #define PREVBROWSER_CONTEXT_MODEL "context_model"
 #define PREVBROWSER_CONTEXT_BG "context_background"

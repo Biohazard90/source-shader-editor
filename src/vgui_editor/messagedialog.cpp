@@ -8,11 +8,10 @@
 #include "vgui/ILocalize.h"
 #include "vgui/ISurface.h"
 
-// NOTE: This has to be the last file included!
-#include "tier0/memdbgon.h"
-
-
 #include "vgui_editor_platform.h"
+
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 //-----------------------------------------------------------------------------
 // CMessageDialog

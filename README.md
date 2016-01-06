@@ -1,7 +1,7 @@
 SOURCE SHADER EDITOR
 ====================
 
-This is the source code for the Source Shader Editor (SSE) for the Source Engine. 
+This is the source code for the Source Shader Editor (SSE) for the Source Engine.
 
 The repository for the Source SDK 2013 can be found here:
 http://github.com/ValveSoftware/source-sdk-2013
@@ -62,3 +62,8 @@ respectively.
 
 For the 2013 SDK, the game shader library is called game_shader_dx6.dll, because
 Valve recently broke shader dll loading through the wildcard game_shader_generic*.dll.
+
+NOTES Linux:
+--------------
+
+You need to compile the Shaders on Windows with shader model 2.0. To get them working rename "ps20b.vcs" and "vs20.vcs" to "ps30.vcs" and "vs30.vcs".

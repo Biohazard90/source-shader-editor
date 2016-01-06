@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CNodePP_Base::CNodePP_Base( const char *opName, CNodeView *p ) : BaseClass( opName, p )
 {
 	SetupVguiTex( m_iPreviewMaterial, "shadereditor/_rt_ppe" );

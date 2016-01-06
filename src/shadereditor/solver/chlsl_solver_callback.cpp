@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CHLSL_Solver_Callback::CHLSL_Solver_Callback( const CHLSL_Solver_Callback &o ) : CHLSL_SolverBase( o )
 {
 	iCallbackIndex = o.iCallbackIndex;

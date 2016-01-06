@@ -2,6 +2,8 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CNodeBaseEvaluate::CNodeBaseEvaluate( const char *name, CNodeView *p, int LockOutput, int numInputs, bool bSmall, int LockInput ) : BaseClass( name, p )
 {

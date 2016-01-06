@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 // Specify source root of your game.
-$Macro TARGET_SRC_DIRECTORY "\run\media\vincent\dbcbf69d-8162-4768-976c-c7c5b5ace72b\sourceengine\Transmissions_Element_120_Source\src" // example: C:\sourcesdk2013\sp\src
+$Macro TARGET_SRC_DIRECTORY "\media\src" // example: C:\sourcesdk2013\sp\src
 
 
 
@@ -21,7 +21,7 @@ $Conditional "TARGET_PLATFORM_2006" 0
 $Conditional "TARGET_PLATFORM_PORTAL2" 0
 
 // Specify game root.
-$Macro TARGET_GAME_DIRECTORY "\run\media\vincent\dbcbf69d-8162-4768-976c-c7c5b5ace72b\sourceengine\Transmissions_Element_120_Source\game" // example: C:\Steam\steamapps\sourcemods\mygame
+$Macro TARGET_GAME_DIRECTORY "\media\game" // example: C:\Steam\steamapps\sourcemods\mygame
 
 
 // Toggled through macro above, do not touch.

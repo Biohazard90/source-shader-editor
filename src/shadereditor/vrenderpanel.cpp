@@ -5,6 +5,8 @@
 #include "view_shared.h"
 #include "materialsystem/imesh.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CRenderPanel::CRenderPanel( Panel *parent, const char *pElementName ) : BaseClass( parent, pElementName )
 {

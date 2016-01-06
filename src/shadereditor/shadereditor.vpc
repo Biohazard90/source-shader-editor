@@ -16,7 +16,7 @@ $Macro SRCDIRSHARED			"$SRCDIR\game\shared"
 $Macro SRCDIRPUBLIC			"$TARGET_SRC_DIRECTORY\public"
 $Macro SRCDIREDITOR			"$SRCDIR\shadereditor"
 
-////$Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
+$Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
 
 $Configuration	"Debug"
 {
@@ -53,7 +53,7 @@ $Configuration
 		$PreprocessorDefinitions		"$BASE;ENABLE_CHROMEHTMLWINDOW;" [$LINUX]
 		$PreprocessorDefinitions		"$BASE;USE_WEBM_FOR_REPLAY" [$LINUX]
 		$PreprocessorDefinitions		"$BASE;CURL_STATICLIB" [$WIN32 && $BUILD_REPLAY]
-		$PreprocessorDefinitions		"$BASE;NO_COMPILING;RAD_TELEMETRY_DISABLED" [$LINUX]
+		$PreprocessorDefinitions		"$BASE;RAD_TELEMETRY_DISABLED" [$LINUX]
 		//$PreprocessorDefinitions		"$BASE;NO_MALLOC_OVERRIDE"
 		$Create/UsePrecompiledHeader	"Use Precompiled Header (/Yu)"
 		$Create/UsePCHThroughFile		"cbase.h"
@@ -349,37 +349,37 @@ $Project "$OUTBINNAME"
 		}
 	}
 
-	$Folder	"Link Libraries" [$WIN32]
-	{
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\bitmap"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\choreoobjects"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\dmxloader"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\mathlib"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\matsys_controls"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\particles"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier1"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier2"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier3"
-		$Lib	"$SRCDIR\lib\public\vgui_controls_editor_$TARGET_PLATFORM"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\steam_api"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\vtf"
-		$Lib	"$SRCDIR\lib\public\jpeglib"
-	}
+	//$Folder	"Link Libraries" [$WIN32]
+	//{
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\bitmap"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\choreoobjects"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\dmxloader"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\mathlib"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\matsys_controls"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\particles"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier1"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier2"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier3"
+	//	$Lib	"$SRCDIR\lib\public\vgui_controls_editor_$TARGET_PLATFORM"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\steam_api"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\vtf"
+	//	$Lib	"$SRCDIR\lib\public\jpeglib"
+	//}
 
-	$Folder	"Link Libraries" [$POSIX]
-	{
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\bitmap"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\choreoobjects"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\dmxloader"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\mathlib"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\matsys_controls"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\particles"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier1"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier2"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier3"
-		$Lib	"$SRCDIR\lib\public\linux32\vgui_controls_editor_$TARGET_PLATFORM"
-		$ImpLib  "$TARGET_SRC_DIRECTORY\lib\public\linux32\steam_api"
-		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\vtf"
-		$Lib	"$SRCDIR\lib\public\linux32\libjpeg"
-	}
+	//$Folder	"Link Libraries" [$POSIX]
+	//{
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\bitmap"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\choreoobjects"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\dmxloader"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\mathlib"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\matsys_controls"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\particles"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier1"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier2"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier3"
+	//	$Lib	"$SRCDIR\lib\public\linux32\vgui_controls_editor_$TARGET_PLATFORM"
+	//	$ImpLib  "$TARGET_SRC_DIRECTORY\lib\public\linux32\steam_api"
+	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\vtf"
+	//	$Lib	"$SRCDIR\lib\public\linux32\libjpeg"
+	//}
 }

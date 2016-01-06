@@ -6,6 +6,9 @@
 
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 #define __DBG_PARSE DEBUG
 
 #if __DBG_PARSE

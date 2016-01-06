@@ -1,15 +1,15 @@
-The Source engine and Valve games use Third Party code for certain functions.  The 
-required legal notices for using such code are reproduced below in accordance with 
-Valve’s obligations to provide such notices:
+The Source engine and Valve games use Third Party code for certain functions.  The
+required legal notices for using such code are reproduced below in accordance with
+Valve's obligations to provide such notices:
 
 ************************************************************************************
 Xzip/Xunzip:
 ************************************************************************************
 
-	// This is version 2002-Feb-16 of the Info-ZIP copyright and license. The 
-	// definitive version of this document should be available at 
+	// This is version 2002-Feb-16 of the Info-ZIP copyright and license. The
+	// definitive version of this document should be available at
 	// ftp://ftp.info-zip.org/pub/infozip/license.html indefinitely.
-	// 
+	//
 	// Copyright (c) 1990-2002 Info-ZIP.  All rights reserved.
 	//
 	// For the purposes of this copyright and license, "Info-ZIP" is defined as
@@ -17,10 +17,10 @@ Xzip/Xunzip:
 	//
 	//   Mark Adler, John Bush, Karl Davis, Harald Denker, Jean-Michel Dubois,
 	//   Jean-loup Gailly, Hunter Goatley, Ian Gorman, Chris Herborth, Dirk Haase,
-	//   Greg Hartwig, Robert Heath, Jonathan Hudson, Paul Kienitz, 
-	//   David Kirschbaum, Johnny Lee, Onno van der Linden, Igor Mandrichenko, 
-	//   Steve P. Miller, Sergio Monesi, Keith Owens, George Petrov, Greg Roelofs, 
-	//   Kai Uwe Rommel, Steve Salisbury, Dave Smith, Christian Spieler, 
+	//   Greg Hartwig, Robert Heath, Jonathan Hudson, Paul Kienitz,
+	//   David Kirschbaum, Johnny Lee, Onno van der Linden, Igor Mandrichenko,
+	//   Steve P. Miller, Sergio Monesi, Keith Owens, George Petrov, Greg Roelofs,
+	//   Kai Uwe Rommel, Steve Salisbury, Dave Smith, Christian Spieler,
 	//   Antoine Verheijen, Paul von Behren, Rich Wales, Mike White
 	//
 	// This software is provided "as is", without warranty of any kind, express
@@ -35,29 +35,29 @@ Xzip/Xunzip:
 	//    1. Redistributions of source code must retain the above copyright notice,
 	//       definition, disclaimer, and this list of conditions.
 	//
-	//    2. Redistributions in binary form (compiled executables) must reproduce 
-	//       the above copyright notice, definition, disclaimer, and this list of 
-	//       conditions in documentation and/or other materials provided with the 
-	//       distribution. The sole exception to this condition is redistribution 
-	//       of a standard UnZipSFX binary as part of a self-extracting archive; 
-	//       that is permitted without inclusion of this license, as long as the 
+	//    2. Redistributions in binary form (compiled executables) must reproduce
+	//       the above copyright notice, definition, disclaimer, and this list of
+	//       conditions in documentation and/or other materials provided with the
+	//       distribution. The sole exception to this condition is redistribution
+	//       of a standard UnZipSFX binary as part of a self-extracting archive;
+	//       that is permitted without inclusion of this license, as long as the
 	//       normal UnZipSFX banner has not been removed from the binary or disabled.
 	//
-	//    3. Altered versions--including, but not limited to, ports to new 
-	//       operating systems, existing ports with new graphical interfaces, and 
-	//       dynamic, shared, or static library versions--must be plainly marked 
-	//       as such and must not be misrepresented as being the original source.  
-	//       Such altered versions also must not be misrepresented as being 
-	//       Info-ZIP releases--including, but not limited to, labeling of the 
-	//       altered versions with the names "Info-ZIP" (or any variation thereof, 
-	//       including, but not limited to, different capitalizations), 
-	//       "Pocket UnZip", "WiZ" or "MacZip" without the explicit permission of 
-	//       Info-ZIP.  Such altered versions are further prohibited from 
-	//       misrepresentative use of the Zip-Bugs or Info-ZIP e-mail addresses or 
+	//    3. Altered versions--including, but not limited to, ports to new
+	//       operating systems, existing ports with new graphical interfaces, and
+	//       dynamic, shared, or static library versions--must be plainly marked
+	//       as such and must not be misrepresented as being the original source.
+	//       Such altered versions also must not be misrepresented as being
+	//       Info-ZIP releases--including, but not limited to, labeling of the
+	//       altered versions with the names "Info-ZIP" (or any variation thereof,
+	//       including, but not limited to, different capitalizations),
+	//       "Pocket UnZip", "WiZ" or "MacZip" without the explicit permission of
+	//       Info-ZIP.  Such altered versions are further prohibited from
+	//       misrepresentative use of the Zip-Bugs or Info-ZIP e-mail addresses or
 	//       of the Info-ZIP URL(s).
 	//
 	//    4. Info-ZIP retains the right to use the names "Info-ZIP", "Zip", "UnZip",
-	//       "UnZipSFX", "WiZ", "Pocket UnZip", "Pocket Zip", and "MacZip" for its 
+	//       "UnZipSFX", "WiZ", "Pocket UnZip", "Pocket Zip", and "MacZip" for its
 	//       own source and binary releases.
 	//
 	///////////////////////////////////////////////////////////////////////////////
@@ -66,12 +66,12 @@ Xzip/Xunzip:
 JPEG image support:
 ************************************************************************************
 
-	The Source engine and SDK also make use of library functions for working with .jpg 
-	files.  Specifically, the Source engine jpeg library is based in part on the work of 
-	the Independent JPEG Group (IJG).  The original source code and project files for the IJG's 
+	The Source engine and SDK also make use of library functions for working with .jpg
+	files.  Specifically, the Source engine jpeg library is based in part on the work of
+	the Independent JPEG Group (IJG).  The original source code and project files for the IJG's
 	JPEG libraries may be found at:  http://www.ijg.org/files/jpegsrc.v6b.tar.gz
 
-	The following is the README. File from that archive and is produced in accordance with the legal 
+	The following is the README. File from that archive and is produced in accordance with the legal
 	notices required by the library:
 
 	The Independent JPEG Group's JPEG software
@@ -493,31 +493,31 @@ Celt Codec:
 ************************************************************************************
 SPEEX Codes:
 ************************************************************************************
-	SPEEX  © 2002-2003, Jean-Marc Valin/Xiph.Org Foundation
-	Redistribution and use in source and binary forms, with or without modification, are permitted 
-	provided that the following conditions are met: 
-	*	Redistributions of source code must retain the above copyright notice, this list of 
-	conditions and the following disclaimer. 
-	*	Redistributions in binary form must reproduce the above copyright notice, this list of 
-	conditions and the following disclaimer in the documentation and/or other materials 
-	provided with the distribution. 
-	*	Neither the name of the Xiph.org Foundation nor the names of its contributors may be 
-	used to endorse or promote products derived from this software without specific prior 
-	written permission. 
-	This software is provided by the copyright holders and contributors “as is” and any express or 
-	implied warranties, including, but not limited to, the implied warranties of merchantability and 
-	fitness for a particular purpose are disclaimed. In no event shall the foundation or contributors be 
-	liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, 
-	but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or 
-	business interruption) however caused and on any theory of liability, whether in contract, strict 
-	liability, or tort (including negligence or otherwise) arising in any way out of the use of this 
-	software, even if advised of the possibility of such damage. 
+	SPEEX  ï¿½ 2002-2003, Jean-Marc Valin/Xiph.Org Foundation
+	Redistribution and use in source and binary forms, with or without modification, are permitted
+	provided that the following conditions are met:
+	*	Redistributions of source code must retain the above copyright notice, this list of
+	conditions and the following disclaimer.
+	*	Redistributions in binary form must reproduce the above copyright notice, this list of
+	conditions and the following disclaimer in the documentation and/or other materials
+	provided with the distribution.
+	*	Neither the name of the Xiph.org Foundation nor the names of its contributors may be
+	used to endorse or promote products derived from this software without specific prior
+	written permission.
+	This software is provided by the copyright holders and contributors ï¿½as isï¿½ and any express or
+	implied warranties, including, but not limited to, the implied warranties of merchantability and
+	fitness for a particular purpose are disclaimed. In no event shall the foundation or contributors be
+	liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including,
+	but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or
+	business interruption) however caused and on any theory of liability, whether in contract, strict
+	liability, or tort (including negligence or otherwise) arising in any way out of the use of this
+	software, even if advised of the possibility of such damage.
 
 ************************************************************************************
 google-perftools:
 ************************************************************************************
 
-	http://code.google.com/p/gperftools/ 
+	http://code.google.com/p/gperftools/
 
 	Copyright (c) 2012, Google Inc.
 	All rights reserved.
@@ -563,17 +563,17 @@ google-perftools:
 		* The name of the author may not be used to endorse or promote products
 		  derived from this software without specific prior written permission.
 
-	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-	AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+	AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 	IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-	ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-	LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-	CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
-	SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+	ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+	LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+	CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+	SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
 	INTERRUPTION)
-	HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
-	LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY 
-	OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH 
+	HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+	LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+	OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 	DAMAGE.
 
 ************************************************************************************
@@ -612,13 +612,13 @@ LZMA
 	LZMA SDK is licensed under two licenses:
 	1) GNU Lesser General Public License (GNU LGPL)
 	2) Common Public License (CPL)
-	It means that you can select one of these two licenses and 
+	It means that you can select one of these two licenses and
 	follow rules of that license.
 	SPECIAL EXCEPTION:
-	Igor Pavlov, as the author of this Code, expressly permits you to 
-	statically or dynamically link your Code (or bind by name) to the 
-	interfaces of this file without subjecting your linked Code to the 
-	terms of the CPL or GNU LGPL. Any modifications or additions 
+	Igor Pavlov, as the author of this Code, expressly permits you to
+	statically or dynamically link your Code (or bind by name) to the
+	interfaces of this file without subjecting your linked Code to the
+	terms of the CPL or GNU LGPL. Any modifications or additions
 	to this file, however, are subject to the LGPL or CPL terms.
 
 ************************************************************************************
@@ -666,17 +666,17 @@ Fast Pow Function
 	// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ************************************************************************************
-Autodesk® FBX®:
+Autodeskï¿½ FBXï¿½:
 ************************************************************************************
 
-	“This software contains Autodesk® FBX® code developed by Autodesk, Inc. Copyright 2012 Autodesk, Inc. 
-	All rights, reserved. Such code is provided “as is” and Autodesk, Inc. disclaims any and all warranties, 
-	whether express or implied, including without limitation the implied warranties of merchantability, fitness for a 
-	particular purpose or non-infringement of third party rights. In no event shall Autodesk, Inc. be liable for any 
-	direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, 
-	procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however 
-	caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or 
-	otherwise) arising in any way out of such code.”
+	ï¿½This software contains Autodeskï¿½ FBXï¿½ code developed by Autodesk, Inc. Copyright 2012 Autodesk, Inc.
+	All rights, reserved. Such code is provided ï¿½as isï¿½ and Autodesk, Inc. disclaims any and all warranties,
+	whether express or implied, including without limitation the implied warranties of merchantability, fitness for a
+	particular purpose or non-infringement of third party rights. In no event shall Autodesk, Inc. be liable for any
+	direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to,
+	procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however
+	caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or
+	otherwise) arising in any way out of such code.ï¿½
 
 ************************************************************************************
 OpenSSL:
@@ -707,7 +707,7 @@ OpenSSL:
 	 *    "This product includes software developed by the OpenSSL Project
 	 *    for use in the OpenSSL Toolkit. (http://www.openssl.org/)"
 	 *
-	 * 4. The names "OpenSSL Toolkit" and "OpenSSL Project" must not be 
+	 * 4. The names "OpenSSL Toolkit" and "OpenSSL Project" must not be
 	used to
 	 *    endorse or promote products derived from this software without
 	 *    prior written permission. For written permission, please contact
@@ -776,9 +776,9 @@ OpenSSL:
 	 *    The word 'cryptographic' can be left out if the rouines from the library
 	 *    being used are not cryptographic related :-).
 	 * 4. If you include any Windows specific code (or a derivative thereof) from
-	 *    the apps directory (application code) you must include an 
+	 *    the apps directory (application code) you must include an
 	acknowledgement:
-	 *    "This product includes software written by Tim Hudson 
+	 *    "This product includes software written by Tim Hudson
 	(tjh@cryptsoft.com)"
 	 *
 	 * THIS SOFTWARE IS PROVIDED BY ERIC YOUNG ``AS IS'' AND

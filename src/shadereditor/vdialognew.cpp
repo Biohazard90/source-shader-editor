@@ -4,6 +4,9 @@
 #include "vgui_controls/radiobutton.h"
 #include <vgui_controls/promptsimple.h>
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CDialog_NewCanvas::CDialog_NewCanvas( CNodeView *n, Panel *parent ) : Frame( parent, "newshader" )
 {
 	pNodeView = n;

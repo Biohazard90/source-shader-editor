@@ -23,7 +23,8 @@
 #include "veditorroot.h"
 #include "vnodeview.h"
 
-//#include "vgui_int.h"
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CEditorRoot *pEditorRoot = NULL;
 
@@ -251,7 +252,7 @@ void CEditorRoot::PageChanged()
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 5, bIsShader );
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 6, bIsShader );
 
-#ifdef NO_COMPILING
+#ifndef _WIN32
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 2, false );
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 3, false );
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 4, false );

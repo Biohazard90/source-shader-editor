@@ -2,6 +2,8 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CSheet_PP_Mat::CSheet_PP_Mat(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )
 	: BaseClass( pNode, view, data, parent )

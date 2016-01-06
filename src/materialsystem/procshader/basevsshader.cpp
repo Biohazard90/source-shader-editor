@@ -1,4 +1,4 @@
-//===== Copyright Valve Corporation, All rights reserved. ======//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose:
 //
@@ -31,7 +31,7 @@
 #include "flashlight_ps20.inc"
 #include "flashlight_ps20b.inc"
 #endif
-#include "UnlitGeneric_vs11.inc"
+#include "unlitgeneric_vs11.inc"
 #include "VertexLitGeneric_EnvmappedBumpmap_NoLighting_ps14.inc"
 #include "VertexLitGeneric_EnvmappedBumpmap_NoLighting.inc"
 #include "vertexlitgeneric_flashlight_vs11.inc"
@@ -865,6 +865,7 @@ void CBaseVSShader::SetHWMorphVertexShaderState( int nDimConst, int nSubrectCons
 	s_pShaderAPI->BindStandardVertexTexture( morphSampler, TEXTURE_MORPH_ACCUMULATOR );
 #endif
 }
+
 
 //-----------------------------------------------------------------------------
 // Vertex shader unlit generic pass
@@ -2055,7 +2056,7 @@ void CBaseVSShader::DrawFlashlight_dx90( IMaterialVar** params, IShaderDynamicAP
 		if ( g_pHardwareConfig->SupportsPixelShaders_2_b() )
 		{
 			DECLARE_DYNAMIC_PIXEL_SHADER( flashlight_ps20b );
-			SET_DYNAMIC_PIXEL_SHADER_COMBO( PIXELFOGTYPE, pShaderAPI->GetPixelFogCombo() );
+			SET_DYNAMIC_PIXEL_SHADER_COMBO( PIXELFOGTYPE,  pShaderAPI->GetPixelFogCombo() );
 			SET_DYNAMIC_PIXEL_SHADER_COMBO( FLASHLIGHTSHADOWS, flashlightState.m_bEnableShadows && ( pFlashlightDepthTexture != NULL ) );
 			SET_DYNAMIC_PIXEL_SHADER( flashlight_ps20b );
 		}

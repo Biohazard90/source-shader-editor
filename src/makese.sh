@@ -8,10 +8,9 @@ rm ${logfile}.pipe
 
 # Set path to steam runtime sdk change this to your path!
 # Arch
-export STEAM_RUNTIME_ROOT="/run/media/pathto/steam-runtime-sdk"
+#export STEAM_RUNTIME_ROOT="/run/media/steam-runtime-sdk"
 # Ubuntu
-#export STEAM_RUNTIME_ROOT="/media/pathto/steam-runtime-sdk"
-
+export STEAM_RUNTIME_ROOT="/media/steam-runtime-sdk"
 # Stop the script if we run into any errors
 set -e
 
@@ -65,7 +64,6 @@ echo
 # Create Game Projects
 echo "Create Game Projects..."
 pushd `dirname $0`
-#devtools/bin/vpc /2013
 devtools/bin/vpc +shadereditor /mksln shadereditor
 popd
 
@@ -77,9 +75,9 @@ sed -i 's/\$(PWD)\/\/media/\/media/' ./shadereditor/shadereditor_dll_linux32.mak
 sed -i 's/\$(PWD)\/\/media/\/media/' ./vgui_editor/vgui_controls_editor_linux32.mak
 sed -i 's/\$(PWD)\/\/media/\/media/' ./materialsystem/procshader/editor_shader_linux32.mak
 #Arch
-sed -i 's/\$(PWD)\/\/run/\/run/' ./shadereditor/shadereditor_dll_linux32.mak
-sed -i 's/\$(PWD)\/\/run/\/run/' ./vgui_editor/vgui_controls_editor_linux32.mak
-sed -i 's/\$(PWD)\/\/run/\/run/' ./materialsystem/procshader/editor_shader_linux32.mak
+#sed -i 's/\$(PWD)\/\/run/\/run/' ./shadereditor/shadereditor_dll_linux32.mak
+#sed -i 's/\$(PWD)\/\/run/\/run/' ./vgui_editor/vgui_controls_editor_linux32.mak
+#sed -i 's/\$(PWD)\/\/run/\/run/' ./materialsystem/procshader/editor_shader_linux32.mak
 # Build TE120
 echo "Using ccache."
 export PATH="/usr/lib/ccache/bin/:$PATH"

@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CShaderPrecache::CShaderPrecache( vgui::Panel *parent, CNodeView *nodeview ) : BaseClass( parent, nodeview, "shaderpreview" )
 {
 	m_pPanelList_Shader = new PanelListPanel( this, "shaderlist" );

@@ -3,6 +3,9 @@
 #include "editorcommon.h"
 #include <vgui/ILocalize.h>
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 //CBaseContainerNode::CBaseContainerNode( CNodeView *p ) : BaseClass( "BaseContainer", p )
 CBaseContainerNode::CBaseContainerNode( const char *opName, CNodeView *p ) : BaseClass( opName, p )
 {

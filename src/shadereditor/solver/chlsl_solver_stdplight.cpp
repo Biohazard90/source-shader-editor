@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 void CHLSL_Solver_StdPLight::SetState( bool supportsStaticL, bool doHL, bool doAO )
 {
 	m_bStaticLighting = supportsStaticL;

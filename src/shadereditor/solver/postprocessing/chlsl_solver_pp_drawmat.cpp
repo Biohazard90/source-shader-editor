@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CHLSL_Solver_PP_DrawMat::CHLSL_Solver_PP_DrawMat( HNODE nodeidx ) : CHLSL_Solver_PP_Base( nodeidx )
 {
 	m_bPushTarget = false;

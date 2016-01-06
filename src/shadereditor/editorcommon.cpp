@@ -9,6 +9,9 @@
 #include "vgui_controls/controls.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 
 ConVar sedit_draw_datatypes( "shaderEditor_render_datatypes", "1" );
 ConVar sedit_draw_shadows( "shaderEditor_render_shadows", "1" );

@@ -28,6 +28,8 @@
 #include "vsheets.h"
 
 //#include "memtrack.h"
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 bool CNodeView::bRenderingScreenShot = false;
 Vector4D CNodeView::vecScreenshotBounds = Vector4D( 0,0,0,0 );

@@ -4,6 +4,8 @@
 #include "vsmarttooltip.h"
 #include "vsmarttext.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CSmartTooltip::CSmartTooltip( Panel *parent, const char *pElementname ) : BaseClass( parent, pElementname )
 {

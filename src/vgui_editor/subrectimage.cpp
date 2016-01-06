@@ -12,7 +12,6 @@
 // NOTE: This has to be the last file included!
 #include "tier0/memdbgon.h"
 
-
 using namespace vgui;
 
 // Officially the invalid texture ID is zero, but -1 is used in many

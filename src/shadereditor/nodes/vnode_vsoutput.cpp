@@ -3,6 +3,8 @@
 #include "editorcommon.h"
 #include "vsheets.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CNodeVSOutput::CNodeVSOutput( CNodeView *p ) : BaseClass( "VS Output", p )
 {

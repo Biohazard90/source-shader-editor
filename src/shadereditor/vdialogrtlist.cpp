@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CDialog_RendertargetList::CDialog_RendertargetList( Panel *parent ) : CBaseDiag( parent, NULL, "_rt_list" )
 {
 	SetSizeable( false );

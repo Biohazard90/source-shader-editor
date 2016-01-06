@@ -5,6 +5,8 @@
 #endif
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 static CPostProcessingCache gs_ppcache;
 CPostProcessingCache *GetPPCache(){ return &gs_ppcache; };

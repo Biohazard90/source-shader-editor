@@ -27,6 +27,8 @@
 #include "modelrendersystem.h"
 #endif
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 #if SWARM_DLL
 #define Editor_MainViewOrigin MainViewOrigin( 0 )
@@ -35,7 +37,6 @@
 #define Editor_MainViewOrigin MainViewOrigin()
 #define Editor_MainViewForward MainViewForward()
 #endif
-
 
 ShaderEditorHandler __g_ShaderEditorSystem( "ShEditUpdate" );
 ShaderEditorHandler *g_ShaderEditorSystem = &__g_ShaderEditorSystem;
@@ -514,12 +515,11 @@ protected:
 		//if( !r_drawopaquerenderables.GetBool() )
 		//	return;
 
-		// undefined reference to `CViewRender::ShouldDrawEntities()' collect2: ld returned 1 exit status
-		/*if( !m_pMainView->ShouldDrawEntities() )
-		  return;
+		// commented out: undefined reference to `CViewRender::ShouldDrawEntities()'
+		/*
+		if( !m_pMainView->ShouldDrawEntities() )
+			return;
 		*/
-		if( !ShouldDrawEntities() )
-		  return;
 
 		render->SetBlend( 1 );
 

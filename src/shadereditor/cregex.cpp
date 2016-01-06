@@ -10,6 +10,9 @@
 #include "tier0/valve_minmax_on.h"
 #include "cregex.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 static const char *g_szSyntaxList_Keywords[] =
 {
 	"static",

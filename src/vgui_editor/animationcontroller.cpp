@@ -21,11 +21,11 @@
 #include "mathlib/mathlib.h"
 #include "characterset.h"
 
-// memdbgon must be the last include file in a .cpp file!!!
-#include <tier0/dbg.h>
 // for SRC
 #include <vstdlib/random.h>
-#include <tier0/memdbgon.h>
+
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 using namespace vgui;
 

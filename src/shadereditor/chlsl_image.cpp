@@ -2,13 +2,8 @@
 #include "cbase.h"
 #include "editorcommon.h"
 #include "view_shared.h"
-
 #include "vtf/vtf.h"
-//#include "magick++.h"
-//#ifdef SHADER_EDITOR_DLL_2006
 #include "setjmp.h"
-//#endif
-
 #define JPEGLIB_USE_STDIO
 #include "jpeglib/jpeglib.h"
 #undef JPEGLIB_USE_STDIO

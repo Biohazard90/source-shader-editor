@@ -9,6 +9,9 @@
 #include "cregex.h"
 #include <ctype.h>
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 //#define UCHAR_MDOT L'\x00B7'
 //#define UCHAR_ARROW_R L'\x2192'
 //#define UCHAR_AUTO_CR L'\x2514'

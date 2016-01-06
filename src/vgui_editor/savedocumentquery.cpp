@@ -15,9 +15,7 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-
 using namespace vgui;
-
 
 //-----------------------------------------------------------------------------
 // This dialog asks if you want to save your work

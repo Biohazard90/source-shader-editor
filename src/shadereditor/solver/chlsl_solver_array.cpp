@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CHLSL_Solver_Array::CHLSL_Solver_Array( HNODE nodeidx ) : CHLSL_SolverBase( nodeidx )
 {
 	m_iNumComps = 0;

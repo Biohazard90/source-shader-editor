@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 CNodePP_ClearBuffers::CNodePP_ClearBuffers( CNodeView *p ) : BaseClass( "Clear buffers", p )
 {
 	m_bAllInputsRequired = false;

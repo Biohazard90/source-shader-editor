@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 static const char *blendNames[] = {
 	"None",
 	"Blend enabled",
@@ -44,7 +47,7 @@ CDialog_GeneralConfig::CDialog_GeneralConfig( CNodeView *n, Panel *parent ) : Fr
 	m_pCBut_sRGBWrite = new CheckButton( this, "srgbwrite", "write sRGB" );
 
 	m_pCBox_AlphaBlend = new ComboBox( this, "alphablend", numAblendModes, false );
-	
+
 	for ( int i = 0; i < numAblendModes; i++ )
 		m_pCBox_AlphaBlend->AddItem( blendNames[i], NULL );
 

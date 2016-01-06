@@ -9,6 +9,9 @@
 
 #include "ivprocshader.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 #ifndef AllocCheck_Alloc
 #define AllocCheck_Alloc() ((void)NULL)
 #endif

@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "vsheets.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 __customCtrlEntry::__customCtrlEntry()
 {
 	pName = NULL;

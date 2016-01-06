@@ -15,7 +15,6 @@
 // NOTE: This has to be the last file included!
 #include "tier0/memdbgon.h"
 
-
 using namespace vgui;
 
 USING_BUILD_FACTORY( Button );

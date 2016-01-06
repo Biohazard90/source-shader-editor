@@ -2,6 +2,8 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 CNodeEnvC::CNodeEnvC( CNodeView *p, float defaultSmartVal ) : BaseClass( "UNKNOWN ENVC", p )
 {

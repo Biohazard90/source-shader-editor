@@ -11,6 +11,9 @@
 #include "tier1/strtools.h"
 #include "tier1/characterset.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 #if defined( _WIN32 ) || defined( WIN32 )
 #define PATHSEPARATOR(c) ((c) == '\\' || (c) == '/')
 #else	//_WIN32

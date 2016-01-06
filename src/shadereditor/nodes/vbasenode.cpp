@@ -16,6 +16,9 @@
 #include "editorcommon.h"
 #include "vbasenode.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 HNODE CBaseNode::m_iUniqueIndexCount = HNODE(0);
 
 CBaseNode::CBaseNode( const char *opName, CNodeView *p )

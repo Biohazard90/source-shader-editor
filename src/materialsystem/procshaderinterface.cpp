@@ -5,6 +5,9 @@
 
 #include "tier1.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 #define VENGINE_CLIENT_RANDOM_INTERFACE_VERSION	"VEngineRandom001"
 
 static ProcShaderInterface __g_ProcShaderCTRL;

@@ -9,6 +9,8 @@
 #include "skymask_vs20.inc"
 #include "skymask_ps20.inc"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 BEGIN_VS_SHADER( BACKGROUND_PREV, "" )
 	BEGIN_SHADER_PARAMS

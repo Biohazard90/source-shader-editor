@@ -14,7 +14,8 @@
 
 #include "vgui_editor_platform.h"
 
-#include <tier0/memdbgon.h>
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 using namespace vgui;
 

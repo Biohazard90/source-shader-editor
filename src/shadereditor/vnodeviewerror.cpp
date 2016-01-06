@@ -2,6 +2,9 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 static const char *szErrorNames[] = {
 	"YOU ARE USING MULTIPLE TEXTURE NODES WITH THE SAME VMT PARAMETER (%s) BUT DIFFERENT TEXTURE REFERENCES!",
 	"A RENDER VIEW NODE WITH 'DURING SCENE' CHECKED SHOULD BE AT THE VERY BEGINNING OF THE GRAPH!",
