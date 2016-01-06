@@ -1,14 +1,14 @@
 
 #include "cbase.h"
-#include "ShaderEditor/Grass/CGrassCluster.h"
+#include "ShaderEditor/grass/cfrasscluster.h"
 #include "view.h"
 #include "viewrender.h"
 #include "idebugoverlaypanel.h"
-#include "engine/IVDebugOverlay.h"
+#include "engine/ivdebugoverlay.h"
 #include "iclientshadowmgr.h"
 #include "clientleafsystem.h"
-#include "materialsystem/ITexture.h"
-#include "materialsystem/IMaterialVar.h"
+#include "materialsystem/itexture.h"
+#include "materialsystem/imaterialvar.h"
 #include "collisionutils.h"
 #include "fasttimer.h"
 
@@ -195,9 +195,6 @@ CON_COMMAND( grasscluster_preset_meadow_ultra, "" )
 	//gcluster_sprite_index.SetValue( 2 );
 	CGrassClusterManager::GetInstance()->ClearClusterData();
 }
-
-#ifdef SHADEREDITOR_FORCE_ENABLED
-#endif
 
 Vector FetchLightSamples( Vector pos )
 {
@@ -1273,12 +1270,12 @@ void CGrassClusterManager::BuildSingleGrassObject( CMeshBuilder &builder, _grass
 
 	const bool bSmall = !RandomInt( 0, gcluster_grass_type_small_oddness.GetInt() );
 	const bool bHuge = !RandomInt( 0, gcluster_grass_type_huge_oddness.GetInt() );
-	const float flSize_up = bHuge ?		RandomFloat( gcluster_grass_height_huge_min.GetFloat(), gcluster_grass_height_huge_max.GetFloat() )	:	
-		bSmall ?	RandomFloat( gcluster_grass_height_small_min.GetFloat(), gcluster_grass_height_small_max.GetFloat() ) : 
+	const float flSize_up = bHuge ?		RandomFloat( gcluster_grass_height_huge_min.GetFloat(), gcluster_grass_height_huge_max.GetFloat() )	:
+		bSmall ?	RandomFloat( gcluster_grass_height_small_min.GetFloat(), gcluster_grass_height_small_max.GetFloat() ) :
 		RandomFloat( gcluster_grass_height_med_min.GetFloat(), gcluster_grass_height_med_max.GetFloat() );
 
-	const float flSize_side = bHuge ?		RandomFloat( gcluster_grass_width_huge_min.GetFloat(), gcluster_grass_width_huge_max.GetFloat() )	:	
-		bSmall ?	RandomFloat( gcluster_grass_width_small_min.GetFloat(), gcluster_grass_width_small_max.GetFloat() ) : 
+	const float flSize_side = bHuge ?		RandomFloat( gcluster_grass_width_huge_min.GetFloat(), gcluster_grass_width_huge_max.GetFloat() )	:
+		bSmall ?	RandomFloat( gcluster_grass_width_small_min.GetFloat(), gcluster_grass_width_small_max.GetFloat() ) :
 		RandomFloat( gcluster_grass_width_med_min.GetFloat(), gcluster_grass_width_med_max.GetFloat() );
 
 	if ( pMorphInfo != NULL )
@@ -1384,7 +1381,7 @@ void CGrassClusterManager::BuildSingleGrassObject( CMeshBuilder &builder, _grass
 		//uvs[1].Init( 0, 0 );
 		//uvs[2].Init( 1, 0 );
 		//uvs[3].Init( 1, 1 );
-		
+
 		for ( int t = 0; t < 4; t++ )
 		{
 			builder.Position3fv( planePos[t].Base() );

@@ -38,6 +38,7 @@
 #define Editor_MainViewForward MainViewForward()
 #endif
 
+
 ShaderEditorHandler __g_ShaderEditorSystem( "ShEditUpdate" );
 ShaderEditorHandler *g_ShaderEditorSystem = &__g_ShaderEditorSystem;
 
@@ -515,11 +516,12 @@ protected:
 		//if( !r_drawopaquerenderables.GetBool() )
 		//	return;
 
-		// commented out: undefined reference to `CViewRender::ShouldDrawEntities()'
-		/*
-		if( !m_pMainView->ShouldDrawEntities() )
-			return;
+		// undefined reference to `CViewRender::ShouldDrawEntities()' collect2: ld returned 1 exit status
+		/*if( !m_pMainView->ShouldDrawEntities() )
+		  return;
 		*/
+		if( !ShouldDrawEntities() )
+		  return;
 
 		render->SetBlend( 1 );
 
