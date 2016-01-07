@@ -6,6 +6,7 @@
 //		-	exposes client callbacks to shaders
 //
 // ******************************************************
+
 #include "cbase.h"
 #include "client_factorylist.h"
 #include "shadereditor/ivshadereditor.h"
@@ -83,13 +84,13 @@ bool ShaderEditorHandler::Init()
 
 	char modulePath[MAX_PATH*4];
 #ifdef SWARM_DLL
-	Q_snprintf( modulePath, sizeof( modulePath ), "%s/bin/shadereditor_swarm.dll\n", engine->GetGameDirectory() );
+	Q_snprintf( modulePath, sizeof( modulePath ), "%s/bin/shadereditor_swarm.dll", engine->GetGameDirectory() );
 #elif SOURCE_2006
-	Q_snprintf( modulePath, sizeof( modulePath ), "%s/bin/shadereditor_2006.dll\n", engine->GetGameDirectory() );
+	Q_snprintf( modulePath, sizeof( modulePath ), "%s/bin/shadereditor_2006.dll", engine->GetGameDirectory() );
 #elif SOURCE_2013
-	Q_snprintf( modulePath, sizeof( modulePath ), "%s/bin/shadereditor_2013.dll\n", engine->GetGameDirectory() );
+	Q_snprintf( modulePath, sizeof( modulePath ), "%s/bin/shadereditor_2013.dll", engine->GetGameDirectory() );
 #else
-	Q_snprintf( modulePath, sizeof( modulePath ), "%s/bin/shadereditor_2007.dll\n", engine->GetGameDirectory() );
+	Q_snprintf( modulePath, sizeof( modulePath ), "%s/bin/shadereditor_2007.dll", engine->GetGameDirectory() );
 #endif
 	shaderEditorModule = Sys_LoadModule( modulePath );
 	if ( shaderEditorModule )
@@ -348,11 +349,6 @@ protected:
 		return true;
 	};
 
-	virtual bool ShouldDrawEntities()
-	{
-		return true;
-	};
-
 	virtual bool ShouldDrawRopes()
 	{
 		return true;
@@ -513,14 +509,7 @@ protected:
 
 	void DrawOpaqueRenderables_Custom( bool bShadowDepth )
 	{
-		//if( !r_drawopaquerenderables.GetBool() )
-		//	return;
-
-		// undefined reference to `CViewRender::ShouldDrawEntities()' collect2: ld returned 1 exit status
-		/*if( !m_pMainView->ShouldDrawEntities() )
-		  return;
-		*/
-		if( !ShouldDrawEntities() )
+		if( !m_pMainView->ShouldDrawEntities() )
 		  return;
 
 		render->SetBlend( 1 );
@@ -1016,7 +1005,6 @@ public:
 		bool bClearObeyStencil;
 		bool bFogOverride;
 		bool bFogEnabled;
-		bool bDrawEntities;
 
 		int iClearColorR;
 		int iClearColorG;
@@ -1250,12 +1238,6 @@ public:
 		return settings.bDrawParticles;
 	};
 
-
-	virtual bool ShouldDrawEntities()
-	{
-		return settings.bDrawEntities;
-	};
-
 	virtual bool ShouldDrawRopes()
 	{
 		return settings.bDrawRopes;
@@ -1411,7 +1393,6 @@ pFnVrCallback_Declare( VrCallback_General )
 	settings.bClearObeyStencil = pbOptions[14];
 	settings.bFogOverride = pbOptions[15];
 	settings.bFogEnabled = pbOptions[16];
-	settings.bDrawEntities = pbOptions[17];
 
 	settings.iClearColorR = piOptions[0];
 	settings.iClearColorG = piOptions[1];
