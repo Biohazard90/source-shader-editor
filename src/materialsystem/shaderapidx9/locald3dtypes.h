@@ -1,6 +1,6 @@
-//===== Copyright Valve Corporation, All rights reserved. ======//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
-// Purpose:
+// Purpose: 
 //
 // $NoKeywords: $
 //===========================================================================//
@@ -28,7 +28,7 @@ class CDx10Types
 {
 public:
 	typedef struct IDirect3D10BaseTexture	IDirect3DTexture;
-	// FIXME: What is this called now ?
+	// FIXME: What is this called now ? 
 	// typedef ID3D10TextureCube			IDirect3DCubeTexture;
 	typedef ID3D10Texture3D					IDirect3DVolumeTexture;
 	typedef ID3D10Device					IDirect3DDevice;
@@ -114,7 +114,7 @@ typedef void *HardwareShader_t;
 // The vertex and pixel shader type
 //-----------------------------------------------------------------------------
 typedef int VertexShader_t;
-typedef int PixelShader_t;
+typedef int PixelShader_t;	
 
 //-----------------------------------------------------------------------------
 // Bitpattern for an invalid shader
@@ -153,7 +153,7 @@ typedef int PixelShader_t;
 #define D3DRS_NORMALIZENORMALS					D3DRS_NOTSUPPORTED
 #define D3DRS_SPECULARMATERIALSOURCE			D3DRS_NOTSUPPORTED
 #define D3DRS_AMBIENTMATERIALSOURCE				D3DRS_NOTSUPPORTED
-#define D3DRS_EMISSIVEMATERIALSOURCE			D3DRS_NOTSUPPORTED
+#define D3DRS_EMISSIVEMATERIALSOURCE			D3DRS_NOTSUPPORTED	
 #define D3DRS_VERTEXBLEND						D3DRS_NOTSUPPORTED
 #define D3DRS_POINTSCALEENABLE					D3DRS_NOTSUPPORTED
 #define D3DRS_POINTSCALE_A						D3DRS_NOTSUPPORTED

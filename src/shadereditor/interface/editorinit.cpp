@@ -1,6 +1,21 @@
 
+#include <stdio.h>
+
+#ifdef _WIN32
+#include <windows.h>
+#include <tlhelp32.h>
+#include <tchar.h>
+#include <direct.h>
+#endif
+
 #include "cbase.h"
 #include "vgui/ISystem.h"
+
+#include "editorinit.h"
+#include "editorcommon.h"
+
+#include "view_shared.h"
+#include "materialsystem/imesh.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -18,21 +33,6 @@ float GetEditorTime()
 {
 	return g_pVGuiSystem->GetCurrentTime();
 }
-
-#include "editorinit.h"
-#include "editorcommon.h"
-
-#include <stdio.h>
-
-#ifdef _WIN32
-#include <windows.h>
-#include <tlhelp32.h>
-#include <tchar.h>
-#include <direct.h>
-#endif
-
-#include "view_shared.h"
-#include "materialsystem/imesh.h"
 
 void ForceTerminateCompilers()
 {

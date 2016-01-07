@@ -2,6 +2,8 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+#include "ivprocshader.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
@@ -46,8 +48,6 @@ CAutoSolverCallback *CAutoSolverCallback::GetSolverClientByIdx( HAUTOSOLVER idx 
 	}
 	return NULL;
 }
-
-#include "ivprocshader.h"
 
 void CAutoSolverCallback::Update3DPrevMaterial( GenericShaderData *data, const int index )
 {
