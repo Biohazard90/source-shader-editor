@@ -63,7 +63,33 @@ respectively.
 For the 2013 SDK, the game shader library is called game_shader_dx6.dll, because
 Valve recently broke shader dll loading through the wildcard game_shader_generic*.dll.
 
-NOTES Linux:
+Linux:
 --------------
 
-You need to compile the Shaders on Windows with shader model 2.0. To get them working rename "ps20b.vcs" and "vs20.vcs" to "ps30.vcs" and "vs30.vcs".
+You need to compile the Shaders on Windows with shader model 2.0!
+
+remove in client/viewrender.cpp:
+```
+//-----------------------------------------------------------------------------
+// Purpose:
+// Output : Returns true on success, false on failure.
+//-----------------------------------------------------------------------------
+inline bool CViewRender::ShouldDrawEntities( void )
+{
+	return ( !m_pDrawEntities || (m_pDrawEntities->GetInt() != 0) );
+}
+```
+replace in client/viewrender.h:
+```
+bool	ShouldDrawEntities( void );
+```
+with:
+```
+// Output : Returns true on success, false on failure.
+	bool ShouldDrawEntities( void )
+	{
+		return ( !m_pDrawEntities || (m_pDrawEntities->GetInt() != 0) );
+	}
+```
+
+Add to your client_*.vpc $PreprocessorDefinitions: ;SOURCE_2013
