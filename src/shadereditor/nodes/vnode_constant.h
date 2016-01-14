@@ -1,5 +1,8 @@
-#ifndef CNODE_CONSTANT_H
-#define CNODE_CONSTANT_H
+#ifndef VNODE_CONSTANT_H
+#define VNODE_CONSTANT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -28,7 +31,6 @@ private:
 	void UpdateNode();
 };
 
-
 class CNodeRandom : public CBaseNode
 {
 	DECLARE_CLASS( CNodeRandom, CBaseNode );
@@ -51,7 +53,6 @@ private:
 	void UpdateNode();
 };
 
-
 class CNodeBumpBasis : public CBaseNode
 {
 	DECLARE_CLASS( CNodeBumpBasis, CBaseNode );
@@ -66,6 +67,5 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 #endif

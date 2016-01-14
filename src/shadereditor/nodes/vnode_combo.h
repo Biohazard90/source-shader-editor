@@ -1,5 +1,8 @@
-#ifndef CNODE_COMBO_H
-#define CNODE_COMBO_H
+#ifndef VNODE_COMBO_H
+#define VNODE_COMBO_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasecontainer.h"
 
@@ -29,6 +32,5 @@ private:
 	bool m_bStatic;
 	char *m_szComboName;
 };
-
 
 #endif

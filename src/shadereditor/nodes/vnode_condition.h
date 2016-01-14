@@ -1,5 +1,8 @@
-#ifndef CNODE_CONDITION_H
-#define CNODE_CONDITION_H
+#ifndef VNODE_CONDITION_H
+#define VNODE_CONDITION_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasecontainer.h"
 
@@ -28,6 +31,5 @@ private:
 
 	int m_iCondition;
 };
-
 
 #endif

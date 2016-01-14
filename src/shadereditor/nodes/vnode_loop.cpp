@@ -39,6 +39,7 @@ void CNodeLoop::Solve_ContainerEntered()
 	solver_iterator->AddTargetVar( varIterator );
 	AddSolver( solver_iterator );
 }
+
 void CNodeLoop::Solve_ContainerLeft()
 {
 	CHLSL_Solver_LoopOutro *solver_outro = new CHLSL_Solver_LoopOutro( GetUniqueIndex() );
@@ -55,6 +56,7 @@ KeyValues *CNodeLoop::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodeLoop::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	BaseClass::RestoreFromKeyValues_Specific( pKV );

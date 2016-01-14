@@ -48,6 +48,7 @@ KeyValues *CNodeCombo::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodeCombo::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	BaseClass::RestoreFromKeyValues_Specific( pKV );
@@ -66,6 +67,7 @@ void CNodeCombo::RestoreFromKeyValues_Specific( KeyValues *pKV )
 
 	pNodeView->MakeSolversDirty();
 }
+
 bool CNodeCombo::VguiDraw( bool bShadow )
 {
 	if ( !BaseClass::VguiDraw( bShadow ) )

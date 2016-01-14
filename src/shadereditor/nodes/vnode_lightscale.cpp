@@ -26,13 +26,13 @@ void CNodeLightscale::UpdateNode()
 	GetJack_Out( 0 )->SetName( GetLightscaleGameString( m_iLightScale ) );
 }
 
-
 KeyValues *CNodeLightscale::AllocateKeyValues( int NodeIndex )
 {
 	KeyValues *pKV = BaseClass::AllocateKeyValues( NodeIndex );
 	pKV->SetInt( "i_lscale_type", m_iLightScale );
 	return pKV;
 }
+
 void CNodeLightscale::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_iLightScale = pKV->GetInt( "i_lscale_type", m_iLightScale );

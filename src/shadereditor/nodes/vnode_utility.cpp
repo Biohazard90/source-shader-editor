@@ -17,13 +17,16 @@ CNodeUtility_Declare::CNodeUtility_Declare( CNodeView *p ) : BaseClass( "Declare
 	SetJackFlags_Input( 0, HLSLJACKFLAGS_ALL );
 	SetJackFlags_Output( 0, HLSLJACKFLAGS_ALL );
 }
+
 CNodeUtility_Declare::~CNodeUtility_Declare()
 {
 }
+
 int CNodeUtility_Declare::UpdateInputsValid()
 {
 	return BaseClass::UpdateInputsValid();
 }
+
 void CNodeUtility_Declare::UpdateOutputs()
 {
 	if ( !GetNumJacks_Out() || !GetNumJacks_In() )
@@ -34,6 +37,7 @@ void CNodeUtility_Declare::UpdateOutputs()
 
 	GetJack_Out( 0 )->SetSmartType( GetJack_In(0)->GetSmartType() );
 }
+
 bool CNodeUtility_Declare::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < 1 )
@@ -56,8 +60,6 @@ bool CNodeUtility_Declare::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
 CNodeUtility_Assign::CNodeUtility_Assign( CNodeView *p ) : BaseClass( "Assign", p )
 {
 	m_flMinSizeX = NODEDEFSIZE_SMALL;
@@ -71,9 +73,11 @@ CNodeUtility_Assign::CNodeUtility_Assign( CNodeView *p ) : BaseClass( "Assign", 
 	SetJackFlags_Input( 1, HLSLJACKFLAGS_ALL );
 	SetJackFlags_Output( 0, HLSLJACKFLAGS_ALL );
 }
+
 CNodeUtility_Assign::~CNodeUtility_Assign()
 {
 }
+
 int CNodeUtility_Assign::UpdateInputsValid()
 {
 	int vartype_jack_0 = GetJack_In( 0 )->GetSmartType();
@@ -88,6 +92,7 @@ int CNodeUtility_Assign::UpdateInputsValid()
 
 	return max( autoTest, BaseClass::UpdateInputsValid() );
 }
+
 void CNodeUtility_Assign::UpdateOutputs()
 {
 	if ( !GetNumJacks_Out() || !GetNumJacks_In() )
@@ -98,6 +103,7 @@ void CNodeUtility_Assign::UpdateOutputs()
 
 	GetJack_Out( 0 )->SetSmartType( GetJack_In(0)->GetSmartType() );
 }
+
 bool CNodeUtility_Assign::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < 2 )
@@ -112,7 +118,6 @@ bool CNodeUtility_Assign::CreateSolvers(GenericShaderData *ShaderData)
 		OnShowSolverErrored();
 		return false;
 	}
-
 
 	const int res = pJ_Out->GetResourceType();
 

@@ -1,5 +1,8 @@
-#ifndef CNODE_SWIZZLE_H
-#define CNODE_SWIZZLE_H
+#ifndef VNODE_SWIZZLE_H
+#define VNODE_SWIZZLE_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -35,6 +38,5 @@ private:
 
 	void UpdateNode();
 };
-
 
 #endif

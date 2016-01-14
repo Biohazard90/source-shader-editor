@@ -1,5 +1,8 @@
-#ifndef CNODEARRAY_H
-#define CNODEARRAY_H
+#ifndef VNODE_ARRAY_H
+#define VNODE_ARRAY_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -32,6 +35,5 @@ private:
 
 	Vector4D *m_vecValues;
 };
-
 
 #endif

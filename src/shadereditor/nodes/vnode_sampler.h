@@ -1,5 +1,8 @@
-#ifndef CNODE_SAMPLEROBJECT_H
-#define CNODE_SAMPLEROBJECT_H
+#ifndef VNODE_SAMPLER_H
+#define VNODE_SAMPLER_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -33,6 +36,5 @@ private:
 	int iTexType;
 	int iFallbackType;
 };
-
 
 #endif

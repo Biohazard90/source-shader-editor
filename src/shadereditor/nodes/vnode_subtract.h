@@ -1,5 +1,8 @@
-#ifndef CNODE_SUBTRACT_H
-#define CNODE_SUBTRACT_H
+#ifndef VNODE_SUBTRACT_H
+#define VNODE_SUBTRACT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -22,8 +25,6 @@ private:
 
 };
 
-
-
 class CNodeInvert : public CBaseNode
 {
 	DECLARE_CLASS( CNodeInvert, CBaseNode );
@@ -42,6 +43,5 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 #endif

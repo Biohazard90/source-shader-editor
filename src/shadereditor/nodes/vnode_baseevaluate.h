@@ -1,5 +1,8 @@
-#ifndef CNODE_NORMALIZE_H
-#define CNODE_NORMALIZE_H
+#ifndef VNODE_BASEEVALUATE_H
+#define VNODE_BASEEVALUATE_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -33,6 +36,7 @@ public:\
 protected:\
 	virtual CHLSL_SolverBase *AllocRangeSolver(){ return new solverclassName( GetUniqueIndex() ); };\
 }
+
 #define CREATE_EVALUATE_NODE_FAST( name, nodeType, lockType ) CREATE_EVALUATE_NODE( CNode##name, name, nodeType, CHLSL_Solver_##name, lockType, 1, false, -1 )
 #define CREATE_EVALUATE_NODE_FAST_SETIN( name, nodeType, lockType, numIn ) CREATE_EVALUATE_NODE( CNode##name, name, nodeType, CHLSL_Solver_##name, lockType, numIn, false, -1 )
 

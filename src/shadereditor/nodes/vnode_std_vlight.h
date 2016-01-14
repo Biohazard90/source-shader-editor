@@ -1,5 +1,8 @@
-#ifndef CNODE_STD_VLIGHT_H
-#define CNODE_STD_VLIGHT_H
+#ifndef VNODE_STD_VLIGHT_H
+#define VNODE_STD_VLIGHT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -29,6 +32,5 @@ private:
 	bool m_bStaticLighting;
 	bool m_bHalfLambert;
 };
-
 
 #endif

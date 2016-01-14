@@ -1,5 +1,8 @@
 #ifndef EDITORINIT_H
 #define EDITORINIT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 class ShaderEditorInterface;
 

@@ -1,5 +1,5 @@
-#ifndef CNODE_PP_MAT_H
-#define CNODE_PP_MAT_H
+#ifndef VNODE_PP_MAT_H
+#define VNODE_PP_MAT_H
 
 #include <editorcommon.h>
 

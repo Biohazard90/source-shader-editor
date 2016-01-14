@@ -64,6 +64,7 @@ void CNodeVSOutput::Setup( SETUP_HLSL_VS_Output_PS_Input info )
 
 	RestoreBridgesFromList_In( m_hRestoreBridges );
 }
+
 void CNodeVSOutput::LoadNames()
 {
 	int numInputs = 0;
@@ -97,6 +98,7 @@ void CNodeVSOutput::LoadNames()
 		curInput++;
 	}
 }
+
 KeyValues *CNodeVSOutput::AllocateKeyValues( int NodeIndex )
 {
 	KeyValues *pKV = BaseClass::AllocateKeyValues( NodeIndex );
@@ -115,6 +117,7 @@ KeyValues *CNodeVSOutput::AllocateKeyValues( int NodeIndex )
 	}
 	return pKV;
 }
+
 void CNodeVSOutput::RestoreFromKeyValues( KeyValues *pKV )
 {
 	BaseClass::RestoreFromKeyValues( pKV );
@@ -123,6 +126,7 @@ void CNodeVSOutput::RestoreFromKeyValues( KeyValues *pKV )
 	if ( pPartner )
 		pPartner->RestoreFromKeyValues_Specific( pKV );
 }
+
 void CNodeVSOutput::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	SETUP_HLSL_VS_Output_PS_Input info;

@@ -35,10 +35,13 @@ public:
 void UpdateConstantByIdentifier( CBaseVSShader *pShader, IShaderDynamicAPI* pShaderAPI, IMaterialVar **params, SimpleEnvConstant *pConst, CProceduralContext *pContext,
 							bool bPS, int iFirstMutable, int iFirstStatic )
 {
-	float data[4][4] = { 0, 0, 0, 0,
-						0, 0, 0, 0,
-						0, 0, 0, 0,
-						0, 0, 0, 0 };
+	float data[4][4] = {
+		0, 0, 0, 0,
+		0, 0, 0, 0,
+		0, 0, 0, 0,
+		0, 0, 0, 0
+	};
+
 	int _register = RemapEnvironmentConstant( bPS, pConst->iHLSLRegister );
 
 	switch ( pConst->iEnvC_ID )
@@ -89,17 +92,6 @@ void UpdateConstantByIdentifier( CBaseVSShader *pShader, IShaderDynamicAPI* pSha
 		pShader->PI_SetPixelShaderLocalLighting( SSEREG_LIGHT_INFO_ARRAY );
 #endif
 		return;
-/*
-#ifndef SHADER_EDITOR_DLL_2006
-	case HLSLENV_STUDIO_MORPHING:
-		{
-			pShader->SetHWMorphVertexShaderState_NoTex( VERTEX_SHADER_SHADER_SPECIFIC_CONST_10, VERTEX_SHADER_SHADER_SPECIFIC_CONST_11 );
-			bool bUnusedTexCoords[3] = { false, false, !pShaderAPI->IsHWMorphingEnabled() };
-			pShaderAPI->MarkUnusedVertexFields( 0, 3, bUnusedTexCoords );
-		}
-		return;
-#endif
-*/
 	case HLSLENV_FLASHLIGHT_VPMATRIX:
 		{
 			VMatrix worldToTexture;
@@ -123,14 +115,12 @@ void UpdateConstantByIdentifier( CBaseVSShader *pShader, IShaderDynamicAPI* pSha
 			pShader->HashShadow2DJitter( flashlightState.m_flShadowJitterSeed, &tweaks[2], &tweaks[3] );
 			pShaderAPI->SetPixelShaderConstant( SSEREG_LIGHT_INFO_ARRAY+1, tweaks, 1 ); // c07
 #endif
-
 			float vScreenScale[4] = {1280.0f / 32.0f, 768.0f / 32.0f, 0, 0};
 			int nWidth, nHeight;
 			pShaderAPI->GetBackBufferDimensions( nWidth, nHeight );
 			vScreenScale[0] = (float) nWidth  / 32.0f;
 			vScreenScale[1] = (float) nHeight / 32.0f;
 			pShaderAPI->SetPixelShaderConstant( SSEREG_LIGHT_INFO_ARRAY + 5, vScreenScale, 1 ); // c11
-
 #ifdef SHADER_EDITOR_DLL_2006
 			SetFlashLightColorFromState( flashlightState, pShaderAPI, SSEREG_LIGHT_INFO_ARRAY + 4 ); // c10
 #else
@@ -261,7 +251,6 @@ int CalcShaderIndex( CBaseVSShader *pShader, IShaderShadow* pShaderShadow, IShad
 	if ( pShaderAPI && !pShader->UsingFlashlight( params ) )
 		pShaderAPI->GetDX9LightState( &lState );
 #endif
-
 	int localIndex = 0;
 	int curMultiplier = bStatic ? numDynamic : 1;
 
@@ -360,11 +349,6 @@ int CalcShaderIndex( CBaseVSShader *pShader, IShaderShadow* pShaderShadow, IShad
 
 	return localIndex;
 }
-//#include "vertexlitgeneric_dx9_helper.h"
-//extern void DrawHack(CBaseVSShader *pShader, IMaterialVar** params,
-//											   IShaderDynamicAPI *pShaderAPI,
-//											   IShaderShadow* pShaderShadow,
-//											    VertexLitGeneric_DX9_Vars_t &info);
 
 void DrawFallback( CBaseVSShader *pShader, IMaterialVar** params, IShaderShadow* pShaderShadow, IShaderDynamicAPI* pShaderAPI, VertexCompressionType_t vertexCompression )
 {
@@ -519,20 +503,24 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 	//{
 	//	return IS_FLAG_SET( MATERIAL_VAR_TRANSLUCENT );
 	//}
+
 	bool IsCustomShader( IMaterialVar **params )
 	{
 		return params[ISCUSTOMSHADERREADY]->IsDefined() && params[ISCUSTOMSHADERREADY]->GetIntValue() > 0;
 	}
+
 	bool IsInlineMaterial( IMaterialVar **params )
 	{
 		return params[PPEINLINE_PARAM_KEY]->IsDefined() && params[PPEINLINE_PARAM_KEY]->GetIntValue() > 0;
 	}
+
 	BasicShaderCfg_t *GetCustomShaderData( IMaterialVar **params )
 	{
 		if ( !params[ISCUSTOMSHADERREADY] )
 			return NULL;
 		return gProcShaderCTRL->GetPreloadShader_Internal( params[CUSTOMSHADERINDEX]->GetIntValue() );
 	}
+
 	int GetParamIdxFromMode( int texmode )
 	{
 		switch ( texmode )
@@ -819,7 +807,9 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 			params[CUSTOMSHADERINDEX]->SetIntValue( idx );
 		}
 		else
+		{
 			cfg = gProcShaderCTRL->AccessVolatileData();
+		}
 
 		if ( !cfg ) // fallback mode
 		{
@@ -1170,8 +1160,28 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 			pShaderShadow->SetVertexShader( tmp_vs, index_vs_static );
 			pShaderShadow->SetPixelShader( tmp_ps, index_ps_static );
 #else
+#ifdef _WIN32
 			pShaderShadow->SetVertexShader( cfg->ProcVSName, index_vs_static );
 			pShaderShadow->SetPixelShader( cfg->ProcPSName, index_ps_static );
+#else // POSIX
+			char tmp_vs[MAX_PATH*4];
+			char tmp_ps[MAX_PATH*4];
+			V_strncpy(tmp_vs, cfg->ProcVSName, sizeof( tmp_vs ) );
+			V_strncpy(tmp_ps, cfg->ProcPSName, sizeof( tmp_ps ) );
+			//Msg( "VertexShader name: %s.\n", tmp_vs );
+			//Msg( "PixelShader name: %s.\n", tmp_ps );
+			char * tmp_p_vs;
+			char * tmp_p_ps;
+			tmp_p_vs = V_strstr( tmp_vs, "_vs30" );
+			tmp_p_ps = V_strstr( tmp_ps, "_ps30" );
+			V_strncpy( tmp_p_vs, "_vs20", 7 );
+			V_strncpy( tmp_p_ps, "_ps20b", 7 );
+			//Msg( "PS 2.0 VertexShader name: %s.\n", tmp_vs );
+			//Msg( "PS 2.0 PixelShader name: %s.\n", tmp_ps );
+			// load ps2.0 shaders
+			pShaderShadow->SetVertexShader( tmp_vs, index_vs_static );
+			pShaderShadow->SetPixelShader( tmp_ps, index_ps_static );
+#endif // POSIX
 #endif
 		}
 

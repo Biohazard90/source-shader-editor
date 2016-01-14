@@ -1,5 +1,8 @@
-#ifndef CNODEPSOUTPUT_H
-#define CNODEPSOUTPUT_H
+#ifndef VNODE_PSOUTPUT_H
+#define VNODE_PSOUTPUT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include <editorcommon.h>
 
@@ -34,6 +37,5 @@ private:
 
 	SETUP_HLSL_PS_Output curSetup;
 };
-
 
 #endif

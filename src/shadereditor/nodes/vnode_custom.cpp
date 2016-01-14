@@ -188,6 +188,7 @@ void CNodeCustom::FillJackDataFromKV( KeyValues *pKV, CUtlVector< __funcParamSet
 		itr++;
 	}
 }
+
 __funcParamSetup *CNodeCustom::AllocOutputSetup( bool bOutput, const char *name, int type )
 {
 	__funcParamSetup *p = new __funcParamSetup();
@@ -213,11 +214,9 @@ void CNodeCustom::UpdateNode()
 	GenerateJacks_Input( m_hszVarNames_In.Count() );
 	//GenerateJacks_Input( numJacksIn );
 
-
 	CUtlVector< BridgeRestoreInfo* >m_hRestoreBridges_Out;
 	CreateBridgeRestoreData_Out( CBaseNode::BY_INDEX, m_hRestoreBridges_Out );
 	GenerateJacks_Output( m_hszVarNames_Out.Count() );
-
 
 	for ( int i = 0; i < GetNumJacks_In(); i++ )
 	{
@@ -247,7 +246,6 @@ void CNodeCustom::UpdateNode()
 
 	RestoreBridgesFromList_In( m_hRestoreBridges_In );
 	RestoreBridgesFromList_Out( m_hRestoreBridges_Out );
-
 
 	OnUpdateHierachy( NULL, NULL );
 }

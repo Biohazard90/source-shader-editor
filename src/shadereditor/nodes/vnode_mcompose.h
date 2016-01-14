@@ -1,5 +1,8 @@
-#ifndef CNODE_MCOMPOSE_H
-#define CNODE_MCOMPOSE_H
+#ifndef VNODE_MCOMPOSE_H
+#define VNODE_MCOMPOSE_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -26,6 +29,5 @@ private:
 	int iTargetMatrix;
 	bool bColumns;
 };
-
 
 #endif

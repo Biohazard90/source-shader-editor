@@ -85,23 +85,28 @@ CBaseNode::~CBaseNode()
 	if ( pNodeView )
 		pNodeView->OnHierachyChanged();
 }
+
 void CBaseNode::SetName( const char *opName )
 {
 	Q_snprintf( szOpName, sizeof( szOpName ), "%s", opName );
 	UpdateSize();
 }
+
 const char *CBaseNode::GetName()
 {
 	return szOpName;
 }
+
 const char *CBaseNode::GetUserName()
 {
 	return szNodeName;
 }
+
 const int CBaseNode::GetAllowedFlowgraphTypes()
 {
 	return CNodeView::FLOWGRAPH_HLSL | CNodeView::FLOWGRAPH_HLSL_TEMPLATE;
 }
+
 int CBaseNode::GetFinalTextSize()
 {
 	int i = 0;
@@ -149,6 +154,7 @@ void CBaseNode::AddSolver( CHLSL_SolverBase *solver )
 #endif
 	m_hLocalSolvers.AddToTail( solver );
 }
+
 void CBaseNode::RemoveSolvers( bool bDelete )
 {
 	if ( bDelete )
@@ -156,10 +162,12 @@ void CBaseNode::RemoveSolvers( bool bDelete )
 	else
 		m_hLocalSolvers.Purge();
 }
+
 const int CBaseNode::GetNumSolvers()
 {
 	return m_hLocalSolvers.Count();
 }
+
 bool CBaseNode::HasDummySolvers()
 {
 	for ( int i = 0; i < m_hLocalSolvers.Count(); i++ )
@@ -167,10 +175,12 @@ bool CBaseNode::HasDummySolvers()
 			return true;
 	return false;
 }
+
 const CUtlVector< CHLSL_SolverBase* > *CBaseNode::GetSolvers()
 {
 	return &m_hLocalSolvers;
 }
+
 CHLSL_SolverBase *CBaseNode::GetSolver( int idx )
 {
 #if SHOW_SEDIT_ERRORS
@@ -178,6 +188,7 @@ CHLSL_SolverBase *CBaseNode::GetSolver( int idx )
 #endif
 	return m_hLocalSolvers[ idx ];
 }
+
 bool CBaseNode::InvokeCreateSolvers( GenericShaderData *ShaderData )
 {
 	Assert( ShaderData || !( GetAllowedFlowgraphTypes() & CNodeView::FLOWGRAPH_HLSL ) );
@@ -206,6 +217,7 @@ bool CBaseNode::InvokeCreateSolvers( GenericShaderData *ShaderData )
 
 	return bSuccess;
 }
+
 bool CBaseNode::CreateSolvers( GenericShaderData *ShaderData )
 {
 #if SHOW_SEDIT_ERRORS
@@ -213,12 +225,14 @@ bool CBaseNode::CreateSolvers( GenericShaderData *ShaderData )
 #endif
 	return false;
 }
+
 void CBaseNode::SmartCreateDummySolver()
 {
 	if ( GetNumSolvers() )
 		return;
 	AddSolver( new CHLSL_Solver_Dummy( GetUniqueIndex() ) );
 }
+
 void CBaseNode::SweepJackHlslCache()
 {
 	for ( int i = 0; i < GetNumJacks_In(); i++ )
@@ -237,12 +251,14 @@ bool CBaseNode::InsertToContainer( CBaseContainerNode *container )
 	m_hParentContainers.AddToTail( container );
 	return true;
 }
+
 bool CBaseNode::HasContainerParent( CBaseContainerNode *container )
 {
 	if ( !container )
 		return false;
 	return m_hParentContainers.HasElement( container );
 }
+
 bool CBaseNode::RemoveFromContainer( CBaseContainerNode *container )
 {
 	int idx = m_hParentContainers.Find( container );
@@ -252,19 +268,23 @@ bool CBaseNode::RemoveFromContainer( CBaseContainerNode *container )
 	Assert( !HasContainerParent( container ) );
 	return true;
 }
+
 int CBaseNode::GetNumContainers()
 {
 	return m_hParentContainers.Count();
 }
+
 CBaseContainerNode *CBaseNode::GetContainer( int idx )
 {
 	Assert( m_hParentContainers.IsValidIndex( idx ) );
 	return m_hParentContainers[ idx ];
 }
+
 Vector2D CBaseNode::GetContainerSensitiveCenter()
 {
 	return GetPosition() + Vector2D( 45, - 30 );
 }
+
 void CBaseNode::ListContainersChronologically_Internal( CUtlVector< CBaseNode* > &m_hNodesProcessed,
 												CUtlVector< CBaseContainerNode* > &hList )
 {
@@ -289,6 +309,7 @@ void CBaseNode::ListContainersChronologically_Internal( CUtlVector< CBaseNode* >
 		}
 	}
 }
+
 int ContainerSort( CBaseContainerNode *const *c1, CBaseContainerNode *const *c2 )
 {
 	if ( (*c1)->HasContainerParent( (*c2) ) )
@@ -297,6 +318,7 @@ int ContainerSort( CBaseContainerNode *const *c1, CBaseContainerNode *const *c2 
 		return -1;
 	return 0;
 }
+
 void CBaseNode::ListContainersChronologically( CUtlVector< CBaseContainerNode* > &hList )
 {
 	CUtlVector< CBaseNode* > hNodes;
@@ -305,6 +327,7 @@ void CBaseNode::ListContainersChronologically( CUtlVector< CBaseContainerNode* >
 
 	hList.Sort( ContainerSort );
 }
+
 bool CBaseNode::RecursiveTestContainerError_Internal( CUtlVector< CBaseNode* > &m_hNodesProcessed,
 										bool &bLeftContainerOnce, const bool &bHierachyUp, CBaseContainerNode *container )
 {
@@ -343,6 +366,7 @@ bool CBaseNode::RecursiveTestContainerError_Internal( CUtlVector< CBaseNode* > &
 	bLeftContainerOnce = false;
 	return bError;
 }
+
 bool CBaseNode::RecursiveTestContainerError( const bool &bHierachyUp, CBaseContainerNode *container )
 {
 	CUtlVector< CBaseNode* >m_hProcessed;
@@ -398,6 +422,7 @@ bool CBaseNode::IsSolvable( bool bHierachyUp, CUtlVector< CBaseNode* > *hCallerL
 	}
 	return true;
 }
+
 void CBaseNode::Recursive_AddTailNodes_Internal(	CUtlVector< CBaseNode* > &m_hProcessedNodes,
 													CUtlVector< CBaseNode* > &m_hList,
 													bool bHierachyUp, bool bOnlyWithoutSolver,
@@ -477,6 +502,7 @@ void CBaseNode::Recursive_AddTailNodes_Internal(	CUtlVector< CBaseNode* > &m_hPr
 		}
 	}
 }
+
 void CBaseNode::Recursive_AddTailNodes( CUtlVector< CBaseNode* > &m_hList, bool bHierachyUp, bool bOnlyWithoutSolver,
 	CBaseContainerNode *pContainer, bool bAddContainers )
 {
@@ -493,10 +519,12 @@ void CBaseNode::MarkForDeletion()
 {
 	m_bMarkedForDeletion = true;
 }
+
 const bool CBaseNode::IsMarkedForDeletion()
 {
 	return m_bMarkedForDeletion;
 }
+
 //void CBaseNode::OnUpdateHierachy_Upwards( CBridge *pBridgeInitiator )
 //{
 //	//if ( pBridgeInitiator )
@@ -517,6 +545,7 @@ const bool CBaseNode::IsMarkedForDeletion()
 //
 //	UpdatePreviewAllowed();
 //}
+
 void CBaseNode::OnUpdateHierachy_Internal( CUtlVector< CBaseNode* > &m_hNodesProcessed )
 //void CBaseNode::OnUpdateHierachy_Internal(		CUtlVector< CBaseNode* > &m_hNodesProcessed,
 //									CUtlVector< CBridge* > &m_hBridgesToUpdate,
@@ -629,6 +658,7 @@ void CBaseNode::OnUpdateHierachy_Internal( CUtlVector< CBaseNode* > &m_hNodesPro
 		}
 	}
 }
+
 void CBaseNode::OnUpdateHierachy( CBridge *pBridgeInitiator, CJack *pCaller )
 {
 	if ( !pCaller && pBridgeInitiator )
@@ -646,11 +676,13 @@ void CBaseNode::OnUpdateHierachy( CBridge *pBridgeInitiator, CJack *pCaller )
 
 	pNodeView->OnHierachyChanged();
 }
+
 void CBaseNode::UpdatePreviewAllowed()
 {
 	int hierachyType = GetHierachyTypeIterateFullyRecursive();
 	CheckHierachyTypeFullyRecursive( hierachyType );
 }
+
 void CBaseNode::CheckHierachyTypeFullyRecursive( int t )
 {
 	CUtlVector< CBaseNode* > m_hNodesProcessed;
@@ -658,6 +690,7 @@ void CBaseNode::CheckHierachyTypeFullyRecursive( int t )
 	CheckHierachyTypeFullyRecursive_Internal( t, m_hNodesProcessed );
 	m_hNodesProcessed.Purge();
 }
+
 void CBaseNode::CheckHierachyTypeFullyRecursive_Internal( int t, CUtlVector< CBaseNode* > &m_hNodesProcessed )
 {
 	m_bAllowPreview = t != HLSLHIERACHY_VS;
@@ -726,6 +759,7 @@ int CBaseNode::UpdateInputsValid()
 		return ERRORLEVEL_UNDEFINED;
 	return ERRORLEVEL_NONE;
 }
+
 void CBaseNode::UpdateBridgeValidity( CBridge *pBridge, CJack *pCaller, int inputErrorLevel )
 {
 	CBaseNode *pNodeViewNode = pBridge->GetInputNode();
@@ -767,9 +801,11 @@ void CBaseNode::UpdateBridgeValidity( CBridge *pBridge, CJack *pCaller, int inpu
 
 	pBridge->SetErrorLevel( iGoalErrorLevel );
 }
+
 void CBaseNode::UpdateOutputs()
 {
 }
+
 void CBaseNode::SetOutputsUndefined()
 {
 	for ( int i = 0; i < GetNumJacks_Out(); i++ )
@@ -778,6 +814,7 @@ void CBaseNode::SetOutputsUndefined()
 		pJack->SetSmartType( -1 );
 	}
 }
+
 void CBaseNode::OnShowSolverErrored()
 {
 	CUtlVector< CBaseNode* >hList;
@@ -796,12 +833,14 @@ void CBaseNode::OnShowSolverErrored()
 	}
 	hList.Purge();
 }
+
 const int CBaseNode::GetErrorLevel()
 {
 	if ( ShouldErrorOnUndefined() && iErrorLevel == ERRORLEVEL_UNDEFINED )
 		return ERRORLEVEL_FAIL;
 	return iErrorLevel;
 }
+
 void CBaseNode::SetErrorLevel( const int e )
 {
 	iErrorLevel = e;
@@ -811,10 +850,12 @@ int CBaseNode::GetHierachyType()
 {
 	return HLSLHIERACHY_NONE;
 }
+
 int CBaseNode::GetAllowedHierachiesAsFlags()
 {
 	return HLSLHIERACHY_VS | HLSLHIERACHY_PS; // | HLSLHIERACHY_TEMPLATE_VS | HLSLHIERACHY_TEMPLATE_PS;
 }
+
 int CBaseNode::GetHierachyTypeIterateFullyRecursive_Internal( CUtlVector< CBaseNode* > &m_hNodesProcessed, int *iAllowances )
 {
 	int tmp = GetHierachyType();
@@ -876,6 +917,7 @@ int CBaseNode::GetHierachyTypeIterateFullyRecursive_Internal( CUtlVector< CBaseN
 
 	return tmp;
 }
+
 int CBaseNode::GetHierachyTypeIterateFullyRecursive( int *iAllowances )
 {
 	if ( iAllowances )
@@ -897,7 +939,6 @@ int CBaseNode::GetHierachyTypeIterateFullyRecursive( int *iAllowances )
 	m_hIgnore.Purge();
 	return hSearch;
 }
-
 
 void CBaseNode::SetTempHierachyTypeFullyRecursive_Internal( CUtlVector< CBaseNode* > &m_hNodesProcessed, int t )
 {
@@ -932,10 +973,12 @@ void CBaseNode::SetTempHierachyTypeFullyRecursive_Internal( CUtlVector< CBaseNod
 		}
 	}
 }
+
 const int CBaseNode::GetTempHierachyType()
 {
 	return m_iTempHierachy;
 }
+
 void CBaseNode::SetTempHierachyTypeFullyRecursive( const int t )
 {
 	CUtlVector< CBaseNode* > m_hIgnore;
@@ -946,6 +989,7 @@ void CBaseNode::SetTempHierachyTypeFullyRecursive( const int t )
 
 	m_hIgnore.Purge();
 }
+
 void CBaseNode::SetTempHierachyType( const int t )
 {
 	m_iTempHierachy = t;
@@ -990,6 +1034,7 @@ int CBaseNode::GetHierachyTypeIterate( bool bUp, int *iAllowances )
 	return tmp;
 }
 */
+
 /*
 int CBaseNode::GetHierachyTypeIterate( int *iAllowances )
 {
@@ -1019,6 +1064,7 @@ int CBaseNode::GetHierachyTypeIterate( int *iAllowances )
 	return max( hUp, hDown );
 }
 */
+
 bool CBaseNode::IsPreviewVisible()
 {
 	return m_bAllowPreview && m_bPreviewEnabled;
@@ -1050,6 +1096,7 @@ void CBaseNode::UpdateSize()
 
 	UpdateSimpleObjectBounds( m_vecPosition, m_vecSize, m_vecBounds );
 }
+
 void CBaseNode::GenerateJacks_Input( int num )
 {
 	if ( num )
@@ -1067,6 +1114,7 @@ void CBaseNode::GenerateJacks_Input( int num )
 
 	UpdateSize();
 }
+
 void CBaseNode::GenerateJacks_Output( int num )
 {
 	SaveDeleteVector( m_hOutputs );
@@ -1079,6 +1127,7 @@ void CBaseNode::GenerateJacks_Output( int num )
 
 	UpdateSize();
 }
+
 void CBaseNode::TouchJacks()
 {
 	for ( int i = 0; i < m_hInputs.Count(); i++ )
@@ -1086,14 +1135,17 @@ void CBaseNode::TouchJacks()
 	for ( int i = 0; i < m_hOutputs.Count(); i++ )
 		m_hOutputs[i]->UpdatePosition();
 }
+
 int CBaseNode::GetNumJacks_Out()
 {
 	return m_hOutputs.Count();
 }
+
 int CBaseNode::GetNumJacks_In()
 {
 	return m_hInputs.Count();
 }
+
 int CBaseNode::GetNumJacks_Out_Connected()
 {
 	int o = 0;
@@ -1104,6 +1156,7 @@ int CBaseNode::GetNumJacks_Out_Connected()
 	}
 	return o;
 }
+
 int CBaseNode::GetNumJacks_In_Connected()
 {
 	int o = 0;
@@ -1114,14 +1167,17 @@ int CBaseNode::GetNumJacks_In_Connected()
 	}
 	return o;
 }
+
 CJack* CBaseNode::GetJack_Out( int i )
 {
 	return m_hOutputs[ i ];
 }
+
 CJack* CBaseNode::GetJack_In( int i )
 {
 	return m_hInputs[ i ];
 }
+
 CJack *CBaseNode::GetJackByName_Out( const char *name )
 {
 	for ( int i = 0; i < GetNumJacks_Out(); i++ )
@@ -1129,6 +1185,7 @@ CJack *CBaseNode::GetJackByName_Out( const char *name )
 			return GetJack_Out( i );
 	return NULL;
 }
+
 CJack *CBaseNode::GetJackByName_In( const char *name )
 {
 	for ( int i = 0; i < GetNumJacks_In(); i++ )
@@ -1136,6 +1193,7 @@ CJack *CBaseNode::GetJackByName_In( const char *name )
 			return GetJack_In( i );
 	return NULL;
 }
+
 CJack *CBaseNode::GetJackByResType_Out( int restype )
 {
 	for ( int i = 0; i < GetNumJacks_Out(); i++ )
@@ -1143,6 +1201,7 @@ CJack *CBaseNode::GetJackByResType_Out( int restype )
 			return GetJack_Out( i );
 	return NULL;
 }
+
 CJack *CBaseNode::GetJackByResType_In( int restype )
 {
 	for ( int i = 0; i < GetNumJacks_In(); i++ )
@@ -1150,14 +1209,17 @@ CJack *CBaseNode::GetJackByResType_In( int restype )
 			return GetJack_In( i );
 	return NULL;
 }
+
 bool CBaseNode::JacksAllConnected_Out()
 {
 	return GetNumJacks_Out_Connected() == GetNumJacks_Out();
 }
+
 bool CBaseNode::JacksAllConnected_In()
 {
 	return GetNumJacks_In_Connected() == GetNumJacks_In();
 }
+
 void CBaseNode::JackHierachyUpdate_Out()
 {
 	for ( int j = 0; j < GetNumJacks_Out(); j++ )
@@ -1175,6 +1237,7 @@ void CBaseNode::JackHierachyUpdate_Out()
 		}
 	}
 }
+
 CHLSL_Var *CBaseNode::GetInputToWriteTo( int varTypes )
 {
 	for ( int i = 0; i < GetNumJacks_In(); i++ )
@@ -1207,6 +1270,7 @@ void CBaseNode::SetJackFlags_MinFloatRequirement( CJack *j, int components )
 		j->AddVarFlags( HLSLVAR_FLOAT4 );
 	}
 }
+
 void CBaseNode::SetJackFlags( CJack *j, HLSLJackVarCluster mode )
 {
 	j->ClearVarFlags();
@@ -1241,36 +1305,43 @@ void CBaseNode::SetJackFlags( CJack *j, HLSLJackVarCluster mode )
 		break;
 	}
 }
+
 void CBaseNode::SetJackFlags_Input( int idx, HLSLJackVarCluster mode )
 {
 	SetJackFlags( GetJack_In( idx ), mode );
 }
+
 void CBaseNode::SetJackFlags_Output( int idx, HLSLJackVarCluster mode )
 {
 	SetJackFlags( GetJack_Out( idx ), mode );
 }
+
 void CBaseNode::SetJackFlags_Input_Flags( int idx, int Flags )
 {
 	CJack *j = GetJack_In( idx );
 	j->ClearVarFlags();
 	j->AddVarFlags(Flags);
 }
+
 void CBaseNode::SetJackFlags_Output_Flags( int idx, int Flags )
 {
 	CJack *j = GetJack_Out( idx );
 	j->ClearVarFlags();
 	j->AddVarFlags(Flags);
 }
+
 void CBaseNode::SetupJackOutput( int idx, HLSLJackVarCluster mode, const char *name )
 {
 	GetJack_Out( idx )->SetName( name );
 	SetJackFlags( GetJack_Out( idx ), mode );
 }
+
 void CBaseNode::SetupJackInput( int idx, HLSLJackVarCluster mode, const char *name )
 {
 	GetJack_In( idx )->SetName( name );
 	SetJackFlags( GetJack_In( idx ), mode );
 }
+
 void CBaseNode::LockJackOutput_Flags( int idx, int Flag, const char *name )
 {
 	CJack *j = GetJack_Out( idx );
@@ -1283,6 +1354,7 @@ void CBaseNode::LockJackOutput_Flags( int idx, int Flag, const char *name )
 	j->SetSmartType( Flag );
 	j->SetSmartTypeLocked( true );
 }
+
 void CBaseNode::LockJackInput_Flags( int idx, int Flag, const char *name )
 {
 	CJack *j = GetJack_In( idx );
@@ -1295,6 +1367,7 @@ void CBaseNode::LockJackInput_Flags( int idx, int Flag, const char *name )
 	j->SetSmartType( Flag );
 	j->SetSmartTypeLocked( true );
 }
+
 int CBaseNode::TestJackFlags_In()
 {
 	bool bError = false;
@@ -1314,6 +1387,7 @@ int CBaseNode::TestJackFlags_In()
 		return ERRORLEVEL_UNDEFINED;
 	return ERRORLEVEL_NONE;
 }
+
 void CBaseNode::PurgeBridges( bool bInputs, bool bOutputs )
 {
 	if ( bInputs )
@@ -1323,6 +1397,7 @@ void CBaseNode::PurgeBridges( bool bInputs, bool bOutputs )
 		for ( int i = 0; i < GetNumJacks_Out(); i++ )
 			GetJack_Out( i )->PurgeBridges();
 }
+
 void CBaseNode::CreateBridgeRestoreData_Out( BridgeRestoreMode mode, CUtlVector< BridgeRestoreInfo* > &m_hList )
 {
 	int iJacksInUse = 0;
@@ -1359,6 +1434,7 @@ void CBaseNode::CreateBridgeRestoreData_Out( BridgeRestoreMode mode, CUtlVector<
 		}
 	}
 }
+
 void CBaseNode::CreateBridgeRestoreData_In( BridgeRestoreMode mode, CUtlVector< BridgeRestoreInfo* > &m_hList )
 {
 	int iJacksInUse = 0;
@@ -1395,6 +1471,7 @@ void CBaseNode::CreateBridgeRestoreData_In( BridgeRestoreMode mode, CUtlVector< 
 		}
 	}
 }
+
 void CBaseNode::RestoreBridgesFromList_Out( CUtlVector< BridgeRestoreInfo* > &m_hList )
 {
 	for ( int i = 0; i < m_hList.Count(); i++ )
@@ -1427,6 +1504,7 @@ void CBaseNode::RestoreBridgesFromList_Out( CUtlVector< BridgeRestoreInfo* > &m_
 	}
 	SaveDeleteVector( m_hList );
 }
+
 void CBaseNode::RestoreBridgesFromList_In( CUtlVector< BridgeRestoreInfo* > &m_hList )
 {
 	for ( int i = 0; i < m_hList.Count(); i++ )
@@ -1482,6 +1560,7 @@ bool CBaseNode::RecursiveFindNode_Internal( CUtlVector< CBaseNode* > &m_hList, C
 	}
 	return bFound;
 }
+
 bool CBaseNode::RecursiveFindNode( CBaseNode *n, bool bHierachyUp )
 {
 	CUtlVector< CBaseNode* > m_hList;
@@ -1494,10 +1573,12 @@ Vector2D CBaseNode::GetBoundsMin()
 {
 	return GetBoundsTitleMin();
 }
+
 Vector2D CBaseNode::GetBoundsMax()
 {
 	return GetBoundsBoxMax();
 }
+
 Vector2D CBaseNode::GetBoundsMinNodeSpace()
 {
 	Vector2D _min = GetBoundsMin();
@@ -1506,6 +1587,7 @@ Vector2D CBaseNode::GetBoundsMinNodeSpace()
 		min( _min.y, _max.y ) );
 	return out;
 }
+
 Vector2D CBaseNode::GetBoundsMaxNodeSpace()
 {
 	Vector2D _min = GetBoundsMin();
@@ -1514,36 +1596,44 @@ Vector2D CBaseNode::GetBoundsMaxNodeSpace()
 		max( _min.y, _max.y ) );
 	return out;
 }
+
 Vector2D CBaseNode::GetSelectionBoundsMinNodeSpace()
 {
 	return GetBoundsMinNodeSpace();
 }
+
 Vector2D CBaseNode::GetSelectionBoundsMaxNodeSpace()
 {
 	return GetBoundsMaxNodeSpace();
 }
+
 Vector2D CBaseNode::GetCenter()
 {
 	Vector2D _min = GetBoundsMinNodeSpace();
 	Vector2D _max = GetBoundsMaxNodeSpace();
 	return _min + ( _max - _min ) * 0.5f;
 }
+
 Vector2D CBaseNode::GetBoundsTitleMin()
 {
 	return m_vecPosition;
 }
+
 Vector2D CBaseNode::GetBoundsTitleMax()
 {
 	return Vector2D( m_vecPosition + Vector2D( m_vecSize.x, -NODE_DRAW_TITLE_Y ) );
 }
+
 Vector2D CBaseNode::GetBoundsBoxMin()
 {
 	return Vector2D( m_vecPosition - Vector2D( 0, NODE_DRAW_TITLE_Y + NODE_DRAW_TITLE_SPACE ) );
 }
+
 Vector2D CBaseNode::GetBoundsBoxMax()
 {
 	return Vector2D( GetBoundsBoxMin() + m_vecSize );
 }
+
 bool CBaseNode::IsWithinBounds_Base( const Vector2D &pos )
 {
 	Vector2D _min, _max;
@@ -1559,18 +1649,22 @@ bool CBaseNode::IsWithinBounds_Base( const Vector2D &pos )
 void CBaseNode::OnLeftClick( Vector2D &pos )
 {
 }
+
 void CBaseNode::OnDragStart()
 {
 }
+
 void CBaseNode::OnDrag( Vector2D &delta )
 {
 	Vector2D pos = GetPosition();
 	pos += delta;
 	SetPosition( pos );
 }
+
 void CBaseNode::OnDragEnd()
 {
 }
+
 bool CBaseNode::MustDragAlone()
 {
 	return false;
@@ -1616,14 +1710,17 @@ void CBaseNode::SetPosition( Vector2D vec, bool bCenter )
 
 	UpdateParentContainers();
 }
+
 Vector2D CBaseNode::GetPosition()
 {
 	return m_vecPosition;
 }
+
 Vector2D CBaseNode::GetSize()
 {
 	return m_vecSize;
 }
+
 const Vector4D &CBaseNode::GetBoundsFast()
 {
 	return m_vecBounds;
@@ -1633,12 +1730,14 @@ void CBaseNode::SetAllocating( const bool &a )
 {
 	m_bIsAllocating = a;
 }
+
 bool CBaseNode::IsAllocating()
 {
 	if ( !GetNumSolvers() || HasDummySolvers() )
 		return false;
 	return m_bIsAllocating;
 }
+
 bool CBaseNode::VguiDraw( bool bShadow )
 {
 	if ( !ShouldSimpleDrawObject( pNodeView, pNodeView, m_vecBounds ) )
@@ -1766,7 +1865,6 @@ bool CBaseNode::VguiDraw( bool bShadow )
 		VguiDraw_Preview();
 	}
 
-
 	if ( Q_strlen( szNodeName ) > 1 )
 	{
 		surface()->DrawSetTextColor( bShadow ? NODE_DRAW_COLOR_SHADOW : NODE_DRAW_COLOR_CUSTOMTITLE );
@@ -1786,6 +1884,7 @@ bool CBaseNode::VguiDraw( bool bShadow )
 	}
 	return true;
 }
+
 void CBaseNode::VguiDraw_Jacks( bool bShadow )
 {
 	for ( int i = 0; i < m_hInputs.Count(); i++ )
@@ -1793,6 +1892,7 @@ void CBaseNode::VguiDraw_Jacks( bool bShadow )
 	for ( int i = 0; i < m_hOutputs.Count(); i++ )
 		m_hOutputs[ i ]->VguiDraw(bShadow);
 }
+
 void CBaseNode::VguiDraw_Preview()
 {
 	if ( !IsPreviewVisible() )
@@ -1821,7 +1921,6 @@ void CBaseNode::VguiDraw_Preview()
 	//Msg("own idx: %u - puzzle: %i\n",GetUniqueIndex(),puzzleIdx);
 
 	float preview_inset = PREVIEWINSET;
-
 
 	Vector2D prev_min( m_vecPosition.x + m_vecBorderInfo.x + preview_inset, GetBoundsBoxMin().y - preview_inset );
 	Vector2D prev_max( m_vecPosition.x + m_vecSize.x - m_vecBorderInfo.y - preview_inset, GetBoundsBoxMax().y + preview_inset );
@@ -1919,6 +2018,7 @@ void CBaseNode::RestoreFromKeyValues( KeyValues *pKV )
 	//UpdatePreviewAllowed();
 	UpdateSize();
 }
+
 void CBaseNode::RestoreFromKeyValues_CreateBridges( KeyValues *pKV )
 {
 	PurgeBridges( true, false );

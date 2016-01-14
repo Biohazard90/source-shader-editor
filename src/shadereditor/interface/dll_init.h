@@ -67,12 +67,4 @@ char	*VarArgs( char *format, ... );
 int		ScreenHeight( void );
 int		ScreenWidth( void );
 
-
-
-
-
-
-
-
-
 #endif

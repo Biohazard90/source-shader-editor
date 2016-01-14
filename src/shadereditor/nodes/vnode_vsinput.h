@@ -1,5 +1,8 @@
-#ifndef CNODEVSINPUT_H
-#define CNODEVSINPUT_H
+#ifndef VNODE_VSINPUT_H
+#define VNODE_VSINPUT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include <editorcommon.h>
 
@@ -32,6 +35,5 @@ private:
 
 	SETUP_HLSL_VS_Input curSetup;
 };
-
 
 #endif

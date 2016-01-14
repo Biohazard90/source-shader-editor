@@ -21,12 +21,14 @@ CNodeVmtParam_Mutable::CNodeVmtParam_Mutable( CNodeView *p ) : BaseClass( "VPara
 
 	UpdateNode();
 }
+
 void CNodeVmtParam_Mutable::UpdateNode()
 {
 	LockJackOutput_Flags( 0, ::GetVarTypeFlag( m_iNumComponents ), VarArgs( "Idx %02i", m_iParamIndex + 1 ) );
 
 	OnUpdateHierachy( NULL, NULL );
 }
+
 KeyValues *CNodeVmtParam_Mutable::AllocateKeyValues( int NodeIndex )
 {
 	KeyValues *pKV = BaseClass::AllocateKeyValues( NodeIndex );
@@ -37,6 +39,7 @@ KeyValues *CNodeVmtParam_Mutable::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodeVmtParam_Mutable::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_iParamIndex = pKV->GetInt( "i_vp_mutable_param", m_iParamIndex );
@@ -49,6 +52,7 @@ void CNodeVmtParam_Mutable::RestoreFromKeyValues_Specific( KeyValues *pKV )
 
 	UpdateNode();
 }
+
 bool CNodeVmtParam_Mutable::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CJack *pJ_Out = GetJack_Out( 0 );
@@ -68,11 +72,6 @@ bool CNodeVmtParam_Mutable::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
-
-
-
 CNodeVmtParam_Static::CNodeVmtParam_Static( CNodeView *p ) : BaseClass( "VParam static", p )
 {
 	m_flMinSizeX = NODEDEFSIZE_SMALL;
@@ -87,10 +86,12 @@ CNodeVmtParam_Static::CNodeVmtParam_Static( CNodeView *p ) : BaseClass( "VParam 
 
 	UpdateNode();
 }
+
 CNodeVmtParam_Static::~CNodeVmtParam_Static()
 {
 	delete [] m_szName;
 }
+
 void CNodeVmtParam_Static::UpdateNode()
 {
 	CUtlVector< BridgeRestoreInfo* >m_hRestoreBridges;
@@ -106,6 +107,7 @@ void CNodeVmtParam_Static::UpdateNode()
 
 	RestoreBridgesFromList_Out( m_hRestoreBridges );
 }
+
 KeyValues *CNodeVmtParam_Static::AllocateKeyValues( int NodeIndex )
 {
 	KeyValues *pKV = BaseClass::AllocateKeyValues( NodeIndex );
@@ -116,6 +118,7 @@ KeyValues *CNodeVmtParam_Static::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodeVmtParam_Static::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	const char *name = pKV->GetString( "i_vp_static_name" );
@@ -135,6 +138,7 @@ void CNodeVmtParam_Static::RestoreFromKeyValues_Specific( KeyValues *pKV )
 	UpdateNode();
 	OnUpdateHierachy( NULL, NULL );
 }
+
 bool CNodeVmtParam_Static::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( !m_szName || !Q_strlen( m_szName ) )

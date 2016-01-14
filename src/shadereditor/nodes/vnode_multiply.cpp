@@ -96,6 +96,7 @@ int CNodeMultiply::UpdateInputsValid()
 
 	return max( locallevel, baseLevel );
 }
+
 void CNodeMultiply::UpdateOutputs()
 {
 	if ( !GetNumJacks_Out() || !GetNumJacks_In() )
@@ -132,6 +133,7 @@ void CNodeMultiply::UpdateOutputs()
 	return pJO->SetSmartType( iGoalSmarttype );
 	//GetJack_Out( 0 )->SetSmartType( max( GetJack_In(0)->GetSmartType(), GetJack_In(1)->GetSmartType() ) );
 }
+
 bool CNodeMultiply::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < 2 )
@@ -146,7 +148,7 @@ bool CNodeMultiply::CreateSolvers(GenericShaderData *ShaderData)
 	const int res = pJ_Out->GetResourceType();
 
 	CHLSL_Var *tg = NULL;
-	
+
 	if ( type1 == type2 || type1 == HLSLVAR_FLOAT1 || type2 == HLSLVAR_FLOAT1 )
 		tg = GetInputToWriteTo( max( type1, type2 ) );
 	else if ( type1 == HLSLVAR_FLOAT3 && type2 == HLSLVAR_MATRIX3X3 )

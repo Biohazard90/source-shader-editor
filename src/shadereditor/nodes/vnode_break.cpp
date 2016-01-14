@@ -62,13 +62,16 @@ void CNodeBreak::PreSolverUpdated()
 {
 	UpdateNode();
 }
+
 void CNodeBreak::PostSolverUpdated()
 {
 }
+
 int CNodeBreak::UpdateInputsValid()
 {
 	return BaseClass::UpdateInputsValid();
 }
+
 void CNodeBreak::UpdateOutputs()
 {
 	if ( GetNumJacks_Out() != GetNumJacks_In() )
@@ -84,6 +87,7 @@ void CNodeBreak::UpdateOutputs()
 		GetJack_Out( i )->SetSmartType( iSmartTypeIn );
 	}
 }
+
 bool CNodeBreak::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_Out() != GetNumJacks_In() )
@@ -103,9 +107,6 @@ bool CNodeBreak::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
-
 CNodeClip::CNodeClip( CNodeView *p ) : BaseClass( "Clip", p )
 {
 	m_flMinSizeX = NODEDEFSIZE_SMALL;
@@ -118,9 +119,11 @@ CNodeClip::CNodeClip( CNodeView *p ) : BaseClass( "Clip", p )
 	SetJackFlags_Input( 0, HLSLJACKFLAGS_ALL );
 	SetJackFlags_Output( 0, HLSLJACKFLAGS_ALL );
 }
+
 CNodeClip::~CNodeClip()
 {
 }
+
 void CNodeClip::UpdateOutputs()
 {
 	for ( int i = 0; i < GetNumJacks_In(); i++ )
@@ -133,6 +136,7 @@ void CNodeClip::UpdateOutputs()
 		GetJack_Out( i )->SetSmartType( iSmartTypeIn );
 	}
 }
+
 bool CNodeClip::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < GetNumJacks_In() )

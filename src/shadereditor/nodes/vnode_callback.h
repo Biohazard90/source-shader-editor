@@ -1,5 +1,8 @@
-#ifndef CNODE_CALLBACK_H
-#define CNODE_CALLBACK_H
+#ifndef VNODE_CALLBACK_H
+#define VNODE_CALLBACK_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 

@@ -1,8 +1,10 @@
 #ifndef PPE_HELPER_H
 #define PPE_HELPER_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "cbase.h"
-
 
 class CPPEHelper : public IVPPEHelper
 {
@@ -19,7 +21,5 @@ private:
 	KeyValues *GetInlineMaterial( const char *szmatName, CUtlVector<CHLSL_SolverBase*> &hStack );
 
 };
-
-
 
 #endif

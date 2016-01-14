@@ -1,5 +1,8 @@
-#ifndef CNODE_PP_BASE_H
-#define CNODE_PP_BASE_H
+#ifndef VNODE_PP_BASE_H
+#define VNODE_PP_BASE_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include <editorcommon.h>
 
@@ -24,8 +27,6 @@ public:
 
 };
 
-
-
 class CNodePP_Input : public CNodePP_Base
 {
 	DECLARE_CLASS( CNodePP_Input, CNodePP_Base );
@@ -49,7 +50,6 @@ private:
 
 };
 
-
 class CNodePP_Output : public CNodePP_Base
 {
 	DECLARE_CLASS( CNodePP_Output, CNodePP_Base );
@@ -72,6 +72,5 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 #endif

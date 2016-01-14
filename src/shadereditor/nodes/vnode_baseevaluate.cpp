@@ -75,6 +75,7 @@ int CNodeBaseEvaluate::UpdateInputsValid()
 
 	return max( locallevel, baseLevel );
 }
+
 void CNodeBaseEvaluate::UpdateOutputs()
 {
 	if ( !GetNumJacks_Out() || !GetNumJacks_In() || GetJack_Out(0)->IsSmartTypeLocked() )
@@ -88,6 +89,7 @@ void CNodeBaseEvaluate::UpdateOutputs()
 		maxType = max( maxType, GetJack_In(i)->GetSmartType() );
 	GetJack_Out( 0 )->SetSmartType( maxType );
 }
+
 bool CNodeBaseEvaluate::CreateSolvers(GenericShaderData *ShaderData)
 {
 	int numIn = GetNumJacks_In();

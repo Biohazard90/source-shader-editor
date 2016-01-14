@@ -60,6 +60,7 @@ void CNodeCondition::Solve_ContainerEntered()
 	CHLSL_Solver_ContainerBasic *solver_dummy = new CHLSL_Solver_ContainerBasic( GetUniqueIndex() );
 	AddSolver( solver_dummy );
 }
+
 void CNodeCondition::Solve_ContainerLeft()
 {
 	CHLSL_Solver_LoopOutro *solver_outro = new CHLSL_Solver_LoopOutro( GetUniqueIndex() );
@@ -74,6 +75,7 @@ KeyValues *CNodeCondition::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodeCondition::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	BaseClass::RestoreFromKeyValues_Specific( pKV );

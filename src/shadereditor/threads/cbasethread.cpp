@@ -8,6 +8,7 @@ CBaseThread::CBaseThread()
 {
 	_RefCount = 0;
 }
+
 bool CBaseThread::ShouldDie()
 {
 	bool b;
@@ -16,6 +17,7 @@ bool CBaseThread::ShouldDie()
 	mutex_refcount.Unlock();
 	return b;
 }
+
 int CBaseThread::GetRefCount()
 {
 	int tmp;
@@ -24,18 +26,21 @@ int CBaseThread::GetRefCount()
 	mutex_refcount.Unlock();
 	return tmp;
 }
+
 void CBaseThread::IncrementRefCount()
 {
 	mutex_refcount.Lock();
 	_RefCount++;
 	mutex_refcount.Unlock();
 }
+
 void CBaseThread::DecrementRefCount()
 {
 	mutex_refcount.Lock();
 	_RefCount--;
 	mutex_refcount.Unlock();
 }
+
 int CBaseThread::CheckCommon()
 {
 	if ( m_Queue_Common.MessageWaiting() )

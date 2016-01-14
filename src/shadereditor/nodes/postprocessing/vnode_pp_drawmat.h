@@ -1,5 +1,8 @@
-#ifndef CNODE_PP_DRAWMAT_H
-#define CNODE_PP_DRAWMAT_H
+#ifndef VNODE_PP_DRAWMAT_H
+#define VNODE_PP_DRAWMAT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include <editorcommon.h>
 
@@ -34,6 +37,5 @@ private:
 	bool m_bPushTarget;
 	vp_offsets_t m_offsets;
 };
-
 
 #endif

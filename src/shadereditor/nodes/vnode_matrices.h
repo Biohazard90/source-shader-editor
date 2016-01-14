@@ -1,5 +1,8 @@
-#ifndef CNODEMATRICES_H
-#define CNODEMATRICES_H
+#ifndef VNODE_MATRICES_H
+#define VNODE_MATRICES_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -16,7 +19,6 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 };
 
-
 class CNodeMatrix_VP : public CBaseNode
 {
 	DECLARE_CLASS( CNodeMatrix_VP, CBaseNode );
@@ -29,7 +31,6 @@ public:
 private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 };
-
 
 class CNodeMatrix_M : public CBaseNode
 {
@@ -44,8 +45,6 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 };
 
-
-
 class CNodeMatrix_VM : public CBaseNode
 {
 	DECLARE_CLASS( CNodeMatrix_VM, CBaseNode );
@@ -59,9 +58,6 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 };
 
-
-
-
 class CNodeMatrix_FVP : public CBaseNode
 {
 	DECLARE_CLASS( CNodeMatrix_FVP, CBaseNode );
@@ -74,7 +70,6 @@ public:
 private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 };
-
 
 class CNodeMatrix_Custom : public CBaseNode
 {

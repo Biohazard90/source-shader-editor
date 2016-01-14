@@ -1,5 +1,8 @@
-#ifndef CNODE_VCOMPRESSION_H
-#define CNODE_VCOMPRESSION_H
+#ifndef VNODE_VCOMPRESSION_H
+#define VNODE_VCOMPRESSION_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -39,6 +42,5 @@ private:
 
 	int m_iCompressionMode;
 };
-
 
 #endif

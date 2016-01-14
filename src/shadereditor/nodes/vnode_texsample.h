@@ -1,5 +1,8 @@
-#ifndef CNODETEXTURESAMPLE_H
-#define CNODETEXTURESAMPLE_H
+#ifndef VNODE_TEXSAMPLE_H
+#define VNODE_TEXSAMPLE_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -36,6 +39,5 @@ private:
 	int iFallbackType;
 	int iLookupOverride;
 };
-
 
 #endif

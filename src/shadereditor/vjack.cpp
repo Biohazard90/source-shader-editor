@@ -22,8 +22,6 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-
-
 CJack::CJack( CBaseNode *p, int slot, bool input )
 {
 	pNode = p;

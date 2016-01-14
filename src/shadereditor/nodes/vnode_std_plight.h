@@ -1,5 +1,8 @@
-#ifndef CNODE_STD_PLIGHT_H
-#define CNODE_STD_PLIGHT_H
+#ifndef VNODE_STD_PLIGHT_H
+#define VNODE_STD_PLIGHT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -29,8 +32,6 @@ private:
 	bool m_bHalfLambert;
 };
 
-
-
 class CNodeStdPSpecLight : public CBaseNode
 {
 	DECLARE_CLASS( CNodeStdPSpecLight, CBaseNode );
@@ -54,6 +55,5 @@ private:
 
 	bool m_bAOTerm;
 };
-
 
 #endif

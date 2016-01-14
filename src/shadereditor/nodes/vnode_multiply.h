@@ -1,5 +1,8 @@
-#ifndef CNODEMULTIPLY_H
-#define CNODEMULTIPLY_H
+#ifndef VNODE_MULTIPLY_H
+#define VNODE_MULTIPLY_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -26,6 +29,5 @@ private:
 	bool m_bMatrixRotation;
 
 };
-
 
 #endif

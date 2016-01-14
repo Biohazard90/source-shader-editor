@@ -10,6 +10,7 @@ static const char *pszSizingModes[] = {
 	"Half frame buffer",
 	"Quarter frame buffer",
 };
+
 static const int iSizingModes = ARRAYSIZE( pszSizingModes );
 
 CSheet_PP_DrawMat::CSheet_PP_DrawMat(CBaseNode *pNode, CNodeView *view, KeyValues *data, Panel *parent )

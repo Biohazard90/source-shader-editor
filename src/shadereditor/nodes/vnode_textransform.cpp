@@ -69,6 +69,7 @@ KeyValues *CNodeTexTransform::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodeTexTransform::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	bEnable_Center = !!pKV->GetInt( "iTexTrans_center", bEnable_Center ? 1 : 0 );
@@ -85,6 +86,7 @@ int CNodeTexTransform::UpdateInputsValid()
 	int autoTest = TestJackFlags_In();
 	return max( autoTest, baseLevel );
 }
+
 bool CNodeTexTransform::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < GetNumJacks_In() )

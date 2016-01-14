@@ -58,6 +58,7 @@ KeyValues *CNodeParallax::AllocateKeyValues( int NodeIndex )
 	pKV->SetInt( "i_prlx_mode", m_PSetup.iParallaxMode );
 	return pKV;
 }
+
 void CNodeParallax::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_PSetup.iSamplesMin = pKV->GetInt( "i_samples_min" );
@@ -112,8 +113,6 @@ bool CNodeParallax::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
 CNodeParallax_StdShadow::CNodeParallax_StdShadow( CNodeView *p ) : BaseClass( "Parallax shadow", p )
 {
 	GenerateJacks_Input( 7 );
@@ -126,7 +125,7 @@ CNodeParallax_StdShadow::CNodeParallax_StdShadow( CNodeView *p ) : BaseClass( "P
 	LockJackInput_Flags( 4, HLSLVAR_FLOAT3, "World pos" );
 	LockJackInput_Flags( 5, HLSLVAR_FLOAT1, "Softening" );
 	LockJackInput_Flags( 6, HLSLVAR_SAMPLER, "Heightmap" );
-	
+
 	LockJackOutput_Flags( 0, HLSLVAR_FLOAT1, "Light" );
 }
 

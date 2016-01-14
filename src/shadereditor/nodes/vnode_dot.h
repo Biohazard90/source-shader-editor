@@ -1,5 +1,8 @@
-#ifndef CNODEDOT_H
-#define CNODEDOT_H
+#ifndef VNODE_DOT_H
+#define VNODE_DOT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -21,6 +24,5 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 #endif

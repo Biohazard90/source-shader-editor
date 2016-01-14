@@ -34,12 +34,13 @@ KeyValues *CNodeSampler::AllocateKeyValues( int NodeIndex )
 	pKV->SetString( "szParamname", szParamName );
 	pKV->SetInt( "iTextureType", iTexType );
 	pKV->SetInt( "IsCubemap", bIs3DTexture ? 1: 0 );
-	
+
 	pKV->SetString( "szDemoTexturePath", m_szDemoTexturePath );
 	pKV->SetString( "szFallbackTexturePath", m_szFallbackTexturePath );
 	pKV->SetInt( "iFallbackMode", iFallbackType );
 	return pKV;
 }
+
 void CNodeSampler::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	Q_snprintf( szParamName, MAX_PATH, "%s", pKV->GetString( "szParamname" ) );

@@ -50,6 +50,7 @@ void CNodePSOutput::Setup( SETUP_HLSL_PS_Output info )
 	curSetup = info;
 	RestoreBridgesFromList_In( m_hRestoreBridges );
 }
+
 KeyValues *CNodePSOutput::AllocateKeyValues( int NodeIndex )
 {
 	KeyValues *pKV = BaseClass::AllocateKeyValues( NodeIndex );
@@ -59,10 +60,12 @@ KeyValues *CNodePSOutput::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodePSOutput::RestoreFromKeyValues( KeyValues *pKV )
 {
 	BaseClass::RestoreFromKeyValues( pKV );
 }
+
 void CNodePSOutput::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	SETUP_HLSL_PS_Output info;

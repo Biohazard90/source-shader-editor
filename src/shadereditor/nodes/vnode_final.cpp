@@ -33,6 +33,7 @@ KeyValues *CNodeFinal::AllocateKeyValues( int NodeIndex )
 	pKV->SetInt( "i_final_wdepth", b_writedepth ? 1 : 0 );
 	return pKV;
 }
+
 void CNodeFinal::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	i_tonemaptype = pKV->GetInt( "i_final_tonemap", i_tonemaptype );

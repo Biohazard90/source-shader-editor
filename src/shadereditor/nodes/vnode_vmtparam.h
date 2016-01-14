@@ -1,5 +1,8 @@
-#ifndef CNODE_VMTPARAM_H
-#define CNODE_VMTPARAM_H
+#ifndef VNODE_VMTPARAM_H
+#define VNODE_VMTPARAM_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -28,8 +31,6 @@ private:
 	TokenChannels_t m_iChannelInfo;
 };
 
-
-
 class CNodeVmtParam_Static : public CBaseNode
 {
 	DECLARE_CLASS( CNodeVmtParam_Static, CBaseNode );
@@ -54,6 +55,5 @@ private:
 	char m_szConstantString[MAX_PATH];
 	TokenChannels_t m_iChannelInfo;
 };
-
 
 #endif

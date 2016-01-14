@@ -1,5 +1,8 @@
-#ifndef CNODE_TIME_H
-#define CNODE_TIME_H
+#ifndef VNODE_ENVC_H
+#define VNODE_ENVC_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -35,6 +38,5 @@ private:
 	float m_flDefaultSmartVal;
 	float m_flSmartVal;
 };
-
 
 #endif

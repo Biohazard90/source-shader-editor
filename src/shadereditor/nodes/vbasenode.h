@@ -1,5 +1,8 @@
-#ifndef CBASENODE_H
-#define CBASENODE_H
+#ifndef VBASENODE_H
+#define VBASENODE_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include <vgui/VGUI.h>
 #include <vgui/IInput.h>

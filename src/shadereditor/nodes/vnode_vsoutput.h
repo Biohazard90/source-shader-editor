@@ -1,5 +1,8 @@
-#ifndef CNODEVSOUTPUT_H
-#define CNODEVSOUTPUT_H
+#ifndef VNODE_VSOUTPUT_H
+#define VNODE_VSOUTPUT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include <editorcommon.h>
 
@@ -36,6 +39,5 @@ private:
 	SETUP_HLSL_VS_Output_PS_Input curSetup;
 	SETUP_VSOUTPSIN_CustomNames curNames;
 };
-
 
 #endif

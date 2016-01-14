@@ -1,5 +1,8 @@
-#ifndef CNODELOOP_H
-#define CNODELOOP_H
+#ifndef VNODELOOP_H
+#define VNODELOOP_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasecontainer.h"
 
@@ -27,6 +30,5 @@ private:
 	int m_iValue_End;
 	bool bDecrement;
 };
-
 
 #endif

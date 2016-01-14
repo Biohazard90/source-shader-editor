@@ -62,7 +62,7 @@ void CNodeTexSample::UpdateInput()
 	}
 	if ( bHasDerivative )
 		numIn = 3;
-	
+
 	GenerateJacks_Input( numIn );
 	LockJackInput_Flags( 0, Flag, jackname );
 	if ( bHasDerivative )
@@ -83,12 +83,13 @@ KeyValues *CNodeTexSample::AllocateKeyValues( int NodeIndex )
 	pKV->SetInt( "iTextureType", iTexType );
 	pKV->SetInt( "IsCubemap", bIs3DTexture ? 1: 0 );
 	pKV->SetInt( "iLookupoverride", iLookupOverride );
-	
+
 	pKV->SetString( "szDemoTexturePath", m_szDemoTexturePath );
 	pKV->SetString( "szFallbackTexturePath", m_szFallbackTexturePath );
 	pKV->SetInt( "iFallbackMode", iFallbackType );
 	return pKV;
 }
+
 void CNodeTexSample::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	Q_snprintf( szParamName, MAX_PATH, "%s", pKV->GetString( "szParamname" ) );
@@ -117,6 +118,7 @@ int CNodeTexSample::UpdateInputsValid()
 
 	return max( baseLevel, autoTest );
 }
+
 void CNodeTexSample::UpdateOutputs()
 {
 }

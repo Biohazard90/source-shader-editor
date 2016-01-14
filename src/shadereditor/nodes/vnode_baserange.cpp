@@ -87,17 +87,19 @@ bool CNodeBaseRange::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
 CNodeSmoothstep::CNodeSmoothstep( CNodeView *p ) : BaseClass( "Smooth step", p )
 {
 }
+
 CHLSL_SolverBase *CNodeSmoothstep::AllocRangeSolver()
 {
 	return new CHLSL_Solver_Smoothstep( GetUniqueIndex() );
 }
+
 CNodeClamp::CNodeClamp( CNodeView *p ) : BaseClass( "Clamp", p )
 {
 }
+
 CHLSL_SolverBase *CNodeClamp::AllocRangeSolver()
 {
 	return new CHLSL_Solver_Clamp( GetUniqueIndex() );

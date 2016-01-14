@@ -1,5 +1,8 @@
-#ifndef CNODE_BREAK_H
-#define CNODE_BREAK_H
+#ifndef VNODE_BREAK_H
+#define VNODE_BREAK_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -55,6 +58,5 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 #endif

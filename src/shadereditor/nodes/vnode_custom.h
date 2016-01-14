@@ -1,5 +1,8 @@
-#ifndef CNODECUSTOM_H
-#define CNODECUSTOM_H
+#ifndef VNODE_CUSTOM_H
+#define VNODE_CUSTOM_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -61,6 +64,5 @@ private:
 
 	char *GenerateDefaultName( int idx, bool bOut = false );
 };
-
 
 #endif

@@ -1,5 +1,8 @@
-#ifndef CNODE_PARALLAX_H
-#define CNODE_PARALLAX_H
+#ifndef VNODE_PARALLAX_H
+#define VNODE_PARALLAX_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 #include "editorcommon.h"

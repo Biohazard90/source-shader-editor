@@ -49,11 +49,13 @@ void CNodeSwizzle::UpdateNode()
 
 	RestoreBridgesFromList_Out( m_hRestoreBridges );
 }
+
 int CNodeSwizzle::GetSwizzleMinComponents()
 {
 	Assert( m_SwizzleInfo.IsActive() );
 	return m_SwizzleInfo.iChannelDepth;
 }
+
 int CNodeSwizzle::GetSwizzleTargetComponents()
 {
 	return m_SwizzleInfo.iActiveChannels;
@@ -70,6 +72,7 @@ KeyValues *CNodeSwizzle::AllocateKeyValues( int NodeIndex )
 	pKV->SetString( "swizzleString", szSwizzle );
 	return pKV;
 }
+
 void CNodeSwizzle::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_SwizzleInfo.Tokenize( pKV->GetString( "swizzleString" ) );
@@ -82,6 +85,7 @@ int CNodeSwizzle::UpdateInputsValid()
 	int baseLevel = BaseClass::UpdateInputsValid();
 	return max( baseLevel, TestJackFlags_In() );
 }
+
 void CNodeSwizzle::UpdateOutputs()
 {
 	if ( !GetNumJacks_Out() || !GetNumJacks_In() )
@@ -94,6 +98,7 @@ void CNodeSwizzle::UpdateOutputs()
 
 	GetJack_Out( 0 )->SetSmartType( GetJack_In(0)->GetSmartType() );
 }
+
 bool CNodeSwizzle::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < 1 )

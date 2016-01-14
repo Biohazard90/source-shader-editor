@@ -1,5 +1,8 @@
-#ifndef CCONTAINER_NODE_H
-#define CCONTAINER_NODE_H
+#ifndef VBASECONTAINER_NODE_H
+#define VBASECONTAINER_NODE_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 

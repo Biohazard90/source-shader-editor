@@ -1,5 +1,8 @@
-#ifndef CNODE_BASERANGE_H
-#define CNODE_BASERANGE_H
+#ifndef VNODE_BASERANGE_H
+#define VNODE_BASERANGE_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -25,7 +28,6 @@ protected:
 
 };
 
-
 class CNodeSmoothstep : public CNodeBaseRange
 {
 	DECLARE_CLASS( CNodeSmoothstep, CNodeBaseRange );
@@ -35,6 +37,7 @@ public:
 protected:
 	virtual CHLSL_SolverBase *AllocRangeSolver();
 };
+
 class CNodeClamp : public CNodeBaseRange
 {
 	DECLARE_CLASS( CNodeClamp, CNodeBaseRange );

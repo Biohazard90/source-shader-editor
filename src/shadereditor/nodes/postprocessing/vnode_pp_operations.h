@@ -1,5 +1,8 @@
-#ifndef CNODE_PP_OPERATIONS_H
-#define CNODE_PP_OPERATIONS_H
+#ifndef VNODE_PP_OPERATIONS_H
+#define VNODE_PP_OPERATIONS_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include <editorcommon.h>
 
@@ -27,7 +30,6 @@ private:
 	bool m_bClearDepth;
 };
 
-
 class CNodePP_VP_Push : public CNodePP_Base
 {
 	DECLARE_CLASS( CNodePP_VP_Push, CNodePP_Base );
@@ -43,7 +45,6 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 class CNodePP_VP_Pop : public CNodePP_Base
 {
@@ -61,7 +62,6 @@ private:
 
 };
 
-
 class CNodePP_VP_SetRT : public CNodePP_Base
 {
 	DECLARE_CLASS( CNodePP_VP_SetRT, CNodePP_Base );
@@ -77,7 +77,6 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 class CNodePP_CopyRT : public CNodePP_Base
 {
@@ -95,7 +94,6 @@ private:
 
 };
 
-
 class CNodePP_UpdateFB : public CNodePP_Base
 {
 	DECLARE_CLASS( CNodePP_UpdateFB, CNodePP_Base );
@@ -110,6 +108,5 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 #endif

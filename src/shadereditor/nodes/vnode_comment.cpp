@@ -69,6 +69,7 @@ Vector2D CNodeComment::GetSelectionBoundsMinNodeSpace()
 {
 	return GetContainerBorderMin( CBORDER_TOP_LEFT ) + Vector2D( CBORDER_SIZE, 0 );
 }
+
 Vector2D CNodeComment::GetSelectionBoundsMaxNodeSpace()
 {
 	return GetContainerBorderMin( CBORDER_TOP_LEFT ) + Vector2D( CBORDER_SIZE + 64, GetBorderSize() + CBORDER_SIZE );
@@ -248,6 +249,7 @@ bool CNodeComment::VguiDraw( bool bShadow )
 		surface()->DrawFilledRect( rects_[7].x-borderSize, rects_[5].y, rects_[2].x+borderSize, rects_[5].y+borderSize );
 	}
 #endif
+
 	if ( !bShadow )
 		DrawGrabIcon();
 

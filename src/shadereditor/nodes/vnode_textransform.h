@@ -1,5 +1,8 @@
-#ifndef CNODE_TEXTRANSFORM_H
-#define CNODE_TEXTRANSFORM_H
+#ifndef VNODE_TEXTRANSFORM_H
+#define VNODE_TEXTRANSFORM_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -28,6 +31,5 @@ private:
 	bool bEnable_Scale;
 	bool bEnable_Trans;
 };
-
 
 #endif

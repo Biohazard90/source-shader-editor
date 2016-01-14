@@ -26,6 +26,7 @@ KeyValues *CNodeStdSkinning::AllocateKeyValues( int NodeIndex )
 	pKV->SetInt( "i_vskinning_mode", m_iSkinMode );
 	return pKV;
 }
+
 void CNodeStdSkinning::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_iSkinMode = pKV->GetInt( "i_vskinning_mode", m_iSkinMode );
@@ -53,9 +54,6 @@ void CNodeStdSkinning::UpdateNode()
 		LockJackInput_Flags( 4, HLSLVAR_FLOAT4, "Obj tangent s" );
 
 	RestoreBridgesFromList_In( m_hRestoreBridges );
-
-
-
 
 	CreateBridgeRestoreData_Out( CBaseNode::BY_NAME, m_hRestoreBridges );
 
@@ -97,15 +95,6 @@ bool CNodeStdSkinning::CreateSolvers(GenericShaderData *ShaderData)
 
 	return true;
 }
-
-
-
-
-
-
-
-
-
 
 CNodeStdMorph::CNodeStdMorph( CNodeView *p ) : BaseClass( "Morph", p )
 {
@@ -158,9 +147,6 @@ void CNodeStdMorph::UpdateNode()
 		LockJackInput_Flags( 4, HLSLVAR_FLOAT3, "Tangent s" );
 
 	RestoreBridgesFromList_In( m_hRestoreBridges );
-
-
-
 
 	CreateBridgeRestoreData_Out( CBaseNode::BY_NAME, m_hRestoreBridges );
 

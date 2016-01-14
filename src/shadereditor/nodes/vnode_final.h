@@ -1,5 +1,8 @@
-#ifndef CNODE_FINAL_H
-#define CNODE_FINAL_H
+#ifndef VNODE_FINAL_H
+#define VNODE_FINAL_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -27,6 +30,5 @@ private:
 	int i_tonemaptype;
 	bool b_writedepth;
 };
-
 
 #endif

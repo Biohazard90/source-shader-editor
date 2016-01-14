@@ -1,5 +1,8 @@
-#ifndef CNODE_LERP_H
-#define CNODE_LERP_H
+#ifndef VNODE_LERP_H
+#define VNODE_LERP_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -21,6 +24,5 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 #endif

@@ -1,5 +1,8 @@
 #ifndef CSOLVERCALLBACK_H
 #define CSOLVERCALLBACK_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "editorcommon.h"
 

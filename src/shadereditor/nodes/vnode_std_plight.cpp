@@ -29,6 +29,7 @@ KeyValues *CNodeStdPLight::AllocateKeyValues( int NodeIndex )
 	pKV->SetInt( "i_plight_hl", m_bHalfLambert ? 1 : 0 );
 	return pKV;
 }
+
 void CNodeStdPLight::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_bStaticLighting = !!pKV->GetInt( "i_plight_static", m_bStaticLighting );
@@ -100,11 +101,6 @@ bool CNodeStdPLight::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
-
-
-
 CNodeStdPSpecLight::CNodeStdPSpecLight( CNodeView *p ) : BaseClass( "PS specular", p )
 {
 	GenerateJacks_Output( 1 );
@@ -125,6 +121,7 @@ KeyValues *CNodeStdPSpecLight::AllocateKeyValues( int NodeIndex )
 	pKV->SetInt( "i_plight_ao", m_bAOTerm ? 1 : 0 );
 	return pKV;
 }
+
 void CNodeStdPSpecLight::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_bAOTerm = !!pKV->GetInt( "i_plight_ao", m_bAOTerm );
@@ -164,6 +161,7 @@ void CNodeStdPSpecLight::UpdateNode()
 
 	RestoreBridgesFromList_In( m_hRestoreBridges );
 }
+
 bool CNodeStdPSpecLight::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < GetNumJacks_In() )

@@ -10,6 +10,13 @@
 
 #include "cbase.h"
 #include "vgui/ISystem.h"
+#include "vgui/ISurface.h"
+#include "vgui/IVGui.h"
+#include "vgui/IInput.h"
+#include "vgui/IPanel.h"
+#include "vgui_controls/Controls.h"
+#include "vgui_controls/Panel.h"
+#include "vgui_controls/AnimationController.h"
 
 #include "editorinit.h"
 #include "editorcommon.h"
@@ -61,7 +68,6 @@ void ForceTerminateCompilers()
 #endif
 }
 
-
 #ifdef SHADER_EDITOR_DLL_SWARM
 void VCRHook_WaitForSingleObject(
 	__in HANDLE hHandle,
@@ -71,7 +77,6 @@ void VCRHook_WaitForSingleObject(
 	WaitForSingleObject( hHandle, dwMilliseconds );
 }
 #endif
-
 
 ShaderEditorInterface gShaderEditorInterface;
 ShaderEditorInterface *shaderEdit = &gShaderEditorInterface;
@@ -107,16 +112,7 @@ ShaderEditorInterface::~ShaderEditorInterface()
 
 using namespace vgui;
 
-#include "vgui_controls/Controls.h"
-#include "vgui_controls/Panel.h"
-#include "vgui_controls/AnimationController.h"
-#include <vgui/ISurface.h>
-#include <vgui/IVGui.h>
-#include <vgui/IInput.h>
-#include "vgui/IPanel.h"
-
 CViewSetup_SEdit_Shared _MainView;
-
 
 void RenderFullScreenQuad( IMaterial *pMat )
 {
@@ -481,7 +477,6 @@ void ShaderEditorInterface::RegisterViewRenderCallback( const char *pszVrCName, 
 	for ( int i = 0; i < numStringParams; i++ )
 		if ( !pszStringNames[i] || Q_strlen( pszStringNames[i] ) < 1 )
 			return Warning( "Bad string parameter for vrcallback %s at pos %i!\n", pszVrCName, i );
-
 
 	EditorRenderViewCommand_Definition *pVRCDef = new EditorRenderViewCommand_Definition();
 

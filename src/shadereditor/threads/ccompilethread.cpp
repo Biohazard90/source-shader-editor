@@ -214,6 +214,7 @@ CCompileThread::CCompileThread()
 	_target = NULL;
 	curFlags = 0;
 }
+
 CCompileThread::~CCompileThread()
 {
 	delete _shaderData;
@@ -232,6 +233,7 @@ CCompileThread::~CCompileThread()
 		DestroyCompilerMessage(m_hCurrentMessages[i]);
 	m_hCurrentMessages.Purge();
 }
+
 void CCompileThread::DestroyCompilerMessage( __threadcmds_CompileCommand *msg )
 {
 	if ( msg->__data )
@@ -247,6 +249,7 @@ void CCompileThread::DestroyCompilerMessage( __threadcmds_CompileCommand *msg )
 
 	delete msg;
 }
+
 void CCompileThread::UniquifyCommandList()
 {
 	if ( !m_hCurrentMessages.Count() )

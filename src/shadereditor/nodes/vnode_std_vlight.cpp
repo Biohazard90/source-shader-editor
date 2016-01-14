@@ -24,6 +24,7 @@ KeyValues *CNodeStdVLight::AllocateKeyValues( int NodeIndex )
 	pKV->SetInt( "i_vlight_hl", m_bHalfLambert ? 1 : 0 );
 	return pKV;
 }
+
 void CNodeStdVLight::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_bStaticLighting = !!pKV->GetInt( "i_vlight_static", m_bStaticLighting );

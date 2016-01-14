@@ -16,9 +16,11 @@ CNodeEnvC::CNodeEnvC( CNodeView *p, float defaultSmartVal ) : BaseClass( "UNKNOW
 
 	m_flSmartVal = m_flDefaultSmartVal = defaultSmartVal;
 }
+
 CNodeEnvC::~CNodeEnvC()
 {
 }
+
 int CNodeEnvC::GetAllowedHierachiesAsFlags()
 {
 	switch ( m_iEnvCIndex )
@@ -39,6 +41,7 @@ KeyValues *CNodeEnvC::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodeEnvC::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_flSmartVal = pKV->GetFloat( "flSmartVal0" );
@@ -54,6 +57,7 @@ void CNodeEnvC::SetEnvCType( int type )
 	GenerateJacks_Output( 1 );
 	LockJackOutput_Flags( 0, EConstant_GetData(type)->varflag, EConstant_GetData(type)->jackname );
 }
+
 bool CNodeEnvC::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CJack *pJ_Out = GetJack_Out( 0 );

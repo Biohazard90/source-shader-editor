@@ -31,7 +31,6 @@ CNodeFog::~CNodeFog()
 {
 }
 
-
 bool CNodeFog::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < GetNumJacks_In() )

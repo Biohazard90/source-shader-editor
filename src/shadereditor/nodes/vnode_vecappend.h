@@ -1,5 +1,8 @@
-#ifndef CNODE_APPEND_H
-#define CNODE_APPEND_H
+#ifndef VNODE_VECAPPEND_H
+#define VNODE_VECAPPEND_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -21,6 +24,5 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 #endif

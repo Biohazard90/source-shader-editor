@@ -1,5 +1,8 @@
-#ifndef CNODE_FLASHLIGHT_H
-#define CNODE_FLASHLIGHT_H
+#ifndef VNODE_FLASHLIGHT_H
+#define VNODE_FLASHLIGHT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -26,8 +29,6 @@ private:
 	bool m_bSpecular;
 };
 
-
-
 class CNodeFlashlight_Position : public CBaseNode
 {
 	DECLARE_CLASS( CNodeFlashlight_Position, CBaseNode );
@@ -43,6 +44,5 @@ public:
 private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 };
-
 
 #endif

@@ -509,7 +509,7 @@ protected:
 
 	void DrawOpaqueRenderables_Custom( bool bShadowDepth )
 	{
-		if( !m_pMainView->ShouldDrawEntities() )
+		if ( !m_pMainView->ShouldDrawEntities() )
 		  return;
 
 		render->SetBlend( 1 );

@@ -1,7 +1,10 @@
 
 #include "cbase.h"
 #include "editorcommon.h"
+#include "editorinit.h"
 #include "dll_init.h"
+
+#include "ivprocshader.h"
 
 #include "steam/steam_api.h"
 #include "datacache/idatacache.h"
@@ -53,13 +56,6 @@ CSteamAPIContext *steamapicontext = &g_SteamAPIContext;
 static CGlobalVarsBase dummyvars( true );
 CGlobalVarsBase *gpGlobals = &dummyvars;
 
-
-
-
-#include "editorinit.h"
-#include "editorcommon.h"
-#include "ivprocshader.h"
-
 CSysModule *ProcShaderModule = NULL;
 IVProcShader *gProcShaderCTRL = NULL;
 ISEditModelRender *sEditMRender = NULL;
@@ -74,7 +70,6 @@ static void OnShaderEditor_RestoreFunc( int nChangeFlags )
 {
 	shaderEdit->FlushPPEMaterialVarCache();
 }
-
 
 bool ShaderEditorInterface::Init( CreateInterfaceFn appSystemFactory, CGlobalVarsBase *pGlobals, void *pSEditMRender,
 								bool bCreateEditor, bool bEnablePrimaryDebug, int iSkymaskMode )
@@ -157,9 +152,10 @@ bool ShaderEditorInterface::Init( CreateInterfaceFn appSystemFactory, CGlobalVar
 	//if (!Initializer::InitializeAllObjects())
 	//	return false;
 
-	if (!VGui_Editor_Startup( appSystemFactory ))
+	if ( !VGui_Editor_Startup( appSystemFactory ) )
 		return false;
 
+//TODO: POSIX
 #ifdef SHADER_EDITOR_DLL_SWARM
 	const char *pszModuleName = "game_shader_generic_eshader_SWARM.dll";
 #elif SHADER_EDITOR_DLL_2006

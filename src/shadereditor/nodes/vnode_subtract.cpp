@@ -48,6 +48,7 @@ int CNodeSubtract::UpdateInputsValid()
 
 	return max( locallevel, baseLevel );
 }
+
 void CNodeSubtract::UpdateOutputs()
 {
 	if ( !GetNumJacks_Out() || !GetNumJacks_In() )
@@ -58,6 +59,7 @@ void CNodeSubtract::UpdateOutputs()
 
 	GetJack_Out( 0 )->SetSmartType( max( GetJack_In(0)->GetSmartType(), GetJack_In(1)->GetSmartType() ) );
 }
+
 bool CNodeSubtract::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < 2 )
@@ -87,12 +89,6 @@ bool CNodeSubtract::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
-
-
-
-
 CNodeInvert::CNodeInvert( CNodeView *p ) : BaseClass( "Invert", p )
 {
 	GenerateJacks_Input( 1 );
@@ -115,6 +111,7 @@ int CNodeInvert::UpdateInputsValid()
 
 	return max( locallevel, baseLevel );
 }
+
 void CNodeInvert::UpdateOutputs()
 {
 	if ( !GetNumJacks_Out() || !GetNumJacks_In() )
@@ -125,6 +122,7 @@ void CNodeInvert::UpdateOutputs()
 
 	GetJack_Out( 0 )->SetSmartType( GetJack_In(0)->GetSmartType() );
 }
+
 bool CNodeInvert::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < 1 )

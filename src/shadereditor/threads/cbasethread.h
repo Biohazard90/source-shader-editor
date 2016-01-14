@@ -1,5 +1,8 @@
 #ifndef CBASE_THREAD_H
 #define CBASE_THREAD_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "cbase.h"
 #include "editorcommon.h"
@@ -21,6 +24,5 @@ private:
 	int _RefCount;
 	CThreadMutex mutex_refcount;
 };
-
 
 #endif

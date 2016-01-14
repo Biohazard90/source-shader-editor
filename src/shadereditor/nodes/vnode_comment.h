@@ -1,5 +1,8 @@
-#ifndef CNODE_COMMENT_H
-#define CNODE_COMMENT_H
+#ifndef VNODE_COMMENT_H
+#define VNODE_COMMENT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasecontainer.h"
 
@@ -43,6 +46,5 @@ private:
 	TokenChannels_t m_iChannelInfo;
 	char m_szConstantString[MAX_PATH];
 };
-
 
 #endif

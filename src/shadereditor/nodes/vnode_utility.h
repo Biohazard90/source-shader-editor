@@ -1,5 +1,8 @@
-#ifndef CNODE_UTILITY_H
-#define CNODE_UTILITY_H
+#ifndef VNODE_UTILITY_H
+#define VNODE_UTILITY_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -22,7 +25,6 @@ private:
 
 };
 
-
 class CNodeUtility_Assign : public CBaseNode
 {
 	DECLARE_CLASS( CNodeUtility_Assign, CBaseNode );
@@ -41,6 +43,5 @@ private:
 	virtual bool CreateSolvers(GenericShaderData *ShaderData);
 
 };
-
 
 #endif

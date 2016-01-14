@@ -1,8 +1,10 @@
-#ifndef CNODE_STD_SKINNING_H
-#define CNODE_STD_SKINNING_H
+#ifndef VNODE_STD_SKINNING_H
+#define VNODE_STD_SKINNING_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
-
 
 enum
 {
@@ -39,7 +41,6 @@ private:
 	int m_iSkinMode;
 };
 
-
 class CNodeStdMorph : public CBaseNode
 {
 	DECLARE_CLASS( CNodeStdMorph, CBaseNode );
@@ -67,6 +68,5 @@ private:
 
 	int m_iSkinMode;
 };
-
 
 #endif

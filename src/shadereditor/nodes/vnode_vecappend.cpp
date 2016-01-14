@@ -41,6 +41,7 @@ int CNodeAppend::UpdateInputsValid()
 
 	return max( locallevel, baseLevel );
 }
+
 void CNodeAppend::UpdateOutputs()
 {
 	if ( !GetNumJacks_Out() || !GetNumJacks_In() )
@@ -55,6 +56,7 @@ void CNodeAppend::UpdateOutputs()
 
 	GetJack_Out( 0 )->SetSmartType( typeO );
 }
+
 bool CNodeAppend::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < 2 )

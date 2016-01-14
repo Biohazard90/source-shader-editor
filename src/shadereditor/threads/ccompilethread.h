@@ -1,5 +1,8 @@
 #ifndef CCOMPILE_THREAD_H
 #define CCOMPILE_THREAD_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "cbase.h"
 #include "editorcommon.h"

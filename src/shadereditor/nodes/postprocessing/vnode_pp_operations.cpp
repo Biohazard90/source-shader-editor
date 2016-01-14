@@ -26,9 +26,11 @@ CNodePP_ClearBuffers::CNodePP_ClearBuffers( CNodeView *p ) : BaseClass( "Clear b
 	m_iChannelInfo.bAllowChars = false;
 	m_szConstantString[0] = '\0';
 }
+
 CNodePP_ClearBuffers::~CNodePP_ClearBuffers()
 {
 }
+
 int CNodePP_ClearBuffers::UpdateInputsValid()
 {
 	int baseerror = BaseClass::UpdateInputsValid();
@@ -37,6 +39,7 @@ int CNodePP_ClearBuffers::UpdateInputsValid()
 
 	return max( baseerror, localerror );
 }
+
 KeyValues *CNodePP_ClearBuffers::AllocateKeyValues( int NodeIndex )
 {
 	KeyValues *pKV = BaseClass::AllocateKeyValues( NodeIndex );
@@ -46,6 +49,7 @@ KeyValues *CNodePP_ClearBuffers::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodePP_ClearBuffers::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	char tmp[MAX_PATH];
@@ -57,6 +61,7 @@ void CNodePP_ClearBuffers::RestoreFromKeyValues_Specific( KeyValues *pKV )
 	m_bClearColor = !!pKV->GetInt( "iClear_Color" );
 	m_bClearDepth = !!pKV->GetInt( "iClear_Depth" );
 }
+
 bool CNodePP_ClearBuffers::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CHLSL_Solver_PP_ClearBuffers *solver = new CHLSL_Solver_PP_ClearBuffers( GetUniqueIndex() );
@@ -69,7 +74,6 @@ bool CNodePP_ClearBuffers::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
 CNodePP_VP_Push::CNodePP_VP_Push( CNodeView *p ) : BaseClass( "Push RT / viewport", p )
 {
 	GenerateJacks_Output( 1 );
@@ -81,9 +85,11 @@ CNodePP_VP_Push::CNodePP_VP_Push( CNodeView *p ) : BaseClass( "Push RT / viewpor
 	m_hInputs[ 0 ]->SetJackColorCode( HLSLJACK_COLOR_PPMASTER );
 	LockJackInput_Flags( 1, HLSLVAR_PP_RT, "RT (optional)" );
 }
+
 CNodePP_VP_Push::~CNodePP_VP_Push()
 {
 }
+
 int CNodePP_VP_Push::UpdateInputsValid()
 {
 	int pushCount = 1;
@@ -105,6 +111,7 @@ int CNodePP_VP_Push::UpdateInputsValid()
 
 	return BaseClass::UpdateInputsValid();
 }
+
 bool CNodePP_VP_Push::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CHLSL_Solver_PP_VP_Push *solver = new CHLSL_Solver_PP_VP_Push( GetUniqueIndex() );
@@ -113,8 +120,6 @@ bool CNodePP_VP_Push::CreateSolvers(GenericShaderData *ShaderData)
 	AddSolver( solver );
 	return true;
 }
-
-
 
 CNodePP_VP_Pop::CNodePP_VP_Pop( CNodeView *p ) : BaseClass( "Pop RT / viewport", p )
 {
@@ -126,9 +131,11 @@ CNodePP_VP_Pop::CNodePP_VP_Pop( CNodeView *p ) : BaseClass( "Pop RT / viewport",
 	LockJackInput_Flags( 0, HLSLVAR_PP_MASTER, "" );
 	m_hInputs[ 0 ]->SetJackColorCode( HLSLJACK_COLOR_PPMASTER );
 }
+
 CNodePP_VP_Pop::~CNodePP_VP_Pop()
 {
 }
+
 int CNodePP_VP_Pop::UpdateInputsValid()
 {
 	int pushCount = -1;
@@ -150,15 +157,13 @@ int CNodePP_VP_Pop::UpdateInputsValid()
 
 	return BaseClass::UpdateInputsValid();
 }
+
 bool CNodePP_VP_Pop::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CHLSL_Solver_PP_VP_Pop *solver = new CHLSL_Solver_PP_VP_Pop( GetUniqueIndex() );
 	AddSolver( solver );
 	return true;
 }
-
-
-
 
 CNodePP_VP_SetRT::CNodePP_VP_SetRT( CNodeView *p ) : BaseClass( "Set RT / viewport", p )
 {
@@ -173,9 +178,11 @@ CNodePP_VP_SetRT::CNodePP_VP_SetRT( CNodeView *p ) : BaseClass( "Set RT / viewpo
 	m_hInputs[ 0 ]->SetJackColorCode( HLSLJACK_COLOR_PPMASTER );
 	LockJackInput_Flags( 1, HLSLVAR_PP_RT, "RT (optional)" );
 }
+
 CNodePP_VP_SetRT::~CNodePP_VP_SetRT()
 {
 }
+
 int CNodePP_VP_SetRT::UpdateInputsValid()
 {
 	int baseerror = BaseClass::UpdateInputsValid();
@@ -184,6 +191,7 @@ int CNodePP_VP_SetRT::UpdateInputsValid()
 
 	return max( baseerror, localerror );
 }
+
 bool CNodePP_VP_SetRT::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CHLSL_Solver_PP_VP_SetRT *solver = new CHLSL_Solver_PP_VP_SetRT( GetUniqueIndex() );
@@ -194,9 +202,6 @@ bool CNodePP_VP_SetRT::CreateSolvers(GenericShaderData *ShaderData)
 	AddSolver( solver );
 	return true;
 }
-
-
-
 
 CNodePP_CopyRT::CNodePP_CopyRT( CNodeView *p ) : BaseClass( "Copy RT", p )
 {
@@ -212,9 +217,11 @@ CNodePP_CopyRT::CNodePP_CopyRT( CNodeView *p ) : BaseClass( "Copy RT", p )
 	LockJackInput_Flags( 1, HLSLVAR_PP_RT, "RT source (optional)" );
 	LockJackInput_Flags( 2, HLSLVAR_PP_RT, "RT target" );
 }
+
 CNodePP_CopyRT::~CNodePP_CopyRT()
 {
 }
+
 int CNodePP_CopyRT::UpdateInputsValid()
 {
 	int baseerror = BaseClass::UpdateInputsValid();
@@ -224,6 +231,7 @@ int CNodePP_CopyRT::UpdateInputsValid()
 
 	return max( baseerror, localerror );
 }
+
 bool CNodePP_CopyRT::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CHLSL_Solver_PP_CopyRT *solver = new CHLSL_Solver_PP_CopyRT( GetUniqueIndex() );
@@ -237,9 +245,6 @@ bool CNodePP_CopyRT::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
-
 CNodePP_UpdateFB::CNodePP_UpdateFB( CNodeView *p ) : BaseClass( "Update FB copy", p )
 {
 	GenerateJacks_Output( 1 );
@@ -250,9 +255,11 @@ CNodePP_UpdateFB::CNodePP_UpdateFB( CNodeView *p ) : BaseClass( "Update FB copy"
 	LockJackInput_Flags( 0, HLSLVAR_PP_MASTER, "" );
 	m_hInputs[ 0 ]->SetJackColorCode( HLSLJACK_COLOR_PPMASTER );
 }
+
 CNodePP_UpdateFB::~CNodePP_UpdateFB()
 {
 }
+
 bool CNodePP_UpdateFB::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CHLSL_Solver_PP_UpdateFB *solver = new CHLSL_Solver_PP_UpdateFB( GetUniqueIndex() );

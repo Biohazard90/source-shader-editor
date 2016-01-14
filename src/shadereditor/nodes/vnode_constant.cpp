@@ -29,6 +29,7 @@ KeyValues *CNodeConstant::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodeConstant::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	char tmp[MAX_PATH];
@@ -99,7 +100,7 @@ bool CNodeConstant::VguiDraw( bool bShadow )
 
 	char szraw[32];
 	wchar_t szconverted[ 32 ];
-	
+
 	const Vector2D bmin = GetBoundsBoxMin();
 	const Vector2D bmax = GetBoundsBoxMax();
 	const float _offset = PREVIEWINSET + 0.5f;
@@ -126,10 +127,6 @@ bool CNodeConstant::VguiDraw( bool bShadow )
 	return true;
 }
 
-
-
-
-
 CNodeRandom::CNodeRandom( CNodeView *p ) : BaseClass( "Random", p )
 {
 	m_flMinSizeX = NODEDEFSIZE_SMALL;
@@ -142,9 +139,11 @@ CNodeRandom::CNodeRandom( CNodeView *p ) : BaseClass( "Random", p )
 	m_flValue_Max = 1;
 	UpdateNode();
 }
+
 CNodeRandom::~CNodeRandom()
 {
 }
+
 KeyValues *CNodeRandom::AllocateKeyValues( int NodeIndex )
 {
 	KeyValues *pKV = BaseClass::AllocateKeyValues( NodeIndex );
@@ -154,6 +153,7 @@ KeyValues *CNodeRandom::AllocateKeyValues( int NodeIndex )
 
 	return pKV;
 }
+
 void CNodeRandom::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_iNumComponents = pKV->GetInt( "i_num_comps", m_iNumComponents );
@@ -161,10 +161,12 @@ void CNodeRandom::RestoreFromKeyValues_Specific( KeyValues *pKV )
 	m_flValue_Max = pKV->GetFloat( "fl_value_max", m_flValue_Max );
 	UpdateNode();
 }
+
 void CNodeRandom::UpdateNode()
 {
 	LockJackOutput_Flags( 0, ::GetVarTypeFlag( m_iNumComponents ) );
 }
+
 bool CNodeRandom::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CJack *pJ_Out = GetJack_Out( 0 );
@@ -182,7 +184,6 @@ bool CNodeRandom::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
 CNodeBumpBasis::CNodeBumpBasis( CNodeView *p ) : BaseClass( "Bump basis", p )
 {
 	m_flMinSizeX = NODEDEFSIZE_SMALL;
@@ -194,9 +195,11 @@ CNodeBumpBasis::CNodeBumpBasis( CNodeView *p ) : BaseClass( "Bump basis", p )
 	LockJackOutput_Flags( 1, HLSLVAR_FLOAT3, "2" );
 	LockJackOutput_Flags( 2, HLSLVAR_FLOAT3, "3" );
 }
+
 CNodeBumpBasis::~CNodeBumpBasis()
 {
 }
+
 bool CNodeBumpBasis::CreateSolvers(GenericShaderData *ShaderData)
 {
 	for ( int i = 0; i < GetNumJacks_Out(); i++ )

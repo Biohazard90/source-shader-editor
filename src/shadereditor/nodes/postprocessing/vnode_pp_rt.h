@@ -1,5 +1,8 @@
-#ifndef CNODE_PP_RT_H
-#define CNODE_PP_RT_H
+#ifndef VNODE_PP_RT_H
+#define VNODE_PP_RT_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include <editorcommon.h>
 

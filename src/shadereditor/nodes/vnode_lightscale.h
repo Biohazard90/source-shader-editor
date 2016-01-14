@@ -1,5 +1,8 @@
-#ifndef CNODE_LIGHTSCALE_H
-#define CNODE_LIGHTSCALE_H
+#ifndef VNODE_LIGHTSCALE_H
+#define VNODE_LIGHTSCALE_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "vbasenode.h"
 
@@ -25,6 +28,5 @@ private:
 
 	int m_iLightScale;
 };
-
 
 #endif

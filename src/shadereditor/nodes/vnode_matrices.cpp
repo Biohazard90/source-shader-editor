@@ -26,12 +26,12 @@ bool CNodeMatrix_MVP::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
 CNodeMatrix_VP::CNodeMatrix_VP( CNodeView *p ) : BaseClass( "Matrix VP", p )
 {
 	GenerateJacks_Output( 1 );
 	LockJackOutput_Flags( 0, HLSLVAR_MATRIX4X4, "View Projection" );
 }
+
 bool CNodeMatrix_VP::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CJack *pJ_Out = GetJack_Out( 0 );
@@ -48,13 +48,12 @@ bool CNodeMatrix_VP::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
 CNodeMatrix_M::CNodeMatrix_M( CNodeView *p ) : BaseClass( "Matrix Model", p )
 {
 	GenerateJacks_Output( 1 );
 	LockJackOutput_Flags( 0, HLSLVAR_MATRIX4X3, "Model transform" );
 }
+
 bool CNodeMatrix_M::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CJack *pJ_Out = GetJack_Out( 0 );
@@ -71,16 +70,12 @@ bool CNodeMatrix_M::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
-
-
-
 CNodeMatrix_VM::CNodeMatrix_VM( CNodeView *p ) : BaseClass( "Matrix VP", p )
 {
 	GenerateJacks_Output( 1 );
 	LockJackOutput_Flags( 0, HLSLVAR_MATRIX4X4, "View Model" );
 }
+
 bool CNodeMatrix_VM::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CJack *pJ_Out = GetJack_Out( 0 );
@@ -97,15 +92,12 @@ bool CNodeMatrix_VM::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
-
-
 CNodeMatrix_FVP::CNodeMatrix_FVP( CNodeView *p ) : BaseClass( "Flashlight VP", p )
 {
 	GenerateJacks_Output( 1 );
 	LockJackOutput_Flags( 0, HLSLVAR_MATRIX4X4, "Flashlight View Proj" );
 }
+
 bool CNodeMatrix_FVP::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CJack *pJ_Out = GetJack_Out( 0 );
@@ -122,30 +114,32 @@ bool CNodeMatrix_FVP::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
-
 CNodeMatrix_Custom::CNodeMatrix_Custom( CNodeView *p ) : BaseClass( "Custom matrix", p )
 {
 	m_iCustomID = CMATRIX_VIEW;
 	GenerateJacks_Output( 1 );
 	UpdateNode();
 }
+
 void CNodeMatrix_Custom::UpdateNode()
 {
 	const customMatrix_t *data = GetCMatrixInfo( m_iCustomID );
 	LockJackOutput_Flags( 0, data->iHLSLVarFlag, data->szCanvasName );
 }
+
 KeyValues *CNodeMatrix_Custom::AllocateKeyValues( int NodeIndex )
 {
 	KeyValues *pKV = BaseClass::AllocateKeyValues( NodeIndex );
 	pKV->SetInt( "i_c_matrix", m_iCustomID );
 	return pKV;
 }
+
 void CNodeMatrix_Custom::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_iCustomID = pKV->GetInt( "i_c_matrix" );
 	UpdateNode();
 }
+
 bool CNodeMatrix_Custom::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CJack *pJ_Out = GetJack_Out( 0 );

@@ -167,7 +167,12 @@ void ShaderNameToSwarmUnique( char *pBuf, int maxLen )
 
 BasicShaderCfg_t::BasicShaderCfg_t()
 {
+#ifdef _WIN32
 	iShaderModel = SM_30;
+#else // POSIX
+	// force sm 2.0b
+	iShaderModel = SM_20B;
+#endif // POSIX
 	iCullmode = CULLMODE_CW;
 	iAlphablendmode = ABLEND_NONE;
 	flAlphaTestRef = 0.5f;

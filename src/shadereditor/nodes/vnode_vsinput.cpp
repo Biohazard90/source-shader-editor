@@ -95,6 +95,7 @@ void CNodeVSInput::Setup( SETUP_HLSL_VS_Input info )
 
 	RestoreBridgesFromList_Out( m_hRestoreBridges );
 }
+
 KeyValues *CNodeVSInput::AllocateKeyValues( int NodeIndex )
 {
 	KeyValues *pKV = BaseClass::AllocateKeyValues( NodeIndex );
@@ -114,9 +115,10 @@ KeyValues *CNodeVSInput::AllocateKeyValues( int NodeIndex )
 
 	for ( int i = 0; i < 2; i++ )
 		pKV->SetInt( VarArgs( "dTFlag_Color_%i", i ), curSetup.iDataTypeFlag_Color[i] );
-	
+
 	return pKV;
 }
+
 void CNodeVSInput::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	SETUP_HLSL_VS_Input info;
@@ -138,6 +140,7 @@ void CNodeVSInput::RestoreFromKeyValues_Specific( KeyValues *pKV )
 
 	Setup( info );
 }
+
 bool CNodeVSInput::CreateSolvers(GenericShaderData *ShaderData)
 {
 	for ( int i = 0; i < GetNumJacks_Out(); i++ )

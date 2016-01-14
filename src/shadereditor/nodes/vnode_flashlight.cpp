@@ -33,8 +33,6 @@ void CNodeFlashlight::UpdateNode()
 
 	RestoreBridgesFromList_In( m_hRestoreBridges );
 
-
-
 	CreateBridgeRestoreData_Out( CBaseNode::BY_NAME, m_hRestoreBridges );
 
 	GenerateJacks_Output( m_bSpecular ? 2 : 1 );
@@ -52,6 +50,7 @@ KeyValues *CNodeFlashlight::AllocateKeyValues( int NodeIndex )
 	pKV->SetInt( "i_flashlight_Spec", m_bSpecular ? 1 : 0 );
 	return pKV;
 }
+
 void CNodeFlashlight::RestoreFromKeyValues_Specific( KeyValues *pKV )
 {
 	m_bSpecular = !!pKV->GetInt( "i_flashlight_Spec", m_bSpecular );
@@ -96,7 +95,6 @@ bool CNodeFlashlight::CreateSolvers(GenericShaderData *ShaderData)
 	return true;
 }
 
-
 CNodeFlashlight_Position::CNodeFlashlight_Position( CNodeView *p ) : BaseClass( "FL Pos", p )
 {
 	m_flMinSizeX = NODEDEFSIZE_SMALL;
@@ -106,9 +104,11 @@ CNodeFlashlight_Position::CNodeFlashlight_Position( CNodeView *p ) : BaseClass( 
 	GenerateJacks_Output( 1 );
 	LockJackOutput_Flags( 0, HLSLVAR_FLOAT3, "pos" );
 }
+
 CNodeFlashlight_Position::~CNodeFlashlight_Position()
 {
 }
+
 bool CNodeFlashlight_Position::CreateSolvers(GenericShaderData *ShaderData)
 {
 	CJack *pJ_Out_0 = GetJack_Out( 0 );

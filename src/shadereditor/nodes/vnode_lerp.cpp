@@ -42,7 +42,7 @@ int CNodeLerp::UpdateInputsValid()
 			vartype_jack_2 > vartype_jack_1 )
 			locallevel = ERRORLEVEL_FAIL;
 		else if ( vartype_jack_2 != vartype_jack_0 &&
-			vartype_jack_2 != vartype_jack_1 && 
+			vartype_jack_2 != vartype_jack_1 &&
 			vartype_jack_2 != HLSLVAR_FLOAT1 )
 			locallevel = ERRORLEVEL_FAIL;
 
@@ -54,13 +54,14 @@ int CNodeLerp::UpdateInputsValid()
 				locallevel = ERRORLEVEL_FAIL;
 		}
 		else if ( vartype_jack_0 >= HLSLVAR_MATRIX3X3 ||
-			vartype_jack_1 >= HLSLVAR_MATRIX3X3 || 
+			vartype_jack_1 >= HLSLVAR_MATRIX3X3 ||
 			vartype_jack_2 >= HLSLVAR_MATRIX3X3 )
 				locallevel = ERRORLEVEL_FAIL;
 	}
 
 	return max( locallevel, baseLevel );
 }
+
 void CNodeLerp::UpdateOutputs()
 {
 	if ( !GetNumJacks_Out() || !GetNumJacks_In() )
@@ -71,6 +72,7 @@ void CNodeLerp::UpdateOutputs()
 
 	GetJack_Out( 0 )->SetSmartType( max( GetJack_In(0)->GetSmartType(), GetJack_In(1)->GetSmartType() ) );
 }
+
 bool CNodeLerp::CreateSolvers(GenericShaderData *ShaderData)
 {
 	if ( GetNumJacks_In_Connected() < 3 )

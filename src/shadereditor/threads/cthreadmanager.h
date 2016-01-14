@@ -1,5 +1,8 @@
 #ifndef CTHREADMANAGER_H
 #define CTHREADMANAGER_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "editorcommon.h"
 
@@ -11,7 +14,7 @@ public:
 
 	virtual void Update( float frametime );
 	virtual void Shutdown();
-	
+
 	//CSolveThread *CreateSolverThread();
 	CCompileThread *GetCompileThread();
 	void StopThread( CBaseThread *t, bool bTerminate = false );
