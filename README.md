@@ -14,9 +14,9 @@ http://developer.valvesoftware.com/wiki/Category:SourceShaderEditor
 USAGE:
 --------------
 
-1.) Clone this repository into a separate directory outside of your games source code.
+- Clone this repository into a separate directory outside of your games source code.
 
-2.) Edit the file src/shadereditor_platform.vpc to point to specify the location of
+- Edit the file src/shadereditor_platform.vpc to point to specify the location of
     your game, the source code of your game and the target Source Engine SDK version
     like this:
 
@@ -36,39 +36,34 @@ USAGE:
                             it typically lies in SteamApps/sourcemods/<YOURGAME>/. This macro is used
                             to define the output directory of the binaries you build.
 
-3.) Run src/createshadereditorprojects.bat to build projects and solution for
+- Follow the OS specific instructions below
+
+Windows:
+--------------
+
+- Run src/createshadereditorprojects.bat to build projects and solution for
     Visual Studio.
 
-4.) Open the solution and build it. The resulting binaries will be copied into the
+- Open the solution and build it. The resulting binaries will be copied into the
     target directory you specified with TARGET_GAME_DIRECTORY.
 
-5.) Add the directory from shadereditor from client/ to your games client library
+- Add the directory from shadereditor from client/ to your games client library
     as described here:
     https://developer.valvesoftware.com/wiki/SourceShaderEditor/Installation#Compile
 
-6.) Copy the contents of the directory game/ to your game root directory, the
+- Copy the contents of the directory game/ to your game root directory, the
     editor is relying on these resources to be present.
 
 Editor internal shaders can be build by calling
 src\materialsystem\procshader\buildeditorshaders.bat. Refer to the instructions inside
 the batch file to set up your paths appropriately!
 
-NOTES:
---------------
-
-The libraries build by this project are shadereditor_<PLATFORM>.dll, so
-shadereditor_2013.dll, for example, and game_shader_generic_eshader_<PLATFORM>.dll
-respectively.
-
-For the 2013 SDK, the game shader library is called game_shader_dx6.dll, because
-Valve recently broke shader dll loading through the wildcard game_shader_generic*.dll.
-
 Linux:
 --------------
 
-You need to compile the Shaders on Windows with shader model 2.0!
+- You need to compile the Shaders on Windows with shader model 2.0!
 
-remove in client/viewrender.cpp:
+- remove in client/viewrender.cpp:
 ```
 //-----------------------------------------------------------------------------
 // Purpose:
@@ -79,7 +74,7 @@ inline bool CViewRender::ShouldDrawEntities( void )
 	return ( !m_pDrawEntities || (m_pDrawEntities->GetInt() != 0) );
 }
 ```
-replace in client/viewrender.h:
+- replace in client/viewrender.h:
 ```
 bool	ShouldDrawEntities( void );
 ```
@@ -92,4 +87,19 @@ with:
 	}
 ```
 
-Add to your client_*.vpc $PreprocessorDefinitions: ;SOURCE_2013
+- Add to your client_*.vpc $PreprocessorDefinitions:
+```
+;SOURCE_2013
+```
+
+- Build the editor with makese.sh (define path to steam runtime sdk inside!)
+
+NOTES:
+--------------
+
+The libraries build by this project are shadereditor_<PLATFORM>.dll / .so , so
+shadereditor_2013.dll / .so, for example, and game_shader_generic_eshader_<PLATFORM>.dll / .so
+respectively.
+
+For the 2013 SDK, the game shader library is called game_shader_dx6.dll / .so, because
+Valve recently broke shader dll loading through the wildcard game_shader_generic*.dll / .so.
