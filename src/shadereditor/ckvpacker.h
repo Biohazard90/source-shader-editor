@@ -17,6 +17,4 @@ public:
 	static void KVClearPacked( const char *pszKey, KeyValues *pKVTarget );
 };
 
-
-
 #endif

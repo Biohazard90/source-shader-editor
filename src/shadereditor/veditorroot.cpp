@@ -26,9 +26,9 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
+#define EDITOR_CONFIG_FILE "shadereditorui/editor_config.txt"
+
 CEditorRoot *pEditorRoot = NULL;
-
-
 
 enum ERoot_FileMenu_t
 {
@@ -42,6 +42,7 @@ enum ERoot_FileMenu_t
 	ER_FMENU_UNDO,
 	ER_FMENU_REDO,
 };
+
 enum ERoot_ShaderMenu_t
 {
 	ER_SMENU_SCONFIG = 0,
@@ -52,6 +53,7 @@ enum ERoot_ShaderMenu_t
 	ER_SMENU_INJECT,
 	ER_SMENU_PAINT,
 };
+
 enum ERoot_PostProcMenu_t
 {
 	ER_PMENU_PCONFIG = 0,
@@ -112,46 +114,45 @@ CEditorRoot::CEditorRoot( const char *pElementName ) : BaseClass( NULL, "editor"
 	m_pLabel_Coords = new Label( this, "mouse_node_coords", "" );
 	m_pLabel_FrameTime = new Label( this, "framespeed", "" );
 
-
 	m_pMenuBar = new MenuBar( this, "menu_bar" );
 	m_pMBut_File = new MenuButton( this, "mbut_file", "File" );
 	m_pMBut_File->AddActionSignalTarget( this );
 	Menu *pMenu_File = new Menu( m_pMBut_File, "" );
-	pMenu_File->AddMenuItem( "New", new KeyValues("onmenufile","entry",ER_FMENU_NEW), this );
+	pMenu_File->AddMenuItem( "New", new KeyValues("onmenufile", "entry", ER_FMENU_NEW), this );
 	pMenu_File->AddSeparator();
-	pMenu_File->AddMenuItem( "Open", new KeyValues("onmenufile","entry",ER_FMENU_OPEN), this );
+	pMenu_File->AddMenuItem( "Open", new KeyValues("onmenufile", "entry", ER_FMENU_OPEN), this );
 	pMenu_File->AddSeparator();
-	pMenu_File->AddMenuItem( "Save", new KeyValues("onmenufile","entry",ER_FMENU_SAVE), this );
-	pMenu_File->AddMenuItem( "Save as", new KeyValues("onmenufile","entry",ER_FMENU_SAVE_AS), this );
-	pMenu_File->AddMenuItem( "Save all", new KeyValues("onmenufile","entry",ER_FMENU_SAVE_ALL), this );
+	pMenu_File->AddMenuItem( "Save", new KeyValues("onmenufile", "entry", ER_FMENU_SAVE), this );
+	pMenu_File->AddMenuItem( "Save as", new KeyValues("onmenufile", "entry", ER_FMENU_SAVE_AS), this );
+	pMenu_File->AddMenuItem( "Save all", new KeyValues("onmenufile", "entry", ER_FMENU_SAVE_ALL), this );
 	pMenu_File->AddSeparator();
-	pMenu_File->AddMenuItem( "Undo", new KeyValues("onmenufile","entry",ER_FMENU_UNDO), this );
-	pMenu_File->AddMenuItem( "Redo", new KeyValues("onmenufile","entry",ER_FMENU_REDO), this );
+	pMenu_File->AddMenuItem( "Undo", new KeyValues("onmenufile", "entry", ER_FMENU_UNDO), this );
+	pMenu_File->AddMenuItem( "Redo", new KeyValues("onmenufile", "entry", ER_FMENU_REDO), this );
 	pMenu_File->AddSeparator();
-	pMenu_File->AddMenuItem( "Take screenshot", new KeyValues("onmenufile","entry",ER_FMENU_SCREENSHOT), this );
-	pMenu_File->AddMenuItem( "Editor config", new KeyValues("onmenufile","entry",ER_FMENU_ECONFIG), this );
+	pMenu_File->AddMenuItem( "Take screenshot", new KeyValues("onmenufile", "entry", ER_FMENU_SCREENSHOT), this );
+	pMenu_File->AddMenuItem( "Editor config", new KeyValues("onmenufile", "entry", ER_FMENU_ECONFIG), this );
 	m_pMBut_File->SetMenu( pMenu_File );
 	m_pMenuBar->AddButton( m_pMBut_File );
 
 	m_pMBut_Shader = new MenuButton( this, "mbut_shader", "Shader" );
 	Menu *pMenu_Shader = new Menu( m_pMBut_Shader, "" );
-	pMenu_Shader->AddMenuItem( "Shader settings", new KeyValues("onmenushader","entry",ER_SMENU_SCONFIG), this );
-	pMenu_Shader->AddMenuItem( "Shader precache", new KeyValues("onmenushader","entry",ER_SMENU_SPRECACHE), this );
+	pMenu_Shader->AddMenuItem( "Shader settings", new KeyValues("onmenushader", "entry", ER_SMENU_SCONFIG), this );
+	pMenu_Shader->AddMenuItem( "Shader precache", new KeyValues("onmenushader", "entry", ER_SMENU_SPRECACHE), this );
 	pMenu_Shader->AddSeparator();
-	pMenu_Shader->AddMenuItem( "Full compile", new KeyValues("onmenushader","entry",ER_SMENU_FULLCOMPILE), this );
-	pMenu_Shader->AddMenuItem( "Compile all precached", new KeyValues("onmenushader","entry",ER_SMENU_ALLCOMPILE), this );
-	pMenu_Shader->AddMenuItem( "Terminate compilers", new KeyValues("onmenushader","entry",ER_SMENU_KILLCOMPILER), this );
+	pMenu_Shader->AddMenuItem( "Full compile", new KeyValues("onmenushader", "entry", ER_SMENU_FULLCOMPILE), this );
+	pMenu_Shader->AddMenuItem( "Compile all precached", new KeyValues("onmenushader", "entry", ER_SMENU_ALLCOMPILE), this );
+	pMenu_Shader->AddMenuItem( "Terminate compilers", new KeyValues("onmenushader", "entry", ER_SMENU_KILLCOMPILER), this );
 	pMenu_Shader->AddSeparator();
-	pMenu_Shader->AddMenuItem( "Inject shader into world", new KeyValues("onmenushader","entry",ER_SMENU_INJECT), this );
-	pMenu_Shader->AddMenuItem( "Paint world", new KeyValues("onmenushader","entry",ER_SMENU_PAINT), this );
+	pMenu_Shader->AddMenuItem( "Inject shader into world", new KeyValues("onmenushader", "entry", ER_SMENU_INJECT), this );
+	pMenu_Shader->AddMenuItem( "Paint world", new KeyValues("onmenushader", "entry", ER_SMENU_PAINT), this );
 	m_pMBut_Shader->SetMenu( pMenu_Shader );
 	m_pMenuBar->AddButton( m_pMBut_Shader );
 
 	m_pMBut_PostProc = new MenuButton( this, "mbut_postproc", "Post processing" );
 	Menu *pMenu_PostProc = new Menu( m_pMBut_PostProc, "" );
-	pMenu_PostProc->AddMenuItem( "Effect settings", new KeyValues("onmenupostprocessing","entry",ER_PMENU_PCONFIG), this );
-	pMenu_PostProc->AddMenuItem( "Effect precache", new KeyValues("onmenupostprocessing","entry",ER_PMENU_PPRECACHE), this );
-	pMenu_PostProc->AddMenuItem( "Manage rendertargets", new KeyValues("onmenupostprocessing","entry",ER_PMENU_RTS), this );
+	pMenu_PostProc->AddMenuItem( "Effect settings", new KeyValues("onmenupostprocessing", "entry", ER_PMENU_PCONFIG), this );
+	pMenu_PostProc->AddMenuItem( "Effect precache", new KeyValues("onmenupostprocessing", "entry", ER_PMENU_PPRECACHE), this );
+	pMenu_PostProc->AddMenuItem( "Manage rendertargets", new KeyValues("onmenupostprocessing", "entry", ER_PMENU_RTS), this );
 	m_pMBut_PostProc->SetMenu( pMenu_PostProc );
 	m_pMenuBar->AddButton( m_pMBut_PostProc );
 
@@ -189,6 +190,7 @@ CEditorRoot::CEditorRoot( const char *pElementName ) : BaseClass( NULL, "editor"
 
 	//m_iLastCompileIndex = GetSafeFlowgraph()->GetStackIndex();
 }
+
 CEditorRoot::~CEditorRoot()
 {
 	if ( m_pszMaterialList )
@@ -252,11 +254,11 @@ void CEditorRoot::PageChanged()
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 5, bIsShader );
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 6, bIsShader );
 
-#ifndef _WIN32
+#ifndef _WIN32 //POSIX
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 2, false );
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 3, false );
 	m_pMBut_Shader->GetMenu()->SetItemEnabled( 4, false );
-#endif
+#endif // POSIX
 
 	const bool bIsPPEffect = pView->GetFlowgraphType() == CNodeView::FLOWGRAPH_POSTPROC;
 	m_pMBut_PostProc->GetMenu()->SetItemEnabled( 0, bIsPPEffect );
@@ -373,16 +375,19 @@ void CEditorRoot::SortButtons()
 		pViewReset->SetBgColor( Color( 127,127,127,127) );
 	}
 }
+
 void CEditorRoot::OnSceneRender()
 {
 	if ( pPreview )
 		pPreview->OnSceneRender();
 }
+
 void CEditorRoot::OnPostRender()
 {
 	if ( pPreview )
 		pPreview->OnPostRender();
 }
+
 void CEditorRoot::AllocProceduralMaterials()
 {
 	for ( int i = 0; i < NPSOP_CALC_LAST; i++ )
@@ -404,6 +409,7 @@ void CEditorRoot::AllocProceduralMaterials()
 	//m_pMat_BGPreview = materials->CreateMaterial( "__bg_preview", m_pKV_BGPreviewMat );
 	//m_pMat_BGPreview->Refresh();
 }
+
 void CEditorRoot::UpdateVariablePointer()
 {
 	bool bFound = false;
@@ -458,16 +464,19 @@ IMaterial *CEditorRoot::GetOperatorMaterial( int i )
 	Assert( m_pMat_NodePreview[i] );
 	return m_pMat_NodePreview[i];
 }
+
 IMaterialVar *CEditorRoot::GetUVTargetParam( int i, int num )
 {
 	Assert( m_pMatVar_NodePv_UVs[i][num] );
 	return m_pMatVar_NodePv_UVs[i][num];
 }
+
 //IMaterialVar *CEditorRoot::GetOperatorParam( int i )
 //{
 //	Assert( m_pMatVar_NodePv_OP[i] );
 //	return m_pMatVar_NodePv_OP[i];
 //}
+
 void CEditorRoot::DeleteProceduralMaterials()
 {
 	for ( int i = 0; i < NPSOP_CALC_LAST; i++ )
@@ -496,6 +505,7 @@ void CEditorRoot::SendFullyCompiledShader( GenericShaderData* data )
 	if ( ShouldAutoPublish() )
 		InvokeShaderToScene();
 }
+
 void CEditorRoot::InvokeShaderToScene( GenericShaderData *pShader )
 {
 	if ( pShader == NULL )
@@ -542,6 +552,7 @@ void CEditorRoot::EndPaintWorld( bool bValid )
 	gShaderEditorSystem->BeginMaterialReload( !bValid );
 	//ReloadGameShaders( m_pLastFullCompiledShader, m_pszMaterialList, m_iNumMaterials );
 }
+
 void CEditorRoot::OnMouseCaptureLost()
 {
 	if ( m_bPainting )
@@ -550,6 +561,7 @@ void CEditorRoot::OnMouseCaptureLost()
 		input()->SetCursorOveride( dc_user );
 	}
 }
+
 void CEditorRoot::OnMousePressed(MouseCode code)
 {
 	if ( m_bPainting )
@@ -600,26 +612,32 @@ const bool CEditorRoot::ShouldDraw_Datatypes()
 {
 	return sedit_draw_datatypes.GetBool() && m_bDraw_Datatypes;
 }
+
 const bool CEditorRoot::ShouldDraw_Shadows()
 {
 	return sedit_draw_shadows.GetBool() && m_bDraw_Shadows;
 }
+
 const bool CEditorRoot::ShouldDraw_Nodes()
 {
 	return sedit_draw_nodes.GetBool();
 }
+
 const bool CEditorRoot::ShouldDraw_Jacks()
 {
 	return sedit_draw_jacks.GetBool();
 }
+
 const bool CEditorRoot::ShouldDraw_Bridges()
 {
 	return sedit_draw_bridges.GetBool();
 }
+
 const bool CEditorRoot::ShouldDraw_AllLimits()
 {
 	return m_bDraw_AllLimits;
 }
+
 void CEditorRoot::SendCopyNodes( KeyValues *pKV )
 {
 	if ( m_pKV_SelectionCopy )
@@ -694,19 +712,24 @@ void CEditorRoot::OnThink(void)
 	}
 #endif
 }
+
 bool CEditorRoot::ShouldDraw( void )
 {
 	return true;
 }
+
 void CEditorRoot::Init(void)
 {
 }
+
 void CEditorRoot::LevelInit( void )
 {
 }
+
 void CEditorRoot::LevelShutdown()
 {
 }
+
 void CEditorRoot::SetVisible(bool state)
 {
 	BaseClass::SetVisible(state);
@@ -770,6 +793,7 @@ void CEditorRoot::OnMenuFile( int entry )
 		break;
 	}
 }
+
 void CEditorRoot::OnMenuShader( int entry )
 {
 	switch ( entry )
@@ -802,6 +826,7 @@ void CEditorRoot::OnMenuShader( int entry )
 		break;
 	}
 }
+
 void CEditorRoot::OnMenuPostProcessing( int entry )
 {
 	switch ( entry )
@@ -851,6 +876,7 @@ void CEditorRoot::SaveAllGraphs()
 			GetFlowGraph(i)->SaveToFile( GetFlowGraph(i)->GetShadername() );
 	}
 }
+
 void CEditorRoot::OnShaderNameChanged()
 {
 	CNodeView *pView = GetSafeFlowgraph();
@@ -883,6 +909,7 @@ void CEditorRoot::OnShaderNameChanged()
 
 	pNodeSheet->InvalidateLayout( true, true );
 }
+
 void CEditorRoot::SetCurrentShaderName( const char *n )
 {
 	CNodeView *pView = GetSafeFlowgraph();
@@ -911,6 +938,7 @@ void CEditorRoot::OnMenuOpen( KeyValues *pKV )
 		m_pMBut_File->GetMenu()->SetItemEnabled( 6, bAllowRedo );
 	}
 }
+
 void CEditorRoot::OpenFileDialog( bool bSave )
 {
 	if ( m_hShaderBrowser.Get() )
@@ -934,13 +962,16 @@ void CEditorRoot::OpenFileDialog( bool bSave )
 		m_hShaderBrowser->DoModal( true );
 	}
 }
+
 void CEditorRoot::OnFileSelected( KeyValues *pKV )
 {
 	KeyValues *pContext = pKV->FindKey( "FileOpenContext" );
 	if ( !pContext )
 		return;
+
 	const char *__c = pContext->GetString( "context" );
 	bool bSaving = true;
+
 	if ( !Q_stricmp( __c, "openc" ) )
 		bSaving = false;
 
@@ -1244,6 +1275,7 @@ void CEditorRoot::CreatePreview()
 	pPreview->MakeReadyForUse();
 	pPreview->InvalidateLayout( true, true );
 }
+
 const char *CEditorRoot::GetEnvmapOverride()
 {
 	if ( !pPreview )
@@ -1255,6 +1287,7 @@ const char *CEditorRoot::GetEnvmapOverride()
 
 	return pEnv;
 }
+
 void CEditorRoot::OnNewFile()
 {
 	//m_szShaderName[0] = '\0';
@@ -1262,11 +1295,14 @@ void CEditorRoot::OnNewFile()
 	pView->SetShadername(NULL);
 	OnShaderNameChanged();
 }
+
 void CEditorRoot::LoadLayout()
 {
 	KeyValues *pKV = new KeyValues( "config" );
 	bool bPreview = false;
-	if ( pKV->LoadFromFile( filesystem, VarArgs( "%s/shadereditorui/editor_config.txt", engine->GetGameDirectory()), "MOD" ) )
+
+	//if ( pKV->LoadFromFile( filesystem, VarArgs( "%s/shadereditorui/editor_config.txt", engine->GetGameDirectory()), "MOD" ) )
+	if ( pKV->LoadFromFile( g_pFullFileSystem, EDITOR_CONFIG_FILE, "MOD" ) )
 	{
 		px = pKV->GetInt( "p_x" );
 		py = pKV->GetInt( "p_y" );
@@ -1277,7 +1313,7 @@ void CEditorRoot::LoadLayout()
 	}
 	else
 	{
-		px=py=psx=psy=0;
+		px = py = psx = psy = 0;
 	}
 
 	m_bDraw_Datatypes = !!pKV->GetInt( "draw_datatypes", 1 );
@@ -1300,6 +1336,7 @@ void CEditorRoot::LoadLayout()
 	if ( bPreview )
 		CreatePreview();
 }
+
 void CEditorRoot::SaveLayout()
 {
 	KeyValues *pKV = new KeyValues( "config" );
@@ -1328,7 +1365,8 @@ void CEditorRoot::SaveLayout()
 	pKV->SetInt( "cedit_sx", cedit_sx );
 	pKV->SetInt( "cedit_sy", cedit_sy );
 
-	pKV->SaveToFile( filesystem, VarArgs( "%s/shadereditorui/editor_config.txt", engine->GetGameDirectory()), "MOD" );
+	//pKV->SaveToFile( filesystem, VarArgs( "%s/shadereditorui/editor_config.txt", engine->GetGameDirectory()), "MOD" );
+	pKV->SaveToFile( g_pFullFileSystem, EDITOR_CONFIG_FILE, "MOD" );
 	pKV->deleteThis();
 
 	//DeallocPingPongRTs();
@@ -1418,6 +1456,7 @@ void CEditorRoot::ApplySchemeSettings(vgui::IScheme *pScheme)
 	OnShaderNameChanged();
 	GenerateFonts(pScheme);
 }
+
 void CEditorRoot::PerformLayout()
 {
 	BaseClass::PerformLayout();
@@ -1435,6 +1474,7 @@ void CEditorRoot::PerformLayout()
 
 	m_pLabelTitle->SetVisible( !m_bHalfView );
 }
+
 void CEditorRoot::OnKeyCodeTyped(KeyCode code)
 {
 	BaseClass::OnKeyCodeTyped( code );
@@ -1443,6 +1483,7 @@ void CEditorRoot::OnKeyCodeTyped(KeyCode code)
 	if ( pView )
 		pView->OnParentKeyCodeTyped( code );
 }
+
 void CEditorRoot::OnKeyCodePressed ( vgui::KeyCode code )
 {
 	BaseClass::OnKeyCodePressed( code );
@@ -1451,6 +1492,7 @@ void CEditorRoot::OnKeyCodePressed ( vgui::KeyCode code )
 	if ( pView )
 		pView->OnParentKeyCodePressed( code );
 }
+
 void CEditorRoot::OnKeyCodeReleased( vgui::KeyCode code )
 {
 	BaseClass::OnKeyCodeReleased( code );
@@ -1527,6 +1569,7 @@ void CEditorRoot::ToggleFullScreen()
 		pNodeSheet->ScrollToActivePage();
 	}
 }
+
 void CEditorRoot::ToggleVisible()
 {
 	SetVisible( !IsVisible() );
@@ -1534,6 +1577,7 @@ void CEditorRoot::ToggleVisible()
 	if ( IsVisible() )
 		MoveToFront();
 }
+
 void CEditorRoot::ToggleInput()
 {
 	if ( !pEditorRoot->IsVisible() )

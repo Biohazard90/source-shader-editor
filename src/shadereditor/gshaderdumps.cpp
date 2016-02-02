@@ -5,28 +5,32 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
+#define DUMP_LIST_FILE "shadereditorui/dumps/shaderlist.txt"
+
+/*
 void GetDumpListFilePath( char *out, int maxlen )
 {
 	Q_snprintf( out, maxlen, "%s/shaderlist.txt", ::GetDumpDirectory() );
 	Q_FixSlashes( out );
 }
+*/
 
 KeyValues *df_LoadDump_List()
 {
-	char path_dump_list[MAX_PATH];
-	GetDumpListFilePath( path_dump_list, MAX_PATH );
-
 	KeyValues *pKV = new KeyValues( "shaderlist" );
-	pKV->LoadFromFile( g_pFullFileSystem, path_dump_list, "MOD" );
+ 	// Allow loading from vpks
+	pKV->LoadFromFile( filesystem, DUMP_LIST_FILE, "GAME" ) || pKV->LoadFromFile( g_pFullFileSystem, DUMP_LIST_FILE, "MOD" );
 	return pKV;
 }
 
 void df_SaveDump_List( KeyValues *pKV )
 {
-	char path_dump_list[MAX_PATH];
-	GetDumpListFilePath( path_dump_list, MAX_PATH );
+	//char path_dump_list[MAX_PATH];
+	//GetDumpListFilePath( path_dump_list, MAX_PATH );
 
-	pKV->SaveToFile( g_pFullFileSystem, path_dump_list, "MOD" );
+	//pKV->SaveToFile( g_pFullFileSystem, path_dump_list, "MOD" );
+	pKV->SaveToFile( g_pFullFileSystem, DUMP_LIST_FILE, "MOD" );
+
 	pKV->deleteThis();
 }
 
@@ -70,7 +74,6 @@ void LoadGameShaders( bool bFirstRun )
 	hListShaders.Purge();
 }
 
-
 void UnloadGameShaders()
 {
 	if ( !gProcShaderCTRL )
@@ -88,7 +91,6 @@ void UnloadGameShaders()
 		delete old;
 	}
 }
-
 
 void ReadKVIdents_Texture( CUtlVector< SimpleTexture* > &hList, KeyValues *pKV )
 {
@@ -122,6 +124,7 @@ void ReadKVIdents_Texture( CUtlVector< SimpleTexture* > &hList, KeyValues *pKV )
 		c = pKV->FindKey( tmp );
 	}
 }
+
 void ReadKVIdents_EConst( CUtlVector< SimpleEnvConstant* > &hList, KeyValues *pKV )
 {
 	int itr = 0;
@@ -156,6 +159,7 @@ void ReadKVIdents_EConst( CUtlVector< SimpleEnvConstant* > &hList, KeyValues *pK
 		c = pKV->FindKey( tmp );
 	}
 }
+
 void ReadKVIdents_Combos( CUtlVector< SimpleCombo* > &hList, KeyValues *pKV )
 {
 	int itr = 0;
@@ -183,6 +187,7 @@ void ReadKVIdents_Combos( CUtlVector< SimpleCombo* > &hList, KeyValues *pKV )
 		c = pKV->FindKey( tmp );
 	}
 }
+
 void ReadIdents( IdentifierLists_t &idents, KeyValues *pKV )
 {
 	ReadKVIdents_Combos( idents.hList_Combos, pKV );
@@ -191,22 +196,57 @@ void ReadIdents( IdentifierLists_t &idents, KeyValues *pKV )
 
 	idents.inum_DynamicCombos = pKV->GetInt( "i_numdcombos" );
 }
+
+// Convert the PS 3.0 names to PS 2.0b names on the fly
+#ifndef _WIN32 //POSIX
+const char *ConvertShadersToPS20( const char *c )
+{
+	char *tmp_p;
+
+	// Handle vertex shader
+	if ( V_strstr(c, "_vs30") )
+	{
+    tmp_p = V_strstr( c, "_vs30" );
+		V_strncpy( tmp_p, "_vs20", 7 );
+	}
+
+	// Handle pixel shader
+	if ( V_strstr(c, "_ps30") )
+	{
+		tmp_p = V_strstr( c, "_ps30" );
+		V_strncpy( tmp_p, "_ps20b", 7 );
+	}
+
+	return c;
+}
+#endif //POSIX
+
+// Get shader informations from .dump files
 BasicShaderCfg_t *BuildShaderData( const char *dumpFileName )
 {
 	KeyValues *pKV = new KeyValues( dumpFileName );
 	char _path[MAX_PATH];
-	Q_snprintf( _path, MAX_PATH, "%s/%s.dump", ::GetDumpDirectory(), dumpFileName );
+	//Q_snprintf( _path, MAX_PATH, "%s/%s.dump", ::GetDumpDirectory(), dumpFileName );
+	Q_snprintf( _path, MAX_PATH, "%s/%s.dump", "shadereditorui/dumps", dumpFileName );
 	Q_FixSlashes( _path );
-	pKV->LoadFromFile( g_pFullFileSystem, _path, "MOD" );
+
+	// Allow loading from vpks
+	pKV->LoadFromFile( filesystem, _path, "GAME" ) || pKV->LoadFromFile( g_pFullFileSystem, _path, "MOD" );
 
 	BasicShaderCfg_t *data = new BasicShaderCfg_t();
 
 	const char *szT = pKV->GetString( "vs_name" );
+#ifndef _WIN32 // POSIX
+	szT = ConvertShadersToPS20(szT);
+#endif // POSIX
 	int len = Q_strlen( szT ) + 1;
 	data->ProcVSName = new char[ len ];
 	Q_snprintf( data->ProcVSName, len, "%s", szT );
 
 	szT = pKV->GetString( "ps_name" );
+#ifndef _WIN32 // POSIX
+	szT = ConvertShadersToPS20(szT);
+#endif // POSIX
 	len = Q_strlen( szT ) + 1;
 	data->ProcPSName = new char[ len ];
 	Q_snprintf( data->ProcPSName, len, "%s", szT );
@@ -223,8 +263,11 @@ BasicShaderCfg_t *BuildShaderData( const char *dumpFileName )
 	Q_snprintf( data->CanvasName, len, "%s", szT );
 
 	Q_snprintf( data->dumpversion, sizeof(data->dumpversion), "%s", pKV->GetString( GetDumpVersion_KeyName() ) );
-
+#ifndef _WIN32 // POSIX
+	data->iShaderModel = 0; // force ps2.0b on Posix
+#else // WIN32
 	data->iShaderModel = pKV->GetInt( "i_sm" );
+#endif // POSIX
 	data->iCullmode = pKV->GetInt( "i_cull" );
 	data->iAlphablendmode = pKV->GetInt( "i_ablend" );
 	data->flAlphaTestRef = pKV->GetFloat( "fl_atestref" );
@@ -256,7 +299,6 @@ BasicShaderCfg_t *BuildShaderData( const char *dumpFileName )
 	pKV->deleteThis();
 	return data;
 }
-
 
 KeyValues *__AllocKV_Texture( int i, SimpleTexture *c )
 {
@@ -301,7 +343,7 @@ KeyValues *__AllocKV_EConst( int i, SimpleEnvConstant *c )
 		Q_snprintf( tmpdef, MAX_PATH, "fl_smartdefault_%02i", i );
 		pKV->SetFloat( tmpdef, c->flSmartDefaultValues[ i ] );
 	}
-	
+
 	return pKV;
 }
 /*
@@ -367,7 +409,7 @@ void df_SaveDump_File( const char *canvasname, const BasicShaderCfg_t &shader )
 	pKV->SetInt( "i_dtest", shader.iDepthtestmode );
 	pKV->SetInt( "i_dwrite", shader.iDepthwritemode );
 	pKV->SetInt( "i_srgbw", shader.bsRGBWrite ? 1 : 0 );
-	
+
 	pKV->SetInt( "i_vfmt_flags", shader.iVFMT_flags );
 	pKV->SetInt( "i_vfmt_texcoords", shader.iVFMT_numTexcoords );
 	pKV->SetInt( "i_vfmt_udata", shader.iVFMT_numUserData );

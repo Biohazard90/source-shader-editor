@@ -49,7 +49,7 @@ void CNodeViewError::SetText( const char *szParam )
 	if ( szParam != NULL )
 		Q_snprintf( tmp, sizeof(tmp), szErrorText, szParam );
 	else
-		Q_snprintf( tmp, sizeof(tmp), szErrorText );
+		Q_snprintf( tmp, sizeof(tmp), szErrorText, (2 * MAX_PATH) );
 
 	pL->SetText( tmp );
 

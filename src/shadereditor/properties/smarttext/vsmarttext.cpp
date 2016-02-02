@@ -255,12 +255,12 @@ void CParserHelper::Shutdown()
 		ParserThreadCmd_Request *pR = new ParserThreadCmd_Request();
 		pR->flags = PARSERREQUEST_STOPTHREAD;
 		ParserThread.m_QueueParse.QueueMessage( pR );
-//ThreadSetAffinity
+		//ThreadSetAffinity
 #ifdef _WIN32
 		VCRHook_WaitForSingleObject( ParserThread.GetThreadHandle(), TT_INFINITE );
-#else // not WIN32
+#else // POSIX
 		VCRHook_WaitForSingleObject( ParserThread.GetThreadId(), TT_INFINITE );
-#endif // not WIN32
+#endif // POSIX
 	}
 }
 

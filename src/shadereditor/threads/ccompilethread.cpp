@@ -21,10 +21,10 @@ static ConVar sedit_cf( "shaderEditor_compilefrenzy", "0" );
 
 char *compilerSMConstants[4][2] =
 {
-	"DSHADER_MODEL_PS_2_B",			"Tps_2_b",
-	"DSHADER_MODEL_PS_3_0",			"Tps_3_0",
-	"DSHADER_MODEL_VS_2_0",			"Tvs_2_0",
-	"DSHADER_MODEL_VS_3_0",			"Tvs_3_0",
+	"DSHADER_MODEL_PS_2_B",	"Tps_2_b",
+	"DSHADER_MODEL_PS_3_0",	"Tps_3_0",
+	"DSHADER_MODEL_VS_2_0",	"Tvs_2_0",
+	"DSHADER_MODEL_VS_3_0",	"Tvs_3_0",
 };
 
 
@@ -1146,7 +1146,8 @@ bool CCompileThread::StartCompiler()
 
 	//chdir( old_wd );
 	return true;
-#else
+#else // POSIX
+	Msg("Compiling is not possible on Posix!\n");
 	return false;
-#endif
+#endif // POSIX
 }

@@ -91,6 +91,7 @@ void CShaderPrecache::LoadList()
 
 	pKV->deleteThis();
 }
+
 void CShaderPrecache::AddEntry( const char *name )
 {
 	char szFullpath[MAX_PATH];
@@ -119,6 +120,7 @@ void CShaderPrecache::AddEntry( const char *name )
 
 	SortAllEntries();
 }
+
 int PEntrySort( PListEntry_t const *p1, PListEntry_t const *p2 )
 {
 	char sz1[ MAX_PATH ];
@@ -127,6 +129,7 @@ int PEntrySort( PListEntry_t const *p1, PListEntry_t const *p2 )
 	( *p2 ).L->GetText( sz2, sizeof( sz2 ) );
 	return Q_stricmp( sz1, sz2 );
 }
+
 void CShaderPrecache::SortAllEntries()
 {
 	m_pPanelList.Sort( PEntrySort );
@@ -135,6 +138,7 @@ void CShaderPrecache::SortAllEntries()
 		m_pPanelList_Shader->AddItem( m_pPanelList[i].L, m_pPanelList[i].B );
 	UpdateAllButtonCmds();
 }
+
 void CShaderPrecache::SetButtonCmd( Button *b )
 {
 	Assert( PListEntry_t::HasElement( m_pPanelList, b ) );
@@ -142,6 +146,7 @@ void CShaderPrecache::SetButtonCmd( Button *b )
 	int idx = PListEntry_t::FindEntry( m_pPanelList, b );
 	b->SetCommand( new KeyValues( "shaderremove", "index", idx ) );
 }
+
 void CShaderPrecache::SaveList()
 {
 	KeyValues *pKV = new KeyValues( "shaderlist" );
@@ -155,6 +160,7 @@ void CShaderPrecache::SaveList()
 
 	df_SaveDump_List( pKV );
 }
+
 void CShaderPrecache::OnRemovePressed( int index )
 {
 	m_pPanelList.Remove( index );
@@ -168,7 +174,6 @@ void CShaderPrecache::UpdateAllButtonCmds()
 	for ( int i = 0; i < m_pPanelList.Count(); i++ )
 		SetButtonCmd( m_pPanelList[i].B );
 }
-
 
 void CShaderPrecache::OpenFileBrowser()
 {
@@ -187,6 +192,7 @@ void CShaderPrecache::OpenFileBrowser()
 		m_hDumpBrowser->DoModal();
 	}
 }
+
 void CShaderPrecache::OnFileSelected( KeyValues *pKV )
 {
 	const char *pathIn = pKV->GetString( "fullpath" );

@@ -1160,28 +1160,8 @@ BEGIN_VS_SHADER( EDITOR_SHADER, "" )
 			pShaderShadow->SetVertexShader( tmp_vs, index_vs_static );
 			pShaderShadow->SetPixelShader( tmp_ps, index_ps_static );
 #else
-#ifdef _WIN32
 			pShaderShadow->SetVertexShader( cfg->ProcVSName, index_vs_static );
 			pShaderShadow->SetPixelShader( cfg->ProcPSName, index_ps_static );
-#else // POSIX
-			char tmp_vs[MAX_PATH*4];
-			char tmp_ps[MAX_PATH*4];
-			V_strncpy(tmp_vs, cfg->ProcVSName, sizeof( tmp_vs ) );
-			V_strncpy(tmp_ps, cfg->ProcPSName, sizeof( tmp_ps ) );
-			//Msg( "VertexShader name: %s.\n", tmp_vs );
-			//Msg( "PixelShader name: %s.\n", tmp_ps );
-			char * tmp_p_vs;
-			char * tmp_p_ps;
-			tmp_p_vs = V_strstr( tmp_vs, "_vs30" );
-			tmp_p_ps = V_strstr( tmp_ps, "_ps30" );
-			V_strncpy( tmp_p_vs, "_vs20", 7 );
-			V_strncpy( tmp_p_ps, "_ps20b", 7 );
-			//Msg( "PS 2.0 VertexShader name: %s.\n", tmp_vs );
-			//Msg( "PS 2.0 PixelShader name: %s.\n", tmp_ps );
-			// load ps2.0 shaders
-			pShaderShadow->SetVertexShader( tmp_vs, index_vs_static );
-			pShaderShadow->SetPixelShader( tmp_ps, index_ps_static );
-#endif // POSIX
 #endif
 		}
 

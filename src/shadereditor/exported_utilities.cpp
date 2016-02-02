@@ -18,7 +18,7 @@
 #define PATHSEPARATOR(c) ((c) == '\\' || (c) == '/')
 #else	//_WIN32
 #define PATHSEPARATOR(c) ((c) == '/')
-#endif	//_WIN32
+#endif//_WIN32
 
 #ifdef SHADER_EDITOR_DLL_2006
 
@@ -26,6 +26,7 @@ IFileSystem *getdllFS()
 {
 	return filesystem;
 }
+
 void setdllFS(IFileSystem*fs)
 {
 	filesystem = fs;
@@ -63,7 +64,7 @@ char *V_StripFirstDir (char *path)
 
 	int             pos = 0;
 
-	while ( pos <= len_max && 
+	while ( pos <= len_max &&
 		!PATHSEPARATOR( path[pos] ) )
 	{
 		pos++;
@@ -75,6 +76,7 @@ char *V_StripFirstDir (char *path)
 	//path[ pos ] = 0;
 	return &path[ pos ];
 }
+
 void V_IsolateFirstDir (char *path)
 {
 	int             lengthMax;
@@ -84,7 +86,7 @@ void V_IsolateFirstDir (char *path)
 	if ( lengthMax <= 0 )
 		return;
 
-	while ( pos <= lengthMax && 
+	while ( pos <= lengthMax &&
 		!PATHSEPARATOR( path[pos] ) )
 	{
 		pos++;
@@ -93,10 +95,7 @@ void V_IsolateFirstDir (char *path)
 	path[ pos ] = 0;
 }
 
-
-
-
-CUtlBufferEditor::CUtlBufferEditor( int growSize, int initSize, int nFlags ) : 
+CUtlBufferEditor::CUtlBufferEditor( int growSize, int initSize, int nFlags ) :
 	m_Memory( growSize, initSize ), m_Error(0)
 {
 	m_Get = 0;
@@ -138,9 +137,8 @@ CUtlBufferEditor::CUtlBufferEditor( const void *pBuffer, int nSize, int nFlags )
 	SetOverflowFuncs( &CUtlBufferEditor::GetOverflow, &CUtlBufferEditor::PutOverflow );
 }
 
-
 //-----------------------------------------------------------------------------
-// Modifies the buffer to be binary or text; Blows away the buffer and the CONTAINS_CRLF value. 
+// Modifies the buffer to be binary or text; Blows away the buffer and the CONTAINS_CRLF value.
 //-----------------------------------------------------------------------------
 void CUtlBufferEditor::SetBufferType( bool bIsText, bool bContainsCRLF )
 {
@@ -250,7 +248,6 @@ void CUtlBufferEditor::EnsureCapacity( int num )
 	m_Memory.EnsureCapacity( num );
 }
 
-
 //-----------------------------------------------------------------------------
 // Base get method from which all others derive
 //-----------------------------------------------------------------------------
@@ -263,9 +260,8 @@ void CUtlBufferEditor::Get( void* pMem, int size )
 	}
 }
 
-
 //-----------------------------------------------------------------------------
-// This will get at least 1 byte and up to nSize bytes. 
+// This will get at least 1 byte and up to nSize bytes.
 // It will return the number of bytes actually read.
 //-----------------------------------------------------------------------------
 int CUtlBufferEditor::GetUpTo( void *pMem, int nSize )
@@ -276,10 +272,9 @@ int CUtlBufferEditor::GetUpTo( void *pMem, int nSize )
 		m_Get += nSize;
 		return nSize;
 	}
-	return 0;	
+	return 0;
 }
 
-	
 //-----------------------------------------------------------------------------
 // Eats whitespace
 //-----------------------------------------------------------------------------
@@ -295,7 +290,6 @@ void CUtlBufferEditor::EatWhiteSpace()
 		}
 	}
 }
-
 
 //-----------------------------------------------------------------------------
 // Eats C++ style comments
@@ -323,7 +317,6 @@ bool CUtlBufferEditor::EatCPPComment()
 	return false;
 }
 
-	
 //-----------------------------------------------------------------------------
 // Peeks how much whitespace to eat
 //-----------------------------------------------------------------------------
@@ -341,7 +334,6 @@ int CUtlBufferEditor::PeekWhiteSpace( int nOffset )
 
 	return nOffset;
 }
-
 
 //-----------------------------------------------------------------------------
 // Peek size of sting to come, check memory bound
@@ -398,7 +390,6 @@ int	CUtlBufferEditor::PeekStringLength()
 	} while ( true );
 }
 
-
 //-----------------------------------------------------------------------------
 // Peek size of line to come, check memory bound
 //-----------------------------------------------------------------------------
@@ -439,7 +430,6 @@ int	CUtlBufferEditor::PeekLineLength()
 	} while ( true );
 }
 
-
 //-----------------------------------------------------------------------------
 // Does the next bytes of the buffer match a pattern?
 //-----------------------------------------------------------------------------
@@ -449,7 +439,6 @@ bool CUtlBufferEditor::PeekStringMatch( int nOffset, const char *pString, int nL
 		return false;
 	return !Q_strncmp( (const char*)PeekGet(nOffset), pString, nLen );
 }
-
 
 //-----------------------------------------------------------------------------
 // This version of PeekStringLength converts \" to \\ and " to \, etc.
@@ -500,7 +489,6 @@ int CUtlBufferEditor::PeekDelimitedStringLength( CUtlCharConversion *pConv, bool
 	return bActualSize ? nLen : nOffset - nActualStart + pConv->GetDelimiterLength() + 1;
 }
 
-
 //-----------------------------------------------------------------------------
 // Reads a null-terminated string
 //-----------------------------------------------------------------------------
@@ -532,7 +520,7 @@ void CUtlBufferEditor::GetString( char* pString, int nMaxChars )
 		m_Error |= GET_OVERFLOW;
 		return;
 	}
-	
+
 	// Strip off the terminating NULL
 	if ( nLen <= nMaxChars )
 	{
@@ -552,7 +540,6 @@ void CUtlBufferEditor::GetString( char* pString, int nMaxChars )
 		VerifyEquals( GetChar(), 0 );
 	}
 }
-
 
 //-----------------------------------------------------------------------------
 // Reads up to and including the first \n
@@ -581,7 +568,7 @@ void CUtlBufferEditor::GetLine( char* pLine, int nMaxChars )
 		m_Error |= GET_OVERFLOW;
 		return;
 	}
-	
+
 	// Strip off the terminating NULL
 	if ( nLen <= nMaxChars )
 	{
@@ -596,7 +583,6 @@ void CUtlBufferEditor::GetLine( char* pLine, int nMaxChars )
 	}
 }
 
-	
 //-----------------------------------------------------------------------------
 // This version of GetString converts \ to \\ and " to \", etc.
 // It also places " at the beginning and end of the string
@@ -675,7 +661,6 @@ void CUtlBufferEditor::GetDelimitedString( CUtlCharConversion *pConv, char *pStr
 	pString[nRead] = '\0';
 }
 
-
 //-----------------------------------------------------------------------------
 // Checks if a get is ok
 //-----------------------------------------------------------------------------
@@ -702,7 +687,6 @@ bool CUtlBufferEditor::CheckGet( int nSize )
 	return true;
 }
 
-
 //-----------------------------------------------------------------------------
 // Checks if a peek get is ok
 //-----------------------------------------------------------------------------
@@ -716,7 +700,6 @@ bool CUtlBufferEditor::CheckPeekGet( int nOffset, int nSize )
 	m_Error &= ~GET_OVERFLOW;
 	return bOk;
 }
-
 
 //-----------------------------------------------------------------------------
 // Call this to peek arbitrarily long into memory. It doesn't fail unless
@@ -746,7 +729,6 @@ bool CUtlBufferEditor::CheckArbitraryPeekGet( int nOffset, int &nIncrement )
 	return (nIncrement != 0);
 }
 
-
 //-----------------------------------------------------------------------------
 // Peek part of the butt
 //-----------------------------------------------------------------------------
@@ -757,16 +739,15 @@ const void* CUtlBufferEditor::PeekGet( int nMaxSize, int nOffset )
 	return &m_Memory[ m_Get + nOffset - m_nOffset ];
 }
 
-
 //-----------------------------------------------------------------------------
 // Change where I'm reading
 //-----------------------------------------------------------------------------
-void CUtlBufferEditor::SeekGet( SeekType_t type, int offset )	
+void CUtlBufferEditor::SeekGet( SeekType_t type, int offset )
 {
 	switch( type )
 	{
-	case SEEK_HEAD:						 
-		m_Get = offset; 
+	case SEEK_HEAD:
+		m_Get = offset;
 		break;
 
 	case SEEK_CURRENT:
@@ -792,7 +773,6 @@ void CUtlBufferEditor::SeekGet( SeekType_t type, int offset )
 	}
 }
 
-
 //-----------------------------------------------------------------------------
 // Parse...
 //-----------------------------------------------------------------------------
@@ -804,7 +784,7 @@ int CUtlBufferEditor::VaScanf( const char* pFmt, va_list list )
 	Assert( pFmt );
 	if ( m_Error || !IsText() )
 		return 0;
-	
+
 	int numScanned = 0;
 	int nLength;
 	char c;
@@ -870,7 +850,7 @@ int CUtlBufferEditor::VaScanf( const char* pFmt, va_list list )
 						m_Get += nBytesRead;
 					}
 					break;
-				
+
 				case 'x':
 					{
 						int* i = va_arg( list, int * );
@@ -890,7 +870,7 @@ int CUtlBufferEditor::VaScanf( const char* pFmt, va_list list )
 						m_Get += nBytesRead;
 					}
 					break;
-					
+
 				case 'u':
 					{
 						unsigned int* u = va_arg( list, unsigned int *);
@@ -910,7 +890,7 @@ int CUtlBufferEditor::VaScanf( const char* pFmt, va_list list )
 						m_Get += nBytesRead;
 					}
 					break;
-					
+
 				case 'f':
 					{
 						float* f = va_arg( list, float *);
@@ -930,7 +910,7 @@ int CUtlBufferEditor::VaScanf( const char* pFmt, va_list list )
 						m_Get += nBytesRead;
 					}
 					break;
-					
+
 				case 's':
 					{
 						char* s = va_arg( list, char * );
@@ -981,7 +961,6 @@ int CUtlBufferEditor::Scanf( const char* pFmt, ... )
 	return count;
 }
 
-
 //-----------------------------------------------------------------------------
 // Advance the get index until after the particular string is found
 // Do not eat whitespace before starting. Return false if it failed
@@ -1026,7 +1005,6 @@ bool CUtlBufferEditor::GetToken( const char *pToken )
 	SeekGet( CUtlBufferEditor::SEEK_HEAD, nGet );
 	return false;
 }
-
 
 //-----------------------------------------------------------------------------
 // (For text buffers only)
@@ -1112,7 +1090,6 @@ parseFailed:
 	return false;
 }
 
-
 //-----------------------------------------------------------------------------
 // Parses the next token, given a set of character breaks to stop at
 //-----------------------------------------------------------------------------
@@ -1129,7 +1106,7 @@ int CUtlBufferEditor::ParseToken( characterset_t *pBreaks, char *pTokenBuf, int 
 		EatWhiteSpace();
 		if ( bParseComments )
 		{
-			if ( !EatCPPComment() )	
+			if ( !EatCPPComment() )
 				break;
 		}
 		else
@@ -1137,9 +1114,9 @@ int CUtlBufferEditor::ParseToken( characterset_t *pBreaks, char *pTokenBuf, int 
 			break;
 		}
 	}
-	
+
 	char c = GetChar();
-	
+
 	// End of buffer
 	if ( c == 0 )
 		return -1;
@@ -1197,13 +1174,11 @@ int CUtlBufferEditor::ParseToken( characterset_t *pBreaks, char *pTokenBuf, int 
 			break;
 		}
 	}
-	
+
 	pTokenBuf[nLen] = 0;
 	return nLen;
 }
 
-
-	
 //-----------------------------------------------------------------------------
 // Serialization
 //-----------------------------------------------------------------------------
@@ -1217,7 +1192,6 @@ void CUtlBufferEditor::Put( const void *pMem, int size )
 		AddNullTermination();
 	}
 }
-
 
 //-----------------------------------------------------------------------------
 // Writes a null-terminated string
@@ -1275,7 +1249,6 @@ void CUtlBufferEditor::PutString( const char* pString )
 	}
 }
 
-
 //-----------------------------------------------------------------------------
 // This version of PutString converts \ to \\ and " to \", etc.
 // It also places " at the beginning and end of the string
@@ -1332,12 +1305,11 @@ void CUtlBufferEditor::PutDelimitedString( CUtlCharConversion *pConv, const char
 	Put( pConv->GetDelimiter(), pConv->GetDelimiterLength() );
 }
 
-
 void CUtlBufferEditor::VaPrintf( const char* pFmt, va_list list )
 {
 	char temp[2048];
-#ifdef _DEBUG	
-	int nLen = 
+#ifdef _DEBUG
+	int nLen =
 #endif
 		Q_vsnprintf( temp, sizeof( temp ), pFmt, list );
 	Assert( nLen < 2048 );
@@ -1353,7 +1325,6 @@ void CUtlBufferEditor::Printf( const char* pFmt, ... )
 	va_end( args );
 }
 
-
 //-----------------------------------------------------------------------------
 // Calls the overflow functions
 //-----------------------------------------------------------------------------
@@ -1363,7 +1334,6 @@ void CUtlBufferEditor::SetOverflowFuncs( UtlBufferOverflowFunc_t getFunc, UtlBuf
 	m_PutOverflowFunc = putFunc;
 }
 
-	
 //-----------------------------------------------------------------------------
 // Calls the overflow functions
 //-----------------------------------------------------------------------------
@@ -1377,7 +1347,6 @@ bool CUtlBufferEditor::OnGetOverflow( int nSize )
 	return (this->*m_GetOverflowFunc)( nSize );
 }
 
-	
 //-----------------------------------------------------------------------------
 // Checks if a put is ok
 //-----------------------------------------------------------------------------
@@ -1403,7 +1372,7 @@ bool CUtlBufferEditor::GetOverflow( int nSize )
 {
 	return false;
 }
-	
+
 
 //-----------------------------------------------------------------------------
 // Checks if a put is ok
@@ -1424,13 +1393,13 @@ bool CUtlBufferEditor::CheckPut( int nSize )
 	return true;
 }
 
-void CUtlBufferEditor::SeekPut( SeekType_t type, int offset )	
+void CUtlBufferEditor::SeekPut( SeekType_t type, int offset )
 {
 	int nNextPut = m_Put;
 	switch( type )
 	{
-	case SEEK_HEAD:						 
-		nNextPut = offset; 
+	case SEEK_HEAD:
+		nNextPut = offset;
 		break;
 
 	case SEEK_CURRENT:
@@ -1453,7 +1422,6 @@ void CUtlBufferEditor::SeekPut( SeekType_t type, int offset )
 	AddNullTermination();
 }
 
-
 void CUtlBufferEditor::ActivateByteSwapping( bool bActivate )
 {
 	m_Byteswap.ActivateByteSwapping( bActivate );
@@ -1468,7 +1436,6 @@ bool CUtlBufferEditor::IsBigEndian( void )
 {
 	return m_Byteswap.IsTargetBigEndian();
 }
-
 
 //-----------------------------------------------------------------------------
 // null terminate the buffer
@@ -1491,9 +1458,8 @@ void CUtlBufferEditor::AddNullTermination( void )
 			}
 		}
 		m_nMaxPut = m_Put;
-	}		
+	}
 }
-
 
 //-----------------------------------------------------------------------------
 // Converts a buffer from a CRLF buffer to a CR buffer (and back)
@@ -1575,8 +1541,8 @@ bool CUtlBufferEditor::ConvertCRLF( CUtlBufferEditor &outBuf )
 
 	Assert(	nPut + nPutDelta <= outBuf.TellMaxPut() );
 
-	outBuf.SeekGet( SEEK_HEAD, nGet + nGetDelta ); 
-	outBuf.SeekPut( SEEK_HEAD, nPut + nPutDelta ); 
+	outBuf.SeekGet( SEEK_HEAD, nGet + nGetDelta );
+	outBuf.SeekPut( SEEK_HEAD, nPut + nPutDelta );
 
 	return true;
 }

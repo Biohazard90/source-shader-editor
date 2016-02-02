@@ -1,8 +1,5 @@
 #include "cbase.h"
 #include "editorcommon.h"
-#ifdef _WIN32
-#include <direct.h>
-#endif
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -177,7 +174,6 @@ void CreateDirectoryStrings()
 	Q_FixSlashes( _compilePath_Local );
 	pKV->deleteThis();
 
-
 	const char *__localrootdir = "shadereditorui";
 	Q_snprintf( _seditRoot, MASTERPATH_MAXLEN, "%s/%s", _gamePath, __localrootdir );
 	Q_FixSlashes( _seditRoot );
@@ -204,11 +200,9 @@ void CreateDirectoryStrings()
 	Q_FixSlashes( _swarmShaderDir );
 #endif
 
-
 	ApplyDirectoryOverrides();
 
 	CreateDirectories();
-
 
 	if ( shaderEdit->ShouldShowPrimaryDbg() )
 	{
@@ -228,6 +222,7 @@ void CreateDirectoryStrings()
 		Msg( "src: %s\n", _shaderSource );
 	}
 }
+
 void CreateDirectories()
 {
 	if ( !g_pFullFileSystem->IsDirectory( _canvasDir, "MOD" ) )
@@ -235,6 +230,7 @@ void CreateDirectories()
 
 	if ( !g_pFullFileSystem->IsDirectory( _DumpFiles, "MOD" ) )
 		g_pFullFileSystem->CreateDirHierarchy( _DumpFiles, "MOD" );
+
 	if ( !g_pFullFileSystem->IsDirectory( _shaderSource, "MOD" ) )
 		g_pFullFileSystem->CreateDirHierarchy( _shaderSource, "MOD" );
 
@@ -251,7 +247,6 @@ void CreateDirectories()
 	Q_FixSlashes( tmpDir );
 	if ( !g_pFullFileSystem->IsDirectory( tmpDir, "MOD" ) )
 		g_pFullFileSystem->CreateDirHierarchy( tmpDir, "MOD" );
-
 
 	Q_snprintf( tmpDir, sizeof( tmpDir ), "%s/shaders", _gamePath );
 	Q_FixSlashes( tmpDir );
@@ -280,49 +275,61 @@ void CreateDirectories()
 		g_pFullFileSystem->CreateDirHierarchy( tmpDir );
 #endif
 }
+
 void DestroyDirectoryStrings()
 {
 }
+
 const char *GetWorkingDirectory()
 {
 	return _wd;
 }
+
 const char *GetAccountName()
 {
 	return _acc;
 }
+
 const char *GetGamePath()
 {
 	return _gamePath;
 }
+
 const char *GetBinaryPath()
 {
 	return _compilePath;
 }
+
 const char *GetBinaryPath_Local()
 {
 	return _compilePath_Local;
 }
+
 const char *GetCanvasDirectory()
 {
 	return _canvasDir;
 }
+
 const char *GetShaderSourceDirectory()
 {
 	return _shaderSource;
 }
+
 const char *GetDumpDirectory()
 {
 	return _DumpFiles;
 }
+
 const char *GetUserFunctionDirectory()
 {
 	return _uFuncs;
 }
+
 const char *GetEditorRootDirectory()
 {
 	return _seditRoot;
 }
+
 #ifdef SHADER_EDITOR_DLL_SWARM
 const char *GetSwarmShaderDirectory()
 {
@@ -347,6 +354,7 @@ void ComposeShaderName( GenericShaderData *data, bool bPS, bool bExtension, char
 	Q_FixSlashes( out );
 	//Q_strlower( out );
 }
+
 void ComposeShaderPath( GenericShaderData *data, bool bPS, bool bExtension, char *out, int maxbuf, bool bPosOverride )
 {
 	char sname[MASTERPATH_MAXLEN];
@@ -354,7 +362,6 @@ void ComposeShaderPath( GenericShaderData *data, bool bPS, bool bExtension, char
 	Q_snprintf( out, maxbuf, "%s/%s", GetShaderSourceDirectory(), sname );
 	Q_FixSlashes( out );
 }
-
 
 void ComposeShaderName_Compiled( GenericShaderData *data, bool bPS, bool bExtension, char *out, int maxbuf, bool bPosOverride )
 {
@@ -373,6 +380,7 @@ void ComposeShaderName_Compiled( GenericShaderData *data, bool bPS, bool bExtens
 	Q_FixSlashes( out );
 	//Q_strlower( out );
 }
+
 void ComposeShaderPath_Compiled( GenericShaderData *data, bool bPS, bool bExtension, char *out, int maxbuf, bool bPosOverride )
 {
 	char sname[MASTERPATH_MAXLEN];
@@ -395,7 +403,6 @@ void ComposeShaderPath_CompiledEngine( GenericShaderData *data, bool bPS, bool b
 #endif
 	Q_FixSlashes( out );
 }
-
 
 bool bIsHex( const char &c )
 {
@@ -459,13 +466,14 @@ void ListFiles( const char *dir, CUtlVector< char* > &hFiles, const char *pszExt
 	g_pFullFileSystem->FindClose( _handle );
 }
 
-
 void PreviewCleanup()
 {
 	const bool bDBG = shaderEdit->ShouldShowPrimaryDbg();
 	CUtlVector< char* >hFiles;
+
 	if ( bDBG )
 		Msg("*** cleanup start ***\n");
+
 	char tmp[MASTERPATH_MAXLEN];
 	Q_snprintf( tmp, sizeof( tmp ), "%s", GetShaderSourceDirectory() );
 	ListFiles( tmp, hFiles, NULL, &CheckPreviewMask );
@@ -477,8 +485,10 @@ void PreviewCleanup()
 	Q_snprintf( tmp, sizeof( tmp ), "%s", GetSwarmShaderDirectory() );
 	ListFiles( tmp, hFiles, NULL, &CheckPreviewMask );
 #endif
+
 	if ( bDBG )
 		Msg("killing %i files:\n", hFiles.Count());
+
 	for ( int i = 0; i < hFiles.Count(); i++ )
 	{
 		if ( !hFiles[ i ] )
@@ -509,7 +519,6 @@ void PreviewCleanup()
 	if ( bDBG )
 		Msg("***  cleanup end  ***\n");
 }
-
 
 #ifdef SHADER_EDITOR_DLL_SWARM
 void CopyAllFiles( const char *pPathSrc, const char *pPathDst, const char *pszExtension = NULL, const bool bNoOverride = false, const bool bSwarmShader = false )
@@ -553,6 +562,7 @@ void CopyAllFiles( const char *pPathSrc, const char *pPathDst, const char *pszEx
 void InitSwarmShaders()
 {
 	const bool bDBG = shaderEdit->ShouldShowPrimaryDbg();
+
 	if ( bDBG )
 		Msg("*** swarm auto copy start ***\n");
 
@@ -578,7 +588,6 @@ void InitSwarmShaders()
 		Msg("***  swarm auto copy end  ***\n");
 }
 #endif
-
 
 CON_COMMAND( shaderEditor_filecleanup, "" )
 {

@@ -61,6 +61,7 @@ IVProcShader *gProcShaderCTRL = NULL;
 ISEditModelRender *sEditMRender = NULL;
 
 static bool bIsEditing = false;
+
 const bool IsInEditMode()
 {
 	return bIsEditing;
@@ -147,7 +148,11 @@ bool ShaderEditorInterface::Init( CreateInterfaceFn appSystemFactory, CGlobalVar
 	ConVar_Register( FCVAR_CLIENTDLL );
 #endif
 
-	CreateDirectoryStrings();
+	// Only create directorys in edit mode
+	if ( IsInEditMode() )
+	{
+		CreateDirectoryStrings();
+	}
 
 	//if (!Initializer::InitializeAllObjects())
 	//	return false;
@@ -155,7 +160,6 @@ bool ShaderEditorInterface::Init( CreateInterfaceFn appSystemFactory, CGlobalVar
 	if ( !VGui_Editor_Startup( appSystemFactory ) )
 		return false;
 
-//TODO: POSIX
 #ifdef SHADER_EDITOR_DLL_SWARM
 	const char *pszModuleName = "game_shader_generic_eshader_SWARM.dll";
 #elif SHADER_EDITOR_DLL_2006
@@ -202,6 +206,7 @@ bool ShaderEditorInterface::Init( CreateInterfaceFn appSystemFactory, CGlobalVar
 	AllocSkymask( (SEDIT_SKYMASK_MODE)iSkymaskMode );
 
 	PreviewCleanup();
+
 #if 0 //def SHADER_EDITOR_DLL_SWARM
 	InitSwarmShaders();
 #endif
@@ -248,7 +253,7 @@ void ShaderEditorInterface::Shutdown()
 
 	GetMatSysShutdownHelper()->Shutdown();
 
-	UnloadGameShaders();
+	UnloadGameShaders(); //TODO
 
 	if ( gProcShaderCTRL )
 		gProcShaderCTRL->Shutdown();

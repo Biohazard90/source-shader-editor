@@ -1546,6 +1546,7 @@ int CNodeView::CreatePPSolversFromFile( const char *fileName, CUtlVector<CHLSL_S
 	int iError = CPostProcessingCache::PPE_OKAY;
 	//CNodeView *pCalcView = new CNodeView( NULL, ::pEditorRoot, "" );
 	CNodeView *pCalcView = new CNodeView( NULL, NULL, "" );
+
 	const bool bOpenSuccessful = pCalcView->LoadFromFile( fileName, true );
 
 	if ( !bOpenSuccessful || pCalcView->GetNumNodes() < 1 )
@@ -3025,7 +3026,8 @@ bool CNodeView::LoadFromFile( const char *fullpath, bool bSuppressError )
 	bool bSuccess = false;
 	KeyValues *pCanvas = new KeyValues("canvas");
 
-	if ( pCanvas->LoadFromFile( g_pFullFileSystem, fullpath, "MOD" ) )
+	// Allow loading from vpks
+	if ( pCanvas->LoadFromFile( filesystem, fullpath, "GAME" ) || pCanvas->LoadFromFile( g_pFullFileSystem, fullpath, "MOD" ) )
 	{
 		const char *pCVName = pCanvas->GetString( GetCanvasVersion_KeyName() ); //, GetCanvasVersion_Current() );
 		bool bAllowLoad = true;

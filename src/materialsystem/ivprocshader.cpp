@@ -25,7 +25,6 @@
 #define AllocCheck_FreeS(x) ((void)NULL)
 #endif
 
-
 void AddDataToMaterial( KeyValues *pMat, KeyValues *pData, int recursionDepth = 0 )
 {
 	UnpackMaterial( pData, recursionDepth );
@@ -87,10 +86,12 @@ _clCallback::_clCallback()
 	func = NULL;
 	numComps = 1;
 }
+
 _clCallback::~_clCallback()
 {
 	delete [] name;
 }
+
 _clCallback::_clCallback( const _clCallback &o )
 {
 	name = NULL;
@@ -170,7 +171,7 @@ BasicShaderCfg_t::BasicShaderCfg_t()
 #ifdef _WIN32
 	iShaderModel = SM_30;
 #else // POSIX
-	// force sm 2.0b
+	// force sm 2.0b on Posix
 	iShaderModel = SM_20B;
 #endif // POSIX
 	iCullmode = CULLMODE_CW;
@@ -289,12 +290,14 @@ SimpleCombo::SimpleCombo()
 
 	AllocCheck_Alloc();
 }
+
 SimpleCombo::~SimpleCombo()
 {
 	delete [] name;
 
 	AllocCheck_Free();
 }
+
 SimpleCombo::SimpleCombo(const SimpleCombo &o)
 {
 	name = NULL;
@@ -312,6 +315,7 @@ SimpleCombo::SimpleCombo(const SimpleCombo &o)
 
 	AllocCheck_Alloc();
 }
+
 SimpleTexture::SimpleTexture()
 {
 	szTextureName = NULL;
@@ -324,6 +328,7 @@ SimpleTexture::SimpleTexture()
 
 	AllocCheck_Alloc();
 }
+
 SimpleTexture::~SimpleTexture()
 {
 	if ( szTextureName != NULL )
@@ -337,6 +342,7 @@ SimpleTexture::~SimpleTexture()
 
 	AllocCheck_Free();
 }
+
 SimpleTexture::SimpleTexture( const SimpleTexture &o )
 {
 	iSamplerIndex = o.iSamplerIndex;
@@ -389,12 +395,14 @@ SimpleEnvConstant::SimpleEnvConstant()
 
 	AllocCheck_Alloc();
 }
+
 SimpleEnvConstant::~SimpleEnvConstant()
 {
 	delete [] szSmartHelper;
 
 	AllocCheck_Free();
 }
+
 SimpleEnvConstant::SimpleEnvConstant( const SimpleEnvConstant &o )
 {
 	szSmartHelper = NULL;
@@ -413,6 +421,7 @@ SimpleEnvConstant::SimpleEnvConstant( const SimpleEnvConstant &o )
 
 	AllocCheck_Alloc();
 }
+
 SimpleArray::SimpleArray()
 {
 	vecData = NULL;
@@ -423,6 +432,7 @@ SimpleArray::SimpleArray()
 
 	AllocCheck_Alloc();
 }
+
 SimpleArray::SimpleArray( const SimpleArray &o )
 {
 	iSize_X = o.iSize_X;
@@ -440,6 +450,7 @@ SimpleArray::SimpleArray( const SimpleArray &o )
 
 	AllocCheck_Alloc();
 }
+
 SimpleArray::~SimpleArray()
 {
 	delete [] vecData;
@@ -454,6 +465,7 @@ SimpleFunction::SimpleFunction()
 	szCode_Global = NULL;
 	szCode_Body = NULL;
 }
+
 SimpleFunction::~SimpleFunction()
 {
 	delete [] szFuncName;
@@ -462,6 +474,7 @@ SimpleFunction::~SimpleFunction()
 	delete [] szCode_Body;
 	hParams.PurgeAndDeleteElements();
 }
+
 SimpleFunction::SimpleFunction( const SimpleFunction &o )
 {
 	if ( o.szFuncName && *o.szFuncName )
@@ -503,6 +516,7 @@ SimpleFunction::SimpleFunction( const SimpleFunction &o )
 	for ( int i = 0; i < o.hParams.Count(); i++ )
 		hParams.AddToTail( new __funcParamSetup( *o.hParams[i] ) );
 }
+
 bool SimpleFunction::IsInline()
 {
 	return !szFilePath || !Q_strlen(szFilePath);
@@ -514,11 +528,13 @@ __funcParamSetup::__funcParamSetup()
 	pszName = NULL;
 	bOutput = false;
 }
+
 __funcParamSetup::~__funcParamSetup()
 {
 	if ( pszName != NULL )
 		delete [] pszName;
 }
+
 __funcParamSetup::__funcParamSetup( const __funcParamSetup &o )
 {
 	iFlag = o.iFlag;
@@ -531,6 +547,7 @@ __funcParamSetup::__funcParamSetup( const __funcParamSetup &o )
 		Q_strcpy( pszName, o.pszName );
 	}
 }
+
 const char *__funcParamSetup::GetSafeName( int num )
 {
 	if ( !pszName )
@@ -550,6 +567,7 @@ IdentifierLists_t::IdentifierLists_t()
 
 	AllocCheck_Alloc();
 }
+
 IdentifierLists_t::~IdentifierLists_t()
 {
 	hList_Combos.PurgeAndDeleteElements();
@@ -560,6 +578,7 @@ IdentifierLists_t::~IdentifierLists_t()
 
 	AllocCheck_Free();
 }
+
 IdentifierLists_t::IdentifierLists_t( const IdentifierLists_t &o )
 {
 	for ( int i = 0; i < o.hList_Combos.Count(); i++ )

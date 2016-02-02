@@ -8,9 +8,10 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
+#define PP_EFFECT_PRECACHE_FILE "shadereditorui/postprocessing_precache.txt"
+
 static CPostProcessingCache gs_ppcache;
 CPostProcessingCache *GetPPCache(){ return &gs_ppcache; };
-
 
 EditorRenderViewCommand_Data::EditorRenderViewCommand_Data()
 {
@@ -19,6 +20,7 @@ EditorRenderViewCommand_Data::EditorRenderViewCommand_Data()
 	m_pszCallbackName = NULL;
 	functor = NULL;
 }
+
 EditorRenderViewCommand_Data::~EditorRenderViewCommand_Data()
 {
 	AllocCheck_Free();
@@ -28,6 +30,7 @@ EditorRenderViewCommand_Data::~EditorRenderViewCommand_Data()
 	for ( int i = 0; i < hValues_String.Count(); i++ )
 		delete [] hValues_String[i];
 }
+
 EditorRenderViewCommand_Data::EditorRenderViewCommand_Data( const EditorRenderViewCommand_Data &o )
 {
 	AllocCheck_Alloc();
@@ -48,18 +51,22 @@ EditorRenderViewCommand_Data::EditorRenderViewCommand_Data( const EditorRenderVi
 
 	AutoCopyStringPtr( o.m_pszCallbackName, &m_pszCallbackName );
 }
+
 void EditorRenderViewCommand_Data::AddBoolValue( bool bVal )
 {
 	hValues_Bool.AddToTail( bVal );
 }
+
 void EditorRenderViewCommand_Data::AddIntValue( int iVal )
 {
 	hValues_Int.AddToTail( iVal );
 }
+
 void EditorRenderViewCommand_Data::AddFloatValue( float flVal )
 {
 	hValues_Float.AddToTail( flVal );
 }
+
 void EditorRenderViewCommand_Data::AddStringValue( const char *pszVal )
 {
 	const char *pszDef = "";
@@ -72,22 +79,27 @@ void EditorRenderViewCommand_Data::AddStringValue( const char *pszVal )
 	Q_strcpy( pStr, pszVal );
 	hValues_String.AddToTail( pStr );
 }
+
 const bool EditorRenderViewCommand_Data::GetBoolVal( const int &slot )
 {
 	return hValues_Bool[ slot ];
 }
+
 const int EditorRenderViewCommand_Data::GetIntVal( const int &slot )
 {
 	return hValues_Int[ slot ];
 }
+
 const float EditorRenderViewCommand_Data::GetFloatVal( const int &slot )
 {
 	return hValues_Float[ slot ];
 }
+
 const char *EditorRenderViewCommand_Data::GetStringVal( const int &slot )
 {
 	return hValues_String[ slot ];
 }
+
 void EditorRenderViewCommand_Data::ClearAllValues()
 {
 	for ( int i = 0; i < hValues_String.Count(); i++ )
@@ -101,10 +113,12 @@ void EditorRenderViewCommand_Data::ClearAllValues()
 	delete [] m_pszCallbackName;
 	m_pszCallbackName = NULL;
 }
+
 const char *EditorRenderViewCommand_Data::GetName()
 {
 	return m_pszCallbackName;
 }
+
 void EditorRenderViewCommand_Data::SetName( const char *name )
 {
 	delete [] m_pszCallbackName;
@@ -118,6 +132,7 @@ void EditorRenderViewCommand_Data::SetName( const char *name )
 		*m_pszCallbackName = '\0';
 	}
 }
+
 void EditorRenderViewCommand_Data::ValidateMemory()
 {
 	if ( !GetName() )
@@ -144,6 +159,7 @@ void EditorRenderViewCommand_Data::ValidateMemory()
 	while ( GetNumString() < pDef->GetNumVars( EditorRenderViewCommand_Definition::VAR_STRING ) )
 		AddStringValue( "" );
 }
+
 void EditorRenderViewCommand_Data::CallFunction()
 {
 	Assert( functor != NULL );
@@ -154,10 +170,6 @@ void EditorRenderViewCommand_Data::CallFunction()
 	functor( hValues_Bool.Base(), hValues_Int.Base(), hValues_Float.Base(), hValues_String.Base() );
 }
 
-
-
-
-
 EditorRenderViewCommand_Definition::EditorRenderViewCommand_Definition()
 {
 	AllocCheck_Alloc();
@@ -167,6 +179,7 @@ EditorRenderViewCommand_Definition::EditorRenderViewCommand_Definition()
 	for ( int i = 0; i < VAR_AMT; i++ )
 		hVar_Names.AddToTail( new CUtlVector< char* >() );
 }
+
 EditorRenderViewCommand_Definition::~EditorRenderViewCommand_Definition()
 {
 	AllocCheck_Free();
@@ -181,6 +194,7 @@ EditorRenderViewCommand_Definition::~EditorRenderViewCommand_Definition()
 
 	delete [] m_pszCallbackName;
 }
+
 void EditorRenderViewCommand_Definition::AddVarToList( int type, const char *szName )
 {
 	Assert( type >= 0 && type < VAR_AMT );
@@ -191,6 +205,7 @@ void EditorRenderViewCommand_Definition::AddVarToList( int type, const char *szN
 
 	hVar_Names[ type ]->AddToTail( szCopiedName );
 }
+
 const char *EditorRenderViewCommand_Definition::GetVarName( int type, int slot )
 {
 	Assert( type >= 0 && type < VAR_AMT );
@@ -198,15 +213,18 @@ const char *EditorRenderViewCommand_Definition::GetVarName( int type, int slot )
 
 	return hVar_Names[ type ]->Element( slot );
 }
+
 const int EditorRenderViewCommand_Definition::GetNumVars( int type )
 {
 	Assert( type >= 0 && type < VAR_AMT );
 	return hVar_Names[ type ]->Count();
 }
+
 const char *EditorRenderViewCommand_Definition::GetName()
 {
 	return m_pszCallbackName;
 }
+
 void EditorRenderViewCommand_Definition::SetName( const char *name )
 {
 	delete [] m_pszCallbackName;
@@ -221,16 +239,13 @@ void EditorRenderViewCommand_Definition::SetName( const char *name )
 	}
 }
 
-
-
-
-
 EditorPostProcessingEffect::EditorPostProcessingEffect()
 {
 	AllocCheck_Alloc();
 
 	Init();
 }
+
 EditorPostProcessingEffect::EditorPostProcessingEffect( CUtlVector< CHLSL_SolverBase* > &hSolvers, GenericPPEData &config, bool bCopySolvers )
 {
 	AllocCheck_Alloc();
@@ -247,6 +262,7 @@ EditorPostProcessingEffect::EditorPostProcessingEffect( CUtlVector< CHLSL_Solver
 
 	bReady = true;
 }
+
 void EditorPostProcessingEffect::Init()
 {
 	pszName = NULL;
@@ -256,6 +272,7 @@ void EditorPostProcessingEffect::Init()
 	bIsEnabled = false;
 	bOwnsSolvers = true;
 }
+
 EditorPostProcessingEffect::~EditorPostProcessingEffect()
 {
 	AllocCheck_Free();
@@ -268,6 +285,7 @@ EditorPostProcessingEffect::~EditorPostProcessingEffect()
 	else
 		hSolverArray.Purge();
 }
+
 EditorPostProcessingEffect::EditorPostProcessingEffect( const EditorPostProcessingEffect &o )
 {
 	AllocCheck_Alloc();
@@ -286,6 +304,7 @@ EditorPostProcessingEffect::EditorPostProcessingEffect( const EditorPostProcessi
 	if ( o.hSolverArray.Count() )
 		CopySolvers( o.hSolverArray, hSolverArray );
 }
+
 int EditorPostProcessingEffect::LoadPostProcessingChain( const char *Path, bool bStartEnabled )
 {
 	if ( !Path || !*Path )
@@ -315,11 +334,13 @@ int EditorPostProcessingEffect::LoadPostProcessingChain( const char *Path, bool 
 
 	return retVal;
 }
+
 void EditorPostProcessingEffect::ReplacePostProcessingChain( CUtlVector< CHLSL_SolverBase* > &hNewSolvers )
 {
 	DestroySolverStack( hSolverArray );
 	CopySolvers( hNewSolvers, hSolverArray );
 }
+
 IMaterial *EditorPostProcessingEffect::FindMaterial( const char *pszNodeName )
 {
 	for ( int i = 0; i < hSolverArray.Count(); i++ )
@@ -348,10 +369,6 @@ IMaterial *EditorPostProcessingEffect::FindMaterial( const char *pszNodeName )
 
 	return NULL;
 }
-
-
-
-
 
 CPostProcessingCache::CPostProcessingCache() : CAutoGameSystem( "postprocessingcache" )
 {
@@ -437,10 +454,12 @@ int PPESort( const EditorPostProcessingEffect *p1, const EditorPostProcessingEff
 
 	return Q_stricmp( (*p1).pszName, (*p2).pszName );
 }
+
 void CPostProcessingCache::SortPostProcessingEffects()
 {
 	hEffects.Sort( PPESort );
 }
+
 void CPostProcessingCache::MoveEffectAlongList( int index, bool bUp )
 {
 	if ( !hEffects.IsValidIndex( index ) )
@@ -540,7 +559,6 @@ void CPostProcessingCache::RenderSinglePPE( EditorPostProcessingEffect *effect, 
 		}
 	}
 
-
 	RunCodeContext rContext( bPreviewMode, bSceneMode );
 	rContext.pRenderContext = pRenderContext;
 
@@ -602,6 +620,7 @@ void CPostProcessingCache::RefreshAllPPEMaterials( CUtlVector< CHLSL_SolverBase*
 	}
 }
 
+/*
 const char *CPostProcessingCache::GetPPEffectPrecacheFile()
 {
 	static char tmp[MAX_PATH*4];
@@ -609,12 +628,14 @@ const char *CPostProcessingCache::GetPPEffectPrecacheFile()
 
 	return tmp;
 }
+*/
 
 void CPostProcessingCache::LoadPrecacheFile()
 {
 	KeyValues *pKV = new KeyValues( "pp_precache" );
 
-	if ( pKV->LoadFromFile( g_pFullFileSystem, GetPPEffectPrecacheFile() ) )
+	// Allow loading from vpks
+	if ( pKV->LoadFromFile( filesystem, PP_EFFECT_PRECACHE_FILE, "GAME" ) || pKV->LoadFromFile( g_pFullFileSystem, PP_EFFECT_PRECACHE_FILE, "MOD" ))
 	{
 		for ( KeyValues *pSub = pKV->GetFirstTrueSubKey(); pSub; pSub = pSub->GetNextTrueSubKey() )
 		{
@@ -623,6 +644,8 @@ void CPostProcessingCache::LoadPrecacheFile()
 				continue;
 
 			const bool bStartEnabled = !!pSub->GetInt( "effect_start_enabled" );
+
+			Msg("bStartEnabled = %d\n", bStartEnabled);
 
 			EditorPostProcessingEffect effect;
 			if ( effect.LoadPostProcessingChain( pszEffectPath, bStartEnabled ) != PPE_OKAY )
@@ -660,7 +683,8 @@ void CPostProcessingCache::SavePrecacheFile()
 		pKV->AddSubKey( pKVEffect );
 	}
 
-	pKV->SaveToFile( g_pFullFileSystem, GetPPEffectPrecacheFile() );
+	//pKV->SaveToFile( g_pFullFileSystem, GetPPEffectPrecacheFile(), "MOD" );
+	pKV->SaveToFile( g_pFullFileSystem, PP_EFFECT_PRECACHE_FILE, "MOD" );
 
 	pKV->deleteThis();
 }

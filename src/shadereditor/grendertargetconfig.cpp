@@ -5,6 +5,8 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
+#define RT_SETUP_FILE "shadereditorui/rtsetup.txt"
+
 static CMaterialSysDeletionHelper gMatSysDelHint;
 CMaterialSysDeletionHelper *GetMatSysShutdownHelper(){ return &gMatSysDelHint;};
 
@@ -246,18 +248,22 @@ RenderTargetManager::~RenderTargetManager()
 	//Assert( !m_hRTs.Count() );
 }
 
+/*
 const char *RenderTargetManager::GetRTSetupFilePath()
 {
 	static char rtpath[MAX_PATH*4];
 	Q_snprintf( rtpath, sizeof(rtpath), "%s/rtsetup.txt", GetEditorRootDirectory() );
 	return rtpath;
 }
+*/
 
 bool RenderTargetManager::Init()
 {
 	KeyValues *pRTSetup = new KeyValues( "rt_setup" );
 
-	if ( pRTSetup->LoadFromFile( g_pFullFileSystem, GetRTSetupFilePath() ) )
+	//if ( pRTSetup->LoadFromFile( g_pFullFileSystem, GetRTSetupFilePath() ) )
+	// Allow loading from vpks
+	if ( pRTSetup->LoadFromFile( filesystem, RT_SETUP_FILE, "GAME" ) || pRTSetup->LoadFromFile( g_pFullFileSystem, RT_SETUP_FILE, "MOD" ) )
 	{
 		for ( KeyValues *pSub = pRTSetup->GetFirstTrueSubKey(); pSub; pSub = pSub->GetNextTrueSubKey() )
 		{
@@ -348,7 +354,9 @@ void RenderTargetManager::SaveRTsToFile()
 		pRTSetup->AddSubKey( pSub );
 	}
 
-	pRTSetup->SaveToFile( g_pFullFileSystem, GetRTSetupFilePath() );
+	//pRTSetup->SaveToFile( g_pFullFileSystem, GetRTSetupFilePath() );
+	pRTSetup->SaveToFile( g_pFullFileSystem, RT_SETUP_FILE, "MOD" );
+
 	pRTSetup->deleteThis();
 }
 

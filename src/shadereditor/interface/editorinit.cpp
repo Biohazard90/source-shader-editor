@@ -43,6 +43,7 @@ float GetEditorTime()
 
 void ForceTerminateCompilers()
 {
+// Disabled on Posix
 #ifdef _WIN32
 	PROCESSENTRY32 entry;
 	entry.dwSize = sizeof(PROCESSENTRY32);
