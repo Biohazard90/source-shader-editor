@@ -253,7 +253,7 @@ void ShaderEditorInterface::Shutdown()
 
 	GetMatSysShutdownHelper()->Shutdown();
 
-	UnloadGameShaders(); //TODO
+	UnloadGameShaders();
 
 	if ( gProcShaderCTRL )
 		gProcShaderCTRL->Shutdown();

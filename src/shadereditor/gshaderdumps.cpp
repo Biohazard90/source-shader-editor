@@ -235,18 +235,23 @@ BasicShaderCfg_t *BuildShaderData( const char *dumpFileName )
 
 	BasicShaderCfg_t *data = new BasicShaderCfg_t();
 
-	const char *szT = pKV->GetString( "vs_name" );
-#ifndef _WIN32 // POSIX
-	szT = ConvertShadersToPS20(szT);
+	const char *szT;
+#ifdef _WIN32
+	szT = pKV->GetString( "vs_name" );
+#else // POSIX
+	szT = ConvertShadersToPS20(pKV->GetString( "vs_name" ));
 #endif // POSIX
+
 	int len = Q_strlen( szT ) + 1;
 	data->ProcVSName = new char[ len ];
 	Q_snprintf( data->ProcVSName, len, "%s", szT );
 
+#ifdef _WIN32
 	szT = pKV->GetString( "ps_name" );
-#ifndef _WIN32 // POSIX
-	szT = ConvertShadersToPS20(szT);
+#else // POSIX
+	szT = ConvertShadersToPS20(pKV->GetString( "ps_name" ));
 #endif // POSIX
+
 	len = Q_strlen( szT ) + 1;
 	data->ProcPSName = new char[ len ];
 	Q_snprintf( data->ProcPSName, len, "%s", szT );
