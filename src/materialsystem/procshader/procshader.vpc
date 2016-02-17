@@ -85,23 +85,4 @@ $Project "$OUTBINNAME"
 		$File	"$SRCDIRMATERIALSYSTEM\procshaderinterface.cpp"
 		$File	"$SRCDIRMATERIALSYSTEM\procshaderinterface.h"
 	}
-
-//	$Folder	"Link Libraries" [$WIN32]
-//	{
-//		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\mathlib"
-//		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\shaderlib"
-//		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier0"
-//		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier1"
-//		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\vstdlib"
-//	}
-
-//	$Folder	"Link Libraries" [$POSIX]
-//	{
-//		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\mathlib"
-//		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\shaderlib"
-//		$ImpLib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier0"
-//		$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier1"
-//		$ImpLib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\vstdlib"
-//s	}
-
 }

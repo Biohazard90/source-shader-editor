@@ -31,6 +31,10 @@ inline void swap( T& x, T& y )
 
 #include <stdio.h>
 
+#ifdef _WIN32
+#include <stdlib.h>
+#endif
+
 #include <tier0/platform.h>
 #include <tier0/dbg.h>
 

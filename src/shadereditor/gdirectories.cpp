@@ -1,6 +1,10 @@
 #include "cbase.h"
 #include "editorcommon.h"
 
+#ifdef _WIN32
+#include <direct.h>
+#endif
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 

@@ -63,9 +63,6 @@ $Project
 
 	$Folder	"Link Libraries"
 	{
-		//$ImpLib "$LIBPUBLIC\tier0"		[!$IS_LIB_PROJECT]
-		//$Lib	"$LIBPUBLIC\tier1"		[!$IS_LIB_PROJECT]
-		//$ImpLib "$LIBPUBLIC\vstdlib"	[!$IS_LIB_PROJECT]
 		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\bitmap" [!$IS_LIB_PROJECT]
 		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\choreoobjects" [!$IS_LIB_PROJECT]
 		$Lib	"$TARGET_SRC_DIRECTORY\lib\public$PLATSUBDIR\dmxloader" [!$IS_LIB_PROJECT]

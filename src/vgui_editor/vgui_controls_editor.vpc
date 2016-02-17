@@ -13,8 +13,8 @@ $Macro PROTOBUF_LITE 0
 $Macro OUTLIBNAME "vgui_controls_editor_$TARGET_PLATFORM"
 $Macro OUTLIBDIR	"$SRCDIR\lib\public"	[!$LINUX]
 
-////$include "$SRCDIR\vpc_scripts\source_lib_base.vpc"
-//$include "$SRCDIR\vpc_scripts\protobuf_builder.vpc"
+$include "$SRCDIR\vpc_scripts\source_lib_base.vpc"
+$include "$SRCDIR\vpc_scripts\protobuf_builder.vpc"
 
 $Configuration	"Debug"
 {

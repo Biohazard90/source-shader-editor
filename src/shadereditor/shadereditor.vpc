@@ -348,38 +348,4 @@ $Project "$OUTBINNAME"
 			}
 		}
 	}
-
-	//$Folder	"Link Libraries" [$WIN32]
-	//{
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\bitmap"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\choreoobjects"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\dmxloader"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\mathlib"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\matsys_controls"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\particles"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier1"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier2"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\tier3"
-	//	$Lib	"$SRCDIR\lib\public\vgui_controls_editor_$TARGET_PLATFORM"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\steam_api"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\vtf"
-	//	$Lib	"$SRCDIR\lib\public\jpeglib"
-	//}
-
-	//$Folder	"Link Libraries" [$POSIX]
-	//{
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\bitmap"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\choreoobjects"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\dmxloader"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\mathlib"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\matsys_controls"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\particles"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier1"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier2"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\tier3"
-	//	$Lib	"$SRCDIR\lib\public\linux32\vgui_controls_editor_$TARGET_PLATFORM"
-	//	$ImpLib  "$TARGET_SRC_DIRECTORY\lib\public\linux32\steam_api"
-	//	$Lib	"$TARGET_SRC_DIRECTORY\lib\public\linux32\vtf"
-	//	$Lib	"$SRCDIR\lib\public\linux32\libjpeg"
-	//}
 }
