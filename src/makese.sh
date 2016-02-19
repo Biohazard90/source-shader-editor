@@ -8,9 +8,9 @@ rm ${logfile}.pipe
 
 # Set path to steam runtime sdk change this to your path!
 # Arch
-#export STEAM_RUNTIME_ROOT="/run/media/vincent/dbcbf69d-8162-4768-976c-c7c5b5ace72b/sourceengine/steam-runtime-sdk"
+#export STEAM_RUNTIME_ROOT="/steam-runtime-sdk"
 # Ubuntu
-export STEAM_RUNTIME_ROOT="/media/vincent/dbcbf69d-8162-4768-976c-c7c5b5ace72b/sourceengine/steam-runtime-sdk"
+export STEAM_RUNTIME_ROOT="/steam-runtime-sdk"
 # Stop the script if we run into any errors
 set -e
 
