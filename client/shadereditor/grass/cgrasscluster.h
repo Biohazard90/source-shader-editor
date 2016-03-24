@@ -1,5 +1,8 @@
 #ifndef GRASS_CLUSTER_H
 #define GRASS_CLUSTER_H
+#ifdef _WIN32
+#pragma once
+#endif
 
 #include "cbase.h"
 
@@ -113,7 +116,7 @@ private:
 
 	CUtlVector< _grassClusterInfo >m_hClusterInfo;
 	CUtlVector< _grassClusterData >m_hClusterData;
-	
+
 	IMaterial *GetActiveMaterial();
 	//CMaterialReference *m_refMaterial;
 	clusterMaterial *m_refMaterials;

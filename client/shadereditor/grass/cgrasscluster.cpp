@@ -1,6 +1,5 @@
-
 #include "cbase.h"
-#include "ShaderEditor/grass/cfrasscluster.h"
+#include "shadereditor/grass/cgrasscluster.h"
 #include "view.h"
 #include "viewrender.h"
 #include "idebugoverlaypanel.h"

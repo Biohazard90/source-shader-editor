@@ -78,7 +78,7 @@ sed -i 's/\$(PWD)\/\/media/\/media/' ./materialsystem/procshader/editor_shader_l
 #sed -i 's/\$(PWD)\/\/run/\/run/' ./shadereditor/shadereditor_dll_linux32.mak
 #sed -i 's/\$(PWD)\/\/run/\/run/' ./vgui_editor/vgui_controls_editor_linux32.mak
 #sed -i 's/\$(PWD)\/\/run/\/run/' ./materialsystem/procshader/editor_shader_linux32.mak
-# Build TE120
+# Build SE
 echo "Using ccache."
 export PATH="/usr/lib/ccache/bin/:$PATH"
 echo "Building SE..."
