@@ -1,5 +1,5 @@
-
-#include <stdio.h>
+#include "cbase.h"
+#include "editorcommon.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -7,8 +7,7 @@
 #include <direct.h>
 #endif
 
-#include "cbase.h"
-#include "editorcommon.h"
+#include <stdio.h>
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -1013,9 +1012,10 @@ HANDLE g_hChildStd_OUT_Wr = NULL;
 
 // creation flag: CREATE_NO_WINDOW
 
+#ifdef _WIN32
 bool CCompileThread::StartCompiler()
 {
-#ifdef _WIN32
+
 	ForceTerminateCompilers();
 
 	char old_wd[MAX_PATH];
@@ -1146,8 +1146,11 @@ bool CCompileThread::StartCompiler()
 
 	//chdir( old_wd );
 	return true;
+}
 #else // POSIX
+bool CCompileThread::StartCompiler()
+{
 	Msg("Compiling is not possible on Posix!\n");
 	return false;
-#endif // POSIX
 }
+#endif // POSIX

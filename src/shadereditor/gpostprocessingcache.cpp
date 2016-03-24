@@ -1,4 +1,3 @@
-
 #include "cbase.h"
 #ifndef SHADER_EDITOR_DLL_2006
 #include "tier1/callqueue.h"

@@ -1,5 +1,4 @@
-
-#include <stdio.h>
+#include "cbase.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -8,7 +7,14 @@
 #include <direct.h>
 #endif
 
-#include "cbase.h"
+#include <stdio.h>
+
+#include "editorinit.h"
+#include "editorcommon.h"
+
+#include "view_shared.h"
+#include "materialsystem/imesh.h"
+
 #include "vgui/ISystem.h"
 #include "vgui/ISurface.h"
 #include "vgui/IVGui.h"
@@ -17,12 +23,6 @@
 #include "vgui_controls/Controls.h"
 #include "vgui_controls/Panel.h"
 #include "vgui_controls/AnimationController.h"
-
-#include "editorinit.h"
-#include "editorcommon.h"
-
-#include "view_shared.h"
-#include "materialsystem/imesh.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -100,15 +100,16 @@ ShaderEditorInterface::ShaderEditorInterface()
 ShaderEditorInterface::~ShaderEditorInterface()
 {
 	m_hFunctionCallbacks.PurgeAndDeleteElements();
+/*
+	for ( int i = 0; i < 3; i++ )
+	{
+		if ( pSkyMats[ i ] == NULL )
+			continue;
 
-	//for ( int i = 0; i < 3; i++ )
-	//{
-	//	if ( pSkyMats[ i ] == NULL )
-	//		continue;
-
-	//	pSkyMats[ i ]->Clear();
-	//	pSkyMats[ i ] = NULL;
-	//}
+		pSkyMats[ i ]->Clear();
+		pSkyMats[ i ] = NULL;
+	}
+*/
 }
 
 using namespace vgui;

@@ -1,21 +1,19 @@
 //-----------------------------------------------------------------------------
-//	SHADEREDITOR.VPC
+// SHADEREDITOR.VPC
 //
-//	Project Script
+// Project Script
 //-----------------------------------------------------------------------------
 
-$Macro SRCDIR				".."
+$Macro SRCDIR ".."
+$Macro OUTBINNAME "shadereditor_$TARGET_PLATFORM"
+$Macro OUTBINDIR "$TARGET_GAME_DIRECTORY\bin"
+
+$Macro GAMENAME "shader_editor"
+$Macro SRCDIRSHARED "$SRCDIR\game\shared"
+$Macro SRCDIRPUBLIC "$TARGET_SRC_DIRECTORY\public"
+$Macro SRCDIREDITOR "$SRCDIR\shadereditor"
 
 $Include "$SRCDIR\shadereditor_platform.vpc"
-
-$Macro OUTBINNAME	"shadereditor_$TARGET_PLATFORM"
-$Macro OUTBINDIR	"$TARGET_GAME_DIRECTORY\bin"
-
-$Macro GAMENAME				"shader_editor"
-$Macro SRCDIRSHARED			"$SRCDIR\game\shared"
-$Macro SRCDIRPUBLIC			"$TARGET_SRC_DIRECTORY\public"
-$Macro SRCDIREDITOR			"$SRCDIR\shadereditor"
-
 $Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
 
 $Configuration	"Debug"
@@ -49,8 +47,7 @@ $Configuration
 		$AdditionalIncludeDirectories	"$BASE;$TARGET_SRC_DIRECTORY\public;$TARGET_SRC_DIRECTORY\public\tier0;$TARGET_SRC_DIRECTORY\public\tier1;$TARGET_SRC_DIRECTORY\common"
 		$PreprocessorDefinitions		"$BASE;NO_STRING_T;CLIENT_DLL;VECTOR;VERSION_SAFE_STEAM_API_INTERFACES;PROTECTED_THINGS_ENABLE;strncpy=use_Q_strncpy_instead;_snprintf=use_Q_snprintf_instead"
 		$PreprocessorDefinitions		"$BASE;ENABLE_CHROMEHTMLWINDOW;fopen=dont_use_fopen" [$WIN32]
-		$PreprocessorDefinitions		"$BASE;ENABLE_CHROMEHTMLWINDOW;" [$OSXALL]
-		$PreprocessorDefinitions		"$BASE;ENABLE_CHROMEHTMLWINDOW;" [$LINUX]
+		$PreprocessorDefinitions		"$BASE;ENABLE_CHROMEHTMLWINDOW;" [$OSXALL||$LINUX]
 		$PreprocessorDefinitions		"$BASE;USE_WEBM_FOR_REPLAY" [$LINUX]
 		$PreprocessorDefinitions		"$BASE;CURL_STATICLIB" [$WIN32 && $BUILD_REPLAY]
 		$PreprocessorDefinitions		"$BASE;RAD_TELEMETRY_DISABLED" [$LINUX]
@@ -137,8 +134,6 @@ $Project "$OUTBINNAME"
 		$File	"$SRCDIREDITOR\vNodeViewError.cpp"
 		$File	"$SRCDIREDITOR\vPreview.cpp"
 		$File	"$SRCDIREDITOR\vRenderPanel.cpp"
-
-		//$File	"$SRCDIR\public\memtrack.cpp"
 
 		$Folder	"Interface"
 		{
@@ -336,7 +331,6 @@ $Project "$OUTBINNAME"
 	$Folder	"Precompiled Header"
 	{
 		$File	"$SRCDIREDITOR\cbase.h"
-		//$File	"$SRCDIREDITOR\cbase_se.h"
 		$File	"$SRCDIREDITOR\stdafx.cpp"
 		{
 			$Configuration

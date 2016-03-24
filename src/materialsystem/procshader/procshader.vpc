@@ -1,28 +1,26 @@
 //-----------------------------------------------------------------------------
-//  PROCSHADER.VPC
+// PROCSHADER.VPC
 //
-//  Project Script
+// Project Script
 //-----------------------------------------------------------------------------
 
-$Macro SRCDIR				"..\.."
+$Macro SRCDIR "..\.."
+$Macro OUTBINNAME "game_shader_dx6"
+$Macro OUTBINDIR "$TARGET_GAME_DIRECTORY\bin"
+
+$Macro GAMENAME "procshader"
+$Macro SRCDIRPUBLIC "$TARGET_SRC_DIRECTORY\public"
+$Macro SRCDIRMATERIALSYSTEM "$SRCDIR\materialsystem"
+$Macro SRCDIRPROCSHADER "$SRCDIR\materialsystem\procshader"
 
 $Include "$SRCDIR\shadereditor_platform.vpc"
-
-$Macro OUTBINNAME	"game_shader_dx6"
-$Macro OUTBINDIR	"$TARGET_GAME_DIRECTORY\bin"
-
-$Macro GAMENAME				"procshader"
-$Macro SRCDIRPUBLIC			"$TARGET_SRC_DIRECTORY\public"
-$Macro SRCDIRMATERIALSYSTEM	"$SRCDIR\materialsystem"
-$Macro SRCDIRPROCSHADER		"$SRCDIR\materialsystem\procshader"
-
 $Include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
 
 $Configuration	"Debug"
 {
 	$General
 	{
-		$OutputDirectory			".\Debug_$GAMENAME_$TARGET_PLATFORM"
+		$OutputDirectory		".\Debug_$GAMENAME_$TARGET_PLATFORM"
 		$IntermediateDirectory		".\Debug_$GAMENAME_$TARGET_PLATFORM"
 	}
 }
@@ -31,7 +29,7 @@ $Configuration	"Release"
 {
 	$General
 	{
-		$OutputDirectory			".\Release_$GAMENAME_$TARGET_PLATFORM"
+		$OutputDirectory		".\Release_$GAMENAME_$TARGET_PLATFORM"
 		$IntermediateDirectory		".\Release_$GAMENAME_$TARGET_PLATFORM"
 	}
 }
@@ -45,7 +43,7 @@ $Configuration
 
 	$Compiler
 	{
-		$AdditionalIncludeDirectories	"$BASE;fxctmp9;vshtmp9;"	[$WIN32||$POSIX]
+		$AdditionalIncludeDirectories	"$BASE;fxctmp9;vshtmp9;" [$WIN32||$POSIX]
 		$AdditionalIncludeDirectories	"$BASE;fxctmp9_360;vshtmp9_360"					[$X360]
 		$AdditionalIncludeDirectories	"$BASE;$SRCDIRMATERIALSYSTEM;$SRCDIR\..\client\shadereditor"
 		$AdditionalIncludeDirectories	"$BASE;$TARGET_SRC_DIRECTORY\public;$TARGET_SRC_DIRECTORY\public\tier0;$TARGET_SRC_DIRECTORY\public\tier1;"
@@ -58,7 +56,7 @@ $Configuration
 
 	$Linker
 	{
-		$AdditionalDependencies			"$BASE version.lib winmm.lib"	[$WIN32]
+		$AdditionalDependencies			"$BASE version.lib winmm.lib" [$WIN32]
 		$SystemLibraries				"iconv" [$OSXALL]
 	}
 }
@@ -67,7 +65,7 @@ $Configuration "Debug"
 {
 	$Linker
 	{
-		$AdditionalDependencies			"$BASE Dbghelp.lib"	[$WIN32]
+		$AdditionalDependencies			"$BASE Dbghelp.lib" [$WIN32]
 	}
 }
 
@@ -80,6 +78,7 @@ $Project "$OUTBINNAME"
 		$File	"$SRCDIRPROCSHADER\nodeshader.cpp"
 		$File	"$SRCDIRPROCSHADER\procshader.cpp"
 		$File	"$SRCDIRPROCSHADER\prev.cpp"
+
 		$File	"$SRCDIRMATERIALSYSTEM\ivprocshader.cpp"
 		$File	"$SRCDIRMATERIALSYSTEM\ivprocshader.h"
 		$File	"$SRCDIRMATERIALSYSTEM\procshaderinterface.cpp"

@@ -1,20 +1,14 @@
 //-----------------------------------------------------------------------------
-//	VGUI_CONTROLS.VPC
+// VGUI_CONTROLS.VPC
 //
-//	Project Script
+// Project Script
 //-----------------------------------------------------------------------------
 
-$Macro SRCDIR				".."
+$Macro SRCDIR ".."
+$Macro OUTLIBNAME "vgui_controls_editor_$TARGET_PLATFORM"
 
 $Include "$SRCDIR\shadereditor_platform.vpc"
-
-$Macro GENERATED_PROTO_DIR	"generated_proto"
-$Macro PROTOBUF_LITE 0
-$Macro OUTLIBNAME "vgui_controls_editor_$TARGET_PLATFORM"
-$Macro OUTLIBDIR	"$SRCDIR\lib\public"	[!$LINUX]
-
 $include "$SRCDIR\vpc_scripts\source_lib_base.vpc"
-$include "$SRCDIR\vpc_scripts\protobuf_builder.vpc"
 
 $Configuration	"Debug"
 {
@@ -47,8 +41,7 @@ $Configuration
 
 		$AdditionalIncludeDirectories 	"$BASE;$TARGET_SRC_DIRECTORY\common"
 
-		$PreprocessorDefinitions		"$BASE;SHADER_EDITOR_DLL_$TARGET_PLATFORM;RAD_TELEMETRY_DISABLED" [$WIN32]
-		$PreprocessorDefinitions		"$BASE;SHADER_EDITOR_DLL_$TARGET_PLATFORM;RAD_TELEMETRY_DISABLED" [$LINUX]
+		$PreprocessorDefinitions	"$BASE;SHADER_EDITOR_DLL_$TARGET_PLATFORM;RAD_TELEMETRY_DISABLED" [$WIN32||$LINUX]
 	}
 }
 
@@ -136,8 +129,6 @@ $Project "vgui_controls_editor"
 		$File	"URLLabel.cpp"
 		$File	"WizardPanel.cpp"
 		$File	"WizardSubPanel.cpp"
-		//$File   "$TARGET_SRC_DIRECTORY\public\html\htmlprotobuf.cpp"
-		//$File   "$TARGET_SRC_DIRECTORY\vgui2\src\vgui_key_translation.cpp"
 	}
 
 	$Folder	"Public Header Files"

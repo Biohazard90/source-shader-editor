@@ -1,6 +1,5 @@
 #include "cbase.h"
 #include "editorcommon.h"
-
 #ifdef _WIN32
 #include <direct.h>
 #endif

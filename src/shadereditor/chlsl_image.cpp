@@ -1,4 +1,3 @@
-
 #include "cbase.h"
 #include "editorcommon.h"
 #include "view_shared.h"

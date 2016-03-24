@@ -8,9 +8,9 @@ rm ${logfile}.pipe
 
 # Set path to steam runtime sdk change this to your path!
 # Arch
-#export STEAM_RUNTIME_ROOT="/steam-runtime-sdk"
+#export STEAM_RUNTIME_ROOT=""
 # Ubuntu
-export STEAM_RUNTIME_ROOT="/steam-runtime-sdk"
+export STEAM_RUNTIME_ROOT=""
 # Stop the script if we run into any errors
 set -e
 
@@ -78,7 +78,7 @@ sed -i 's/\$(PWD)\/\/media/\/media/' ./materialsystem/procshader/editor_shader_l
 #sed -i 's/\$(PWD)\/\/run/\/run/' ./shadereditor/shadereditor_dll_linux32.mak
 #sed -i 's/\$(PWD)\/\/run/\/run/' ./vgui_editor/vgui_controls_editor_linux32.mak
 #sed -i 's/\$(PWD)\/\/run/\/run/' ./materialsystem/procshader/editor_shader_linux32.mak
-# Build SE
+# Build TE120
 echo "Using ccache."
 export PATH="/usr/lib/ccache/bin/:$PATH"
 echo "Building SE..."

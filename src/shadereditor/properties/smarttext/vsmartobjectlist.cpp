@@ -1316,7 +1316,7 @@ void CSmartObjectList::ParseCode_PreProc( CUtlVector< char* > &hLines, bool bRec
 //}
 
 /*
-deklarationen nach dem �ffnen eines scopes werden ignoriert
+deklarationen nach dem öffnen eines scopes werden ignoriert
 deklarationen in impliziten scopes auch (egal?)
 expressions werden zB in for(;;) gesplittet (egal?)
 */

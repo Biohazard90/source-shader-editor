@@ -1,6 +1,6 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
-// Purpose: 
+// Purpose:
 //
 // $NoKeywords: $
 //=============================================================================//
@@ -44,7 +44,7 @@ public:
 	// Entities are deleted / released here...
 	virtual void LevelShutdownPostEntity() = 0;
 	// end of level shutdown
-	
+
 	// Called during game save
 	virtual void OnSave() = 0;
 
@@ -236,7 +236,7 @@ public:
 	CAutoGameSystemPerFrame *m_pNext;
 
 	virtual char const *Name() { return m_pszName ? m_pszName : "unnamed"; }
-	
+
 private:
 	char const *m_pszName;
 };

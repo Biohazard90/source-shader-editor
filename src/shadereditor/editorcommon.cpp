@@ -1968,7 +1968,7 @@ void GetUVsForPuzzle( const int &num, Vector2D &min, Vector2D &max, bool bAddCla
 	}
 	else
 	{
-		float deltapixelsize = sedit_uv_adjust.GetFloat() / (float)sizeold; // l� magic
+		float deltapixelsize = sedit_uv_adjust.GetFloat() / (float)sizeold; // le magic
 		//float deltapixelsize = ( curPuzzlesPerRow / (float)sizeold ) * 0.1f;
 		//min.x += deltapixelsize;
 		//min.y += deltapixelsize;
