@@ -10,7 +10,7 @@ rm ${logfile}.pipe
 # Arch
 #export STEAM_RUNTIME_ROOT=""
 # Ubuntu
-export STEAM_RUNTIME_ROOT=""
+export STEAM_RUNTIME_ROOT="/media/vincent/dbcbf69d-8162-4768-976c-c7c5b5ace72b/sourceengine/steam-runtime-sdk"
 # Stop the script if we run into any errors
 set -e
 

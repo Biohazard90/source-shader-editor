@@ -25,10 +25,6 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-#define STRINGIFY(x) #x
-#define STRINGIFY_EXPAND(x) STRINGIFY(x)
-#define SHARED_LIBRARY_EXT STRINGIFY_EXPAND(_EXTERNAL_DLL_EXT)
-
 #ifdef SHADER_EDITOR_DLL_2006
 IMDLCache *mdlcache = NULL;
 static CDLL_ConVarAccessor g_ConVarAccessor;
@@ -164,16 +160,16 @@ bool ShaderEditorInterface::Init( CreateInterfaceFn appSystemFactory, CGlobalVar
 		return false;
 
 #ifdef SHADER_EDITOR_DLL_SWARM
-	const char *pszModuleName = "game_shader_generic_eshader_SWARM" SHARED_LIBRARY_EXT;
+	const char *pszModuleName = "game_shader_generic_eshader_SWARM" DLL_EXT_STRING;
 #elif SHADER_EDITOR_DLL_2006
-	const char *pszModuleName = "game_shader_generic_eshader_2006" SHARED_LIBRARY_EXT;
+	const char *pszModuleName = "game_shader_generic_eshader_2006" DLL_EXT_STRING;
 #elif SHADER_EDITOR_DLL_2013
-	//const char *pszModuleName = "game_shader_generic_eshader_2013" SHARED_LIBRARY_EXT;
-	const char *pszModuleName = "game_shader_dx6" SHARED_LIBRARY_EXT;
+	//const char *pszModuleName = "game_shader_generic_eshader_2013" DLL_EXT_STRING;
+	const char *pszModuleName = "game_shader_dx6" DLL_EXT_STRING;
 #elif SHADER_EDITOR_DLL_PORTAL2
-	const char *pszModuleName = "game_shader_generic_eshader_PORTAL2" SHARED_LIBRARY_EXT;
+	const char *pszModuleName = "game_shader_generic_eshader_PORTAL2" DLL_EXT_STRING;
 #else
-	const char *pszModuleName = "game_shader_generic_eshader_2007" SHARED_LIBRARY_EXT;
+	const char *pszModuleName = "game_shader_generic_eshader_2007" DLL_EXT_STRING;
 #endif
 
 	char modulePath[MAX_PATH];
