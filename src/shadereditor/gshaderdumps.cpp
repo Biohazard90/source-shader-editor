@@ -6,14 +6,6 @@
 
 #define DUMP_LIST_FILE "shadereditorui/dumps/shaderlist.txt"
 
-/*
-void GetDumpListFilePath( char *out, int maxlen )
-{
-	Q_snprintf( out, maxlen, "%s/shaderlist.txt", ::GetDumpDirectory() );
-	Q_FixSlashes( out );
-}
-*/
-
 KeyValues *df_LoadDump_List()
 {
 	KeyValues *pKV = new KeyValues( "shaderlist" );
@@ -24,10 +16,6 @@ KeyValues *df_LoadDump_List()
 
 void df_SaveDump_List( KeyValues *pKV )
 {
-	//char path_dump_list[MAX_PATH];
-	//GetDumpListFilePath( path_dump_list, MAX_PATH );
-
-	//pKV->SaveToFile( g_pFullFileSystem, path_dump_list, "MOD" );
 	pKV->SaveToFile( g_pFullFileSystem, DUMP_LIST_FILE, "MOD" );
 
 	pKV->deleteThis();
@@ -196,7 +184,7 @@ void ReadIdents( IdentifierLists_t &idents, KeyValues *pKV )
 	idents.inum_DynamicCombos = pKV->GetInt( "i_numdcombos" );
 }
 
-// Convert the PS 3.0 names to PS 2.0b names on the fly
+// HACK: Convert the PS 3.0 names to PS 2.0b names on the fly
 #ifndef _WIN32 //POSIX
 const char *ConvertShadersToPS20( const char *c )
 {
@@ -221,11 +209,12 @@ const char *ConvertShadersToPS20( const char *c )
 #endif //POSIX
 
 // Get shader informations from .dump files
+// HACK: Overwrite dump informations on Posix to force loading SM 2.0 shader
 BasicShaderCfg_t *BuildShaderData( const char *dumpFileName )
 {
 	KeyValues *pKV = new KeyValues( dumpFileName );
 	char _path[MAX_PATH];
-	//Q_snprintf( _path, MAX_PATH, "%s/%s.dump", ::GetDumpDirectory(), dumpFileName );
+
 	Q_snprintf( _path, MAX_PATH, "%s/%s.dump", "shadereditorui/dumps", dumpFileName );
 	Q_FixSlashes( _path );
 
@@ -267,11 +256,11 @@ BasicShaderCfg_t *BuildShaderData( const char *dumpFileName )
 	Q_snprintf( data->CanvasName, len, "%s", szT );
 
 	Q_snprintf( data->dumpversion, sizeof(data->dumpversion), "%s", pKV->GetString( GetDumpVersion_KeyName() ) );
-#ifndef _WIN32 // POSIX
-	data->iShaderModel = 0; // force ps2.0b on Posix
-#else // WIN32
+#ifdef _WIN32
 	data->iShaderModel = pKV->GetInt( "i_sm" );
-#endif // POSIX
+#else // POSIX
+	data->iShaderModel = 0; // Force PS 2.0 on Posix
+#endif // _WIN32
 	data->iCullmode = pKV->GetInt( "i_cull" );
 	data->iAlphablendmode = pKV->GetInt( "i_ablend" );
 	data->flAlphaTestRef = pKV->GetFloat( "fl_atestref" );

@@ -70,6 +70,7 @@ const char *szSpriteMaterials[] = {
 	"detail/grass_lawn_cut_dark",
 	"detail/grass_lawn_cut_lite",
 };
+
 const int iSpriteMaterialCount = ARRAYSIZE( szSpriteMaterials );
 
 CON_COMMAND( grasscluster_flush, "" )
@@ -85,6 +86,7 @@ CON_COMMAND( grasscluster_preset_density_high, "" )
 	gcluster_cullDist.Revert();
 	CGrassClusterManager::GetInstance()->ClearClusterData();
 }
+
 CON_COMMAND( grasscluster_preset_density_med, "" )
 {
 	gcluster_grass_type_huge_oddness.SetValue( 17 );
@@ -93,6 +95,7 @@ CON_COMMAND( grasscluster_preset_density_med, "" )
 	gcluster_cullDist.SetValue( gcluster_cullDist.GetDefault() );
 	CGrassClusterManager::GetInstance()->ClearClusterData();
 }
+
 CON_COMMAND( grasscluster_preset_density_low, "" )
 {
 	gcluster_grass_type_huge_oddness.SetValue( 10 );
@@ -119,6 +122,7 @@ CON_COMMAND( grasscluster_preset_height_monstrous, "" )
 	gcluster_grass_width_huge_max.SetValue( 140 );
 	CGrassClusterManager::GetInstance()->ClearClusterData();
 }
+
 CON_COMMAND( grasscluster_preset_height_high, "" )
 {
 	gcluster_grass_height_small_min.SetValue( gcluster_grass_height_small_min.GetDefault() );
@@ -136,6 +140,7 @@ CON_COMMAND( grasscluster_preset_height_high, "" )
 	gcluster_grass_width_huge_max.SetValue( gcluster_grass_width_huge_max.GetDefault() );
 	CGrassClusterManager::GetInstance()->ClearClusterData();
 }
+
 CON_COMMAND( grasscluster_preset_height_med, "" )
 {
 	gcluster_grass_height_small_min.SetValue( 10 );
@@ -153,6 +158,7 @@ CON_COMMAND( grasscluster_preset_height_med, "" )
 	gcluster_grass_width_huge_max.SetValue( 50 );
 	CGrassClusterManager::GetInstance()->ClearClusterData();
 }
+
 CON_COMMAND( grasscluster_preset_height_low, "" )
 {
 	gcluster_grass_height_small_min.SetValue( 8 );
@@ -236,6 +242,7 @@ _grassPressureData::_grassPressureData()
 	flLastUpdateTime = NULL;
 	bDirty = NULL;
 }
+
 _grassPressureData::~_grassPressureData()
 {
 	Assert( flAmt && vecDir && bDirty && vecPos );
@@ -248,6 +255,7 @@ _grassPressureData::~_grassPressureData()
 	delete [] flLastUpdateTime;
 	delete [] bDirty;
 }
+
 void _grassPressureData::Init( int num )
 {
 	delete [] vecDir;
@@ -277,12 +285,10 @@ void _grassPressureData::Init( int num )
 	Q_memset( bDirty, 0, sizeof( bool ) * iNumGrassObjects );
 }
 
-
 _grassClusterInfo::_grassClusterInfo()
 {
 	flSortDist = -1;
 }
-
 
 _grassClusterData::_grassClusterData()
 {
@@ -295,10 +301,12 @@ _grassClusterData::_grassClusterData()
 	iLPatchSize_x = iLPatchSize_y = 0;
 	flLPatchStep_x = flLPatchStep_y = 0;
 }
+
 _grassClusterData::~_grassClusterData()
 {
 	// DestroyLightingPatch();
 }
+
 void _grassClusterData::Destroy()
 {
 	if ( pLOD )
@@ -318,6 +326,7 @@ void _grassClusterData::Destroy()
 		pPressureInfo = NULL;
 	}
 }
+
 int _grassClusterData::Draw()
 {
 	const bool bDrawLOD = pLOD != NULL &&
@@ -333,6 +342,7 @@ int _grassClusterData::Draw()
 		return iNumQuads;
 	}
 }
+
 void _grassClusterData::CreateLightingPatch( const CUtlVector< _grassClusterInfo > &hints )
 {
 	Assert( !lighting );
@@ -405,6 +415,7 @@ void _grassClusterData::CreateLightingPatch( const CUtlVector< _grassClusterInfo
 
 	localHints.Purge();
 }
+
 const Vector _grassClusterData::GetLightingForPoint( const Vector &pos )
 {
 	Assert( lighting );
@@ -445,6 +456,7 @@ const Vector _grassClusterData::GetLightingForPoint( const Vector &pos )
 		Lerp( interp_x, samples[0][0], samples[1][0] ),
 		Lerp( interp_x, samples[0][1], samples[1][1] ) );
 }
+
 void _grassClusterData::DestroyLightingPatch()
 {
 	Assert( lighting );
@@ -453,11 +465,11 @@ void _grassClusterData::DestroyLightingPatch()
 	lighting = NULL;
 }
 
-
 clusterMaterial::clusterMaterial()
 {
 	ivar_dir = ivar_ang = 0;
 }
+
 void clusterMaterial::Init( const char *pszMat )
 {
 	ivar_dir = ivar_ang = 0;
@@ -466,15 +478,18 @@ void clusterMaterial::Init( const char *pszMat )
 	if ( mat.IsValid() && IsErrorMaterial( mat ) )
 		mat.Shutdown();
 }
+
 void clusterMaterial::Shutdown()
 {
 	ivar_dir = ivar_ang = 0;
 	mat.Shutdown();
 }
+
 bool clusterMaterial::IsValid()
 {
 	return mat.IsValid();
 }
+
 IMaterial *clusterMaterial::GetMaterial()
 {
 	if ( mat.IsValid() )
@@ -482,19 +497,20 @@ IMaterial *clusterMaterial::GetMaterial()
 	return NULL;
 	//ivar_dir
 }
+
 IMaterialVar *clusterMaterial::GetVarDir()
 {
 	if ( !GetMaterial() )
 		return NULL;
 	return GetMaterial()->FindVarFast( "$MUTABLE_01", &ivar_dir );
 }
+
 IMaterialVar *clusterMaterial::GetVarAng()
 {
 	if ( !GetMaterial() )
 		return NULL;
 	return GetMaterial()->FindVarFast( "$MUTABLE_02", &ivar_ang );
 }
-
 
 void ReleaseGrassCluster()
 {
@@ -562,13 +578,11 @@ void CGrassClusterManager::LevelInitPostEntity()
 		m_refMaterials[i].Init( szSpriteMaterials[i] );
 
 		if ( !m_refMaterials[i].IsValid() )
-			Warning( "unable to initialize grass material: %s\n", szSpriteMaterials[i] );
+			Warning( "[SSE]: Unable to initialize grass material: %s!\n", szSpriteMaterials[i] );
 	}
-
 
 	//m_refMaterial.Init( "detail/detailsprites_editor", TEXTURE_GROUP_OTHER );
 	//m_refMaterial.Init( "debug/debugspritewireframe", TEXTURE_GROUP_OTHER );
-
 }
 
 void CGrassClusterManager::LevelShutdownPostEntity()
@@ -626,7 +640,7 @@ public:
 		ShadowHandle_t handle = g_pClientShadowMgr->GetShadowHandle( clienthandle );
 
 		shadowList.AddToTail( handle );
-	};
+	}
 
 	CUtlVector< ShadowHandle_t >shadowList;
 };
@@ -925,6 +939,7 @@ void CGrassClusterManager::UpdateMorphInfo()
 		m_flMorphTime += timer.GetDuration().GetMillisecondsF();
 	}
 }
+
 void CGrassClusterManager::InjectMorph( int i )
 {
 	Assert( i >= 0 && i < m_hClusterData.Count() );
@@ -1162,6 +1177,7 @@ void CGrassClusterManager::BuildClusterMesh( _grassClusterData &data, const CUtl
 
 		hClusterInfoSortedSub.Purge();
 	}
+
 	flAverageMinDist = FastSqrt( flAverageMinDist/(float)hintCount );
 
 	data.iNumQuads = numQuads;
@@ -1354,7 +1370,6 @@ void CGrassClusterManager::BuildSingleGrassObject( CMeshBuilder &builder, _grass
 				colors[c][v] = clamp( colors[c][v], 0, 1 );
 			colors[c] *= meadowAccum;
 		}
-
 
 		//uvs[0].Init( un_min.x, un_max.y );
 		//uvs[1].Init( un_min.x, un_min.y );

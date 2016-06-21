@@ -1,7 +1,7 @@
 //**********************************************//
-//						//
+//																							//
 // Installation instructions for grass clusters //
-//						//
+//																							//
 //**********************************************//
 
 *** ONLY TESTED WITH SOURCE 2007, SO DON'T EXPECT SWARM COMPATIBILITY ***

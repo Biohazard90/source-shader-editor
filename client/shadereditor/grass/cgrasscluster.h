@@ -131,5 +131,4 @@ private:
 	double m_flMorphTime;
 };
 
-
-#endif
+#endif // GRASS_CLUSTER_H

@@ -91,6 +91,7 @@ bool ShaderEditorHandler::Init()
 #else
 	Q_snprintf( modulePath, sizeof( modulePath ), "%s/bin/shadereditor_2007" DLL_EXT_STRING, engine->GetGameDirectory() );
 #endif
+	Q_FixSlashes(modulePath);
 	shaderEditorModule = Sys_LoadModule( modulePath );
 	if ( shaderEditorModule )
 	{
@@ -99,18 +100,18 @@ bool ShaderEditorHandler::Init()
 
 		if ( !shaderEdit )
 		{
-			Warning( "Unable to pull IVShaderEditor interface.\n" );
+			Warning( "[SSE]: Unable to pull IVShaderEditor interface!\n" );
 		}
 		else if ( !shaderEdit->Init( factories.appSystemFactory, gpGlobals, sEditMRender,
 				bCreateEditor, bShowPrimDebug, iEnableSkymask ) )
 		{
-			Warning( "Cannot initialize IVShaderEditor.\n" );
+			Warning( "[SSE]: Cannot initialize IVShaderEditor!\n" );
 			shaderEdit = NULL;
 		}
 	}
 	else
 	{
-		Warning( "Cannot load shadereditor" DLL_EXT_STRING "from %s!\n", modulePath );
+		Warning( "[SSE]: Cannot load shadereditor" DLL_EXT_STRING "from %s!\n", modulePath );
 	}
 
 	m_bReady = shaderEdit != NULL;
@@ -130,14 +131,14 @@ bool ShaderEditorHandler::Init()
 CON_COMMAND( sedit_debug_toggle_ppe, "" )
 {
 	if ( !g_ShaderEditorSystem->IsReady() )
-		return Warning( "lib not ready.\n" );
+		return Warning( "[SSE]: Lib not ready.\n" );
 
 	if ( args.ArgC() < 2 )
 		return;
 
 	const int idx = shaderEdit->GetPPEIndex( args[1] );
 	if ( idx < 0 )
-		return Warning( "can't find ppe named: %s\n", args[1] );
+		return Warning( "[SSE]: Can't find ppe named: %s\n", args[1] );
 
 	shaderEdit->SetPPEEnabled( idx, !shaderEdit->IsPPEEnabled( idx ) );
 }
@@ -174,9 +175,11 @@ void ShaderEditorHandler::InitialPreRender()
 		m_Lock.Unlock();
 	}
 }
+
 void ShaderEditorHandler::PostRender()
 {
 }
+
 #ifdef SOURCE_2006
 void ShaderEditorHandler::CustomViewRender( int *viewId, const VisibleFogVolumeInfo_t &fogVolumeInfo )
 #else
@@ -193,11 +196,13 @@ void ShaderEditorHandler::CustomViewRender( int *viewId, const VisibleFogVolumeI
 	if ( IsReady() )
 		shaderEdit->OnSceneRender();
 }
+
 void ShaderEditorHandler::UpdateSkymask( bool bCombineMode, int x, int y, int w, int h )
 {
 	if ( IsReady() )
 		shaderEdit->OnUpdateSkymask( bCombineMode, x, y, w, h );
 }
+
 void ShaderEditorHandler::CustomPostRender()
 {
 	if ( IsReady() )
@@ -334,39 +339,39 @@ protected:
 
 	CBaseVCallbackView( CViewRender *pMainView ) : CRendering3dView( pMainView )
 	{
-	};
+	}
 
-	virtual bool	AdjustView( float waterHeight ){ return false; };
+	virtual bool	AdjustView( float waterHeight ){ return false; }
 
 	virtual void CallbackInitRenderList( int viewId )
 	{
 		BuildRenderableRenderLists( viewId );
-	};
+	}
 
 	virtual bool ShouldDrawParticles()
 	{
 		return true;
-	};
+	}
 
 	virtual bool ShouldDrawRopes()
 	{
 		return true;
-	};
+	}
 
 	virtual bool ShouldDrawWorld()
 	{
 		return true;
-	};
+	}
 
 	virtual bool ShouldDrawTranslucents()
 	{
 		return true;
-	};
+	}
 
 	virtual bool ShouldDrawTranslucentWorld()
 	{
 		return true;
-	};
+	}
 
 	void DrawSetup( float waterHeight, int nSetupFlags, float waterZAdjust, int iForceViewLeaf = -1 )
 	{
@@ -386,7 +391,7 @@ protected:
 		render->EndUpdateLightmaps();
 
 		g_ShaderEditorSystem->GetViewIdForModify() = savedViewID;
-	};
+	}
 
 	void DrawExecute( float waterHeight, view_id_t viewID, float waterZAdjust )
 	{
@@ -451,7 +456,7 @@ protected:
 		m_DrawFlags = iDrawFlagsBackup;
 
 		g_ShaderEditorSystem->GetViewIdForModify() = savedViewID;
-	};
+	}
 
 	virtual void	PushView( float waterHeight )
 	{
@@ -498,13 +503,13 @@ protected:
 		{
 			pRenderContext->SetHeightClipZ( waterHeight );
 		}
-	};
+	}
 
 	virtual void	PopView()
 	{
 		CMatRenderContextPtr pRenderContext( materials );
 		pRenderContext->SetHeightClipMode( MATERIAL_HEIGHTCLIPMODE_DISABLE );
-	};
+	}
 
 	void DrawOpaqueRenderables_Custom( bool bShadowDepth )
 	{
@@ -648,7 +653,6 @@ protected:
 
 		bool const bDrawopaquestaticpropslast = false; //r_drawopaquestaticpropslast.GetBool();
 
-
 		//
 		// First do the brush models
 		//
@@ -658,7 +662,6 @@ protected:
 			pEntitiesEnd = pEntitiesBegin + m_pRenderablesList->m_RenderGroupCounts[RENDER_GROUP_OPAQUE_BRUSH];
 			DrawOpaqueRenderables_DrawBrushModels( pEntitiesBegin, pEntitiesEnd, bShadowDepth );
 		}
-
 
 		//
 		// Sort everything that's not a static prop
@@ -745,17 +748,19 @@ protected:
 			RopeManager()->DrawRenderCache( bShadowDepth );
 		if ( bParticles )
 			g_pParticleSystemMgr->DrawRenderCache( bShadowDepth );
-	};
+	}
 
 #ifdef SWARM_DLL
 	void	DrawOpaqueRenderables_ModelRenderables( int nCount, ModelRenderSystemData_t* pModelRenderables, bool bShadowDepth )
 	{
 		g_pModelRenderSystem->DrawModels( pModelRenderables, nCount, bShadowDepth ? MODEL_RENDER_MODE_SHADOW_DEPTH : MODEL_RENDER_MODE_NORMAL );
 	}
+
 	void DrawOpaqueRenderables_NPCs( int nCount, CClientRenderablesList::CEntry **ppEntities, bool bShadowDepth )
 	{
 		DrawOpaqueRenderables_Range( nCount, ppEntities, bShadowDepth );
 	}
+
 	void DrawRenderable( IClientRenderable *pEnt, int flags, const RenderableInstance_t &instance )
 	{
 		extern ConVar r_entityclips;
@@ -770,7 +775,7 @@ protected:
 				pRenderContext->PushCustomClipPlane( pRenderClipPlane );
 #if DEBUG
 			else
-				AssertMsg( 0, "can't link DrawClippedDepthBox externally so you either have to cope with even more redundancy or move all this crap to viewrender" );
+				AssertMsg( 0, "[SSE]: Can't link DrawClippedDepthBox externally so you either have to cope with even more redundancy or move all this crap to viewrender" );
 #endif
 			//	DrawClippedDepthBox( pEnt, pRenderClipPlane );
 			Assert( view->GetCurrentlyDrawingEntity() == NULL );
@@ -794,7 +799,8 @@ protected:
 			//BlurTest( pEnt, flags, false, instance );
 			view->SetCurrentlyDrawingEntity( NULL );
 		}
-	};
+	}
+
 	void DrawOpaqueRenderable( IClientRenderable *pEnt, bool bTwoPass, bool bShadowDepth )
 	{
 		ASSERT_LOCAL_PLAYER_RESOLVABLE();
@@ -819,7 +825,7 @@ protected:
 		RenderableInstance_t instance;
 		instance.m_nAlpha = 255;
 		DrawRenderable( pEnt, flags, instance );
-	};
+	}
 #else
 	void DrawOpaqueRenderable( IClientRenderable *pEnt, bool bTwoPass, bool bShadowDepth )
 	{
@@ -850,7 +856,7 @@ protected:
 				pRenderContext->PushCustomClipPlane( pRenderClipPlane );
 #if DEBUG
 			else
-				AssertMsg( 0, "can't link DrawClippedDepthBox externally so you either have to cope with even more redundancy or move all this crap to viewrender" );
+				AssertMsg( 0, "[SSE]: Can't link DrawClippedDepthBox externally so you either have to cope with even more redundancy or move all this crap to viewrender" );
 #endif
 			//	DrawClippedDepthBox( pEnt, pRenderClipPlane );
 			Assert( view->GetCurrentlyDrawingEntity() == NULL );
@@ -867,7 +873,7 @@ protected:
 			pEnt->DrawModel( flags );
 			view->SetCurrentlyDrawingEntity( NULL );
 		}
-	};
+	}
 #endif
 
 #ifdef SWARM_DLL
@@ -875,13 +881,13 @@ protected:
 	{
 		for( int i = 0; i < nCount; ++i )
 			DrawOpaqueRenderable( ppEntities[i]->m_pRenderable, false, bShadowDepth );
-	};
+	}
 #else
 	void DrawOpaqueRenderables_DrawBrushModels( CClientRenderablesList::CEntry *pEntitiesBegin, CClientRenderablesList::CEntry *pEntitiesEnd, bool bShadowDepth )
 	{
 		for( CClientRenderablesList::CEntry *itEntity = pEntitiesBegin; itEntity < pEntitiesEnd; ++ itEntity )
 			DrawOpaqueRenderable( itEntity->m_pRenderable, false, bShadowDepth );
-	};
+	}
 #endif
 
 #ifdef SWARM_DLL
@@ -954,7 +960,7 @@ protected:
 
 		if ( numScheduled )
 			staticpropmgr->DrawStaticProps( pStatics, numScheduled, bShadowDepth, vcollide_wireframe.GetBool() );
-	};
+	}
 #endif
 
 #ifdef SWARM_DLL
@@ -966,17 +972,16 @@ protected:
 			if ( itEntity->m_pRenderable )
 				DrawOpaqueRenderable( itEntity->m_pRenderable, ( itEntity->m_TwoPass != 0 ), bShadowDepth );
 		}
-	};
+	}
 #else
 	void DrawOpaqueRenderables_Range( CClientRenderablesList::CEntry *pEntitiesBegin, CClientRenderablesList::CEntry *pEntitiesEnd, bool bShadowDepth )
 	{
 		for( CClientRenderablesList::CEntry *itEntity = pEntitiesBegin; itEntity < pEntitiesEnd; ++ itEntity )
 			if ( itEntity->m_pRenderable )
 				DrawOpaqueRenderable( itEntity->m_pRenderable, ( itEntity->m_TwoPass != 0 ), bShadowDepth );
-	};
+	}
 #endif
 };
-
 
 class CSimpleVCallbackView : public CBaseVCallbackView
 {
@@ -1076,7 +1081,7 @@ public:
 
 		m_pCustomVisibility = NULL;
 		m_fogInfo = fogInfo;
-	};
+	}
 
 	void Draw()
 	{
@@ -1129,7 +1134,7 @@ public:
 		pRenderContext->ClearColor4ub( 0, 0, 0, 255 );
 
 		m_pMainView->DisableFog();
-	};
+	}
 
 	virtual void CallbackInitRenderList( int viewId )
 	{
@@ -1230,32 +1235,32 @@ public:
 
 			m_pRenderablesList->m_RenderGroupCounts[i] = eLast + 1;
 		}
-	};
+	}
 
 	virtual bool ShouldDrawParticles()
 	{
 		return settings.bDrawParticles;
-	};
+	}
 
 	virtual bool ShouldDrawRopes()
 	{
 		return settings.bDrawRopes;
-	};
+	}
 
 	virtual bool ShouldDrawWorld()
 	{
 		return settings.bDrawWorld;
-	};
+	}
 
 	virtual bool ShouldDrawTranslucents()
 	{
 		return settings.bDrawTranslucents;
-	};
+	}
 
 	virtual bool ShouldDrawTranslucentWorld()
 	{
 		return settings.bDrawWorld && settings.bDrawTranslucents;
-	};
+	}
 
 private:
 	VisibleFogVolumeInfo_t m_fogInfo;
@@ -1276,8 +1281,10 @@ bool UpdateRefractIfNeededByList( CViewModelRenderablesList::RenderGroups_t &lis
 			return true;
 		}
 	}
+
 	return false;
 }
+
 void DrawRenderablesInList( CViewModelRenderablesList::RenderGroups_t &renderGroups, int flags = 0 )
 {
 	CViewRender *pCView = assert_cast< CViewRender* >( view );
@@ -1325,6 +1332,7 @@ static inline bool UpdateRefractIfNeededByList( CUtlVector< IClientRenderable * 
 
 	return false;
 }
+
 static inline void DrawRenderablesInList( CUtlVector< IClientRenderable * > &list, int flags = 0 )
 {
 	CViewRender *pCView = assert_cast< CViewRender* >( view );
@@ -1350,17 +1358,18 @@ static inline void DrawRenderablesInList( CUtlVector< IClientRenderable * > &lis
 }
 #endif
 
-
 int &ShaderEditorHandler::GetViewIdForModify()
 {
 	Assert( m_piCurrentViewId != NULL );
 
 	return *m_piCurrentViewId;
 }
+
 const VisibleFogVolumeInfo_t &ShaderEditorHandler::GetFogVolumeInfo()
 {
 	return m_tFogVolumeInfo;
 }
+
 const WaterRenderInfo_t &ShaderEditorHandler::GetWaterRenderInfo()
 {
 	return m_tWaterRenderInfo;
@@ -1520,7 +1529,6 @@ pFnVrCallback_Declare( VrCallback_ViewModel )
 	if ( bFogOverride )
 		pCView->DisableFog();
 }
-
 
 void ShaderEditorHandler::RegisterViewRenderCallbacks()
 {

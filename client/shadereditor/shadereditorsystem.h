@@ -12,7 +12,6 @@
 #include "view_shared.h"
 #include "viewrender.h"
 
-
 class ShaderEditorHandler : public CAutoGameSystemPerFrame
 {
 public:
@@ -58,5 +57,4 @@ private:
 
 extern ShaderEditorHandler *g_ShaderEditorSystem;
 
-
-#endif
+#endif // SHEDITSYSTEM_H

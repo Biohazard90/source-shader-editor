@@ -67,6 +67,7 @@ SEditModelRender::SEditModelRender( char const *name ) : CAutoGameSystemPerFrame
 	m_iNumPoseParams = 0;
 	DestroyModel();
 }
+
 SEditModelRender::~SEditModelRender()
 {
 	DestroyModel();
@@ -76,9 +77,11 @@ bool SEditModelRender::Init()
 {
 	return true;
 }
+
 void SEditModelRender::Shutdown()
 {
 }
+
 void SEditModelRender::Update( float frametime )
 {
 	if ( !IsModelReady() )
@@ -88,14 +91,17 @@ void SEditModelRender::Update( float frametime )
 	if ( pModelInstance->GetCycle() >= 1.0f )
 		pModelInstance->SetCycle( pModelInstance->GetCycle() - 1.0f );
 }
+
 void SEditModelRender::LevelInitPostEntity()
 {
 	ResetModel();
 }
+
 void SEditModelRender::LevelShutdownPostEntity()
 {
 	ResetModel();
 }
+
 void SEditModelRender::ResetModel()
 {
 	if ( !IsModelReady() )
@@ -103,6 +109,7 @@ void SEditModelRender::ResetModel()
 	pModelInstance->m_flAnimTime = gpGlobals->curtime;
 	pModelInstance->m_flOldAnimTime = gpGlobals->curtime;
 }
+
 bool SEditModelRender::IsModelReady()
 {
 	if ( !pModelInstance )
@@ -123,6 +130,7 @@ bool SEditModelRender::IsModelReady()
 
 	return bValid;
 }
+
 bool SEditModelRender::LoadModel( const char *localPath )
 {
 	DestroyModel();
@@ -160,8 +168,10 @@ bool SEditModelRender::LoadModel( const char *localPath )
 	m_iNumPoseParams = pHdr ? pHdr->GetNumPoseParameters() : 0;
 
 	pModelInstance = pEnt;
+
 	return true;
 }
+
 void SEditModelRender::DestroyModel()
 {
 	if ( pModelInstance )
@@ -171,6 +181,7 @@ void SEditModelRender::DestroyModel()
 	m_szModelPath[0] = '\0';
 	m_iNumPoseParams = 0;
 }
+
 void SEditModelRender::GetModelCenter( float *pFl3_ViewOffset )
 {
 	Q_memset( pFl3_ViewOffset, 0, sizeof(float) * 3 );
@@ -187,6 +198,7 @@ void SEditModelRender::GetModelCenter( float *pFl3_ViewOffset )
 		}
 	}
 }
+
 void SEditModelRender::DestroyCharPtrList( char ***szList )
 {
 	Assert( szList );
@@ -202,6 +214,7 @@ int SequenceSort( mstudioseqdesc_t *const *seq1, mstudioseqdesc_t *const *seq2 )
 {
 	return Q_stricmp( ( *seq1 )->pszLabel(), ( *seq2 )->pszLabel() );
 }
+
 int SEditModelRender::QuerySequences( char ***list )
 {
 	if ( !IsModelReady() )
@@ -256,8 +269,10 @@ int SEditModelRender::QuerySequences( char ***list )
 
 	hNameList.Purge();
 	hSeqs.Purge();
+
 	return numSequences;
 }
+
 void SEditModelRender::SetSequence( const char *name )
 {
 	if ( !IsModelReady() )
@@ -266,6 +281,7 @@ void SEditModelRender::SetSequence( const char *name )
 	MDLCACHE_CRITICAL_SECTION();
 	pModelInstance->ResetSequence( pModelInstance->LookupSequence( name ) );
 }
+
 void SEditModelRender::ExecRender()
 {
 	if ( !IsModelReady() )
@@ -285,6 +301,7 @@ void SEditModelRender::ExecRender()
 #endif
 		);
 }
+
 void SEditModelRender::DoPostProc( int x, int y, int w, int h )
 {
 #ifndef SOURCE_2006
@@ -292,6 +309,7 @@ void SEditModelRender::DoPostProc( int x, int y, int w, int h )
 		DoEnginePostProcessing( x, y, w, h, false, false );
 #endif
 }
+
 int SEditModelRender::MaterialPicker( char ***szMat )
 {
 	int mx, my;

@@ -1,4 +1,6 @@
 #!/bin/bash
+SYSTEM="$(lsb_release -sd)"
+
 # Redirect output
 logfile=build.log
 mkfifo ${logfile}.pipe
@@ -6,17 +8,19 @@ tee < ${logfile}.pipe $logfile &
 exec &> ${logfile}.pipe
 rm ${logfile}.pipe
 
-# Set path to steam runtime sdk change this to your path!
-# Arch
-#export STEAM_RUNTIME_ROOT=""
-# Ubuntu
-export STEAM_RUNTIME_ROOT="/media/vincent/dbcbf69d-8162-4768-976c-c7c5b5ace72b/sourceengine/steam-runtime-sdk"
+# Set path to steam runtime sdk
+if [ "$SYSTEM" = "Ubuntu 14.04.4 LTS" -o "$SYSTEM" = "Ubuntu 16.04 LTS" ]; then
+	export STEAM_RUNTIME_ROOT="/media/disk2/Development/sourceengine/steam-runtime-sdk"
+else
+	export STEAM_RUNTIME_ROOT="/run/media/disk2/Development/sourceengine/steam-runtime-sdk"
+fi
+
 # Stop the script if we run into any errors
 set -e
 
 if ! [ -d "${STEAM_RUNTIME_ROOT}" ]; then
-    echo "You need to set STEAM_RUNTIME_ROOT to a valid directory in order to compile!" >&2
-    exit 2
+  echo "You need to set STEAM_RUNTIME_ROOT to a valid directory in order to compile!" >&2
+  exit 2
 fi
 
 # Store away the PATH variable for restoration
@@ -24,14 +28,14 @@ OLD_PATH=$PATH
 
 # Set our host and target architectures
 if [ -z "${STEAM_RUNTIME_HOST_ARCH}" ]; then
-if [ "$(uname -m)" == "i686" ]; then
+	if [ "$(uname -m)" == "i686" ]; then
     STEAM_RUNTIME_HOST_ARCH=i386
-    elif [ "$(uname -m)" == "x86_64" ]; then
+  elif [ "$(uname -m)" == "x86_64" ]; then
     STEAM_RUNTIME_HOST_ARCH=amd64
-    else
+  else
     echo "Unknown target architecture: ${STEAM_RUNTIME_HOST_ARCH}"
     exit 1
-    fi
+  fi
 fi
 
 if [ -z "$STEAM_RUNTIME_TARGET_ARCH" ]; then
@@ -46,9 +50,9 @@ echo "Target architecture set to $STEAM_RUNTIME_TARGET_ARCH"
 
 # Check if our runtime is valid
 if [ ! -d "${STEAM_RUNTIME_ROOT}/runtime/${STEAM_RUNTIME_TARGET_ARCH}" ]; then
-    echo "$0: ERROR: Couldn't find steam runtime directory" >&2
-    echo "Do you need to run setup.sh to download the ${STEAM_RUNTIME_TARGET_ARCH} target?" >&2
-    exit 2
+  echo "$0: ERROR: Couldn't find steam runtime directory" >&2
+  echo "Do you need to run setup.sh to download the ${STEAM_RUNTIME_TARGET_ARCH} target?" >&2
+  exit 2
 fi
 
 export PATH="${STEAM_RUNTIME_ROOT}/bin:$PATH"
@@ -63,26 +67,34 @@ echo
 
 # Create Game Projects
 echo "Create Game Projects..."
-pushd `dirname $0`
+pushd "$(dirname "$0")"
 devtools/bin/vpc +shadereditor /mksln shadereditor
 popd
 
 echo
+
 # Patch .mak's
 echo "Patching .mak's..."
-#Ubuntu
-sed -i 's/\$(PWD)\/\/media/\/media/' ./shadereditor/shadereditor_dll_linux32.mak
-sed -i 's/\$(PWD)\/\/media/\/media/' ./vgui_editor/vgui_controls_editor_linux32.mak
-sed -i 's/\$(PWD)\/\/media/\/media/' ./materialsystem/procshader/editor_shader_linux32.mak
-#Arch
-#sed -i 's/\$(PWD)\/\/run/\/run/' ./shadereditor/shadereditor_dll_linux32.mak
-#sed -i 's/\$(PWD)\/\/run/\/run/' ./vgui_editor/vgui_controls_editor_linux32.mak
-#sed -i 's/\$(PWD)\/\/run/\/run/' ./materialsystem/procshader/editor_shader_linux32.mak
+if [ "$SYSTEM" = "Ubuntu 14.04.4 LTS" -o "$SYSTEM" = "Ubuntu 16.04 LTS" ]; then
+	sed -i 's/\$(PWD)\/\/media/\/media/' ./shadereditor/shadereditor_dll_linux32.mak
+	sed -i 's/\$(PWD)\/\/media/\/media/' ./vgui_editor/vgui_controls_editor_linux32.mak
+	sed -i 's/\$(PWD)\/\/media/\/media/' ./materialsystem/procshader/editor_shader_linux32.mak
+else
+	sed -i 's/\$(PWD)\/\/run/\/run/' ./shadereditor/shadereditor_dll_linux32.mak
+	sed -i 's/\$(PWD)\/\/run/\/run/' ./vgui_editor/vgui_controls_editor_linux32.mak
+	sed -i 's/\$(PWD)\/\/run/\/run/' ./materialsystem/procshader/editor_shader_linux32.mak
+fi
+
 # Build SE
 echo "Using ccache."
 export PATH="/usr/lib/ccache/bin/:$PATH"
 echo "Building SE..."
 make -f shadereditor.mak
+
+# Copy files
+echo "Copy files..."
+cp -f ../../game/bin/game_shader_dx6.so "/media/disk1/SteamLibrary/steamapps/common/Transmissions Element 120/te120/bin"
+cp -f ../../game/bin/shadereditor_2013.so "/media/disk1/SteamLibrary/steamapps/common/Transmissions Element 120/te120/bin"
 
 echo "Cleaning up..."
 export PATH=$OLD_PATH

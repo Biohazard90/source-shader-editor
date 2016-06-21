@@ -295,20 +295,12 @@ int RemapEnvironmentConstant( bool bPixelShader, int iNormalized );
 #include "../public/tier1/interface.h"
 #endif
 
-#ifdef _WIN32
 enum
 {
 	SM_20B = 0,
 	SM_30,
 };
-#else // POSIX
-// force sm 2.0b
-enum
-{
-	SM_20B,
-	SM_30 = 0,
-};
-#endif // POSIX
+
 enum
 {
 	CULLMODE_CW = 0,
